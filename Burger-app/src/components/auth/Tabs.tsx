@@ -46,7 +46,7 @@ const styles = StyleSheet.create({
         alignItems: 'baseline',
          width:414,
         position:'relative',
-        top:1
+        top:-50
 
     },
     tabContainer: {
@@ -56,7 +56,7 @@ const styles = StyleSheet.create({
         width:'90%',
         justifyContent:'space-around',
          position:'relative',
-        top:-50
+        top:-6
 
 },
     tab: {

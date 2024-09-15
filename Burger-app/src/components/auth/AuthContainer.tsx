@@ -8,7 +8,7 @@ const AuthContainer = () => {
     <View style={styles.container}>
         <View style={styles.logo}>
         <Image
-                source={require('@/assets/images/log.jpg')} // Adjust the path as necessary
+                source={require('@/assets/images/logo.png')} // Adjust the path as necessary
                 style={styles.image}
                 resizeMode="contain" // or "cover", "stretch", etc.
             />
@@ -21,7 +21,7 @@ const AuthContainer = () => {
 const styles = StyleSheet.create({
 
     container:{
-        height:382,
+        height:350,
         backgroundColor:'#FFFFFF',
         width:414,
         borderRadius:15,
@@ -39,16 +39,13 @@ const styles = StyleSheet.create({
 
     },
     logo:{
-        height:40,
-        width:40,
-        backgroundColor:'black',
-        marginTop:'25%',
+        marginTop:'15%',
          alignItems:'center',
         justifyContent:'flex-start'
     },  
     image: {
-        width: 150, // Set your desired width
-        height: 150, // Set your desired height
+        width: 150, 
+        height: 150, 
     },
 
 })
