@@ -1,11 +1,11 @@
 import { StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 import { Link } from 'expo-router'
-
+import twrnc from "twrnc"
 const SignIn = () => {
   return (
     <View style={styles.container}>
-      <Text>signIn</Text>
+      <Text style={twrnc`bg-blue-500`}>signIn</Text>
       <Link href="/favorite" style={{color:"blue"}}>go to Main</Link>
    
     </View>
