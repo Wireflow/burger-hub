@@ -1,6 +1,5 @@
 import { Text, View } from "react-native"
-import InputUi from "../../ui/input";
-import { Path, useForm } from "react-hook-form";
+ import { Path, useForm } from "react-hook-form";
  import {zodResolver} from '@hookform/resolvers/zod'
 import { LogInSchema } from "@/src/types/validation/LogInSchema";
 import FormInput from "@/src/components/ui/InputForm";
