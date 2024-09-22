@@ -1,11 +1,12 @@
 import { Text, View } from "react-native"
  import { Path, useForm } from "react-hook-form";
  import {zodResolver} from '@hookform/resolvers/zod'
-import { LogInSchema } from "@/src/types/validation/LogInSchema";
+import { LogInSchema } from "@/src/types/validations/LogInSchema";
 import FormInput from "@/src/components/ui/InputForm";
-import { Button } from "react-native-paper";
+import Button from "../../ui/Button";
+
   const LogIn =()=>{
-    
+
     const {
       control,
       handleSubmit,
@@ -26,8 +27,8 @@ import { Button } from "react-native-paper";
         <View style={{width:414,height:290}}>
                <FormInput   control={control} name={'email'}  label='Email' />
                <FormInput   control={control} name={'password'}  label='Password' />
-               <Button style={{alignItems:'flex-start',left:30,marginTop:30}}><Text style={{fontWeight:'600',color:'#AF042C'}}> forget password?</Text> </Button>
-               <Button onPress={handleSubmit(d)}>Submit</Button> 
+               <Button color="red" size="large" title="forget password?"   ></Button>
+               <Button color="red" size="large" title="Submit" onPress={handleSubmit(d)}></Button> 
 
         </View>
     )

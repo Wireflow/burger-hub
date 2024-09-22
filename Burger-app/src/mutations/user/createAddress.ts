@@ -1,5 +1,6 @@
-import { supabase } from "@/src/service/subabase/client";
-import { Insert } from "@/src/service/subabase/table.types";
+
+import { supabase } from "@/src/services/supabase/client";
+import { Insert } from "@/src/services/supabase/table.types";
 import { addressSchema } from "@/src/types/validations/address";
 
 
