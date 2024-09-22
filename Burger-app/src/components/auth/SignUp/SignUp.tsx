@@ -52,7 +52,7 @@ const SignUp = () => {
                 </View>
             </ScrollView>
             <View style={styles.buttonContainer}>
-                     <Button title="Log In" size="large" color="red" onClick={handleSubmit(onSubmit)} />
+                     <Button title="Sign Up" size="large" color="red" onClick={handleSubmit(onSubmit)} />
                 </View>            
         </SafeAreaView>
     );
