@@ -8,12 +8,11 @@ export const UserSchema = z.object({
         .min(1, "Name is required")
         .max(100, "Name is too long"),
     
-    phoneNumber: z.string()
+    phone: z.string()
         .regex(phoneNumberRegex, "Invalid phone number"),
     
     email: z.string()
-        .nonempty("Email is required")
-        .email("Invalid email format"),
+         .email("Invalid email format"),
     
     password: z.string()
         .min(8, "Must be at least 8 characters in length."),

@@ -21,9 +21,9 @@ const AuthContainer = () => {
 const styles = StyleSheet.create({
 
     container:{
-        height:350,
+        height:'40%',
         backgroundColor:'#FFFFFF',
-        width:414,
+        width:"100%",
         borderRadius:15,
         shadowColor:'#000',
         shadowOffset:{
@@ -44,8 +44,8 @@ const styles = StyleSheet.create({
         justifyContent:'flex-start'
     },  
     image: {
-        width: 150, 
-        height: 150, 
+        width: 100, 
+        height: 100, 
     },
 
 })
