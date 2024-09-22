@@ -3,10 +3,10 @@ import { create } from "zustand";
 import { persist, PersistStorage } from "zustand/middleware";
 
  export type UserSession = {
-  name: string;
-  phone: string;
-  email: string;
-  id: string;
+  name: string | "";
+  phone: string |"";
+  email: string | "";
+  id: string |" ";
 };
 
  type SessionState = {

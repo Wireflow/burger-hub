@@ -16,7 +16,7 @@ import { TextInput } from 'react-native-paper';
 const InputUi = ({label,description,placeholder,error,onBlur,value,onChangeText}:InputProps) => {
     const [userError, setUserError] = useState(false);
     return (
-      <View>
+      <View style={{height:60}} >
         <TextInput
     label={label}
      style={{ margin: 'auto',backgroundColor:'' ,width:'80%',marginTop:15}}
@@ -27,7 +27,7 @@ const InputUi = ({label,description,placeholder,error,onBlur,value,onChangeText}
     onChangeText={onChangeText}
     
   />
-   {error && <Text style={{textAlign:'right', right:50,color:'red'}}>{error}</Text>}
+    {error && <Text style={{textAlign:'right', right:50,color:'red',top:35}}> { error}</Text>}
 
         </View>
     );

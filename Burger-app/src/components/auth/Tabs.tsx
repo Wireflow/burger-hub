@@ -1,8 +1,10 @@
     import React, { useState } from "react";
     import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
     import InputUi from "../ui/input";
-    import SignIn from "./SignIn/SignIn";
+    import SignIn from "./SignUp/SignUp";
     import LogIn from "./LogIn/LogIn";import Button from "../ui/Button";
+import { SafeAreaView } from "react-native-safe-area-context";
+import SignUp from "./SignUp/SignUp";
 
     
     const Tabs = () => {
@@ -29,8 +31,9 @@
                 </View>
 
                 <View style={styles.content}>
-                {selectedTab === "Sign Up" && <SignIn  />}
+ {selectedTab === "Sign Up" && <SignUp  />}
                 {selectedTab === "Login" && <LogIn />}
+                 
 
                     
                     
@@ -45,13 +48,12 @@
     const styles = StyleSheet.create({
         container: {
             flex: 1,
-            justifyContent: 'space-around',
-            alignItems: 'baseline',
-            width:414,
+             alignItems: 'baseline',
+            width:"110%",
             position:'relative',
-            top:-50
-
-        },
+             height:200,
+ 
+          },
     
         tabContainer: {
             display:'flex',
@@ -60,13 +62,17 @@
             width:'90%',
             justifyContent:'space-around',
             position:'relative',
-            top:-6
+           
 
     },
         tab: {
             padding: 5,
             alignItems: "center",
-            width:'40%'
+            width:'40%',
+            top:'-15%',
+            
+
+           
         
         },
         tabText: {
@@ -82,9 +88,10 @@
 
         },
         content: {
-            
-            height:500,
+            height:'85%',
             width:414,
+             top:'-15%',
+            
         },
         contentText: {
             fontSize: 24,

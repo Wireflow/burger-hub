@@ -1,6 +1,5 @@
 import { StyleSheet, Text, View } from "react-native";
-import React from "react";
-import { GestureHandlerRootView } from "react-native-gesture-handler";
+ import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { Drawer } from "expo-router/drawer";
 import { Colors } from "@/constants/Colors";
 import { Stack } from "expo-router";

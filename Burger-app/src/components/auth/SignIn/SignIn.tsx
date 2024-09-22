@@ -9,14 +9,13 @@ const SignIn = () => {
   const {
     control,
     handleSubmit,
-    formState: { isValid },
+    formState: { isValid,errors },
   } = useForm({
     resolver: zodResolver(userSchema),
     defaultValues: {
       name: "",
       phoneNumber: "",
       email: "",
-  
     },
   });
 
@@ -26,9 +25,10 @@ const SignIn = () => {
   return (
     <View>
       <FormInput control={control} name={"name"} label="Name" />
+
       <FormInput control={control} name={"phoneNumber"} label="Phone" />
       <FormInput control={control} name={"email"} label="Email" />
-      <Button onPress={()=>handleSubmit(d)}>Submit</Button>
+      <Button onPress={() => handleSubmit(d)}>Submit</Button>
     </View>
   );
 };
