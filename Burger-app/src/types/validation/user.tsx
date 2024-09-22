@@ -8,8 +8,7 @@ export const UserSchema = z.object({
         .min(1, "Name is required")
         .max(100, "Name is too long"),
     
-    phone: z.string()
-        .regex(phoneNumberRegex, "Invalid phone number"),
+    phone: z.string(),
     
     email: z.string()
          .email("Invalid email format"),

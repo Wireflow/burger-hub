@@ -1,4 +1,4 @@
-import { supabase } from "@/src/service/subabase/client"
+import { supabase } from "@/src/services/supabase/client"
 import { useQuery } from "@tanstack/react-query"
 
 export const useGetAllOrders=()=>{

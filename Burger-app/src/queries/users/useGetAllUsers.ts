@@ -1,6 +1,6 @@
+import { supabase } from "@/src/services/supabase/client"
 import { useQuery } from "@tanstack/react-query"
-import { Row } from "../../service/subabase/table.types"
-import { supabase } from "../../service/subabase/client"
+
 
 export const useGetAllUsers=()=>{
     return useQuery({

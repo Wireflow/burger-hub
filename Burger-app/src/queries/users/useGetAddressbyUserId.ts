@@ -1,5 +1,5 @@
+import { supabase } from "@/src/services/supabase/client";
 import { useQuery } from "@tanstack/react-query"
-import { supabase } from "../../service/subabase/client"
 
 export const useGetAddressbyUserId=(id:string)=>{
     return useQuery({
