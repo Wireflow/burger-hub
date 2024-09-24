@@ -74,7 +74,7 @@ const LogIn = () => {
             title="Log In"
             size="large"
             color="red"
-            onPress={handleSubmit(onSubmit)}
+            onClick={handleSubmit(onSubmit)}
           />
         </View>
       </KeyboardAvoidingView>
