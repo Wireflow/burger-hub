@@ -10,15 +10,22 @@ import Buttons from './Buttons'
 
 export const ProductPage = () => {
   return (
-    <View style={styles.container}> 
-    <ImageProduct/>
-  <Presentation/>
-<Buttons/>
-  
-     </View>
+   <View style={styles.container} > 
+     <ImageProduct/> 
+       <Presentation/> 
+      <Buttons/> 
+
+
+   
+    
+    </View>
+ 
+     
   )
 }
 
 const styles = StyleSheet.create({
     container:{height:'100%',width:'100%',backgroundColor:'#F6F6F9',display:'flex',alignItems:'center'},
+  
+  
  })
