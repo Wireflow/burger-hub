@@ -10,7 +10,7 @@ type ButtonProps = {
 
 const Button = ({ title, size, color, onClick }: ButtonProps) => {
     const textColor = color === 'red' ? '#ffffff' : '#AF042C';
-    const borderColor = '#ff0000'; // Fixed red border color
+    const borderColor =   color === 'red' ? '#ffffff' : '#AF042C'; 
     const backgroundColor = color === 'red' ? '#AF042C' : '#ffffff'; // Set background color dynamically
 
     return (
@@ -27,17 +27,15 @@ const styles = StyleSheet.create({
     button: {
       
         borderWidth: 1,
-        borderRadius: 25,  // Rounded corners
+        borderRadius: 30,  
         paddingVertical: 10,
         paddingHorizontal: 20,
         margin: "auto",  // Space from all sides
         alignItems: 'center',
         justifyContent: 'center',
-        width:200,
-        
     },
     text: {
-        fontSize: 16,
+        fontSize: 18,
         fontWeight: 'bold',
     },
     small: {

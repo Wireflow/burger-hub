@@ -1,7 +1,7 @@
 import { SignUpType } from "@/src/types/SignUpType";
 import { supabase } from "../../services/supabase/client";
-import { Database } from "../../services/supabase/database.types";
-
+import { Database } from "@/src/services/supabase/database.type";
+ 
 export default async function SignUpQuery(dataFromUser: SignUpType) {
   try {
     const { data, error } = await supabase.auth.signUp({
