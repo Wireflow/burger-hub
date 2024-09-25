@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Text, Image, StyleSheet, ImageSourcePropType } from 'react-native';
-import Button from '../ui/Button';
+import Button from '../Button';
 type CardContentProps = {
   imageSource: ImageSourcePropType;  
   title: string; 

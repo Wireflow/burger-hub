@@ -7,6 +7,7 @@ import 'react-native-reanimated';
 import { useColorScheme } from '@/hooks/useColorScheme';
 import { QueryClientProvider } from '@tanstack/react-query';
 import queryClient from '@/src/services/react-query';
+import { redirectAuth } from '@/src/hooks/redirectAuth';
 
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
@@ -32,10 +33,12 @@ export default function RootLayout() {
     </QueryClientProvider>)
 }
 function RootLayoutMain() {
+  redirectAuth();
   return (
       <Stack>
-        <Stack.Screen name='auth' options={{ headerShown: false, }}/>
+        <Stack.Screen name="auth" options={{ headerShown: false, }}/>
         <Stack.Screen name="(drawer)" options={{ headerShown: false, }} />
+        <Stack.Screen name='tabs' options={{ headerShown: false, }} />
       </Stack>
   );
 

@@ -18,6 +18,8 @@ import { LogInType } from "@/src/types/LogInType";
 import { useSessionStore } from "@/src/store/useSessionStore";
 import { getUserById } from "@/src/queries/users/getUserById";
 import { LogInSchema } from "@/src/types/validations/LogInSchema";
+
+import { router } from "expo-router";
 const LogIn = () => {
   const { setSession, session } = useSessionStore();
 
@@ -42,6 +44,7 @@ const LogIn = () => {
         email: dataUser.email,
         id: dataUser.id,
       });
+
       console.log("User logined  up:", userId);
       console.log("im session", session);
     } catch (error) {
@@ -61,7 +64,7 @@ const LogIn = () => {
         >
           <View style={{ width: "80%", height: "auto" }}>
             <FormInput control={control} name={"email"} label="Email" />
-            <FormInput control={control} name={"password"} label="Password" />
+            <FormInput control={control} name={"password"} label="Password"  secureTextEntry/>
           </View>
         </ScrollView>
         <View style={{ height: 20, width: "40%", left: 40 }}>
@@ -74,7 +77,7 @@ const LogIn = () => {
             title="Log In"
             size="large"
             color="red"
-            onPress={handleSubmit(onSubmit)}
+            onClick={handleSubmit(onSubmit)}
           />
         </View>
       </KeyboardAvoidingView>

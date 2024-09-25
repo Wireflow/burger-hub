@@ -6,7 +6,7 @@ export const addressSchema=z.object({
     state:z.string().min(1,"state is required").max(30,"state is too long"),
     street:z.string().min(1,"street is required").max(100,"street is too long"),
     zip_code:z.string().regex(zipCodeRegex,"Invalid zip code"),
-    user_id:z.string()
+
 });
 
 export type addressSchemaType=z.infer<typeof addressSchema>;
