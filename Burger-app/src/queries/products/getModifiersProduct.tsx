@@ -9,6 +9,7 @@ import { useQuery } from '@tanstack/react-query';
         .eq('id', productId)
         .single();
 
+        
     if (productError) throw productError;
 
      const { data: modifiers, error: modifiersError } = await supabase
