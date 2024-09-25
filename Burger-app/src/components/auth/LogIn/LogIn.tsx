@@ -18,6 +18,8 @@ import { LogInType } from "@/src/types/LogInType";
 import { useSessionStore } from "@/src/store/useSessionStore";
 import { getUserById } from "@/src/queries/users/getUserById";
 import { LogInSchema } from "@/src/types/validations/LogInSchema";
+import { getAllCategory } from "@/src/queries/products/getAllcat";
+import { router } from "expo-router";
 const LogIn = () => {
   const { setSession, session } = useSessionStore();
 
@@ -30,18 +32,22 @@ const LogIn = () => {
   });
 
   const onSubmit = async (data: LogInType) => {
+
+     
     try {
       if (!data.email || !data.password) {
         return setError("root", { message: "Check your login information." });
       }
       const userId = await LogInQuery(data);
       const dataUser = await getUserById(userId);
-      setSession({
+     const setSessionBy =await setSession({
         name: dataUser.name || "",
         phone: dataUser.phone,
         email: dataUser.email,
         id: dataUser.id,
       });
+      router.navigate("/order");
+
       console.log("User logined  up:", userId);
       console.log("im session", session);
     } catch (error) {
