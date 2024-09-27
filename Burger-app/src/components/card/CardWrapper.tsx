@@ -7,11 +7,13 @@ type CardWrapperProps = {
   imageSource: ImageSourcePropType;
   title: string;
   price: string;
+  height:number;
+  width:number
 };
 
-const CardWrapper: React.FC<CardWrapperProps> = ({ imageSource, title, price }) => {
+const CardWrapper: React.FC<CardWrapperProps> = ({ imageSource, title, price,height,width }) => {
   return (
-    <Card height={200} width={160}>
+    <Card height={height} width={width}>
       <CardContent 
         imageSource={imageSource}
         title={title}

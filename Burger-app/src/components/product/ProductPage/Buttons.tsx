@@ -16,7 +16,10 @@ const Buttons = () => {
     <Button size='large' color='white' title='Costomize' onClick={handlePress}/>
   </View>
   <View style={styles.scop}>
-    <Button size='large' color='red' title='Add to cart' onClick={()=>{
+    <Button size='large' color='red' title='Add to cart' onClick={(
+      
+
+    )=>{
     }}/>
   </View>
   <ModalDialog isPressed={isPressed} handlePress={handlePress}/>

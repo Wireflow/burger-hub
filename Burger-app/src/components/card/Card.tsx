@@ -30,7 +30,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     marginBottom: 16,
     margin:20,
-   marginTop:30,
+   marginTop:40,
    
   },
 });

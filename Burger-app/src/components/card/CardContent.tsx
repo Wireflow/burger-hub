@@ -45,13 +45,15 @@ const CardContent = ({ imageSource, title, price }: CardContentProps) => {
 const styles = StyleSheet.create({
   imageWrapper: {
     position: 'absolute',
-    top: -35,
+    top: -40,
     alignSelf: 'center',
   },
   image: {
-    width: 120,
+    width: 110,
     height: 90,
     borderRadius: 15,
+    borderTopLeftRadius:30,
+    borderTopRightRadius:30
   },
   textContainer: {
     marginTop: 60,

@@ -67,6 +67,8 @@ const Tabs = () => {
               imageSource={{ uri: product.imageUrl || 'http://example.com/default-image.jpg' }}
               title={product.name || "Product Name"}
               price={`$${product.price?.toFixed(2)}`}
+              height={200}
+              width={190}
             />
           ))
         ) : (

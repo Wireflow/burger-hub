@@ -1,6 +1,7 @@
 // src/components/SearchInput.tsx
 import React, { useState } from "react";
-import { View, TouchableOpacity, Image, TextInput, StyleSheet } from "react-native";
+import { View, TouchableOpacity, TextInput, StyleSheet, Text } from "react-native";
+import Icon from 'react-native-vector-icons/FontAwesome'; // تأكد من استيراد الأيقونة
 
 interface SearchInputProps {
     onSearch: (text: string) => void; 
@@ -17,7 +18,7 @@ const SearchInput: React.FC<SearchInputProps> = ({ onSearch }) => {
     return (
         <View style={styles.container}>
             <TouchableOpacity>
-                <Image source={require('@/assets/images/search.png')} style={styles.icon} resizeMode="contain" />
+                <Icon name="search" size={20} color="#333" style={styles.icon} />
             </TouchableOpacity>
             <TextInput
                 style={styles.input}
@@ -50,11 +51,7 @@ const styles = StyleSheet.create({
         marginBottom: 5,
     },
     icon: {
-        width: 30, 
-        height: 30, 
-        margin: 4,
-        borderRadius: 100, 
-        backgroundColor: '#E0E0E0',
+        marginRight: 10, // لضبط المسافة بين الأيقونة وحقل الإدخال
     },
 });
 

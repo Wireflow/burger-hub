@@ -1,3 +1,4 @@
+// src/providers/Providers.tsx
 import queryClient from "@/src/services/react-query";
 import { DefaultTheme, ThemeProvider } from "@react-navigation/native";
 import { QueryClientProvider } from "@tanstack/react-query";
@@ -6,7 +7,8 @@ import {
     SafeAreaProvider,
     initialWindowMetrics,
 } from "react-native-safe-area-context";
-import { TabProvider } from './TabContext'; // تأكد من المسار الصحيح
+import { TabProvider } from './TabContext';
+
 
 const Providers = ({ children }: { children: React.ReactNode }) => {
     return (
@@ -14,7 +16,9 @@ const Providers = ({ children }: { children: React.ReactNode }) => {
             <ThemeProvider value={DefaultTheme}>
                 <SafeAreaProvider initialMetrics={initialWindowMetrics}>
                     <TabProvider>
-                        {children}
+                        
+                            {children}
+                      
                     </TabProvider>
                 </SafeAreaProvider>
             </ThemeProvider>
