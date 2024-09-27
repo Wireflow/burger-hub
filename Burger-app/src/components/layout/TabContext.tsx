@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useState, ReactNode } from 'react';
 
-// تعريف نوع البيانات
+
 interface TabContextType {
     selectedTab: number | null;
     setSelectedTab: (tab: number | null) => void;
@@ -8,7 +8,7 @@ interface TabContextType {
     setSelectedCategoryName: (name: string) => void;
 }
 
-// القيمة الافتراضية
+
 const defaultContextValue: TabContextType = {
     selectedTab: null,
     setSelectedTab: () => {},

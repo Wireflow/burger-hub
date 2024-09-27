@@ -21,7 +21,7 @@ const Tabs = () => {
     if (categories && categories.length > 0 && selectedTab === null) {
       setSelectedTab(categories[0].id);
       if (categories[0].name) {
-        setSelectedCategoryName(categories[0].name); // تعيين اسم الفئة الافتراضية
+        setSelectedCategoryName(categories[0].name); 
       }
     }
   }, [categories, selectedTab, setSelectedTab, setSelectedCategoryName]);
@@ -30,7 +30,7 @@ const Tabs = () => {
     if (selectedTab !== null) {
       const selectedCategory = categories?.find(cat => cat.id === selectedTab);
       if (selectedCategory && selectedCategory.name) {
-        setSelectedCategoryName(selectedCategory.name); // تعيين اسم الفئة عند تغييره
+        setSelectedCategoryName(selectedCategory.name); 
       }
     }
   });
