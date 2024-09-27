@@ -1,6 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { View, Text, Image, StyleSheet, ImageSourcePropType } from 'react-native';
 import Button from '../ui/Button';
+
+// تأكد من استيراد الصورة الافتراضية
+const defaultImage = require('../../../assets/images/dd.jpeg');
 
 type CardContentProps = {
   imageSource: ImageSourcePropType;  
@@ -9,12 +12,20 @@ type CardContentProps = {
 };
 
 const CardContent = ({ imageSource, title, price }: CardContentProps) => {
+  const [currentImage, setCurrentImage] = useState(imageSource);
+
+  const handleImageError = () => {
+    console.log('Error loading image');
+    setCurrentImage(defaultImage); // تغيير الصورة إلى الافتراضية عند حدوث خطأ
+  };
+
   return (
     <View>
       <View style={styles.imageWrapper}>
         <Image 
-          source={imageSource}  
+          source={currentImage}  
           style={styles.image}
+          onError={handleImageError} // التعامل مع الخطأ هنا
         />
       </View>
       <View style={styles.textContainer}>
@@ -25,15 +36,11 @@ const CardContent = ({ imageSource, title, price }: CardContentProps) => {
         title="Customize" 
         size="medium" 
         color="white" 
-        onClick={() => {
-          console.log('Customize clicked'); // تنفيذ وظيفة عند الضغط
-        }} 
+        onClick={() => console.log('Customize clicked')} 
       /> 
     </View>
   );
 };
-
-export default CardContent;
 
 const styles = StyleSheet.create({
   imageWrapper: {
@@ -42,19 +49,21 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
   },
   image: {
-    width: 130,
-    height: 100,
+    width: 120,
+    height: 90,
     borderRadius: 15,
   },
   textContainer: {
     marginTop: 60,
     alignItems: 'center',
-    marginBottom: 10
+    marginBottom: 10,
   },
   text: {
     color: 'black',
     fontSize: 16,
     fontWeight: 'bold',
-    marginBottom: 3
+    marginBottom: 3,
   },
 });
+
+export default CardContent;
