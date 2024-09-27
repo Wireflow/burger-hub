@@ -18,12 +18,7 @@ import { LogInType } from "@/src/types/LogInType";
 import { useSessionStore } from "@/src/store/useSessionStore";
 import { getUserById } from "@/src/queries/users/getUserById";
 import { LogInSchema } from "@/src/types/validations/LogInSchema";
-<<<<<<< HEAD
 
-=======
-import { getAllCategory } from "@/src/queries/products/getAllcat";
->>>>>>> ff5032da9f5338ffb2e0249b462ac0c22308df36
-import { router } from "expo-router";
 const LogIn = () => {
   const { setSession, session } = useSessionStore();
 
@@ -36,25 +31,18 @@ const LogIn = () => {
   });
 
   const onSubmit = async (data: LogInType) => {
-
-     
     try {
       if (!data.email || !data.password) {
         return setError("root", { message: "Check your login information." });
       }
       const userId = await LogInQuery(data);
       const dataUser = await getUserById(userId);
-     const setSessionBy =await setSession({
+      setSession({
         name: dataUser.name || "",
         phone: dataUser.phone,
         email: dataUser.email,
         id: dataUser.id,
       });
-<<<<<<< HEAD
-=======
-      router.navigate("/order");
->>>>>>> ff5032da9f5338ffb2e0249b462ac0c22308df36
-
       console.log("User logined  up:", userId);
       console.log("im session", session);
     } catch (error) {

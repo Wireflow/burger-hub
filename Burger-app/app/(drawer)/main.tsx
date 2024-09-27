@@ -4,6 +4,7 @@ import { createDrawerNavigator } from '@react-navigation/drawer';
 import CustomDrawerContent from './CustomDrawerContent';
 import ProfileScreen from './ProfileScreen';
 import { MyBottomTabs } from '../tabs/BottomTabs';
+import AddressScreen from '@/src/components/address/AddressScreen';
 
 
 const Drawer = createDrawerNavigator();

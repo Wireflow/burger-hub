@@ -4,7 +4,6 @@ import {
   Modal,
   ScrollView,
   StyleSheet,
-  Text,
   ToastAndroid,
   View,
 } from "react-native";
@@ -19,16 +18,21 @@ import { useMutation } from "@tanstack/react-query";
 import { createAddress } from "@/src/mutations/user/createAddress";
 import FormInput from "./FormIput";
 import Button from "../ui/Button";
-type props = {
+
+type Props = {
   setOpen: any;
   open: boolean;
 };
+
 const { width } = Dimensions.get("window");
-const Formaddress = ({ setOpen, open }: props) => {
-  const [isOpenModal, setIsOpenModal] = React.useState(false);
-  const toggleModal = () => {
-    setIsOpenModal(true);
-  };
+
+function FormAddress({ setOpen, open }: Props) {
+  // const [isOpenModal, setIsOpenModal] = React.useState(false);
+  
+  // const toggleModal = () => {
+  //   setIsOpenModal(true);
+  // };
+
   const {
     control,
     handleSubmit,
@@ -41,106 +45,106 @@ const Formaddress = ({ setOpen, open }: props) => {
       state: "",
       street: "",
       zip_code: "",
-
     },
     resolver: zodResolver(addressSchema),
   });
+
   const mutation = useMutation({
     mutationKey: ["new-address"],
     mutationFn: createAddress,
     onSuccess: () => {
-      reset()
-      ToastAndroid.show("Successfully well Add address", ToastAndroid.LONG);
+      reset();
+      ToastAndroid.show("Successfully added address", ToastAndroid.LONG);
     },
   });
+
   const data: addressSchemaType = {
     street: control._getWatch("street"),
     zip_code: control._getWatch("zip_code"),
     state: control._getWatch("state"),
     city: control._getWatch("city"),
     country: control._getWatch("country"),
-
   };
+
   const onSubmit = () => {
     mutation.mutate(data);
   };
+
   return (
     <ScrollView>
       <KeyboardAvoidingView>
-      <Modal
-        onDismiss={toggleModal}
-        presentationStyle="overFullScreen"
-        transparent
-        visible={open}
-        animationType="slide"
-      >
-        <View style={styles.viewWrapper}>
-          <View style={styles.modalView}>
-            
-            <View style={styles.IputStyle}>
-              <FormInput
-                control={control}
-                name="street"
-                placeholder="enter street"
-                text="Street"
-              />
-            </View>
-            <View style={styles.IputStyle}>
-              <FormInput
-                control={control}
-                name="zip_code"
-                placeholder="enter zip code"
-                text="Zip Code"
-              />
-            </View>
-            <View style={styles.IputStyle}>
-              <FormInput
-                control={control}
-                name="state"
-                placeholder="choose state"
-                text="State"
-              />
-            </View>
-            <View style={styles.IputStyle}>
-              <FormInput
-                control={control}
-                name="city"
-                placeholder="enter city"
-                text="City"
-              />
-            </View>
-            <View style={styles.IputStyle}>
-              <FormInput
-                control={control}
-                name="country"
-                placeholder="choose country"
-                text="country"
-              />
-            </View>
-            <View style={styles.buttonStyle}>
-              <Button
-                color="red"
-                size="small"
-                title="close"
-                onClick={setOpen}
-              />
-              <Button
-                color="red"
-                size="small"
-                title="create"
-                onClick={handleSubmit(onSubmit)}
-              />
+        <Modal
+          onDismiss={setOpen}
+          presentationStyle="overFullScreen"
+          transparent
+          visible={open}
+          animationType="slide"
+        >
+          <View style={styles.viewWrapper}>
+            <View style={styles.modalView}>
+              <View style={styles.IputStyle}>
+                <FormInput
+                  control={control}
+                  name="street"
+                  placeholder="Enter street"
+                  text="Street"
+                />
+              </View>
+              <View style={styles.IputStyle}>
+                <FormInput
+                  control={control}
+                  name="zip_code"
+                  placeholder="Enter zip code"
+                  text="Zip Code"
+                />
+              </View>
+              <View style={styles.IputStyle}>
+                <FormInput
+                  control={control}
+                  name="state"
+                  placeholder="Choose state"
+                  text="State"
+                />
+              </View>
+              <View style={styles.IputStyle}>
+                <FormInput
+                  control={control}
+                  name="city"
+                  placeholder="Enter city"
+                  text="City"
+                />
+              </View>
+              <View style={styles.IputStyle}>
+                <FormInput
+                  control={control}
+                  name="country"
+                  placeholder="Choose country"
+                  text="Country"
+                />
+              </View>
+              <View style={styles.buttonStyle}>
+                <Button
+                  color="red"
+                  size="small"
+                  title="Close"
+                  onClick={setOpen}
+                />
+                <Button
+                  color="red"
+                  size="small"
+                  title="Create"
+                  onClick={handleSubmit(onSubmit)}
+                />
+              </View>
             </View>
           </View>
-        </View>
-      
-      </Modal>
+        </Modal>
       </KeyboardAvoidingView>
     </ScrollView>
   );
-};
+}
 
-export default Formaddress;
+export default FormAddress;
 
 const styles = StyleSheet.create({
   viewWrapper: {
@@ -160,7 +164,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     transform: [{ translateX: -(width * 0.4) }, { translateY: -90 }],
-
     backgroundColor: "#fff",
     borderRadius: 7,
     padding: 30,

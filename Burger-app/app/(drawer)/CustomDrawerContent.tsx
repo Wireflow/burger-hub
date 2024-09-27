@@ -29,7 +29,7 @@ const CustomDrawerContent: React.FC<{ navigation: any }> = ({ navigation }) => {
       </TouchableOpacity>
       <TouchableOpacity
         style={styles.menuItem}
-        onPress={() => navigation.native("orders")}
+        onPress={() => navigation.navigate("orders")}
       >
         <Image
           source={require("@/assets/icons/icons8_buy.png")}
@@ -40,7 +40,7 @@ const CustomDrawerContent: React.FC<{ navigation: any }> = ({ navigation }) => {
       </TouchableOpacity>
       <TouchableOpacity
         style={styles.menuItem}
-        onPress={() => navigation.native("payments")}
+        onPress={() => navigation.navigate("payments")}
       >
         <Image
           source={require("@/assets/icons/ic_outline-local-offer.png")}
@@ -51,7 +51,7 @@ const CustomDrawerContent: React.FC<{ navigation: any }> = ({ navigation }) => {
       </TouchableOpacity>
       <TouchableOpacity
         style={styles.menuItem}
-        onPress={() => navigation.native("favorites")}
+        onPress={() => navigation.navigate("favorites")}
       >
         <Image
           source={require("@/assets/icons/ic_outline-sticky-note-2.png")}
