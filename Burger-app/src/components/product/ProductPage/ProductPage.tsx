@@ -25,7 +25,7 @@ export const ProductPage = () => {
 const styles = StyleSheet.create({
     container:{height:'100%',width:'100%',
       backgroundColor:'#F6F6F9',
-     /* display:'flex',
-      alignItems:'center'*/
+     display:'flex',
+      alignItems:'center'
     },
  })
