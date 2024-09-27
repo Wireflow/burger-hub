@@ -1,8 +1,8 @@
-// src/components/NotFound.tsx
+
 import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import Button from '../ui/Button'; // تأكد من المسار الصحيح للزر الخاص بك
+import Button from '../ui/Button'; 
 
 interface NotFoundProps {
   icon: string; 

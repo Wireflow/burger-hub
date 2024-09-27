@@ -12,7 +12,7 @@ const Homes = () => {
   const router = useRouter();
   const [x, setX] = useState(false);
   const [s, setS] = useState(false);
-  const { selectedTab, selectedCategoryName } = useTabContext(); // استخدام selectedCategoryName هنا
+  const { selectedTab, selectedCategoryName } = useTabContext(); 
 
   if (x) {
     return <BurgerList />
@@ -38,7 +38,7 @@ const Homes = () => {
         <Button
           size='large'
           color='red'
-          title={ ` View All ${selectedCategoryName} `} // استخدام selectedCategoryName هنا
+          title={ ` View All ${selectedCategoryName} `} 
           onClick={() => {
             setX(!x);
             console.log(x);

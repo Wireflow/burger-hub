@@ -62,10 +62,10 @@ const styles = StyleSheet.create({
     padding: 16,
   },
   searchContainer: {
-    flexDirection: 'row', // لضبط التخطيط أفقيًا
-    alignItems: 'center', // لضبط العناصر في المنتصف
+    flexDirection: 'row', 
+    alignItems: 'center',
     marginBottom: 16,
-    backgroundColor: '#E0E0E0',  // لإضافة مسافة أسفل حقل البحث
+    backgroundColor: '#E0E0E0',  
   },
   content: {
     height: '85%',

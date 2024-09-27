@@ -1,4 +1,4 @@
-// src/components/ProductSearch.tsx
+
 import React, { useState } from 'react';
 import { View, FlatList, Text, StyleSheet } from 'react-native';
 import SearchInput from '../ui/SearchInput';
@@ -63,10 +63,10 @@ const styles = StyleSheet.create({
       textAlign:'center',
       marginTop:270
     },  searchContainer: {
-        flexDirection: 'row', // لضبط التخطيط أفقيًا
-        alignItems: 'center', // لضبط العناصر في المنتصف
+        flexDirection: 'row', 
+        alignItems: 'center', 
         marginBottom: 16,
-        backgroundColor: '#E0E0E0',  // لإضافة مسافة أسفل حقل البحث
+        backgroundColor: '#E0E0E0', 
       },
 });
 
