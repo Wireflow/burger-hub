@@ -18,6 +18,7 @@ import { useMutation } from "@tanstack/react-query";
 import { createAddress } from "@/src/mutations/user/createAddress";
 import FormInput from "./FormIput";
 import Button from "../ui/Button";
+import { useSessionStore } from "@/src/store/useSessionStore";
 
 type Props = {
   setOpen: any;
@@ -26,13 +27,9 @@ type Props = {
 
 const { width } = Dimensions.get("window");
 
-function FormAddress({ setOpen, open }: Props) {
-  // const [isOpenModal, setIsOpenModal] = React.useState(false);
-  
-  // const toggleModal = () => {
-  //   setIsOpenModal(true);
-  // };
-
+function FormAddress() {
+  const { session } = useSessionStore();
+  const userId = session?.id;
   const {
     control,
     handleSubmit,
@@ -51,7 +48,7 @@ function FormAddress({ setOpen, open }: Props) {
 
   const mutation = useMutation({
     mutationKey: ["new-address"],
-    mutationFn: createAddress,
+    mutationFn: (data: any) => createAddress(data, userId as string),
     onSuccess: () => {
       reset();
       ToastAndroid.show("Successfully added address", ToastAndroid.LONG);
@@ -74,10 +71,8 @@ function FormAddress({ setOpen, open }: Props) {
     <ScrollView>
       <KeyboardAvoidingView>
         <Modal
-          onDismiss={setOpen}
           presentationStyle="overFullScreen"
           transparent
-          visible={open}
           animationType="slide"
         >
           <View style={styles.viewWrapper}>
@@ -123,12 +118,7 @@ function FormAddress({ setOpen, open }: Props) {
                 />
               </View>
               <View style={styles.buttonStyle}>
-                <Button
-                  color="red"
-                  size="small"
-                  title="Close"
-                  onClick={setOpen}
-                />
+                <Button color="red" size="small" title="Close" />
                 <Button
                   color="red"
                   size="small"

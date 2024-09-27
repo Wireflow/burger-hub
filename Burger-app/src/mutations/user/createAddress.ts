@@ -1,12 +1,9 @@
 import { supabase } from "@/src/services/supabase/client";
 import { Insert } from "@/src/services/supabase/table.types";
-import { useSessionStore } from "@/src/store/useSessionStore";
 import { addressSchema } from "@/src/types/validations/address";
 
-export const createAddress = async (data: Insert<"Addresses">) => {
+export const createAddress = async (data: Insert<"Addresses">, userId: string) => {
     try {
-        const {session}=useSessionStore();
-        const userId=session?.id;
         const parsedData = addressSchema.safeParse(data);
         if (!parsedData.success) {
             throw new Error(`Validation error`);
@@ -14,7 +11,7 @@ export const createAddress = async (data: Insert<"Addresses">) => {
 
         const { data: address, error } = await supabase
             .from("Addresses")
-            .insert([{ ...parsedData.data, user_id:userId }]);
+            .insert([{ ...parsedData.data, user_id: userId }]);
 
         if (error) throw new Error(`Failed to create address`);
 

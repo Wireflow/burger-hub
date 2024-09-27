@@ -11,23 +11,20 @@ import { useSessionStore } from "@/src/store/useSessionStore";
 import { Swipeable } from "react-native-gesture-handler";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import Button from "../ui/Button";
-import Formaddress from "./Formaddress";
-import { router } from "expo-router";
-import OpenModalAddress from "./OpenModalAddress";
+
+
 
 export default function AddressScreen() {
-  
-    const [isModalVisible, setModalVisible] = useState(false);
+  // const [isModalVisible, setModalVisible] = useState(false);
 
-    const toggleModalVisibility = () => {
-      setModalVisible(!isModalVisible);
-    };
-   
+  // const toggleModalVisibility = () => {
+  //   setModalVisible(!isModalVisible);
+  // };
+
   const { session } = useSessionStore();
   const { data: address, error } = useGetAddressByUserId(session?.id as string);
   const [addresses, setAddresses] = React.useState(address || []);
 
-  // Update address state when fetched
   React.useEffect(() => {
     if (address) {
       setAddresses(address);
@@ -35,7 +32,9 @@ export default function AddressScreen() {
   }, [address]);
 
   const handleDeleteAddress = (index: number) => {
-    setAddresses((prevAddresses) => prevAddresses.filter((_, i) => i !== index));
+    setAddresses((prevAddresses) =>
+      prevAddresses.filter((_, i) => i !== index)
+    );
   };
 
   const renderRightActions = (index: number) => (
@@ -49,7 +48,6 @@ export default function AddressScreen() {
 
   return (
     <View style={styles.container}>
-     
       <FlatList
         data={addresses}
         renderItem={({ item, index }) => (
@@ -66,21 +64,11 @@ export default function AddressScreen() {
         )}
         keyExtractor={(item, index) => index.toString()}
       />
-   
-    <Button
-  color="red"
-  size="large"
-  title="Add Address"
-  onClick={toggleModalVisibility}
-/>
-{isModalVisible&&<Formaddress open={isModalVisible} setOpen={toggleModalVisibility}/>} 
 
+      <Button color="red" size="large" title="Add Address" />
     </View>
   );
 }
-
-
-
 
 const styles = StyleSheet.create({
   container: {

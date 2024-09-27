@@ -9,6 +9,7 @@ import ProfileScreen from "../(drawer)/ProfileScreen";
 import PaymentScreen from "../(drawer)/PaymentScreen";
 import OrderScreen from "../(drawer)/OrderScreen";
 import OderHistory from "../(drawer)/orderhistory/OderHistory";
+import FavoriteScreen from "../(drawer)/FavoriteScreen";
 
 
 const Tab = createBottomTabNavigator();
@@ -31,7 +32,7 @@ export const MyBottomTabs: React.FC = () => {
       />
       <Tab.Screen
         name="favorite"
-        component={ProfileScreen}
+        component={FavoriteScreen}
         options={{
           headerShown: false,
           tabBarIcon: ({ color, size }) => (

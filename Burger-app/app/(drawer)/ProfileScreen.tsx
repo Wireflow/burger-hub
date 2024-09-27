@@ -1,4 +1,3 @@
-import OpenModalAddress from "@/src/components/address/OpenModalAddress";
 import { useGetAddressByUserId } from "@/src/queries/users/useGetAddressbyUserId";
 import { useSessionStore } from "@/src/store/useSessionStore";
 import { router } from "expo-router";
@@ -26,7 +25,7 @@ const ProfileScreen: React.FC<{ navigation: any }> = ({ navigation }) => {
         </View>
         <View style={styles.profileContainer}>
           <Image
-            source={require("@/assets/images/dd.jpeg")}
+            source={require("@/assets/icons/person.png")}
             style={styles.profileImage}
           />
 
@@ -93,9 +92,9 @@ const styles = StyleSheet.create({
     marginTop: 5,
   },
   profileImage: {
-    width: 80,
-    height: 80,
-    borderRadius: 50,
+    width: 100,
+    height: 100,
+    borderRadius: 20,
   },
   profileName: {
     fontSize: 18,

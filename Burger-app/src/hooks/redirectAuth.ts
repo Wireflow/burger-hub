@@ -5,7 +5,7 @@ import { UserSession, useSessionStore } from "../store/useSessionStore";
 
 export const redirectAuth = () => {
   const setSession = useSessionStore((state) => state.setSession);
-  const router = useRouter(); // Use useNavigation hook from React Navigation
+  const router = useRouter(); 
 
   useEffect(() => {
     const { data: authListener } = supabase.auth.onAuthStateChange(
@@ -27,19 +27,13 @@ export const redirectAuth = () => {
          else if (event === "SIGNED_OUT") {
           router.replace("/auth");
           setSession(null);
-        } else if (event === "PASSWORD_RECOVERY") {
-          // handle password recovery event
-        } else if (event === "TOKEN_REFRESHED") {
-          // handle token refreshed event
-        } else if (event === "USER_UPDATED") {
-          // handle user updated event
-        }
+         }
       }
     );
 
-    // Cleanup function to unsubscribe from the listener
+  
     return () => {
       authListener.subscription.unsubscribe();
     };
-  }, [router]); // Include navigation in the dependency array if needed
+  }, [router]); 
 };
