@@ -8,9 +8,9 @@ import {
 } from "react-native";
 import { useGetAllCategories } from "../../queries/products/gitAllCategores";
 import { category } from "../../types/schema/category";
-import CardWrapper from "../card/CardWrapper";
-import { useGetProductsByCategoryId } from "../../queries/products/getProductsByCategoryId";
+ import { useGetProductsByCategoryId } from "../../queries/products/getProductsByCategoryId";
 import { useTabContext } from '../layout/TabContext';
+import CardWrapper from "../ui/card/CardWrapper";
 
 const Tabs = () => {
   const { data: categories, error, isLoading } = useGetAllCategories();
@@ -33,7 +33,7 @@ const Tabs = () => {
         setSelectedCategoryName(selectedCategory.name); // تعيين اسم الفئة عند تغييره
       }
     }
-  }, [selectedTab, categories, setSelectedCategoryName]);
+  });
 
   if (isLoading || isLoadingProducts) {
     return <ActivityIndicator size="large" color="#0000ff" />;
@@ -46,7 +46,7 @@ const Tabs = () => {
   return (
     <View style={styles.container}>
       <View style={styles.tabContainer}>
-        {categories?.map((categoryItem: category) => (
+        { categories && categories?.map((categoryItem: category) => (
           <TouchableOpacity
             key={categoryItem.id}
             onPress={() => setSelectedTab(categoryItem.id)}

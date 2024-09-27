@@ -7,8 +7,7 @@ import { MyBottomTabs } from '../tabs/BottomTabs';
 import PaymentScreen from './PaymentScreen';
 import OrderHistoryScreen from '@/src/components/oder-history/OrderHistoryScreen';
 import FavoriteScreen from './FavoriteScreen';
-import Homes from '@/src/components/Home/Homes';
-
+ 
 
 const Drawer = createDrawerNavigator();
 

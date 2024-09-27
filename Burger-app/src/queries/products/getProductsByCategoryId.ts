@@ -12,7 +12,7 @@ export const getProductsByCategoryId = async (categoryId: number) => {
       .eq("categoriy_id", categoryId); 
 
     if (error) throw new Error("Failed to get products.");
-
+console.log("im in getProductsByCategoryId",products)
     return products;
   } catch (error: any) {
     console.error("Error getting products:", error);

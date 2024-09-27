@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { View, Text, Image, StyleSheet, ImageSourcePropType } from 'react-native';
-import Button from '../ui/Button';
-type CardContentProps = {
+import Button from '../Button';
+ type CardContentProps = {
   imageSource: ImageSourcePropType;  
   title: string; 
   price: string;  
@@ -10,10 +10,10 @@ type CardContentProps = {
 const CardContent = ({ imageSource, title, price }: CardContentProps) => {
   const [currentImage, setCurrentImage] = useState(imageSource);
 
-  const handleImageError = () => {
-    console.log('Error loading image');
-    setCurrentImage(defaultImage); // تغيير الصورة إلى الافتراضية عند حدوث خطأ
-  };
+  // const handleImageError = () => {
+  //   console.log('Error loading image');
+  //   setCurrentImage(defaultImage); // تغيير الصورة إلى الافتراضية عند حدوث خطأ
+  // };
 
   return (
     <View>
@@ -21,7 +21,7 @@ const CardContent = ({ imageSource, title, price }: CardContentProps) => {
         <Image 
           source={currentImage}  
           style={styles.image}
-          onError={handleImageError} // التعامل مع الخطأ هنا
+          // onError={handleImageError} // التعامل مع الخطأ هنا
         />
       </View>
       <View style={styles.textContainer}>

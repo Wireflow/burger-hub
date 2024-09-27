@@ -17,7 +17,7 @@ const getAllCategories = async () => {
         if (error) {
             throw new Error(error.message);
         }
-
+console.log('im in git all cat ',categories)
         return categories;
     } catch (error) {
         console.error("Error fetching categories:", error);

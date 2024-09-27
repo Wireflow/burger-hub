@@ -10,8 +10,8 @@ import PaymentScreen from "../(drawer)/PaymentScreen";
 import OrderScreen from "../(drawer)/OrderScreen";
 import OderHistory from "../(drawer)/orderhistory/OderHistory";
 import FavoriteScreen from "../(drawer)/FavoriteScreen";
-import Homes from "@/src/components/Home/Homes";
-
+import Homes from "@/src/components/home/home";
+ 
 
 const Tab = createBottomTabNavigator();
 

@@ -3,9 +3,9 @@ import React, { useState } from 'react';
 import { View, FlatList, Text, StyleSheet } from 'react-native';
 import SearchInput from '../ui/SearchInput';
 import { useSearchProducts, Product } from '../../queries/products/getbySearch';
-import CardWrapper from '../card/CardWrapper'; 
-import Buttonout from '../ui/Buttonout';
+ import Buttonout from '../ui/Buttonout';
 import Homes from './home';
+import CardWrapper from '../ui/card/CardWrapper';
 const ProductSearch: React.FC = () => {
 
     const [searchTerm, setSearchTerm] = useState<string>('');

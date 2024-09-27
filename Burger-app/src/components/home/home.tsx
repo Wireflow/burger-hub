@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import SearchInput from '../ui/SearchInput';
-import Tabs from './Tabs';
+ import Tabs from './Tabs';
 import Button from '../ui/Button';
 import { useRouter } from 'expo-router';
 import BurgerList from './BurgerList';
 import ProductSearch from './ProductSearch';
 import { useTabContext } from '../layout/TabContext';
+import SearchInput from '../ui/SearchInput';
 
 const Homes = () => {
   const router = useRouter();

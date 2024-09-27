@@ -12,7 +12,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import FormInput from "@/src/components/ui/InputForm";
 import { SafeAreaView } from "react-native-safe-area-context";
 import Button from "../../ui/Button";
-import LogInQuery from "@/src/queries/auth/login";
+import LogInQuery, { useLoIn } from "@/src/queries/auth/login";
 import { LogInType } from "@/src/types/LogInType";
 import { useSessionStore } from "@/src/store/useSessionStore";
 import { getUserById } from "@/src/queries/users/getUserById";
@@ -28,13 +28,13 @@ const LogIn = () => {
       password: "",
     },
   });
-  const onSubmit = async (data: LogInType) => {
+  const onSubmit = async (dataForm: LogInType) => {
     try {
-      if (!data.email || !data.password) {
-        return setError("root", { message: "Check your login information." });
-      }
-      const userId = await LogInQuery(data);
-      const dataUser = await getUserById(userId);
+      // if (!data.email || !data.password) {
+      //   return setError("root", { message: "Check your login information." });
+      // }
+      const {data ,error,isLoading} = await useLoIn(dataForm);
+      const dataUser = await getUserById(data??"");
       setSession({
         name: dataUser.name || "",
         phone: dataUser.phone,
@@ -43,7 +43,7 @@ const LogIn = () => {
       });
       router.navigate("/");
 
-      console.log("User logined  up:", userId);
+      console.log("User logined  up:", data);
       console.log("im session", session);
     } catch (error) {
       console.error("Log In error:", error);
