@@ -65,7 +65,7 @@ const ProfileScreen: React.FC<{ navigation: any }> = ({ navigation }) => {
         </TouchableOpacity>
         <TouchableOpacity
           style={styles.sectionContainer}
-          onPress={() => router.navigate("/(drawer)/address")}
+          onPress={() => router.push("/(drawer)/address")}
         >
           <Text style={styles.sectionTitle}>Addresses</Text>
           <Text style={styles.sectionArrow}>{">"}</Text>

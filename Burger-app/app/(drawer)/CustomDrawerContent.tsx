@@ -1,72 +1,79 @@
 import React from "react";
-import { View, Text, TouchableOpacity, StyleSheet, Image, SafeAreaView } from "react-native";
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  StyleSheet,
+  Image,
+  SafeAreaView,
+} from "react-native";
 
 const CustomDrawerContent: React.FC<{ navigation: any }> = ({ navigation }) => {
   return (
     <View style={styles.container}>
-     <SafeAreaView>
-     <View style={styles.header}>
-        <View style={styles.containerImage}>
-          <Image
-            source={require("@/assets/images/drawer.png")}
-            style={styles.logo}
-          />
+      <SafeAreaView>
+        <View style={styles.header}>
+          <View style={styles.containerImage}>
+            <Image
+              source={require("@/assets/images/drawer.png")}
+              style={styles.logo}
+            />
+          </View>
+
+          <TouchableOpacity onPress={() => navigation.navigate("home")}>
+            <Text style={styles.backButton}>Back</Text>
+          </TouchableOpacity>
         </View>
-
-        <TouchableOpacity onPress={() => navigation.goBack()}>
-          <Text style={styles.backButton}>Back</Text>
+        <TouchableOpacity
+          style={styles.menuItem}
+          onPress={() => navigation.navigate("Profile")}
+        >
+          <Image
+            source={require("@/assets/icons/gg_profile.png")}
+            style={styles.Icon}
+          />
+          <Text style={styles.menuText}>Profile</Text>
         </TouchableOpacity>
-      </View>
-      <TouchableOpacity
-        style={styles.menuItem}
-        onPress={() => navigation.navigate("Profile")}
-      >
-        <Image
-          source={require("@/assets/icons/gg_profile.png")}
-          style={styles.Icon}
-        />
-        <Text style={styles.menuText}>Profile</Text>
-      </TouchableOpacity>
-      <TouchableOpacity
-        style={styles.menuItem}
-        onPress={() => navigation.navigate("orders")}
-      >
-        <Image
-          source={require("@/assets/icons/icons8_buy.png")}
-          style={styles.Icon}
-        />
+        <TouchableOpacity
+          style={styles.menuItem}
+          onPress={() => navigation.navigate("orders")}
+        >
+          <Image
+            source={require("@/assets/icons/icons8_buy.png")}
+            style={styles.Icon}
+          />
 
-        <Text style={styles.menuText}>Your Orders</Text>
-      </TouchableOpacity>
-      <TouchableOpacity
-        style={styles.menuItem}
-        onPress={() => navigation.navigate("payments")}
-      >
-        <Image
-          source={require("@/assets/icons/ic_outline-local-offer.png")}
-          style={styles.Icon}
-        />
+          <Text style={styles.menuText}>Your Orders</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={styles.menuItem}
+          onPress={() => navigation.navigate("payments")}
+        >
+          <Image
+            source={require("@/assets/icons/ic_outline-local-offer.png")}
+            style={styles.Icon}
+          />
 
-        <Text style={styles.menuText}>Payments</Text>
-      </TouchableOpacity>
-      <TouchableOpacity
-        style={styles.menuItem}
-        onPress={() => navigation.navigate("favorites")}
-      >
-        <Image
-          source={require("@/assets/icons/ic_outline-sticky-note-2.png")}
-          style={styles.Icon}
-        />
+          <Text style={styles.menuText}>Payments</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={styles.menuItem}
+          onPress={() => navigation.navigate("favorites")}
+        >
+          <Image
+            source={require("@/assets/icons/ic_outline-sticky-note-2.png")}
+            style={styles.Icon}
+          />
 
-        <Text style={styles.menuText}>Favorites</Text>
-      </TouchableOpacity>
-      <TouchableOpacity
-        style={styles.signOutButton}
-        onPress={() => navigation.native("signout")}
-      >
-        <Text style={styles.signOutText}>Sign out →</Text>
-      </TouchableOpacity>
-     </SafeAreaView>
+          <Text style={styles.menuText}>Favorites</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={styles.signOutButton}
+          onPress={() => navigation.native("signout")}
+        >
+          <Text style={styles.signOutText}>Sign out →</Text>
+        </TouchableOpacity>
+      </SafeAreaView>
     </View>
   );
 };
@@ -84,7 +91,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     marginBottom: 40,
     justifyContent: "space-between",
-    top:56
+    top: 56,
   },
   containerImage: {
     width: 73,
@@ -113,7 +120,7 @@ const styles = StyleSheet.create({
   menuItem: {
     flexDirection: "row",
     padding: 20,
-    top:40
+    top: 40,
   },
   Icon: {
     width: 24,
@@ -128,8 +135,7 @@ const styles = StyleSheet.create({
   signOutButton: {
     marginTop: "auto",
     padding: 15,
-    top:250
-
+    top: 250,
   },
   signOutText: {
     color: "#FFFFFF",

@@ -19,11 +19,12 @@ const FormInput = ({placeholder,text,name,control}:Props) => {
               control={control}
               name={name}
               render={({ field: { value, onChange, onBlur }, fieldState: { error } }) => (
+
                 <>
                   <TextInput
                     style={styles.input}
                     value={value}
-                    onChangeText={onChange}
+                   onChangeText={onChange}
                     onBlur={onBlur}
                     placeholder={placeholder}
                   />

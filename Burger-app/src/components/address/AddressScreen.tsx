@@ -5,24 +5,31 @@ import {
   View,
   FlatList,
   TouchableOpacity,
+  Alert,
 } from "react-native";
 import { useGetAddressByUserId } from "@/src/queries/users/useGetAddressbyUserId";
 import { useSessionStore } from "@/src/store/useSessionStore";
 import { Swipeable } from "react-native-gesture-handler";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import Button from "../ui/Button";
-
-
+import Formaddress from "./Formaddress";
+import { Dialog } from "react-native-paper";
+import { addressDelete } from "@/src/mutations/user/addressDelete";
 
 export default function AddressScreen() {
-  // const [isModalVisible, setModalVisible] = useState(false);
+  const [isModalVisible, setModalVisible] = useState(false);
 
-  // const toggleModalVisibility = () => {
-  //   setModalVisible(!isModalVisible);
-  // };
+  const toggleModalVisibility = () => {
+    setModalVisible(!isModalVisible);
+  };
 
   const { session } = useSessionStore();
-  const { data: address, error } = useGetAddressByUserId(session?.id as string);
+  const userId = session?.id;
+  const {
+    data: address,
+    error,
+    refetch,
+  } = useGetAddressByUserId(session?.id as string);
   const [addresses, setAddresses] = React.useState(address || []);
 
   React.useEffect(() => {
@@ -31,16 +38,16 @@ export default function AddressScreen() {
     }
   }, [address]);
 
-  const handleDeleteAddress = (index: number) => {
-    setAddresses((prevAddresses) =>
-      prevAddresses.filter((_, i) => i !== index)
-    );
-  };
+  // const handleDeleteAddress = (index: number) => {
+  //   setAddresses((prevAddresses) =>
+  //     prevAddresses.filter((_, i) => i !== index)
+  //   );
+  // };
 
-  const renderRightActions = (index: number) => (
+  const renderRightActions = (index: number, id: number) => (
     <TouchableOpacity
       style={styles.deleteButton}
-      onPress={() => handleDeleteAddress(index)}
+      onPress={() => addressDelete(id, userId as string)}
     >
       <MaterialCommunityIcons name="delete" size={24} color="white" />
     </TouchableOpacity>
@@ -51,9 +58,15 @@ export default function AddressScreen() {
       <FlatList
         data={addresses}
         renderItem={({ item, index }) => (
-          <Swipeable renderRightActions={() => renderRightActions(index)}>
+          <Swipeable
+            renderRightActions={() => renderRightActions(index, item.id)}
+          >
             <View style={styles.addressItem}>
-              <MaterialCommunityIcons name="map-marker" size={24} color="red" />
+              <MaterialCommunityIcons
+                name="map-marker"
+                size={30}
+                color="#DF2C2C"
+              />
               <View style={styles.addressDetails}>
                 <Text>{item.street}</Text>
                 <Text>{`${item.city}, ${item.state}, ${item.zip_code}`}</Text>
@@ -65,7 +78,17 @@ export default function AddressScreen() {
         keyExtractor={(item, index) => index.toString()}
       />
 
-      <Button color="red" size="large" title="Add Address" />
+      <Button
+        color="red"
+        size="large"
+        title="Add Address"
+        onClick={toggleModalVisibility}
+      />
+      <Formaddress
+        open={isModalVisible}
+        setOpen={toggleModalVisibility}
+        refetch={refetch}
+      />
     </View>
   );
 }
@@ -95,15 +118,16 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   deleteButton: {
-    backgroundColor: "red",
+    top: "5%",
+    backgroundColor: "#DF2C2C",
     justifyContent: "center",
     alignItems: "center",
-    width: 30,
-    height: "50%",
-    borderRadius: 8,
+    width: 40,
+    height: "40%",
+    borderRadius: 100,
   },
   addButton: {
-    backgroundColor: "red",
+    backgroundColor: "#DF2C2C",
     padding: 12,
     borderRadius: 4,
     justifyContent: "center",

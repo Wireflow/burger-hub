@@ -14,7 +14,14 @@ import {
   addressSchemaType,
 } from "@/src/types/validations/address";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useMutation } from "@tanstack/react-query";
+import {
+  QueriesObserver,
+  QueryObserverBaseResult,
+  QueryObserverResult,
+  RefetchOptions,
+  RefetchQueryFilters,
+  useMutation,
+} from "@tanstack/react-query";
 import { createAddress } from "@/src/mutations/user/createAddress";
 import FormInput from "./FormIput";
 import Button from "../ui/Button";
@@ -23,11 +30,14 @@ import { useSessionStore } from "@/src/store/useSessionStore";
 type Props = {
   setOpen: any;
   open: boolean;
+  refetch: (
+    options?: RefetchOptions & RefetchQueryFilters
+  ) => Promise<QueryObserverResult<any, any>>;
 };
 
 const { width } = Dimensions.get("window");
 
-function FormAddress() {
+function FormAddress({ setOpen, open, refetch }: Props) {
   const { session } = useSessionStore();
   const userId = session?.id;
   const {
@@ -48,10 +58,10 @@ function FormAddress() {
 
   const mutation = useMutation({
     mutationKey: ["new-address"],
-    mutationFn: (data: any) => createAddress(data, userId as string),
+    mutationFn: async (data: any) => createAddress(data, userId as string),
     onSuccess: () => {
-      reset();
       ToastAndroid.show("Successfully added address", ToastAndroid.LONG);
+      refetch();
     },
   });
 
@@ -64,72 +74,78 @@ function FormAddress() {
   };
 
   const onSubmit = () => {
-    mutation.mutate(data);
+    console.log(data);
+    mutation.mutateAsync(data);
   };
 
   return (
     <ScrollView>
-      <KeyboardAvoidingView>
-        <Modal
-          presentationStyle="overFullScreen"
-          transparent
-          animationType="slide"
-        >
-          <View style={styles.viewWrapper}>
-            <View style={styles.modalView}>
-              <View style={styles.IputStyle}>
-                <FormInput
-                  control={control}
-                  name="street"
-                  placeholder="Enter street"
-                  text="Street"
-                />
-              </View>
-              <View style={styles.IputStyle}>
-                <FormInput
-                  control={control}
-                  name="zip_code"
-                  placeholder="Enter zip code"
-                  text="Zip Code"
-                />
-              </View>
-              <View style={styles.IputStyle}>
-                <FormInput
-                  control={control}
-                  name="state"
-                  placeholder="Choose state"
-                  text="State"
-                />
-              </View>
-              <View style={styles.IputStyle}>
-                <FormInput
-                  control={control}
-                  name="city"
-                  placeholder="Enter city"
-                  text="City"
-                />
-              </View>
-              <View style={styles.IputStyle}>
-                <FormInput
-                  control={control}
-                  name="country"
-                  placeholder="Choose country"
-                  text="Country"
-                />
-              </View>
-              <View style={styles.buttonStyle}>
-                <Button color="red" size="small" title="Close" />
-                <Button
-                  color="red"
-                  size="small"
-                  title="Create"
-                  onClick={handleSubmit(onSubmit)}
-                />
-              </View>
+      <Modal
+        onDismiss={setOpen}
+        presentationStyle="overFullScreen"
+        transparent
+        visible={open}
+        animationType="slide"
+      >
+        <View style={styles.viewWrapper}>
+          <View style={styles.modalView}>
+            <View style={styles.IputStyle}>
+              <FormInput
+                control={control}
+                name="street"
+                placeholder="Enter street"
+                text="Street"
+              />
+            </View>
+            <View style={styles.IputStyle}>
+              <FormInput
+                control={control}
+                name="zip_code"
+                placeholder="Enter zip code"
+                text="Zip Code"
+              />
+            </View>
+            <View style={styles.IputStyle}>
+              <FormInput
+                control={control}
+                name="state"
+                placeholder="Choose state"
+                text="State"
+              />
+            </View>
+            <View style={styles.IputStyle}>
+              <FormInput
+                control={control}
+                name="city"
+                placeholder="Enter city"
+                text="City"
+              />
+            </View>
+            <View style={styles.IputStyle}>
+              <FormInput
+                control={control}
+                name="country"
+                placeholder="Choose country"
+                text="Country"
+              />
+            </View>
+            <View style={styles.buttonStyle}>
+              <Button
+                color="red"
+                size="small"
+                title="Close"
+                onClick={setOpen}
+              />
+              <Button
+                color="red"
+                size="small"
+                title="Create"
+                onClick={handleSubmit(onSubmit)}
+              />
             </View>
           </View>
-        </Modal>
-      </KeyboardAvoidingView>
+        </View>
+      </Modal>
     </ScrollView>
   );
 }
@@ -146,7 +162,7 @@ const styles = StyleSheet.create({
   modalView: {
     position: "absolute",
     display: "flex",
-    top: "30%",
+    top: "25%",
     left: "50%",
     height: 480,
     width: width * 0.8,
