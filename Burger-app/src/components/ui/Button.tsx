@@ -28,8 +28,8 @@ const styles = StyleSheet.create({
       
         borderWidth: 1,
         borderRadius: 30,  
-        paddingVertical: 10,
-        paddingHorizontal: 20,
+        paddingVertical: 0,
+        paddingHorizontal: 10,
         margin: "auto",  
         alignItems: 'center',
         justifyContent: 'center',
@@ -43,6 +43,7 @@ const styles = StyleSheet.create({
     },
     medium: {
         width: 130,
+        height:40
     },
     large: {
         width: 300,

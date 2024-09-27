@@ -45,6 +45,7 @@ const BurgerList = () => {
               price={`$${product.price?.toFixed(2)}`}
               height={190}
               width={160}
+              id={product?.id}
             />
           ))
         ) : (

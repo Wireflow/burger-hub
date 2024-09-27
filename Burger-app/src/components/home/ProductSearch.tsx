@@ -43,6 +43,7 @@ const ProductSearch: React.FC = () => {
                             price={`$${item.price?.toFixed(2)}`} 
                             height={190}
                             width={160}
+                            id={item?.id}
                         />
                     )}
                 />

@@ -18,7 +18,7 @@ const Main: React.FC = () => {
       <Drawer.Navigator  screenOptions={{drawerStyle:{width:1000}}}
     
         drawerContent={(props) => <CustomDrawerContent {...props} />}
-        initialRouteName="home"
+        initialRouteName ="home"
       >
         <Drawer.Screen name="home" component={MyBottomTabs} />
         <Drawer.Screen name="Profile" component={ProfileScreen}  options={{headerShown:true}}/>

@@ -1,7 +1,7 @@
 import { StyleSheet, View ,Text} from 'react-native';
 import React,{useState} from 'react';
-import CardWrapper from '../card/CardWrapper';
-import NotFound from '../notFound/NotFound';
+ import NotFound from '../notFound/NotFound';
+import CardWrapper from '../ui/card/CardWrapper';
 
 const Favorite = () => {
     const [s,SetS]=useState(false)
@@ -19,6 +19,7 @@ const Favorite = () => {
                   title='Burger'
                   price='$99.90'
                   imageSource={require('@/assets/images/dd.jpeg')}
+                  id={1}
                 />
                 <CardWrapper
                   height={190}
@@ -26,6 +27,8 @@ const Favorite = () => {
                   title='Burger'
                   price='$99.90'
                   imageSource={require('@/assets/images/dd.jpeg')}
+                  id={1}
+
                 />
               </View>
               <View style={styles.row}>
@@ -35,6 +38,8 @@ const Favorite = () => {
                   title='Burger'
                   price='$99.90'
                   imageSource={require('@/assets/images/dd.jpeg')}
+                  id={1}
+
                 />
                 <CardWrapper
                   height={190}
@@ -42,6 +47,8 @@ const Favorite = () => {
                   title='Burger'
                   price='$99.90'
                   imageSource={require('@/assets/images/dd.jpeg')}
+                  id={1}
+
                 />
               </View>
             </View>

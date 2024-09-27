@@ -5,9 +5,10 @@ import Button from '../Button';
   imageSource: ImageSourcePropType;  
   title: string; 
   price: string;  
+  id:number
 };
 
-const CardContent = ({ imageSource, title, price }: CardContentProps) => {
+const CardContent = ({id, imageSource, title, price }: CardContentProps) => {
   const [currentImage, setCurrentImage] = useState(imageSource);
 
   // const handleImageError = () => {
@@ -19,7 +20,7 @@ const CardContent = ({ imageSource, title, price }: CardContentProps) => {
     <View>
       <View style={styles.imageWrapper}>
         <Image 
-          source={currentImage}  
+          source={require('@/assets/images/Mask Group.png')}  
           style={styles.image}
           // onError={handleImageError} // التعامل مع الخطأ هنا
         />
@@ -28,6 +29,7 @@ const CardContent = ({ imageSource, title, price }: CardContentProps) => {
         <Text style={styles.text}>{title}</Text>  
         <Text style={[styles.text, { color: 'red' }]}>{price}</Text> 
       </View>
+
       <Button 
         title="Customize" 
         size="medium" 
@@ -41,24 +43,24 @@ const CardContent = ({ imageSource, title, price }: CardContentProps) => {
 const styles = StyleSheet.create({
   imageWrapper: {
     position: 'absolute',
-    top: -40,
+    top: -30,
     alignSelf: 'center',
   },
   image: {
     width: 110,
-    height: 90,
+    height: 100,
     borderRadius: 15,
     borderTopLeftRadius:30,
     borderTopRightRadius:30
   },
   textContainer: {
-    marginTop: 60,
+    marginTop: 58,
     alignItems: 'center',
     marginBottom: 10,
   },
   text: {
     color: 'black',
-    fontSize: 16,
+    fontSize: 15,
     fontWeight: 'bold',
     marginBottom: 3,
   },

@@ -25,16 +25,16 @@ const Homes = () => {
   return (
     <>
       <View style={styles.container}>
-        <View>
+        <View style={{width:'90%'}}>
           <Text style={styles.titleText}>Delicious</Text>
           <Text style={styles.titleText}>burgers for you</Text>
-          <SearchInput onSearch={function (text: string): void {
+           <SearchInput onSearch={function (text: string): void {
             setS(!s);
           }} />
         </View>
       </View>
       <Tabs />
-      <View style={{ marginBottom: 90 }}>
+      <View style={{ marginBottom: 10 }}>
         <Button
           size='large'
           color='red'
@@ -56,9 +56,10 @@ const styles = StyleSheet.create({
     alignItems: 'flex-start',
     marginBottom: 15,
     marginLeft: 25,
+    height:120
   },
   titleText: {
-    fontSize: 40,
+    fontSize: 30,
     color: 'black',
   },
 });
