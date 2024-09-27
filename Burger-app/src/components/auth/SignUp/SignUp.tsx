@@ -10,7 +10,6 @@ import Button from "../../ui/Button";
  
 const SignUp = () => {
     const { setSession } = useSessionStore();
-
     const {
         control,
         handleSubmit,
@@ -25,7 +24,6 @@ const SignUp = () => {
             password: ''
         }
     });
-
     const onSubmit = async (data: SignUpType) => {
         console.log(data, "submitted data");
 
@@ -40,7 +38,6 @@ const SignUp = () => {
             setError("root", { message: "An error occurred during sign up." });
         }
     };
-
     return (
         <SafeAreaView style={styles.container}>
             <ScrollView contentContainerStyle={styles.scrollContent}>

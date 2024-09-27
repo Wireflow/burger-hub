@@ -1,13 +1,15 @@
 import React from 'react'
 import { Text } from 'react-native'
-
-const Title = () => {
+type props ={
+  name?:string;
+}
+const Title = ({name}:props) => {
   return (
     <Text style={{
       color:'#000000',
       fontSize:22,
       fontWeight:600
-    }}>Grilled Burger</Text>
+    }}>{name}</Text>
   )
 }
 

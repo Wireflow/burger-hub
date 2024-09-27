@@ -8,9 +8,9 @@ const AuthContainer = () => {
     <View style={styles.container}>
         <View style={styles.logo}>
         <Image
-                source={require('@/assets/images/logo.png')} // Adjust the path as necessary
+                source={require('@/assets/images/logo.png')} 
                 style={styles.image}
-                resizeMode="contain" // or "cover", "stretch", etc.
+                resizeMode="contain" 
             />
         </View> 
     </View>

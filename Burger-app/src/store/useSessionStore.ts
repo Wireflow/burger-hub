@@ -22,10 +22,10 @@ import { persist, PersistStorage } from "zustand/middleware";
 const customStorage: PersistStorage<SessionState> = {
   getItem: async (name) => {
     const value = await AsyncStorage.getItem(name);
-    return value ? JSON.parse(value) : null; // Deserialize
+    return value ? JSON.parse(value) : null;  
   },
   setItem: async (name, value) => {
-    await AsyncStorage.setItem(name, JSON.stringify(value)); // Serialize
+    await AsyncStorage.setItem(name, JSON.stringify(value)); 
   },
   removeItem: async (name) => {
     await AsyncStorage.removeItem(name);

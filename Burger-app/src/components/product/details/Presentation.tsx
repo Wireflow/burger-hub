@@ -3,13 +3,17 @@ import { View } from 'react-native'
 import Title from '../../ui/Title'
 import Description from '../../ui/Description'
 import Price from '../../ui/Price'
-
-const Presentation = () => {
+type props ={
+  title?:string;
+  price?:number;
+  description?:string;
+}
+const Presentation = ({title,price,description}:props) => {
   return (
  <View style={{height:180,width:"70%",display:'flex',justifyContent:'space-around',alignItems:'center',position:'relative',top:-40}}>
-      <Title/>
-    <Description/>
-    <Price/>
+      <Title name={title} />
+    <Description description={description}/>
+    <Price price={price}/>
  </View>  )
 }
 

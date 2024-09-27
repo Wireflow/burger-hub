@@ -9,7 +9,6 @@ import {
 } from "react-native";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-
 import FormInput from "@/src/components/ui/InputForm";
 import { SafeAreaView } from "react-native-safe-area-context";
 import Button from "../../ui/Button";
@@ -18,8 +17,7 @@ import { LogInType } from "@/src/types/LogInType";
 import { useSessionStore } from "@/src/store/useSessionStore";
 import { getUserById } from "@/src/queries/users/getUserById";
 import { LogInSchema } from "@/src/types/validations/LogInSchema";
-import { getAllCategory } from "@/src/queries/products/getAllcat";
-import { router } from "expo-router";
+ import { router } from "expo-router";
 const LogIn = () => {
   const { setSession, session } = useSessionStore();
 
@@ -30,10 +28,7 @@ const LogIn = () => {
       password: "",
     },
   });
-
   const onSubmit = async (data: LogInType) => {
-
-     
     try {
       if (!data.email || !data.password) {
         return setError("root", { message: "Check your login information." });
@@ -46,7 +41,7 @@ const LogIn = () => {
         email: dataUser.email,
         id: dataUser.id,
       });
-      router.navigate("/order");
+      router.navigate("/(screen)/product");
 
       console.log("User logined  up:", userId);
       console.log("im session", session);
@@ -59,7 +54,7 @@ const LogIn = () => {
     <SafeAreaView style={styles.container}>
       <KeyboardAvoidingView
         style={{ flex: 1 }}
-        behavior={Platform.OS === "ios" ? "padding" : "height"} // Adjust behavior based on platform
+        behavior={Platform.OS === "ios" ? "padding" : "height"}  
       >
         <ScrollView
           contentContainerStyle={styles.scrollContent}

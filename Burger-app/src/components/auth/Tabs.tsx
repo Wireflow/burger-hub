@@ -1,13 +1,9 @@
-    import React, { useState } from "react";
-    import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
-    import InputUi from "../ui/input";
-    import SignIn from "./SignUp/SignUp";
-    import LogIn from "./LogIn/LogIn";import Button from "../ui/Button";
-import { SafeAreaView } from "react-native-safe-area-context";
+import React, { useState } from "react";
+import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
+import LogIn from "./LogIn/LogIn";import Button from "../ui/Button";
 import SignUp from "./SignUp/SignUp";
 
-    
-    const Tabs = () => {
+const Tabs = () => {
         const [selectedTab, setSelectedTab] = useState("Login");
 
         return (
@@ -29,17 +25,10 @@ import SignUp from "./SignUp/SignUp";
                         {selectedTab === "Sign Up" && <View style={styles.underline} />}
                     </TouchableOpacity>
                 </View>
-
                 <View style={styles.content}>
- {selectedTab === "Sign Up" && <SignUp  />}
+                {selectedTab === "Sign Up" && <SignUp  />}
                 {selectedTab === "Login" && <LogIn />}
-                 
-
-                    
-                    
-
                 </View> 
-            
             </View>
         
         );
@@ -62,18 +51,12 @@ import SignUp from "./SignUp/SignUp";
             width:'90%',
             justifyContent:'space-around',
             position:'relative',
-           
-
     },
         tab: {
             padding: 5,
             alignItems: "center",
             width:'40%',
             top:'-15%',
-            
-
-           
-        
         },
         tabText: {
             fontSize: 22,
