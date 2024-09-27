@@ -6,15 +6,17 @@ import React from "react";
   SafeAreaProvider,
   initialWindowMetrics,
 } from "react-native-safe-area-context";
+import { OrdersProvider } from "../context/useContext";
  
 const Providers = ({ children }: { children: React.ReactNode }) => {
   return (
     <QueryClientProvider client={queryClient}>
-  
         <ThemeProvider value={DefaultTheme}>
-             <SafeAreaProvider initialMetrics={initialWindowMetrics}>
+           <OrdersProvider>
+           <SafeAreaProvider initialMetrics={initialWindowMetrics}>
               {children}
             </SafeAreaProvider>
+           </OrdersProvider>
          </ThemeProvider>
      </QueryClientProvider>
   );

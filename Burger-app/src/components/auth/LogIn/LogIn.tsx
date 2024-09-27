@@ -17,7 +17,7 @@ import { LogInType } from "@/src/types/LogInType";
 import { useSessionStore } from "@/src/store/useSessionStore";
 import { getUserById } from "@/src/queries/users/getUserById";
 import { LogInSchema } from "@/src/types/validations/LogInSchema";
- import { router } from "expo-router";
+import { router } from "expo-router";
 const LogIn = () => {
   const { setSession, session } = useSessionStore();
 
@@ -35,13 +35,13 @@ const LogIn = () => {
       }
       const userId = await LogInQuery(data);
       const dataUser = await getUserById(userId);
-     const setSessionBy =await setSession({
+      setSession({
         name: dataUser.name || "",
         phone: dataUser.phone,
         email: dataUser.email,
         id: dataUser.id,
       });
-      router.navigate("/(screen)/product");
+      router.navigate("/");
 
       console.log("User logined  up:", userId);
       console.log("im session", session);
@@ -62,7 +62,7 @@ const LogIn = () => {
         >
           <View style={{ width: "80%", height: "auto" }}>
             <FormInput control={control} name={"email"} label="Email" />
-            <FormInput control={control} name={"password"} label="Password" />
+            <FormInput control={control} name={"password"} label="Password"  secureTextEntry/>
           </View>
         </ScrollView>
         <View style={{ height: 20, width: "40%", left: 40 }}>

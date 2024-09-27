@@ -1,11 +1,13 @@
 import { StyleSheet, Text, View } from 'react-native'
 import React from 'react'
+import AddressScreen from '@/src/components/address/AddressScreen'
 
 const index = () => {
   return (
-    <View>
-      <Text>index</Text>
-    </View>
+    <>
+    <AddressScreen/>
+    
+    </>
   )
 }
 

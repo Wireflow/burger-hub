@@ -4,19 +4,20 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { SignUpType } from "@/src/types/SignUpType";
 import { useSessionStore } from "@/src/store/useSessionStore";
-import { UserSchema } from "../../../types/validation/user";
-import SignUpQuery from "@/src/queries/auth/signUp";
+ import SignUpQuery from "@/src/queries/auth/signUp";
 import Button from "../../ui/Button";
- 
+import { userSchema } from "@/src/types/validations/user";
+
 const SignUp = () => {
     const { setSession } = useSessionStore();
+
     const {
         control,
         handleSubmit,
         setError,
         formState: { isValid },
     } = useForm<SignUpType>({
-        resolver: zodResolver(UserSchema),
+        resolver: zodResolver(userSchema),
         defaultValues: {
             name: '',
             phone: '',
@@ -24,6 +25,7 @@ const SignUp = () => {
             password: ''
         }
     });
+
     const onSubmit = async (data: SignUpType) => {
         console.log(data, "submitted data");
 
@@ -38,6 +40,7 @@ const SignUp = () => {
             setError("root", { message: "An error occurred during sign up." });
         }
     };
+
     return (
         <SafeAreaView style={styles.container}>
             <ScrollView contentContainerStyle={styles.scrollContent}>
@@ -58,20 +61,19 @@ const SignUp = () => {
 export default SignUp;
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-    },
-    scrollContent: {
-        flexGrow: 1,
-    },
-    inputContainer: {
-        width: '80%',
-        height: 350,
- 
-    },
-    buttonContainer: {
-        height: 50,
-        width: '80%',
-        top: 30,
-    },
+  container: {
+    flex: 1,
+  },
+  scrollContent: {
+    flexGrow: 1,
+  },
+  inputContainer: {
+    width: "80%",
+    height: 350,
+  },
+  buttonContainer: {
+    height: 50,
+    width: "80%",
+    top: 30,
+  },
 });
