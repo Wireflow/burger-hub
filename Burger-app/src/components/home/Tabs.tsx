@@ -15,8 +15,8 @@ import CardWrapper from "../ui/card/CardWrapper";
 const Tabs = () => {
   const { data: categories, error, isLoading } = useGetAllCategories();
   const { selectedTab, setSelectedTab, setSelectedCategoryName } = useTabContext();
-  const { data: productsByCategory, isLoading: isLoadingProducts } = useGetProductsByCategoryId(selectedTab || 1);
-
+ const { data: productsByCategory, isLoading: isLoadingProducts } = useGetProductsByCategoryId(selectedTab || 0);
+ 
   useEffect(() => {
     if (categories && categories.length > 0 && selectedTab === null) {
       setSelectedTab(categories[0].id);
@@ -44,11 +44,11 @@ const Tabs = () => {
   return (
     <View style={styles.container}>
       <View style={styles.tabContainer}>
-
+ 
 
         {isLoading && <ActivityIndicator size="large" color="#AF042C" style={{alignItems:'center',justifyContent:'center'}} />}
-        { categories && categories?.map((categoryItem: category) => (
-          <TouchableOpacity
+           {categories && categories.map((categoryItem: category) => (
+           <TouchableOpacity
             key={categoryItem.id}
             onPress={() => setSelectedTab(categoryItem.id)}
             style={styles.tab}
@@ -61,8 +61,10 @@ const Tabs = () => {
         ))}
       </View>
       <View style={styles.content}>
-        { productsByCategory ?(
-          productsByCategory.map(product => (
+          {isLoadingProducts ? (
+          <ActivityIndicator size="large" color="#0000ff" />
+        ) : productsByCategory && productsByCategory.length > 0 ? (
+           productsByCategory.map(product => (
             <CardWrapper
               key={product.id}
               imageSource={{ uri: product.imageUrl || 'http://example.com/default-image.jpg' }}
@@ -73,12 +75,15 @@ const Tabs = () => {
               id={product?.id}
             />
           ))
-        ):(
+         ):(
           <Text style={styles.noProductsText}>No Product found</Text>
         ) }
-      </View>
+ 
+        
+       </View>
     </View>
   );
+  
 };
 
 const styles = StyleSheet.create({
