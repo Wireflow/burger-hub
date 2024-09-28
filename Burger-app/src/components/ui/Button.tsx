@@ -11,11 +11,11 @@ type ButtonProps = {
 const Button = ({ title, size, color, onClick }: ButtonProps) => {
     const textColor = color === 'red' ? '#ffffff' : '#AF042C';
     const borderColor =   color === 'red' ? '#ffffff' : '#AF042C'; 
-    const backgroundColor = color === 'red' ? '#AF042C' : '#ffffff'; // Set background color dynamically
+    const backgroundColor = color === 'red' ? '#AF042C' : '#ffffff'; 
 
     return (
         <TouchableOpacity
-            style={[styles.button, { borderColor, backgroundColor }, styles[size]] } // Use backgroundColor here
+            style={[styles.button, { borderColor, backgroundColor }, styles[size]]} // Use backgroundColor here
             onPress={onClick}
         >
             <Text style={[styles.text, { color: textColor }]}>{title}</Text>
@@ -28,9 +28,9 @@ const styles = StyleSheet.create({
       
         borderWidth: 1,
         borderRadius: 30,  
-        paddingVertical: 10,
-        paddingHorizontal: 20,
-        margin: "auto",  // Space from all sides
+        paddingVertical: 0,
+        paddingHorizontal: 10,
+        margin: "auto",  
         alignItems: 'center',
         justifyContent: 'center',
     },
@@ -43,12 +43,12 @@ const styles = StyleSheet.create({
     },
     medium: {
         width: 130,
+        height:40
     },
     large: {
-        width: 314,
-        height:70,
-        borderRadius: 30,
-      
+        width: 300,
+        borderRadius: 18,
+        height: 60,
     },
 });
 

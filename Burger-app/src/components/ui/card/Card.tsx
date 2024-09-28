@@ -29,7 +29,8 @@ const styles = StyleSheet.create({
     elevation: 1,
     alignItems: 'center',
     marginBottom: 16,
-    margin:15,
-   marginTop:30,
+    margin:20,
+   marginTop:40,
+   
   },
 });

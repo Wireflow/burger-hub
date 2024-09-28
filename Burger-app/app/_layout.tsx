@@ -9,7 +9,7 @@ import { QueryClientProvider } from '@tanstack/react-query';
 import queryClient from '@/src/services/react-query';
 import Providers from '@/src/components/layout/Providers';
 import { redirectAuth } from '@/src/hooks/redirectAuth';
-
+ 
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
 
@@ -34,13 +34,17 @@ export default function RootLayout() {
     </Providers>)
 }
 function RootLayoutMain() {
-  redirectAuth();
+  // redirectAuth();
   return (
       <Stack>
         <Stack.Screen name="auth" options={{ headerShown: false, }}/>
+<<<<<<< HEAD
         <Stack.Screen name="address" options={{ headerShown: false, }}/>
         <Stack.Screen name="orderhistory" options={{ headerShown: false, }}/>
         <Stack.Screen name="(drawer)" options={{ headerShown: false, }} />
+=======
+         <Stack.Screen name="(drawer)" options={{ headerShown: false, }} />
+>>>>>>> db5592601e26cd15bcf5c93d371a601c70da7c06
       </Stack>
   );
 

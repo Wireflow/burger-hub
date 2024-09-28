@@ -10,7 +10,8 @@ import PaymentScreen from "../(drawer)/PaymentScreen";
 import OrderScreen from "../(drawer)/OrderScreen";
 import OderHistory from "../(drawer)/orderhistory/OderHistory";
 import FavoriteScreen from "../(drawer)/FavoriteScreen";
-
+import Homes from "@/src/components/home/home";
+ 
 
 const Tab = createBottomTabNavigator();
 
@@ -22,7 +23,7 @@ export const MyBottomTabs: React.FC = () => {
     >
       <Tab.Screen
         name="home"
-        component={HomeScreen}
+        component={Homes}
         options={{
           headerShown: false,
           tabBarIcon: ({ color, size }) => (

@@ -1,50 +1,70 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { View, Text, Image, StyleSheet, ImageSourcePropType } from 'react-native';
 import Button from '../Button';
-type CardContentProps = {
+import { router } from 'expo-router';
+ type CardContentProps = {
   imageSource: ImageSourcePropType;  
   title: string; 
   price: string;  
+  id:number
 };
 
-const CardContent = ({ imageSource, title, price }:CardContentProps) => {
+const CardContent = ({id, imageSource, title, price }: CardContentProps) => {
+  const [currentImage, setCurrentImage] = useState(imageSource);
+
+  // const handleImageError = () => {
+  //   console.log('Error loading image');
+  //   setCurrentImage(defaultImage); // تغيير الصورة إلى الافتراضية عند حدوث خطأ
+  // };
+
   return (
     <View>
       <View style={styles.imageWrapper}>
         <Image 
-          source={imageSource}  
+          source={require('@/assets/images/Mask Group.png')}  
           style={styles.image}
+          // onError={handleImageError} // التعامل مع الخطأ هنا
         />
       </View>
       <View style={styles.textContainer}>
         <Text style={styles.text}>{title}</Text>  
-        <Text style={[styles.text, { color: 'red' }]}>{price}</Text> 
-        <Button title="Customize" size="medium" color="white" /> 
+        <Text style={[styles.text, { color: '#AF042C' }]}>{price}</Text> 
       </View>
+
+      <Button 
+        title="Customize" 
+        size="medium" 
+        color="white" 
+        onClick={() =>router.navigate(`/${id}`)} 
+      /> 
     </View>
   );
 };
 
-export default CardContent;
-
 const styles = StyleSheet.create({
   imageWrapper: {
     position: 'absolute',
-    top: -45,
+    top: -30,
     alignSelf: 'center',
   },
   image: {
-    width: 100,
+    width: 110,
     height: 100,
-    borderRadius: 35,
+    borderRadius: 15,
+    borderTopLeftRadius:30,
+    borderTopRightRadius:30
   },
   textContainer: {
-    marginTop: 60,
+    marginTop: 58,
     alignItems: 'center',
+    marginBottom: 10,
   },
   text: {
     color: 'black',
-    fontSize: 16,
+    fontSize: 15,
     fontWeight: 'bold',
+    marginBottom: 3,
   },
 });
+
+export default CardContent;
