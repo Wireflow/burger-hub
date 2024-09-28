@@ -3,9 +3,9 @@ import { Redirect } from "expo-router";
  
 const index = () => {
   const { setSession, session } = useSessionStore();
-  // if(session) (<Redirect href={"/main"} />)
+  if(!session) (<Redirect href={"/auth"} />)
  
-  return <Redirect href={"/main"} />;
+  return <Redirect href={"/SelectAdress"} />;
 };
 
 export default index;

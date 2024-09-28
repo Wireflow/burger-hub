@@ -33,7 +33,7 @@ const CardContent = ({id, imageSource, title, price }: CardContentProps) => {
 
       <Button 
         title="Customize" 
-        size="medium" 
+        size="small" 
         color="white" 
         onClick={() =>router.navigate(`/${id}`)} 
       /> 

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { StyleSheet, Text, View } from "react-native";
 import { HeaderBackButton } from "@react-navigation/elements";
 import { router, Stack } from "expo-router";
-import ListProduct from "@/src/components/order/cart/ListProduct";
+ import CheckOutScreen from "@/src/components/order/checkout/CheckOutScreen";
 
 const ProductDetails = () => {
   const [isPressed, setIsPressed] = useState(false);
@@ -13,15 +13,15 @@ const ProductDetails = () => {
         options={{
           headerStyle: { backgroundColor: '#F6F6F9' },
           headerTitleAlign:'center',
-        
+ 
           headerTitle: () => (
             <View style={styles.headerTitleContainer}>
-              <Text style={styles.headerTitle}>Cart</Text>
+              <Text style={styles.headerTitle}>Checkout</Text>
             </View>
           ),
         }}
       />
-      <ListProduct />
+      <CheckOutScreen />
     </>
   );
 };

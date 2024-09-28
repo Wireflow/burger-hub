@@ -49,6 +49,7 @@ const LogIn = () => {
           phone: dataUser.phone,
           email: dataUser.email,
           id: dataUser.id,
+          addressId : dataUser?.adressId,
         });
         showToast("Login successfully!", { type: "success" });
         router.navigate("/(drawer)/main");

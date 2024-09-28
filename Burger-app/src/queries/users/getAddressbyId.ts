@@ -2,29 +2,30 @@ import { supabase } from "@/src/services/supabase/client";
 import { Row } from "@/src/services/supabase/table.types";
 import { address } from "@/src/types/schema/address";
 import { useQuery } from "@tanstack/react-query";
-export type addressWithAdress = Row<"User"> & {
-    user: Row<"Addresses">;
-  };
-export const useGetAddressByUserId = (id: string) => {
+export type addressWithAdress = Row<"Addresses"> 
+
+export const useGetAddressbyId = (id: number) => {
+
     return useQuery({
-        queryKey: ['user', 'address', id],
-        queryFn: () => GetAddressByUserId(id),
+        queryKey: ['address', id],
+        queryFn: () => getAddressById(id),
         enabled:!!id
     });
 };
 
- export const GetAddressByUserId = async (id: string): Promise<Row<"Addresses">[]> => {
+ export const getAddressById = async (id: number) => {
+    if(id == 0){return;}
     try {
-        const { data: addresses, error } = await supabase
+        const { data: address, error } = await supabase
             .from("Addresses")
             .select("*")
-            .eq("user_id", id);
+            .eq("id", id);
         
         if (error) throw new Error("Error fetching addresses: " + error.message);
         
-        return addresses || [];  
+        return address ;  
     } catch (error) {
         console.error(error);
-        return [];  
+        return null;  
     }
 };

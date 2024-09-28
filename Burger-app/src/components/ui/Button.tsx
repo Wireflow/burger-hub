@@ -37,13 +37,16 @@ const styles = StyleSheet.create({
     text: {
         fontSize: 18,
         fontWeight: 'bold',
+
     },
     small: {
-        width: 100,
+        width: 130,
+        height:60
+
     },
     medium: {
-        width: 130,
-        height:40
+        width: 200,
+        height:60
     },
     large: {
         width: 300,

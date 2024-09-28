@@ -2,26 +2,26 @@ import React, { useState } from "react";
 import { StyleSheet, Text, View } from "react-native";
 import { HeaderBackButton } from "@react-navigation/elements";
 import { router, Stack } from "expo-router";
-import ListProduct from "@/src/components/order/cart/ListProduct";
+ import CheckOutScreen from "@/src/components/order/checkout/CheckOutScreen";
+import AddressScreen from "@/src/components/order/Addresses/AddressScreen";
 
-const ProductDetails = () => {
-  const [isPressed, setIsPressed] = useState(false);
-
+const SelectAdress = () => {
+ 
   return (
     <>
       <Stack.Screen
         options={{
-          headerStyle: { backgroundColor: '#F6F6F9' },
+          headerStyle: { backgroundColor: 'white' },
           headerTitleAlign:'center',
-        
+     
           headerTitle: () => (
             <View style={styles.headerTitleContainer}>
-              <Text style={styles.headerTitle}>Cart</Text>
+              <Text style={styles.headerTitle}>Select Address</Text>
             </View>
           ),
         }}
       />
-      <ListProduct />
+      <AddressScreen />
     </>
   );
 };
@@ -38,4 +38,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default ProductDetails;
+export default SelectAdress;

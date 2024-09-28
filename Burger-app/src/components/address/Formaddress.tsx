@@ -19,6 +19,7 @@ import { createAddress } from "@/src/mutations/user/createAddress";
 import FormInput from "./FormIput";
 import Button from "../ui/Button";
 import { useSessionStore } from "@/src/store/useSessionStore";
+import { useCustomToast } from "@/src/hooks/useCustomToast";
 
 type Props = {
   setOpen: any;
@@ -27,7 +28,9 @@ type Props = {
 
 const { width } = Dimensions.get("window");
 
-function FormAddress() {
+function FormAddress({setOpen,open}:Props) {
+  const showToast = useCustomToast();
+
   const { session } = useSessionStore();
   const userId = session?.id;
   const {
@@ -51,7 +54,8 @@ function FormAddress() {
     mutationFn: (data: any) => createAddress(data, userId as string),
     onSuccess: () => {
       reset();
-      ToastAndroid.show("Successfully added address", ToastAndroid.LONG);
+       showToast("Successfully added address",{type:'success'})
+       setOpen();
     },
   });
 
@@ -74,7 +78,8 @@ function FormAddress() {
           presentationStyle="overFullScreen"
           transparent
           animationType="slide"
-        >
+          visible={open}
+         >
           <View style={styles.viewWrapper}>
             <View style={styles.modalView}>
               <View style={styles.IputStyle}>

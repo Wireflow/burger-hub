@@ -5,14 +5,19 @@ import {
   View,
   FlatList,
   TouchableOpacity,
+  Image,
 } from "react-native";
 import { useGetAddressByUserId } from "@/src/queries/users/useGetAddressbyUserId";
 import { useSessionStore } from "@/src/store/useSessionStore";
 import { Swipeable } from "react-native-gesture-handler";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
-import Button from "../ui/Button";
-import OpenModalAddress from "./OpenModalAddress";
-import NoAddress from "./NoAddress";
+import NoAddress from "../../address/NoAddress";
+import OpenModalAddress from "../../address/OpenModalAddress";
+import Button from "../../ui/Button";
+import Buttonout from "../../ui/Buttonout";
+import { router } from "expo-router";
+import Header from "./Header";
+ 
 
 
 
@@ -50,27 +55,33 @@ export default function AddressScreen() {
 
   return (
     <View style={styles.container}>
-
+    
+     <Header/>
       {!address && <NoAddress/> }
       <FlatList
         data={addresses}
         renderItem={({ item, index }) => (
-          <Swipeable renderRightActions={() => renderRightActions(index)}>
             <View style={styles.addressItem}>
-              <MaterialCommunityIcons name="map-marker" size={24} color="#AF042C" />
-              <View style={styles.addressDetails}>
-                <Text>{item.street}</Text>
-                <Text>{`${item.city}, ${item.state}, ${item.zip_code}`}</Text>
-                <Text>{item.country}</Text>
-              </View>
+            <View  style={styles.icon}>
+             <Image
+             source={require('@/assets/icons/Location.png')}
+             />
             </View>
-          </Swipeable>
-        )}
+        <View style={styles.addressDetails}>
+        <Text>{item.street}</Text>
+  <Text>{`${item.city}, ${item.state}, ${item.zip_code}`}</Text>
+  <Text>{item.country}</Text>
+        </View>
+        </View> 
+
+         )}
         keyExtractor={(item, index) => index.toString()}
       />
+      <TouchableOpacity>
+        <Button title="New Address" size="large" color="white" onClick={()=>router.navigate('/(drawer)/address')}/>
+      </TouchableOpacity>
 
-        <OpenModalAddress/>
-    </View>
+     </View>
   );
 }
 
@@ -116,5 +127,15 @@ const styles = StyleSheet.create({
   addButtonText: {
     color: "white",
     fontSize: 16,
-  },
+  },   
+    icon:{
+    height:50,
+    width:50,
+    backgroundColor:'#FFE3E3',
+    alignItems:'center',
+    justifyContent:'center',
+    borderRadius:10,
+    margin:5
+
+}
 });
