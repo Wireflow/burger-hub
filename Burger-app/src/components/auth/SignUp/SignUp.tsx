@@ -70,10 +70,12 @@ const styles = StyleSheet.create({
   inputContainer: {
     width: "80%",
     height: 350,
+    margin:'auto'
   },
   buttonContainer: {
     height: 50,
     width: "80%",
     top: 30,
+    margin:'auto'
   },
 });

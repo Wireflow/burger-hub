@@ -1,62 +1,66 @@
-import React from 'react'
-import { StyleSheet, Text, View } from 'react-native'
-import ImageProduct from './ImageProduct'
-import Title from '../../ui/Title'
-import Description from '../../ui/Description'
-import Price from '../../ui/Price'
-import Presentation from './Presentation'
-import Button from '../../ui/Button'
-import Buttons from './Buttons'
-import { useLocalSearchParams } from 'expo-router'
-import { useGetModifiersWithProduct } from '@/src/queries/products/getModifiersWithProduct'
-import { ActivityIndicator } from 'react-native-paper'
- import SkeletonContent from 'react-native-skeleton-content'
+import React from 'react';
+import { StyleSheet, Text, View } from 'react-native';
+import { ActivityIndicator } from 'react-native-paper';
+import ImageProduct from './ImageProduct';
+import Title from '../../ui/Title'; // Title is imported but not used
+import Description from '../../ui/Description'; // Description is imported but not used
+import Price from '../../ui/Price'; // Price is imported but not used
+import Presentation from './Presentation';
+import Button from '../../ui/Button'; // Button is imported but not used
+import Buttons from './Buttons';
+import { useLocalSearchParams } from 'expo-router';
+import { useGetModifiersWithProduct } from '@/src/queries/products/getModifiersWithProduct';
 
 export const ProductDetailsScreen = () => {
   const { id } = useLocalSearchParams();
+  const numericId = Array.isArray(id) ? Number(id[0]) : Number(id);
 
-  const { data, error, isLoading } = useGetModifiersWithProduct(1);
+  const { data, error, isLoading } = useGetModifiersWithProduct(numericId);
 
   if (isLoading) {
     return (
       <View style={[styles.container, styles.horizontal]}>
-       <ActivityIndicator size="large" color='#AF042C' />
-    </View>
+        <ActivityIndicator size="large" color="#AF042C" />
+      </View>
     );
   }
 
   if (error) {
     return (
-      <View >
+      <View style={styles.container}>
         <Text>Error loading modifiers: {error.message}</Text>
       </View>
     );
   }
 
-  // console.log("Fetched modifiers:", data?.options[1].modifierOption);
- 
-
-
   return (
-   <View style={styles.container} > 
-   <View style={{alignItems:'center'}}> 
-     <ImageProduct imageBase ={data?.product.imageUrl || ""}/> 
-       <Presentation title={data?.product.name || ''} description={data?.product.description || ''} price={data?.product.price || undefined }/> 
-  </View>
-      <Buttons data={data}/> 
-  
+    <View style={styles.container}>
+      <View style={{ alignItems: 'center',width:'95%',marginHorizontal:'auto' }}>
+        <ImageProduct imageBase={data?.product.imageUrl || ''} />
+        <Presentation
+          title={data?.product.name || ''}
+          description={data?.product.description || ''}
+          price={data?.product.price || undefined}
+        />
+      </View>
+      <Buttons data={data} />
     </View>
- 
-     
-  )
-}
+  );
+};
 
 const styles = StyleSheet.create({
-    container:{height:'100%',width:'100%',backgroundColor:'#F6F6F9',display:'flex',alignItems:'center',justifyContent:'space-around'},
-    horizontal: {
-      flexDirection: 'row',
-      justifyContent: 'space-around',
-      padding: 10,
-    },
-  
- })
+  container: {
+    height: '100%',
+    width: '100%',
+    backgroundColor: '#F6F6F9',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'space-around',
+    
+  },
+  horizontal: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
+    padding: 10,
+  },
+});

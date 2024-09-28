@@ -2,11 +2,8 @@ import { Option } from "@/src/types/product/Customize";
 import { Product } from "@/src/types/product/Product";
 import { StateCreator } from "zustand";
 
- 
-
-
 export type CartState = {
-    cart: Product[] ;
+    cart: Product[];
     addProduct: (product: Product) => void;
     increaseQuantity: (productId: number) => void;
     decreaseQuantity: (productId: number) => void;
@@ -15,6 +12,7 @@ export type CartState = {
     addOption: (product: Product) => void;
     deleteOption: (productId: number, modifireId: number, modifireOption: number) => void;
     getProductOptions: (productId: number) => Option[] | null;  
+    getTotalProducts: () => number; // New method to get total unique products
 };
 
 export const createCartSlice: StateCreator<CartState> = (set, get) => ({
@@ -131,10 +129,16 @@ export const createCartSlice: StateCreator<CartState> = (set, get) => ({
         set({ cart: updatedCart });
     },
 
-     getProductOptions: (productId) => {
+    getProductOptions: (productId) => {
         const { cart } = get();
         const product = cart.find(p => p.id === productId);
-        console.log("im in getProductOptions",product?.options)
+        console.log("im in getProductOptions", product?.options);
         return product ? product.options : null; 
+    },
+
+    // New method to get total unique products
+    getTotalProducts: () => {
+        const { cart } = get();
+        return cart.length; // Return the count of unique products
     },
 });

@@ -1,15 +1,9 @@
-import React, { useState } from "react";
-import { StyleSheet } from "react-native";
+import React from "react";
 import { HeaderBackButton } from "@react-navigation/elements";
 import { router, Stack } from "expo-router";
- import {  ProductDetailsScreen } from "@/src/components/product/details/ProductDetailsScreen";
-import ListProduct from "@/src/components/cart/ListProduct";
-  
+import {  ProductDetailsScreen } from "@/src/components/product/details/ProductDetailsScreen";
+
 const ProductDetails = () => {
-  const [isPressed, setIsPressed] = useState(false);
-
- 
-
   return (
     <>
       <Stack.Screen
@@ -19,11 +13,10 @@ const ProductDetails = () => {
             <HeaderBackButton label="Cancel" onPress={() => router.back()} />
           ),
           title: "",
-         
         }}
       />
-      <ProductDetailsScreen/>
-     </>
+     <ProductDetailsScreen/>
+    </>
   );
 };
 

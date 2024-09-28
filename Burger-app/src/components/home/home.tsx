@@ -7,8 +7,14 @@ import BurgerList from './BurgerList';
 import ProductSearch from './ProductSearch';
 import { useTabContext } from '../layout/TabContext';
 import SearchInput from '../ui/SearchInput';
+import CartIcon from '../ui/CartIcon';
+import { useCartStore } from '@/src/store/cart/cartStore';
 
 const Homes = () => {
+   const { getTotalProducts } = useCartStore(state => state);
+   const totalProducts = getTotalProducts();
+
+
   const router = useRouter();
   const [x, setX] = useState(false);
   const [s, setS] = useState(false);
@@ -25,6 +31,7 @@ const Homes = () => {
   return (
     <>
       <View style={styles.container}>
+       <CartIcon itemCount={totalProducts}/>
         <View style={{width:'90%'}}>
           <Text style={styles.titleText}>Delicious</Text>
           <Text style={styles.titleText}>burgers for you</Text>
@@ -32,6 +39,7 @@ const Homes = () => {
             setS(!s);
           }} />
         </View>
+
       </View>
       <Tabs />
       <View style={{ marginBottom: 10 }}>
@@ -56,11 +64,29 @@ const styles = StyleSheet.create({
     alignItems: 'flex-start',
     marginBottom: 15,
     marginLeft: 25,
-    height:120
-  },
+    height:120,
+    position:'relative'  },
   titleText: {
     fontSize: 30,
     color: 'black',
+  },  containeer: {
+    position: 'absolute',
+    marginRight: 20, 
+    right:20,
+    top:20
+   },
+  badge: {
+    position: 'absolute',
+    right: -10,
+    top: -5,
+    backgroundColor: '#AF042C',
+    borderRadius: 10,
+    paddingHorizontal: 6,
+    paddingVertical: 2,
+  },
+  badgeText: {
+    color: '#fff',
+    fontWeight: 'bold',
   },
 });
 

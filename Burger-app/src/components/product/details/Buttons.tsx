@@ -4,15 +4,18 @@ import Button from '../../ui/Button'
 import { useCartStore } from '@/src/store/cart/cartStore'
 import PresentationCustomize from './Customize/PresentationOptions'
 import { router } from 'expo-router'
+import { useCustomToast } from '@/src/hooks/useCustomToast'
   type props ={
   data?:any
 }
 const Buttons = ({data}:props) => {
+  const showToast = useCustomToast();
+
   const {addProduct,cart} = useCartStore(state => state);
   const [isPressed, setIsPressed] = useState(false);
   const handlePress =async () => {
-    // setIsPressed(!isPressed);
-router.navigate('/(screen)/cart')
+    setIsPressed(!isPressed);
+// router.navigate('/(screen)/cart')
   };
   const handleAddProduct =async () => {
     console.log("im button and cart store before",cart)
@@ -24,9 +27,11 @@ router.navigate('/(screen)/cart')
       quantity: 1,
       options: []
     })
+    showToast("Product has been added successfully!", { type: "success" });
+    router.back();
   };
    return (
-    <View style={{height:110,width:250,backgroundColor:'bl ack'}}>
+    <View style={{height:100,width:350,margin:'auto'}}>
     <View style={styles.scop}>
     <Button size='large' color='white' title='Costomize' onClick={handlePress}/>
   </View>
@@ -38,5 +43,5 @@ router.navigate('/(screen)/cart')
 }
 export default Buttons
 const styles = StyleSheet.create({
-     scop:{height:50,top:-20,marginTop:10}
+     scop:{height:50,top:-20,marginTop:20}
 })

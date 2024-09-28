@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { View, Text, Image, StyleSheet, ImageSourcePropType } from 'react-native';
 import Button from '../Button';
+import { router } from 'expo-router';
  type CardContentProps = {
   imageSource: ImageSourcePropType;  
   title: string; 
@@ -27,14 +28,14 @@ const CardContent = ({id, imageSource, title, price }: CardContentProps) => {
       </View>
       <View style={styles.textContainer}>
         <Text style={styles.text}>{title}</Text>  
-        <Text style={[styles.text, { color: 'red' }]}>{price}</Text> 
+        <Text style={[styles.text, { color: '#AF042C' }]}>{price}</Text> 
       </View>
 
       <Button 
         title="Customize" 
         size="medium" 
         color="white" 
-        onClick={() => console.log('Customize clicked')} 
+        onClick={() =>router.navigate(`/${id}`)} 
       /> 
     </View>
   );

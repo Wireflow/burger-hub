@@ -15,7 +15,7 @@ import CardWrapper from "../ui/card/CardWrapper";
 const Tabs = () => {
   const { data: categories, error, isLoading } = useGetAllCategories();
   const { selectedTab, setSelectedTab, setSelectedCategoryName } = useTabContext();
-  const { data: productsByCategory, isLoading: isLoadingProducts } = useGetProductsByCategoryId(1);
+  const { data: productsByCategory, isLoading: isLoadingProducts } = useGetProductsByCategoryId(selectedTab || 1);
 
   useEffect(() => {
     if (categories && categories.length > 0 && selectedTab === null) {
@@ -46,7 +46,7 @@ const Tabs = () => {
       <View style={styles.tabContainer}>
 
 
-        {isLoading && <ActivityIndicator size="large" color="#0000ff" />}
+        {isLoading && <ActivityIndicator size="large" color="#AF042C" style={{alignItems:'center',justifyContent:'center'}} />}
         { categories && categories?.map((categoryItem: category) => (
           <TouchableOpacity
             key={categoryItem.id}
@@ -61,7 +61,7 @@ const Tabs = () => {
         ))}
       </View>
       <View style={styles.content}>
-        { productsByCategory && (
+        { productsByCategory ?(
           productsByCategory.map(product => (
             <CardWrapper
               key={product.id}
@@ -73,6 +73,8 @@ const Tabs = () => {
               id={product?.id}
             />
           ))
+        ):(
+          <Text style={styles.noProductsText}>No Product found</Text>
         ) }
       </View>
     </View>
@@ -115,6 +117,11 @@ const styles = StyleSheet.create({
    },
   contentText: {
     fontSize: 24,
+  },noProductsText: {
+    fontSize: 18,
+    textAlign: 'center',
+    marginTop: 20,
+    color: 'gray',
   },
 });
 
