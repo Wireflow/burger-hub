@@ -46,26 +46,20 @@ function FormAddress({ setOpen, open, refetch }: Props) {
     reset,
     formState: { errors },
   } = useForm<addressSchemaType>({
-    defaultValues: {
-      country: "",
-      city: "",
-      state: "",
-      street: "",
-      zip_code: "",
-    },
+   
     resolver: zodResolver(addressSchema),
   });
 
   const mutation = useMutation({
     mutationKey: ["new-address"],
-    mutationFn: async (data: any) => createAddress(data, userId as string),
+    mutationFn:(data: any) => createAddress(data, userId as string),
     onSuccess: () => {
       ToastAndroid.show("Successfully added address", ToastAndroid.LONG);
       refetch();
     },
   });
 
-  const data: addressSchemaType = {
+  const Addressdata: addressSchemaType = {
     street: control._getWatch("street"),
     zip_code: control._getWatch("zip_code"),
     state: control._getWatch("state"),
@@ -73,9 +67,9 @@ function FormAddress({ setOpen, open, refetch }: Props) {
     country: control._getWatch("country"),
   };
 
-  const onSubmit = () => {
+  const onSubmit = (data:typeof Addressdata) => {
     console.log(data);
-    mutation.mutateAsync(data);
+    mutation.mutate(data);
   };
 
   return (

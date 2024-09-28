@@ -46,7 +46,7 @@ const ProfileScreen: React.FC<{ navigation: any }> = ({ navigation }) => {
                   <Text style={styles.profileValue}>{address.country}</Text>
                 </View>
               ))
-              .slice(1, 2)}
+              .slice(0, 1)}
           </View>
         </View>
       </View>

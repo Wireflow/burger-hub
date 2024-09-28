@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   StyleSheet,
   Text,
@@ -13,11 +13,11 @@ import { Swipeable } from "react-native-gesture-handler";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import Button from "../ui/Button";
 import Formaddress from "./Formaddress";
-import { Dialog } from "react-native-paper";
 import { addressDelete } from "@/src/mutations/user/addressDelete";
 
 export default function AddressScreen() {
   const [isModalVisible, setModalVisible] = useState(false);
+  const [activeSwipeable, setActiveSwipeable] = useState<number | null>(null);
 
   const toggleModalVisibility = () => {
     setModalVisible(!isModalVisible);
@@ -29,29 +29,56 @@ export default function AddressScreen() {
     data: address,
     error,
     refetch,
-  } = useGetAddressByUserId(session?.id as string);
-  const [addresses, setAddresses] = React.useState(address || []);
+  } = useGetAddressByUserId(userId as string);
+  const [addresses, setAddresses] = useState(address || []);
 
-  React.useEffect(() => {
+  useEffect(() => {
     if (address) {
       setAddresses(address);
     }
   }, [address]);
 
-  // const handleDeleteAddress = (index: number) => {
-  //   setAddresses((prevAddresses) =>
-  //     prevAddresses.filter((_, i) => i !== index)
-  //   );
-  // };
+  const handleDeleteAddress = (id: number) => {
+    Alert.alert(
+      "Delete Confirmation",
+      "Are you sure you want to delete this address?",
+      [
+        {
+          text: "Cancel",
+          style: "cancel",
+        },
+        {
+          text: "Delete",
+          style: "default",
+          onPress: () => {
+            addressDelete(id, userId as string);
+            refetch();
+          },
+        },
+      ],
+      { cancelable: true }
+    );
+  };
 
-  const renderRightActions = (index: number, id: number) => (
+  const renderRightActions = (id: number) => (
     <TouchableOpacity
       style={styles.deleteButton}
-      onPress={() => addressDelete(id, userId as string)}
+      onPress={() => handleDeleteAddress(id)}
     >
       <MaterialCommunityIcons name="delete" size={24} color="white" />
     </TouchableOpacity>
   );
+
+  const onSwipeableWillOpen = (index: number) => {
+    if (activeSwipeable !== null && activeSwipeable !== index) {
+      setActiveSwipeable(null); // Close the currently active swipeable
+    }
+    setActiveSwipeable(index);
+  };
+
+  const onSwipeableWillClose = () => {
+    setActiveSwipeable(null);
+  };
 
   return (
     <View style={styles.container}>
@@ -59,7 +86,11 @@ export default function AddressScreen() {
         data={addresses}
         renderItem={({ item, index }) => (
           <Swipeable
-            renderRightActions={() => renderRightActions(index, item.id)}
+            onSwipeableWillOpen={() => onSwipeableWillOpen(index)}
+            onSwipeableWillClose={onSwipeableWillClose}
+            renderRightActions={() => renderRightActions(item.id)}
+            overshootRight={true}
+            enabled={activeSwipeable === null || activeSwipeable === index} // Enable swipe only if no other swipeable is open
           >
             <View style={styles.addressItem}>
               <MaterialCommunityIcons
@@ -75,7 +106,7 @@ export default function AddressScreen() {
             </View>
           </Swipeable>
         )}
-        keyExtractor={(item, index) => index.toString()}
+        keyExtractor={(item) => item.id.toString()} // Use unique id for keyExtractor
       />
 
       <Button
@@ -99,11 +130,6 @@ const styles = StyleSheet.create({
     padding: 16,
     borderRadius: 20,
   },
-  title: {
-    fontSize: 18,
-    fontWeight: "bold",
-    marginBottom: 16,
-  },
   addressItem: {
     flexDirection: "row",
     alignItems: "center",
@@ -125,16 +151,5 @@ const styles = StyleSheet.create({
     width: 40,
     height: "40%",
     borderRadius: 100,
-  },
-  addButton: {
-    backgroundColor: "#DF2C2C",
-    padding: 12,
-    borderRadius: 4,
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  addButtonText: {
-    color: "white",
-    fontSize: 16,
   },
 });

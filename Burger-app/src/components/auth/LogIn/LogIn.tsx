@@ -62,7 +62,12 @@ const LogIn = () => {
         >
           <View style={{ width: "80%", height: "auto" }}>
             <FormInput control={control} name={"email"} label="Email" />
-            <FormInput control={control} name={"password"} label="Password"  secureTextEntry/>
+            <FormInput
+              control={control}
+              name={"password"}
+              label="Password"
+              secureTextEntry
+            />
           </View>
         </ScrollView>
         <View style={{ height: 20, width: "40%", left: 40 }}>

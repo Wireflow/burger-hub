@@ -18,7 +18,8 @@ export const useGetAddressByUserId = (id: string) => {
         const { data: addresses, error } = await supabase
             .from("Addresses")
             .select("*")
-            .eq("user_id", id);
+            .eq("user_id", id)
+            .eq("is_deleted", false);
         
         if (error) throw new Error("Error fetching addresses: " + error.message);
         
