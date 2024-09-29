@@ -2,7 +2,7 @@ import React from 'react';
 import { TouchableOpacity, Text, StyleSheet, View, GestureResponderEvent } from 'react-native';
 
 interface ButtonoutProps {
-  onPress: (event: GestureResponderEvent) => void; // تحديد نوع الدالة
+  onPress: (event: GestureResponderEvent) => void; 
 }
 
 const Buttonout: React.FC<ButtonoutProps> = ({ onPress }) => {
@@ -23,11 +23,11 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     backgroundColor: 'white', 
     width: 50,
-     // زيادة العرض ليكون أكثر وضوحًا
+   
   },
   button: {
-    backgroundColor: '#E0E0E0',
-    padding: 10, // إضافة padding ليكون الزر أكبر
+    backgroundColor: 'white',
+    padding: 10, 
   },
   buttonText: {
     color: 'black',

@@ -19,7 +19,7 @@ export default Card;
 
 const styles = StyleSheet.create({
   card: {
-    backgroundColor: '#f9f9f9',
+    backgroundColor: '#fff',
     padding: 16,
     borderRadius: 20,
     shadowColor: '#000',
@@ -29,7 +29,7 @@ const styles = StyleSheet.create({
     elevation: 1,
     alignItems: 'center',
     marginBottom: 16,
-    margin:20,
+    margin:15,
    marginTop:40,
    
   },

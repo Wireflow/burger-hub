@@ -35,13 +35,13 @@ const styles = StyleSheet.create({
     padding: 100,
   },
   icon: {
-    marginBottom: 30,
-marginTop:60
+    marginBottom: 100,
+marginTop:50
   },
   message1: {
     fontSize: 22,
     textAlign: 'center',
-    marginBottom: 20,
+    marginBottom: 30,
   },
   message2: {
     fontSize: 15,
