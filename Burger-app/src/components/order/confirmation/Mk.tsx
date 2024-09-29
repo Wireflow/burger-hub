@@ -1,21 +1,21 @@
-import { useSessionStore } from '@/src/store/useSessionStore';
-import React, { useEffect, useState } from 'react';
-import { ActivityIndicator, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import { useGetAddressbyId } from '@/src/queries/users/getAddressbyId';
-import { Row } from '@/src/services/supabase/table.types';
-import CardAddress from './CardAddress';
-import { router } from 'expo-router';
+import { useGetAddressbyId } from "@/src/queries/users/getAddressbyId";
+import { useEffect, useState } from "react";
+import { StyleSheet, Text, View } from "react-native";
+import { ActivityIndicator } from "react-native-paper";
+import CardAddress from "../checkout/CardAddress";
+import { Row } from "@/src/services/supabase/table.types";
+import { useCartStore } from "@/src/store/cart/cartStore";
 
+ 
 export type addressRow = Row<"Addresses">;
 type Prop = {
     addressId: number;
 };
 
-const ConnectedCardAddress = ({ addressId }: Prop) => {
-    const [address, setAddress] = useState<addressRow | null>(null);
-    const { session } = useSessionStore();
-    const { data, error, isLoading } = useGetAddressbyId(addressId);
-    
+const Mk = () => {
+    const { cart } = useCartStore(state => state);
+    const addressId =cart.addressId; 
+    const { data, error, isLoading } = useGetAddressbyId(addressId || 53);
     useEffect(() => {
   
     })
@@ -24,9 +24,6 @@ const ConnectedCardAddress = ({ addressId }: Prop) => {
         <View>
             <View style={styles.deliveryAddress}>
                 <Text style={styles.label}>Delivery address</Text>
-                <TouchableOpacity onPress={()=> router.navigate('/SelectAdress')}>
-                    <Text style={styles.changeLink}>change</Text>
-                </TouchableOpacity>
             </View>
 
             {isLoading ? (
@@ -53,11 +50,12 @@ const styles = StyleSheet.create({
         elevation: 1,
     },
     deliveryAddress: {
-        marginBottom: 20,
-        justifyContent: 'space-between',
+         justifyContent: 'space-between',
         flexDirection: 'row',
         width: '97%',
-    },
+        marginTop:30,
+        marginBottom:12
+     },
     label: {
         fontSize: 16,
         fontWeight: '600',
@@ -70,4 +68,4 @@ const styles = StyleSheet.create({
     },
 });
 
-export default ConnectedCardAddress;
+export default Mk;

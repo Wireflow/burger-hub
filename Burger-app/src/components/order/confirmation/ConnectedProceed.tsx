@@ -4,7 +4,7 @@ import Button from '../../ui/Button'
 import { useCartStore } from '@/src/store/cart/cartStore';
 import { router } from 'expo-router';
  
-const ConnectTotal = () => {
+const ConnectedProceed = () => {
 
     const { totalPrice } = useCartStore(state => state);
     const Total = totalPrice();
@@ -16,7 +16,7 @@ const ConnectTotal = () => {
      <Text style={styles.totalAmount}>${Total}</Text>
  </View>
 
-      <Button title='Proceed to payment' color='red' size='large' onClick={()=>router.navigate('/(drawer)/OrderConfirmation')}/>
+      <Button title='Complated  Order' color='red' size='large' onClick={()=>router.navigate('/(drawer)/SelectAdress')}/>
 </View>  )
 }
 const styles = StyleSheet.create({
@@ -44,4 +44,4 @@ const styles = StyleSheet.create({
 
 
 
-export default ConnectTotal
+export default ConnectedProceed

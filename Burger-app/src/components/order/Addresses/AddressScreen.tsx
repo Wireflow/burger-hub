@@ -12,24 +12,29 @@ import { useSessionStore } from "@/src/store/useSessionStore";
 import { Swipeable } from "react-native-gesture-handler";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import NoAddress from "../../address/NoAddress";
-import OpenModalAddress from "../../address/OpenModalAddress";
-import Button from "../../ui/Button";
+ import Button from "../../ui/Button";
 import Buttonout from "../../ui/Buttonout";
 import { router } from "expo-router";
 import Header from "./Header";
+import { useCartStore } from "@/src/store/cart/cartStore";
  
 
 
 
 export default function AddressScreen() {
   const [isModalVisible, setModalVisible] = useState(false);
+  const { session,setSession } = useSessionStore();
+  const { cart ,setAddressId } = useCartStore(state => state);
 
   const toggleModalVisibility = () => {
     setModalVisible(!isModalVisible);
   };
-
-  const { session } = useSessionStore();
-  const { data: address, error } = useGetAddressByUserId(session?.id as string);
+   const userId = session?.id;
+  const {
+    data: address,
+    error,
+    refetch,
+  } = useGetAddressByUserId(userId as string);
   const [addresses, setAddresses] = React.useState(address || []);
 
   React.useEffect(() => {
@@ -38,20 +43,12 @@ export default function AddressScreen() {
     }
   }, [address]);
 
-  const handleDeleteAddress = (index: number) => {
-    setAddresses((prevAddresses) =>
-      prevAddresses.filter((_, i) => i !== index)
-    );
-  };
-
-  const renderRightActions = (index: number) => (
-    <TouchableOpacity
-      style={styles.deleteButton}
-      onPress={() => handleDeleteAddress(index)}
-    >
-      <MaterialCommunityIcons name="delete" size={24} color="white" />
-    </TouchableOpacity>
-  );
+ 
+  const setCurrentAddress = (addressId: number) => {
+    setAddressId(addressId);
+    router.back();
+  }
+  
 
   return (
     <View style={styles.container}>
@@ -61,7 +58,7 @@ export default function AddressScreen() {
       <FlatList
         data={addresses}
         renderItem={({ item, index }) => (
-            <View style={styles.addressItem}>
+            <TouchableOpacity style={styles.addressItem} onPress={()=> setCurrentAddress(item?.id)} >
             <View  style={styles.icon}>
              <Image
              source={require('@/assets/icons/Location.png')}
@@ -72,7 +69,7 @@ export default function AddressScreen() {
   <Text>{`${item.city}, ${item.state}, ${item.zip_code}`}</Text>
   <Text>{item.country}</Text>
         </View>
-        </View> 
+        </TouchableOpacity> 
 
          )}
         keyExtractor={(item, index) => index.toString()}

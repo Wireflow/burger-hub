@@ -1,6 +1,7 @@
 import React from 'react'
 import { Image, StyleSheet, Text, View } from 'react-native'
 import Button from '../../ui/Button';
+import { router } from 'expo-router';
 
 const ConnectedNotFoundAddressId = () => {
   return (
@@ -26,7 +27,7 @@ const ConnectedNotFoundAddressId = () => {
             No Address yet
           </Text>
          </View>
-         <Button title='Select  Address' size='medium' color='red' onClick={() => {}} />
+         <Button title='Select  Address' size='medium' color='red' onClick={() => {router.navigate('/(drawer)/SelectAdress')}} />
 
 
   

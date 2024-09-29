@@ -5,7 +5,7 @@ export type CartType = {
     products: Product[];
     orderType: 'Delivery' | 'Pickup';
     paymentId: number;
-    addressId: number;
+    addressId: number |null;
 };
 
 export type CartState = {
@@ -21,12 +21,14 @@ export type CartState = {
     getTotalProducts: () => number; // New method to get total unique products
     changeOrderType: (orderType: 'Delivery' | 'Pickup') => void; // New method
     totalPrice: () => number;
+    setAddressId: (IdAddress: number) =>void;
+    setPaymentId:(IdPayment: number) =>void;
 };export const createCartSlice: StateCreator<CartState> = (set, get) => ({
     cart: {
         products: [],
         orderType: 'Delivery', // Default value
         paymentId: 0,
-        addressId: 0,
+        addressId: null,
     },
     
     addProduct: (product) => {
@@ -163,5 +165,14 @@ export type CartState = {
             const productQuantity = product.quantity || 1; // Default to 1 if quantity is undefined
             return total + productPrice * productQuantity;
         }, 0);
+    },
+    setAddressId: (idNumber: number) => {
+        const { cart } = get();
+        set({ cart: { ...cart, addressId: idNumber } });
+    },
+
+    setPaymentId: (IdPayment: number) => {
+        const { cart } = get();
+        set({ cart: { ...cart, paymentId: IdPayment } });
     },
 });

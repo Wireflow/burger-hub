@@ -19,7 +19,8 @@ export const useGetAddressbyId = (id: number) => {
         const { data: address, error } = await supabase
             .from("Addresses")
             .select("*")
-            .eq("id", id);
+            .eq("id", id)
+            .single();
         
         if (error) throw new Error("Error fetching addresses: " + error.message);
         

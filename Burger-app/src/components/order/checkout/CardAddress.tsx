@@ -16,9 +16,9 @@ const CardAddress = ({data}:Props) => {
      />
     </View>
 <View style={styles.addressDetails}>
-  <Text>rfg</Text>
-  <Text>{`svda, $fvdvdfvz`}</Text>
-  <Text>rfevfd</Text>
+  <Text>{data.street}</Text>
+  <Text>{data.street}, {data.city}, {data.state}, {data.zip_code}</Text>
+  <Text> {data.country}</Text>
 </View>
 </View> 
      )

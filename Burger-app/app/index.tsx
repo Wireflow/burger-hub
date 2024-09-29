@@ -5,7 +5,7 @@ const index = () => {
   const { setSession, session } = useSessionStore();
   if(!session) (<Redirect href={"/auth"} />)
  
-  return <Redirect href={"/SelectAdress"} />;
+  return <Redirect href={"/main"} />;
 };
 
 export default index;

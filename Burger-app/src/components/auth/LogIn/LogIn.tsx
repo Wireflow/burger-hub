@@ -49,8 +49,7 @@ const LogIn = () => {
           phone: dataUser.phone,
           email: dataUser.email,
           id: dataUser.id,
-          addressId : dataUser?.adressId,
-        });
+         });
         showToast("Login successfully!", { type: "success" });
         router.navigate("/(drawer)/main");
       }
@@ -75,10 +74,11 @@ const LogIn = () => {
           contentContainerStyle={styles.scrollContent}
           keyboardShouldPersistTaps="handled"
         >
-          <View style={styles.inputContainer}>
+         
+           <View style={styles.inputContainer}>
             <FormInput control={control} name="email" label="Email" />
             <FormInput control={control} name="password" label="Password" secureTextEntry />
-          </View>
+           </View>
         </ScrollView>
         <View style={styles.forgotPasswordContainer}>
           <Text style={styles.forgotPasswordText}>Forget Password?</Text>

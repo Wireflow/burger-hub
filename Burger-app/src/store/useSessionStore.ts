@@ -7,7 +7,7 @@ import { persist, PersistStorage } from "zustand/middleware";
   phone: string |"";
   email: string | "";
   id: string |" ";
-  addressId:number | null;
+  
 };
 
  type SessionState = {

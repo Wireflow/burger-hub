@@ -5,11 +5,12 @@ import ContentDetails from './ContentDetails';
  import ConnectedCardAddress from './ConnectedCardAddress';
 import { useSessionStore } from '@/src/store/useSessionStore';
 import ConnectedNotFoundAddressId from './ConnectedNotFoundAddressId';
+import { useCartStore } from '@/src/store/cart/cartStore';
 
 const CheckOutScreen = () => {
   const { session } = useSessionStore();
-  const addressId = session?.addressId;
-
+  const { cart } = useCartStore(state => state);
+  const addressId =cart.addressId;
  
 
     return (
@@ -20,7 +21,7 @@ const CheckOutScreen = () => {
 {
   !addressId  && <ConnectedNotFoundAddressId/>
 }
-           {addressId && <ConnectedCardAddress/> }
+           {addressId && <ConnectedCardAddress addressId={addressId} /> }
 
              <ConnectTotal/>
         </View>

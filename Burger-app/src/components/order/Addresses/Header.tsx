@@ -7,7 +7,7 @@ const Header = () => {
     <View style={styles.head}> 
 <FontAwesome6 name="hand-pointer" size={20} color="black" />
         <Text style={styles.instruction}> 
-                     Press on an item to select</Text>
+                     Press on an address to select</Text>
        </View>    )
 }
 
@@ -24,13 +24,13 @@ const styles = StyleSheet.create({
      },
      head:{
        height:50,
-       width:'65%',
+       width:'80%',
         display:'flex',
        flexDirection:'row',
        justifyContent:'space-around',
        margin:'auto',
-       marginVertical:20
-      }
+       marginVertical:10,
+       }
 });
 
 export default Header
