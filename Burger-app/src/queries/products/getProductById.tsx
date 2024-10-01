@@ -22,8 +22,6 @@ export const getProductById = async (id: number) => {
   }
 };
 
-
-
 export const useGetProductById = (id?: number) => {
     return useQuery({
       queryKey: ["product", id],

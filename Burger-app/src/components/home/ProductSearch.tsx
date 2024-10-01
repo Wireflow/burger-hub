@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, ScrollView, Text, StyleSheet  ,ActivityIndicator, } from 'react-native';
+import { View, ScrollView, Text, StyleSheet, ActivityIndicator } from 'react-native';
 import SearchInput from '../ui/SearchInput';
 import { useSearchProducts, Product } from '../../queries/products/getbySearch';
 import Buttonout from '../ui/Buttonout';
@@ -20,7 +20,6 @@ const ProductSearch: React.FC = () => {
         return <Homes />;
     }
 
-
     if (error) return <Text>Error fetching products.</Text>;
 
     const handleButtonPress = () => {
@@ -33,32 +32,42 @@ const ProductSearch: React.FC = () => {
                 <Buttonout onPress={handleButtonPress} />
                 <SearchInput onSearch={handleSearch} />
             </View>
-            {isLoading && <ActivityIndicator size="large" color="red" style={{ alignItems: 'center', justifyContent: 'center' }} />}
+
+            {isLoading && <ActivityIndicator size="large" color="red" style={styles.loadingIndicator} />}
+
             {products && products.length > 0 ? (
-                <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={styles.content}>
-                    {products.map((item: Product) => (
-                        <CardWrapper
-                            key={item.id}
-                            imageSource={{ uri: item.imageUrl || 'http://example.com/default-image.jpg' }} 
-                            title={item.name || "Product Name"} 
-                            price={`$${item.price?.toFixed(2)}`} 
-                            height={190}
-                            width={160}
-                            id={item?.id}
-                        />
-                    ))}
-                </ScrollView>
+                <>
+                    <Text style={styles.productCount}>Found {products.length} results</Text>
+                    <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={styles.content}>
+                        {products.map((item: Product) => (
+                            <CardWrapper
+                                key={item.id}
+                                imageSource={{ uri: item.imageUrl || 'http://example.com/default-image.jpg' }}
+                                title={item.name || "Product Name"}
+                                price={`$${item.price?.toFixed(2)}`}
+                                height={190}
+                                width={160}
+                                id={item?.id}
+                            />
+                        ))}
+                    </ScrollView>
+                </>
             ) : (
-                <Text style={styles.t} >{searchTerm ? <NotFound
-                    icon="search" 
-                    message1="Item not found"
-                    message2='Try searching the item with a different keyword'
-                     /> :<NotFound
-                     icon="search" 
-                     message1="search by name"
-                     message2=''
-                      />}
-                     </Text>
+                <Text style={styles.t}>
+                    {searchTerm ? (
+                        <NotFound
+                            icon="search"
+                            message1="Item not found"
+                            message2="Try searching the item with a different keyword"
+                        />
+                    ) : (
+                        <NotFound
+                            icon="search"
+                            message1="Search by name"
+                            message2=""
+                        />
+                    )}
+                </Text>
             )}
         </View>
     );
@@ -69,21 +78,29 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: 'white',
     },
-    t:{
+    t: {
         textAlign: 'center',
-        marginRight:10
-
+        marginRight: 10,
     },
-  
+    loadingIndicator: {
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
     searchContainer: {
-        flexDirection: 'row', 
-        alignItems: 'center', 
+        flexDirection: 'row',
+        alignItems: 'center',
         marginBottom: 16,
-        backgroundColor: 'white', 
+        backgroundColor: 'white',
     },
     content: {
         paddingHorizontal: 10,
         flexDirection: 'row',
+    },
+    productCount: {
+        textAlign: 'center',
+        marginVertical: 10,
+        fontSize: 16,
+        fontWeight: 'bold',
     },
 });
 

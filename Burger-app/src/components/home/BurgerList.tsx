@@ -9,7 +9,7 @@ import Homes from './home';
 import CardWrapper from '../ui/card/CardWrapper';
 
 const BurgerList = () => {
-  const { selectedTab } = useTabContext();
+  const { selectedTab,  selectedCategoryName } = useTabContext();
   const { data: productsByCategory, isLoading: isLoadingProducts } = useGetProductsByCategoryId(selectedTab || 0);
   const [s, setS] = useState(false);
   const [g, setG] = useState(false);
@@ -27,6 +27,7 @@ const BurgerList = () => {
 
   return (
     <View style={styles.container}>
+     
       <View style={styles.searchContainer}>
         <Buttonout onPress={handleButtonPress} />
         <SearchInput 
@@ -36,7 +37,7 @@ const BurgerList = () => {
           backgroundColor="white" 
         />
       </View>
-
+      <Text style={styles.t}>Our {selectedCategoryName}s</Text>
       <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={styles.content}>
         {selectedTab !== null && productsByCategory && productsByCategory.length > 0 ? (
           productsByCategory.map(product => (
@@ -77,6 +78,10 @@ const styles = StyleSheet.create({
     fontSize: 24,
     textAlign: 'center',
   },
+  t:{
+    textAlign: 'center',
+    fontSize: 30,
+  }
 });
 
 export default BurgerList;
