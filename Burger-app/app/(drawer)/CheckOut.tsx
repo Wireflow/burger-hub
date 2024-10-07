@@ -2,25 +2,26 @@ import React, { useState } from "react";
 import { StyleSheet, Text, View } from "react-native";
 import { HeaderBackButton } from "@react-navigation/elements";
 import { router, Stack } from "expo-router";
-import ListProduct from "@/src/components/order/cart/ListProduct";
+ import CheckOutScreen from "@/src/components/order/checkout/CheckOutScreen";
 
-const Cart = () => {
- 
+const ProductDetails = () => {
+  const [isPressed, setIsPressed] = useState(false);
+
   return (
     <>
       <Stack.Screen
         options={{
           headerStyle: { backgroundColor: '#F6F6F9' },
           headerTitleAlign:'center',
-        
+ 
           headerTitle: () => (
             <View style={styles.headerTitleContainer}>
-              <Text style={styles.headerTitle}>Cart</Text>
+              <Text style={styles.headerTitle}>Checkout</Text>
             </View>
           ),
         }}
       />
-      <ListProduct />
+      <CheckOutScreen />
     </>
   );
 };
@@ -37,4 +38,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Cart;
+export default ProductDetails;

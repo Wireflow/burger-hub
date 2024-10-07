@@ -6,7 +6,7 @@ import {
 import { CustomTabBar } from "./CustomTab";
 import HomeScreen from "../home/HomeScreen";
 import ProfileScreen from "../(drawer)/ProfileScreen";
-import PaymentScreen from "../(drawer)/PaymentScreen";
+import PaymentScreen from "../(drawer)/Payment";
 import OrderScreen from "../(drawer)/OrderScreen";
 import OderHistory from "../(drawer)/orderhistory/OderHistory";
 import FavoriteScreen from "../(drawer)/FavoriteScreen";

@@ -4,7 +4,7 @@ import { createDrawerNavigator } from '@react-navigation/drawer';
 import CustomDrawerContent from './CustomDrawerContent';
 import ProfileScreen from './ProfileScreen';
 import { MyBottomTabs } from '../tabs/BottomTabs';
-import PaymentScreen from './PaymentScreen';
+import PaymentScreen from './Payment';
 import OrderHistoryScreen from '@/src/components/oder-history/OrderHistoryScreen';
 import FavoriteScreen from './FavoriteScreen';
 import Profile from '@/src/components/profile/Profile';

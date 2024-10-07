@@ -5,18 +5,19 @@ import {
   StyleSheet,
   TouchableOpacity,
   ActivityIndicator,
+  ScrollView,
 } from "react-native";
 import { useGetAllCategories } from "../../queries/products/gitAllCategores";
 import { category } from "../../types/schema/category";
- import { useGetProductsByCategoryId } from "../../queries/products/getProductsByCategoryId";
+import { useGetProductsByCategoryId } from "../../queries/products/getProductsByCategoryId";
 import { useTabContext } from '../layout/TabContext';
 import CardWrapper from "../ui/card/CardWrapper";
 
 const Tabs = () => {
   const { data: categories, error, isLoading } = useGetAllCategories();
   const { selectedTab, setSelectedTab, setSelectedCategoryName } = useTabContext();
- const { data: productsByCategory, isLoading: isLoadingProducts } = useGetProductsByCategoryId(selectedTab || 0);
- 
+  const { data: productsByCategory, isLoading: isLoadingProducts } = useGetProductsByCategoryId(selectedTab || 0);
+  
   useEffect(() => {
     if (categories && categories.length > 0 && selectedTab === null) {
       setSelectedTab(categories[0].id);
@@ -35,8 +36,6 @@ const Tabs = () => {
     }
   });
 
-  
-
   if (error) {
     return <Text>Error fetching categories: {error.message}</Text>;
   }
@@ -44,11 +43,9 @@ const Tabs = () => {
   return (
     <View style={styles.container}>
       <View style={styles.tabContainer}>
- 
-
-        {isLoading && <ActivityIndicator size="large" color="#AF042C" style={{alignItems:'center',justifyContent:'center'}} />}
-           {categories && categories.map((categoryItem: category) => (
-           <TouchableOpacity
+        {isLoading && <ActivityIndicator size="large" color="red" style={{ alignItems: 'center', justifyContent: 'center' }} />}
+        {categories && categories.map((categoryItem: category) => (
+          <TouchableOpacity
             key={categoryItem.id}
             onPress={() => setSelectedTab(categoryItem.id)}
             style={styles.tab}
@@ -61,29 +58,30 @@ const Tabs = () => {
         ))}
       </View>
       <View style={styles.content}>
-          {isLoadingProducts ? (
-          <ActivityIndicator size="large" color="#0000ff" />
+        {isLoadingProducts ? (
+          <ActivityIndicator size="large" color="red" />
         ) : productsByCategory && productsByCategory.length > 0 ? (
-           productsByCategory.map(product => (
-            <CardWrapper
-              key={product.id}
-              imageSource={{ uri: product.imageUrl || 'http://example.com/default-image.jpg' }}
-              title={product.name || "Product Name"}
-              price={`$${product.price?.toFixed(2)}`}
-              height={180}
-              width={150}
-              id={product?.id}
-            />
-          ))
-         ):(
+          <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+            <View style={styles.cardContainer}>
+              {productsByCategory.map(product => (
+                <CardWrapper
+                  key={product.id}
+                  imageSource={{ uri: product.imageUrl || 'http://example.com/default-image.jpg' }}
+                  title={product.name || "Product Name"}
+                  price={`$${product.price?.toFixed(2)}`}
+                  height={200}
+                  width={190}
+                  id={product?.id}
+                />
+              ))}
+            </View>
+          </ScrollView>
+        ) : (
           <Text style={styles.noProductsText}>No Product found</Text>
-        ) }
- 
-        
-       </View>
+        )}
+      </View>
     </View>
   );
-  
 };
 
 const styles = StyleSheet.create({
@@ -93,7 +91,7 @@ const styles = StyleSheet.create({
     width: "90%",
     marginTop: 30,
     margin: 12,
-     height:300
+    height: 300,
   },
   tabContainer: {
     flexDirection: "row",
@@ -119,10 +117,11 @@ const styles = StyleSheet.create({
   content: {
     height: '75%',
     width: '100%',
-   },
-  contentText: {
-    fontSize: 24,
-  },noProductsText: {
+  },
+  cardContainer: {
+    flexDirection: 'row',
+  },
+  noProductsText: {
     fontSize: 18,
     textAlign: 'center',
     marginTop: 20,

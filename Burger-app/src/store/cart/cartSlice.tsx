@@ -1,9 +1,15 @@
 import { Option } from "@/src/types/product/Customize";
 import { Product } from "@/src/types/product/Product";
 import { StateCreator } from "zustand";
+export type CartType = {
+    products: Product[];
+    orderType: 'Delivery' | 'Pickup';
+    paymentId: number;
+    addressId: number |null;
+};
 
 export type CartState = {
-    cart: Product[];
+    cart: CartType;
     addProduct: (product: Product) => void;
     increaseQuantity: (productId: number) => void;
     decreaseQuantity: (productId: number) => void;
@@ -11,33 +17,41 @@ export type CartState = {
     removeCart: () => void;
     addOption: (product: Product) => void;
     deleteOption: (productId: number, modifireId: number, modifireOption: number) => void;
-    getProductOptions: (productId: number) => Option[] | null;  
+    getProductOptions: (productId: number) => Option[] | null;
     getTotalProducts: () => number; // New method to get total unique products
-};
-
-export const createCartSlice: StateCreator<CartState> = (set, get) => ({
-    cart: [],
+    changeOrderType: (orderType: 'Delivery' | 'Pickup') => void; // New method
+    totalPrice: () => number;
+    setAddressId: (IdAddress: number) =>void;
+    setPaymentId:(IdPayment: number) =>void;
+};export const createCartSlice: StateCreator<CartState> = (set, get) => ({
+    cart: {
+        products: [],
+        orderType: 'Delivery', // Default value
+        paymentId: 0,
+        addressId: null,
+    },
     
     addProduct: (product) => {
         const { cart } = get();
-        const alreadyInCart = cart.find((p) => p.id === product.id);
+        const alreadyInCart = cart.products.find((p) => p.id === product.id);
         if (alreadyInCart) return get().increaseQuantity(product.id);
-        set({ cart: [{ ...product, quantity: 1 }, ...cart] });
+        
+        set({ cart: { ...cart, products: [{ ...product, quantity: 1 }, ...cart.products] } });
     },
     
     increaseQuantity: (productId) => {
         const { cart } = get();
-        const updatedCart = cart.map((p) =>
+        const updatedProducts = cart.products.map((p) =>
             p.id === productId
                 ? { ...p, quantity: (p.quantity || 0) + 1 }
                 : p
         );
-        set({ cart: updatedCart });
+        set({ cart: { ...cart, products: updatedProducts } });
     },
     
     decreaseQuantity: (productId) => {
         const { cart } = get();
-        const updatedCart = cart.reduce((acc, p) => {
+        const updatedProducts = cart.products.reduce((acc, p) => {
             if (p.id === productId) {
                 if (p.quantity > 1) {
                     acc.push({ ...p, quantity: p.quantity - 1 });
@@ -48,23 +62,23 @@ export const createCartSlice: StateCreator<CartState> = (set, get) => ({
             return acc;
         }, [] as Product[]);
 
-        set({ cart: updatedCart });
+        set({ cart: { ...cart, products: updatedProducts } });
     },
     
     removeProduct: (productId) => {
         const { cart } = get();
-        const updatedCart = cart.filter((p) => p.id !== productId);
-        set({ cart: updatedCart });
+        const updatedProducts = cart.products.filter((p) => p.id !== productId);
+        set({ cart: { ...cart, products: updatedProducts } });
     },
     
-    removeCart: () => set({ cart: [] }),
+    removeCart: () => set({ cart: { products: [], orderType: 'Delivery', paymentId: 0, addressId: 0 } }),
 
     addOption: (product: Product) => {
         const { cart } = get();
-        const existingProductIndex = cart.findIndex(p => p.id === product.id);
+        const existingProductIndex = cart.products.findIndex(p => p.id === product.id);
         
         if (existingProductIndex !== -1) {
-            const existingProduct = cart[existingProductIndex];
+            const existingProduct = cart.products[existingProductIndex];
             const updatedOptions = existingProduct.options.map(option => {
                 const newOptions = product.options.filter(o => o.modifireId === option.modifireId);
                 return {
@@ -89,26 +103,26 @@ export const createCartSlice: StateCreator<CartState> = (set, get) => ({
                 options: updatedOptions,
             };
 
-            const updatedCart = cart.map((p, index) => 
+            const updatedProducts = cart.products.map((p, index) => 
                 index === existingProductIndex ? updatedProduct : p
             );
 
-            set({ cart: updatedCart });
-            console.log("Updated Cart:", updatedCart);
+            set({ cart: { ...cart, products: updatedProducts } });
+            console.log("Updated Cart:", updatedProducts);
         } else {
             const newProduct: Product = {
                 ...product,
-                options: product.options,  
+                options: product.options,
             };
 
-            set({ cart: [...cart, newProduct] });
-            console.log("Updated Cart:", [...cart, newProduct]);
+            set({ cart: { ...cart, products: [...cart.products, newProduct] } });
+            console.log("Updated Cart:", [...cart.products, newProduct]);
         }
     },
     
     deleteOption: (productId, modifireId, modifireOption) => {
         const { cart } = get();
-        const updatedCart = cart.map((p) => {
+        const updatedProducts = cart.products.map((p) => {
             if (p.id === productId) {
                 const updatedOptions = p.options.map((option) => {
                     if (option.modifireId === modifireId) {
@@ -126,12 +140,12 @@ export const createCartSlice: StateCreator<CartState> = (set, get) => ({
             return p;  
         });
     
-        set({ cart: updatedCart });
+        set({ cart: { ...cart, products: updatedProducts } });
     },
 
     getProductOptions: (productId) => {
         const { cart } = get();
-        const product = cart.find(p => p.id === productId);
+        const product = cart.products.find(p => p.id === productId);
         console.log("im in getProductOptions", product?.options);
         return product ? product.options : null; 
     },
@@ -139,6 +153,26 @@ export const createCartSlice: StateCreator<CartState> = (set, get) => ({
     // New method to get total unique products
     getTotalProducts: () => {
         const { cart } = get();
-        return cart.length; // Return the count of unique products
+        return cart.products.length; // Return the count of unique products
+    },
+    changeOrderType: (orderType) => {
+        const { cart } = get();
+        set({ cart: { ...cart, orderType } });
+    },    totalPrice: () => {
+        const { cart } = get();
+        return cart.products.reduce((total, product) => {
+            const productPrice = product.price || 0; // Ensure price is defined
+            const productQuantity = product.quantity || 1; // Default to 1 if quantity is undefined
+            return total + productPrice * productQuantity;
+        }, 0);
+    },
+    setAddressId: (idNumber: number) => {
+        const { cart } = get();
+        set({ cart: { ...cart, addressId: idNumber } });
+    },
+
+    setPaymentId: (IdPayment: number) => {
+        const { cart } = get();
+        set({ cart: { ...cart, paymentId: IdPayment } });
     },
 });

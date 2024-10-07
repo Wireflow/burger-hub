@@ -38,9 +38,17 @@ function RootLayoutMain() {
       <Stack.Screen name="auth" options={{ headerShown: false }} />
       <Stack.Screen name="main" options={{ headerShown: false }} />
 
+<<<<<<< HEAD
       <Stack.Screen name="address" options={{ headerShown: false }} />
       <Stack.Screen name="orderhistory" options={{ headerShown: false }} />
       <Stack.Screen name="(drawer)" options={{ headerShown: false }} />
     </Stack>
+=======
+        <Stack.Screen name="address" options={{ headerShown: false, }}/>
+        <Stack.Screen name="orderhistory" options={{ headerShown: false, }}/>
+ 
+         <Stack.Screen name="(drawer)" options={{ headerShown: false, }} />
+      </Stack>
+>>>>>>> 9add745c8abe0155461daf7e295f31b499840347
   );
 }

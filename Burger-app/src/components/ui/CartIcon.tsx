@@ -15,6 +15,7 @@ const CartIcon = ({itemCount} :prop) => {
             <Text style={styles.badgeText}>{itemCount}</Text>
           </View>
         )}
+     
       </TouchableOpacity>
     );
   };
@@ -22,13 +23,14 @@ const styles = StyleSheet.create({
     container: {
       flexDirection: 'row',
       justifyContent: 'space-between',
-      alignItems: 'flex-start',
+      alignItems: 'center',
       marginBottom: 15,
       marginLeft: 25,
       height:120,
       position:'relative',
-      width:50,
-      backgroundColor: '#AF042C',
+      width:150,
+      backgroundColor: 'red',
+    
 
     },
     titleText: {
@@ -48,6 +50,8 @@ const styles = StyleSheet.create({
       borderRadius: 10,
       paddingHorizontal: 6,
       paddingVertical: 2,
+      height:25
+      
     },
     badgeText: {
       color: '#fff',
