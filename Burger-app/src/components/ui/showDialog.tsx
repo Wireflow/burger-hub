@@ -41,14 +41,14 @@ const ShowDialog = ({
             marginTop: 0,
           }}
         >
-          <Button onClick={onConfirm} title="Yes" color="red" size="medium" />
+          <Button onClick={onConfirm} title="Yes" color="red" size="small" />
           <Button
             onClick={() => {
               if (onCancel) onCancel();
               setOpen(false);
             }}
             color="red"
-            size="medium"
+            size="small"
             title="Go back"
           />
         </Dialog.Footer>

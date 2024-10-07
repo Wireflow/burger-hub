@@ -13,7 +13,7 @@ const index = () => {
           headerLeft: () => (
             <HeaderBackButton onPress={() => router.back()} />
           ),
-          title: "address",
+          title: "Addresses",
           headerShown:true
         }}
       />

@@ -7,7 +7,7 @@ export type AllAddressState = {
 };
 
 // Create the slice of state
-export const createAllAddressSlice: StateCreator<Partial<AllAddressState>> = (set) => ({
+export const createAllAddressSlice: StateCreator<AllAddressState> = (set) => ({
   addresses: [], // Initialize as an empty array
   setAddress: (addresses) => set({ addresses }),
 });

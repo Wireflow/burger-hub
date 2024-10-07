@@ -33,9 +33,8 @@ const AddressChangeScreen = () => {
     isLoading,
   } = useGetAddressByUserId(userId as string);
 
-
   const showToast = useCustomToast();
-refetch();
+  refetch();
   const handleSelectAddress = (selectedAddressId: number) => {
     addressChane(selectedAddressId)
       .then(() => {
@@ -45,17 +44,16 @@ refetch();
       .catch((error) => {
         showToast("Error updating address", { type: "error" });
       });
-    
   };
-
 
   if (isLoading) {
     return (
       <ActivityIndicator
-        size={"large"}
+      size={"large"}
         color={"blue"}
         style={{ flex: 1, justifyContent: "center", alignItems: "center" }}
-      />
+      >
+      </ActivityIndicator>
     );
   }
   if (!address || address.length == 0) {
@@ -76,7 +74,6 @@ refetch();
             onPress={() => {
               handleSelectAddress(item.id);
               setDialogOpen(true);
-             
             }}
           >
             <View style={styles.addressItem}>
@@ -104,15 +101,15 @@ refetch();
         )}
         keyExtractor={(item) => item.id.toString()}
       />
-        <ShowDialog
-    open={dialogOpen}
-    setOpen={setDialogOpen}
-    onConfirm={() => handleSelectAddress}
-    onCancel={handleCancel}
-    title="Confirm Selection"
-    description="Are you sure you want to select this address?"
-    trigger={undefined}
-  />
+      <ShowDialog
+        open={dialogOpen}
+        setOpen={setDialogOpen}
+        onConfirm={() => handleSelectAddress}
+        onCancel={handleCancel}
+        title="Confirm Selection"
+        description="Are you sure you want to select this address?"
+        trigger={undefined}
+      />
     </SafeAreaView>
   );
 };

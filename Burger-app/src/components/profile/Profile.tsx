@@ -26,7 +26,6 @@ const Profile: React.FC = () => {
   refetch();
   useEffect(() => {
     setList(storedAddresses || []);
-
   }, [storedAddresses]);
   const { session } = useSessionStore();
 

@@ -92,10 +92,11 @@ const AddressScreen = () => {
   if (isLoading) {
     return (
       <ActivityIndicator
-        size={"large"}
+      size={"large"}
         color={"blue"}
         style={{ flex: 1, justifyContent: "center", alignItems: "center" }}
-      />
+      >
+      </ActivityIndicator>
     );
   }
 

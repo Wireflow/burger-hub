@@ -5,7 +5,7 @@ const _layout = () => {
   return (
     <Stack
       screenOptions={{
-        headerShadowVisible: true,
+        headerShadowVisible: false,
       }}
     />
   );

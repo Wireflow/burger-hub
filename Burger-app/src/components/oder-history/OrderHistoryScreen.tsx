@@ -37,7 +37,7 @@ export default function OrderHistoryScreen() {
       {orders.map((order) => (
         <Card key={order.id} height={147} width={321}>
           <View style={styles.container}>
-            <View style={{ left: 30, top: 15 }}>
+            <View style={{ left: 40 }}>
               <Text style={styles.orderText}>
                 $ {order.totalAmount ?? "Not found: totalAmount"}
               </Text>
@@ -46,7 +46,7 @@ export default function OrderHistoryScreen() {
               </Text>
             </View>
             {order.Addresses && (
-              <View style={{ right: 20, top: 15 }}>
+              <View>
                 {order.order_type == "delivery" && (
                   <View style={styles.orderDetails}>
                     <Text style={styles.orderText}>

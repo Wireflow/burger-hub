@@ -74,30 +74,11 @@ const LogIn = () => {
           contentContainerStyle={styles.scrollContent}
           keyboardShouldPersistTaps="handled"
         >
-<<<<<<< HEAD
-
-          <View style={{ width: "80%", height: "auto" }}>
-            <FormInput control={control} name={"email"} label="Email" />
-            <FormInput
-              control={control}
-              name={"password"}
-              label="Password"
-              secureTextEntry
-            />
-
-          <View style={styles.inputContainer}>
-            <FormInput control={control} name="email" label="Email" />
-            <FormInput control={control} name="password" label="Password" secureTextEntry />
-
-          </View>
-          </View>
-=======
          
            <View style={styles.inputContainer}>
             <FormInput control={control} name="email" label="Email" />
             <FormInput control={control} name="password" label="Password" secureTextEntry />
            </View>
->>>>>>> 9add745c8abe0155461daf7e295f31b499840347
         </ScrollView>
         <View style={styles.forgotPasswordContainer}>
           <Text style={styles.forgotPasswordText}>Forget Password?</Text>
