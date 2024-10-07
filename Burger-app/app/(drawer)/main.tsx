@@ -7,6 +7,7 @@ import { MyBottomTabs } from '../tabs/BottomTabs';
 import PaymentScreen from './PaymentScreen';
 import OrderHistoryScreen from '@/src/components/oder-history/OrderHistoryScreen';
 import FavoriteScreen from './FavoriteScreen';
+import Profile from '@/src/components/profile/Profile';
  
 
 const Drawer = createDrawerNavigator();
@@ -15,13 +16,11 @@ const Main: React.FC = () => {
 
   return (
     <NavigationContainer independent={true} >
-      <Drawer.Navigator  screenOptions={{drawerStyle:{width:1000}}}
-    
+      <Drawer.Navigator   screenOptions={{drawerStyle:{width:1000}}}
         drawerContent={(props) => <CustomDrawerContent {...props} />}
-        initialRouteName ="home"
       >
-        <Drawer.Screen name="home" component={MyBottomTabs} />
-        <Drawer.Screen name="Profile" component={ProfileScreen}  options={{headerShown:true}}/>
+        <Drawer.Screen name="home" component={MyBottomTabs}/>
+        <Drawer.Screen name="Profile" component={Profile}/>
         <Drawer.Screen name="payments" component={PaymentScreen} />
         <Drawer.Screen name="orders" component={OrderHistoryScreen} />
         <Drawer.Screen name="favorites" component={FavoriteScreen} />

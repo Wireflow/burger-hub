@@ -51,7 +51,7 @@ const LogIn = () => {
           id: dataUser.id,
         });
         showToast("Login successfully!", { type: "success" });
-        router.navigate("/(drawer)/main");
+        router.push("/(drawer)/main");
       }
 
       console.log("User logged in:", userId);
@@ -74,7 +74,7 @@ const LogIn = () => {
           contentContainerStyle={styles.scrollContent}
           keyboardShouldPersistTaps="handled"
         >
-<<<<<<< HEAD
+
           <View style={{ width: "80%", height: "auto" }}>
             <FormInput control={control} name={"email"} label="Email" />
             <FormInput
@@ -83,11 +83,12 @@ const LogIn = () => {
               label="Password"
               secureTextEntry
             />
-=======
+
           <View style={styles.inputContainer}>
             <FormInput control={control} name="email" label="Email" />
             <FormInput control={control} name="password" label="Password" secureTextEntry />
->>>>>>> db5592601e26cd15bcf5c93d371a601c70da7c06
+
+          </View>
           </View>
         </ScrollView>
         <View style={styles.forgotPasswordContainer}>

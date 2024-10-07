@@ -20,18 +20,38 @@ export const redirectAuth = () => {
         if (event === "INITIAL_SESSION") {
           setSession(userSession);
           router.replace("/auth");
-        } 
-        else if (event === "SIGNED_IN") {
-            router.replace("/(drawer)/main")
         }
-         else if (event === "SIGNED_OUT") {
-          router.replace("/auth");
+         if( event === "SIGNED_IN"){
+          router.replace("/(drawer)/main");
+        }
+        else if (event === "SIGNED_OUT") {
           setSession(null);
-         }
+          router.replace("/auth");
+        }
       }
     );
 
-  
+    // Check for existing session on mount
+    // const checkExistingSession = async () => {
+    //   const {session} = useSessionStore();
+
+    //   // const { data: { session } } = await supabase.auth.getSession();
+    //   if (session) {
+    //     const userSession: UserSession = {
+    //       name: session?.name,
+    //       email: session?.email,
+    //       phone: session?.phone,
+    //       id: session?.id || "",
+    //     };
+    //     setSession(userSession);
+    //     router.replace("/(drawer)/main");
+    //   } else {
+    //     router.replace("/auth");
+    //   }
+    // };
+
+    // checkExistingSession();
+
     return () => {
       authListener.subscription.unsubscribe();
     };

@@ -1,7 +1,5 @@
-import { supabase } from "@/src/service/subabase/client";
-import { Update } from "@/src/service/subabase/table.types";
-
-
+import { supabase } from "@/src/services/supabase/client";
+import { Update } from "@/src/services/supabase/table.types";
 
 export const updateUser=async (data:Update<"User">)=>{
     try {

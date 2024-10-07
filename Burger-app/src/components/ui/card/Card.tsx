@@ -1,5 +1,5 @@
-import React from 'react';
-import { View, StyleSheet } from 'react-native';
+import React from "react";
+import { View, StyleSheet } from "react-native";
 
 type CardProps = {
   height: number;
@@ -7,30 +7,24 @@ type CardProps = {
   children: React.ReactNode;
 };
 
-const Card = ({ height, width, children }:CardProps) => {
-  return (
-    <View style={[styles.card, { height, width }]}>
-      {children}
-    </View>
-  );
+const Card = ({ height, width, children }: CardProps) => {
+  return <View style={[styles.card, { height, width }]}>{children}</View>;
 };
 
 export default Card;
 
 const styles = StyleSheet.create({
   card: {
-    backgroundColor: '#f9f9f9',
-    padding: 16,
+    backgroundColor: "#f9f9f9",
+
     borderRadius: 20,
-    shadowColor: '#000',
+    shadowColor: "#000",
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.8,
     shadowRadius: 2,
     elevation: 1,
-    alignItems: 'center',
     marginBottom: 16,
-    margin:20,
-   marginTop:40,
-   
+    top: 10,
+    left: 15,
   },
 });
