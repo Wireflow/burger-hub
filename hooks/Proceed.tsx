@@ -8,14 +8,13 @@ import Button from '@/src/components/ui/Button';
      method:()=>void;
  }
 const Proceed = ({title,method}:Props) => {
-    const { totalPrice } = useCartStore(state => state);
-    const Total = totalPrice();
-  return (
+    const { cart ,totalPrice} = useCartStore(state => state);
+   return (
     <View style={styles.container}>
 
     <View style={styles.totalContainer}>
      <Text style={styles.totalLabel}>Total</Text>
-     <Text style={styles.totalAmount}>${Total}</Text>
+     <Text style={styles.totalAmount}>${cart?.totalAmount}</Text>
  </View>
 
       <Button title={title} color='red' size='large' onClick={method}/>

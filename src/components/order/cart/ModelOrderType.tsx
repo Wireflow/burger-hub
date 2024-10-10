@@ -4,6 +4,7 @@ import { RadioButton } from 'react-native-paper'; // Import from react-native-pa
 import Button from '../../ui/Button';
 import { useCartStore } from '@/src/store/cart/cartStore';
 import { router } from 'expo-router';
+import { OrderType } from '@/src/store/cart/cartSlice';
 
 type Props = {
     visible?: boolean;
@@ -30,7 +31,7 @@ const OrderDialog = ({ visible, onClose }: Props) => {
                             value="Delivery"
                             status={selectedValue === 'Delivery' ? 'checked' : 'unchecked'}
                             color='black'
-                            onPress={() => setSelectedValue('Delivery')}
+                            onPress={() => setSelectedValue(OrderType.Delivery)}
                         />
                         <Text style={styles.radioLabel}>Delivery</Text>
                     </View>
@@ -38,7 +39,7 @@ const OrderDialog = ({ visible, onClose }: Props) => {
                         <RadioButton
                             value="Pick up"
                             status={selectedValue === 'Pick up' ? 'checked' : 'unchecked'}
-                            onPress={() => setSelectedValue('Pick up')}
+                            onPress={() => setSelectedValue(OrderType.Pickup)}
                             color='black'
                         />
                         <Text style={styles.radioLabel}>Pickup</Text>

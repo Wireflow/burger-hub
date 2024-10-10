@@ -10,6 +10,8 @@ export type CartType = {
     orderType: OrderType.Delivery | OrderType.Pickup;
     paymentId: number;
     addressId: number |null;
+    totalQuantity:number;
+    totalAmount:number
 
 }; 
 
@@ -34,14 +36,17 @@ export type CartState = {
         orderType: OrderType.Delivery, 
         paymentId: 0,
         addressId: null,
+        totalAmount:0,
+        totalQuantity:0
+
     },
     
     addProduct: (product) => {
         const { cart } = get();
         const alreadyInCart = cart.products.find((p) => p.id === product.id);
         if (alreadyInCart) return get().increaseQuantity(product.id);
-        
-        set({ cart: { ...cart, products: [{ ...product, quantity: 1 }, ...cart.products] } });
+         set({ cart: { ...cart, products: [{ ...product, quantity: 1 }, ...cart.products] } });
+         get().totalPrice();
     },
     
     increaseQuantity: (productId) => {
@@ -52,6 +57,9 @@ export type CartState = {
                 : p
         );
         set({ cart: { ...cart, products: updatedProducts } });
+        get().totalPrice();
+
+ 
     },
     
     decreaseQuantity: (productId) => {
@@ -68,15 +76,21 @@ export type CartState = {
         }, [] as Product[]);
 
         set({ cart: { ...cart, products: updatedProducts } });
+        get().totalPrice();
+
     },
     
     removeProduct: (productId) => {
         const { cart } = get();
         const updatedProducts = cart.products.filter((p) => p.id !== productId);
         set({ cart: { ...cart, products: updatedProducts } });
+        get().totalPrice();
+        get().getTotalProducts();
+
+
     },
     
-    removeCart: () => set({ cart: { products: [], orderType: OrderType.Delivery, paymentId: 0, addressId: 0 } }),
+    removeCart: () => set({ cart: { products: [], orderType: OrderType.Delivery, paymentId: 0, addressId: null ,totalAmount:0,totalQuantity:0} }),
 
     addOption: (product: Product) => {
         const { cart } = get();
@@ -146,6 +160,8 @@ export type CartState = {
         });
     
         set({ cart: { ...cart, products: updatedProducts } });
+        get().totalPrice();
+
     },
 
     getProductOptions: (productId) => {
@@ -158,22 +174,34 @@ export type CartState = {
     // New method to get total unique products
     getTotalProducts: () => {
         const { cart } = get();
-        return cart.products.length; // Return the count of unique products
+        const totalQuantity= cart.products.length; 
+        set({ cart: { ...cart, totalQuantity } });
+
+        return totalQuantity;
     },
     changeOrderType: (orderType) => {
         const { cart } = get();
         set({ cart: { ...cart, orderType } });
-    },    totalPrice: () => {
+
+    },
+    totalPrice: () => {
         const { cart } = get();
-        return cart.products.reduce((total, product) => {
+        const totalAmount= cart.products.reduce((total, product) => {
             const productPrice = product.price || 0; // Ensure price is defined
             const productQuantity = product.quantity || 1; // Default to 1 if quantity is undefined
             return total + productPrice * productQuantity;
         }, 0);
+        set({ cart: { ...cart, totalAmount } });
+        get().getTotalProducts();
+
+        return totalAmount;
+
     },
     setAddressId: (idNumber: number) => {
         const { cart } = get();
         set({ cart: { ...cart, addressId: idNumber } });
+        get().getTotalProducts();
+
     },
 
     setPaymentId: (IdPayment: number) => {

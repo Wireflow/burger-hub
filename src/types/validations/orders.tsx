@@ -35,7 +35,8 @@ export const OrderSchema = z.object({
     orderType: z.enum([OrderType.Delivery, OrderType.Pickup]).optional(),
     paymentId: z.number(),
     addressId: z.number().nullable(),
-     totalAmount:z.number().optional()
+    totalAmount:z.number().optional(),
+    totalQuantity:z.number().optional()
 });
 
 export type OrderSchemaType = z.infer<typeof OrderSchema>;

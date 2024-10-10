@@ -11,7 +11,7 @@ import { useCustomToast } from '@/src/hooks/useCustomToast'
 const Buttons = ({data}:props) => {
   const showToast = useCustomToast();
 
-  const {addProduct,cart} = useCartStore(state => state);
+  const {addProduct,cart,getTotalProducts} = useCartStore(state => state);
   const [isPressed, setIsPressed] = useState(false);
   const handlePress =async () => {
     setIsPressed(!isPressed);
@@ -26,7 +26,8 @@ const Buttons = ({data}:props) => {
       price: data?.product?.price,
       quantity: 1,
       options: []
-    })
+    });
+   await getTotalProducts();
     showToast("Product has been added successfully!", { type: "success" });
     router.back();
   };

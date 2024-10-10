@@ -8,10 +8,10 @@ import { router } from 'expo-router';
 
 export type addressRow = Row<"Addresses">;
 type Prop = {
-    addressId: number;
+    addressId?: number;
 };
 
-const ConnectedCardAddress = ({ addressId }: Prop) => {
+const ConnectedCardAddress = ({ addressId=0 }: Prop) => {
     const [address, setAddress] = useState<addressRow | null>(null);
     const { session } = useSessionStore();
     const { data, error, isLoading } = useGetAddressbyId(addressId);

@@ -1,4 +1,8 @@
-import React from "react";
+ import SignOutUser from "@/src/components/auth/LogOut";
+import Button from "@/src/components/ui/Button";
+import ShowDialog from "@/src/components/ui/showDialog";
+ import { router } from "expo-router";
+import React, { useState } from "react";
 import {
   View,
   Text,
@@ -9,11 +13,19 @@ import {
 } from "react-native";
 
 const CustomDrawerContent: React.FC<{ navigation: any }> = ({ navigation }) => {
+  const [dialogOpen, setDialogOpen] = useState(false);
+  const handleCancel = () => {
+    setDialogOpen(false);
+  };
+  const handleConfirm = () => {
+    SignOutUser();
+    setDialogOpen(false);
+  };
   return (
     <View style={styles.container}>
       <SafeAreaView>
         <View style={styles.header}>
-          <View style={styles.containerImage}>
+          <View style={styles.ImageContainer}>
             <Image
               source={require("@/assets/images/drawer.png")}
               style={styles.logo}
@@ -69,8 +81,17 @@ const CustomDrawerContent: React.FC<{ navigation: any }> = ({ navigation }) => {
         </TouchableOpacity>
         <TouchableOpacity
           style={styles.signOutButton}
-          onPress={() => navigation.native("signout")}
+          onPress={() => setDialogOpen(true)}
         >
+          <ShowDialog
+            open={dialogOpen}
+            setOpen={setDialogOpen}
+            title="Log Out"
+            description="Are you sure you want to log out?"
+            onConfirm={handleConfirm}
+            onCancel={handleCancel}
+            trigger={undefined}
+          />
           <Text style={styles.signOutText}>Sign out →</Text>
         </TouchableOpacity>
       </SafeAreaView>
@@ -93,7 +114,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     top: 56,
   },
-  containerImage: {
+  ImageContainer: {
     width: 73,
     height: 73,
     backgroundColor: "#FFFFFF",

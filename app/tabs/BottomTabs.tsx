@@ -4,13 +4,10 @@ import {
   createBottomTabNavigator,
 } from "@react-navigation/bottom-tabs";
 import { CustomTabBar } from "./CustomTab";
-import HomeScreen from "../home/HomeScreen";
-import ProfileScreen from "../(drawer)/ProfileScreen";
-import PaymentScreen from "../(drawer)/Payment";
-import OrderScreen from "../(drawer)/OrderScreen";
-import OderHistory from "../(drawer)/orderhistory/OderHistory";
-import FavoriteScreen from "../(drawer)/FavoriteScreen";
+ import FavoriteScreen from "../(drawer)/FavoriteScreen";
 import Homes from "@/src/components/home/home";
+import Profile from "@/src/components/profile/Profile";
+import OderHistory from "../(drawer)/orderhistory";
  
 
 const Tab = createBottomTabNavigator();
@@ -43,7 +40,7 @@ export const MyBottomTabs: React.FC = () => {
       />
       <Tab.Screen
         name="Profile"
-        component={ProfileScreen}
+        component={Profile}
         options={{
           headerShown: false,
           tabBarIcon: ({ color, size }) => (

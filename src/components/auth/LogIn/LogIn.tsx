@@ -52,12 +52,15 @@ const LogIn = () => {
          });
         showToast("Login successfully!", { type: "success" });
         router.navigate("/(drawer)/main");
+      }else{
+        showToast("there is no account with this email!", { type: "warningC" });
+
       }
 
       console.log("User logged in:", userId);
     } catch (error) {
       console.error("Log In error:", error);
-      showToast("Oops! We have an error. Please try again.", { type: "error" });
+      showToast("there is no account with this email!.", { type: "warning" });
       setError("root", { message: "An error occurred during login." });
     } finally {
       setLoader(false);

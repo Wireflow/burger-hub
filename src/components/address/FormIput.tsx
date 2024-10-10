@@ -1,70 +1,105 @@
-import { View, Text, TextInput ,Dimensions,StyleSheet, ScrollView} from 'react-native'
-import React from 'react'
-import { Controller} from 'react-hook-form'
+import React, { useState } from 'react';
+import {
+  View,
+  Text,
+  TextInput,
+  StyleSheet,
+  NativeSyntheticEvent,
+  TextInputFocusEventData,
+} from 'react-native';
+import { Controller } from 'react-hook-form';
+
 type Props = {
-    text : string,
-    control: any;
-    name:string,
-    placeholder:string,
+  text: string;
+  control: any;
+  name: string;
+  placeholder: string;
+  description?: string; // Optional description prop
+  secureTextEntry?: boolean; // Optional for password inputs
+  onFocus?: () => void; // Optional onFocus handler
+  onBlur?:
+  | ((e: NativeSyntheticEvent<TextInputFocusEventData>) => void)
+  | undefined;
+};
 
+const FormInput: React.FC<Props> = ({
+  text,
+  control,
+  name,
+  placeholder,
+  description,
+  secureTextEntry = false,
+  onFocus,
+  onBlur,
+  ...props
+}) => {
+  const [isFocused, setIsFocused] = useState(false);
 
-  }
-
-const FormInput = ({placeholder,text,name,control}:Props) => {
+  const handleOnFocus = () => setIsFocused(true);
+  const handleOnBlur = () => setIsFocused(false);
   return (
-    <View style={{height:70,width:"95%"   }} >
- <Text style={styles.text}>{text}</Text>
+    <View style={styles.container}>
+      <Text style={styles.label}>{text}</Text>
+      <Controller
+        control={control}
+        name={name}
+        render={({ field: { value, onChange }, fieldState: { error } }) => (
+          <>
+            <TextInput
+              style={[styles.input, error && styles.errorInput]}
+              value={value}
+              
+              onChangeText={onChange}
+              onBlur={onBlur?onBlur:handleOnBlur}
+              onFocus={handleOnFocus}
+              placeholder={placeholder}
+              placeholderTextColor="#A9A9A9" 
+              secureTextEntry={secureTextEntry}
+              {...props}
+            />
+            {error && <Text style={styles.errorMessage}>{error.message}</Text>}
+          </>
+        )}
+      />
+      {description && <Text style={styles.description}>{description}</Text>}
+    </View>
+  );
+};
 
-            <Controller 
-              control={control}
-              name={name}
-              render={({ field: { value, onChange, onBlur }, fieldState: { error } }) => (
+const styles = StyleSheet.create({
+  container: {
+    width: '95%',
+    marginBottom: 15, // Spacing between inputs
+  },
+  label: {
+    fontSize: 14,
+    fontWeight: '700',
+    color: '#091e3a',
+    marginBottom: 5, // Spacing below the label
+  },
+  input: {
+    borderRadius: 10,
+    borderColor: '#91a1b6',
+    borderWidth: 1,
+    padding: 16,
+    height: 50,
+    fontSize: 16,
+    color: 'black',
+  },
+  errorInput: {
+    borderColor: 'red',
+  },
+  errorMessage: {
+    color: 'red',
+    fontSize: 12,
+    textAlign: 'right',
+    marginTop: 5,
+  },
+  description: {
+    fontSize: 12,
+    color: '#6c757d', // Gray color for description
+    marginTop: 3,
+  },
+});
 
-                <>
-                  <TextInput
-                    style={styles.input}
-                    value={value}
-                   onChangeText={onChange}
-                    onBlur={onBlur}
-                    placeholder={placeholder}
-                  />
-                  {error && <Text style={styles.errorMessage}>
-                    {error.message}
-                  </Text>}
-                </>
-              )}
-            />  
-            </View>
-  )
-}
-const styles = StyleSheet.create({ 
-
-  
-
-   text: {
-        fontSize: 12,
-        fontWeight: "700",
-         color: "#091e3a",    }, 
-        
-        errorMessage: {
-        color: 'red',
-        fontSize: 10,
-        textAlign: "right"
-      },  input: {
-        borderRadius: 10,
-        borderStyle: "solid",
-        borderColor: "#91a1b6",
-        borderWidth: 1,
-        flex: 1,
-        width: "100%",
-        height: 70,
-        overflow: "hidden",
-        flexDirection: "row",
-        padding: 16,
-             marginTop:7 
-
-    
-      },
-})
-
-export default FormInput
+export default FormInput;

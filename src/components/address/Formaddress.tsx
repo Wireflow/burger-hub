@@ -55,7 +55,6 @@ function FormAddress({ setOpen, open, refetch }: Props) {
     mutationFn:(data: any) => createAddress(data, userId as string),
     onSuccess: () => {
       ToastAndroid.show("Successfully added address", ToastAndroid.LONG);
-      refetch();
     },
   });
 
@@ -68,7 +67,6 @@ function FormAddress({ setOpen, open, refetch }: Props) {
   };
 
   const onSubmit = (data:typeof Addressdata) => {
-    console.log(data);
     mutation.mutate(data);
   };
 
@@ -113,6 +111,7 @@ function FormAddress({ setOpen, open, refetch }: Props) {
                 name="city"
                 placeholder="Enter city"
                 text="City"
+             
               />
             </View>
             <View style={styles.IputStyle}>
@@ -179,6 +178,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-around",
     paddingRight: 7,
     marginTop: 5,
+   
   },
   IputStyle: { height: 70, width: "100%" },
 });

@@ -6,6 +6,7 @@ import {
   FlatList,
   TouchableOpacity,
   Alert,
+  ActivityIndicator,
 } from "react-native";
 import { useGetAddressByUserId } from "@/src/queries/users/useGetAddressbyUserId";
 import { useSessionStore } from "@/src/store/useSessionStore";
@@ -14,64 +15,70 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 import Button from "../ui/Button";
 import Formaddress from "./Formaddress";
 import { addressDelete } from "@/src/mutations/user/addressDelete";
+import { formatAddress } from "@/src/util/addressFormat";
+import Header from "../ui/Header";
+ import { useCustomToast } from "@/src/hooks/useCustomToast";
+import ShowDialog from "../ui/showDialog";
 
-export default function AddressScreen() {
+const AddressScreen = () => {
   const [isModalVisible, setModalVisible] = useState(false);
   const [activeSwipeable, setActiveSwipeable] = useState<number | null>(null);
-
+  const showToast = useCustomToast();
   const toggleModalVisibility = () => {
     setModalVisible(!isModalVisible);
   };
-
   const { session } = useSessionStore();
   const userId = session?.id;
   const {
     data: address,
     error,
+    isLoading,
     refetch,
   } = useGetAddressByUserId(userId as string);
   const [addresses, setAddresses] = useState(address || []);
-
+  const [dialogOpen, setDialogOpen] = useState(false);
+  const handleCancel = () => {
+    setDialogOpen(false);
+  };
   useEffect(() => {
     if (address) {
       setAddresses(address);
     }
   }, [address]);
 
+
+   
+
   const handleDeleteAddress = (id: number) => {
-    Alert.alert(
-      "Delete Confirmation",
-      "Are you sure you want to delete this address?",
-      [
-        {
-          text: "Cancel",
-          style: "cancel",
-        },
-        {
-          text: "Delete",
-          style: "default",
-          onPress: () => {
-            addressDelete(id, userId as string);
-            refetch();
-          },
-        },
-      ],
-      { cancelable: true }
-    );
+    addressDelete(id, userId as string)
+      .then(() => {
+        showToast("delete address successfully", { type: "success" });
+        setDialogOpen(false)
+      })
+      .catch(() => {
+        showToast("faild to delete address", { type: "error" });
+      });
+    
   };
+
 
   const renderRightActions = (id: number) => (
     <TouchableOpacity
       style={styles.deleteButton}
-      onPress={() => handleDeleteAddress(id)}
+      onPress={() => {
+        handleDeleteAddress(id);
+        setDialogOpen(true);
+    
+      }}
     >
+
       <MaterialCommunityIcons name="delete" size={24} color="white" />
     </TouchableOpacity>
   );
 
   const onSwipeableWillOpen = (index: number) => {
     if (activeSwipeable !== null && activeSwipeable !== index) {
-      setActiveSwipeable(null); // Close the currently active swipeable
+      setActiveSwipeable(null);
     }
     setActiveSwipeable(index);
   };
@@ -79,7 +86,25 @@ export default function AddressScreen() {
   const onSwipeableWillClose = () => {
     setActiveSwipeable(null);
   };
+  if (isLoading) {
+    return (
+      <ActivityIndicator
+      size={"large"}
+        color={"#AF042C"}
+        style={{ flex: 1, justifyContent: "center", alignItems: "center" }}
+      >
+      </ActivityIndicator>
+    );
+  }
 
+ 
+  if (!address || address.length == 0) {
+    return (
+      <Text style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+        no addresses
+      </Text>
+    );
+  }
   return (
     <View style={styles.container}>
       <FlatList
@@ -88,20 +113,32 @@ export default function AddressScreen() {
           <Swipeable
             onSwipeableWillOpen={() => onSwipeableWillOpen(index)}
             onSwipeableWillClose={onSwipeableWillClose}
-            renderRightActions={() => renderRightActions(item.id)}
+            renderRightActions={() =>
+              renderRightActions(item.id)
+              
+              } 
             overshootRight={true}
             enabled={activeSwipeable === null || activeSwipeable === index} // Enable swipe only if no other swipeable is open
           >
             <View style={styles.addressItem}>
-              <MaterialCommunityIcons
-                name="map-marker"
-                size={30}
-                color="#DF2C2C"
-              />
+              <View
+                style={{
+                  width: 56,
+                  height: 56,
+                  top: 2,
+                  borderRadius: 12,
+                  backgroundColor: "#FFE3E3",
+                }}
+              >
+                <MaterialCommunityIcons
+                  name="map-marker"
+                  size={30}
+                  color="#DF2C2C"
+                  style={{ width: 37, height: 37, top: 12, left: 10 }}
+                />
+              </View>
               <View style={styles.addressDetails}>
-                <Text>{item.street}</Text>
-                <Text>{`${item.city}, ${item.state}, ${item.zip_code}`}</Text>
-                <Text>{item.country}</Text>
+                <Text>{formatAddress({ ...item })}</Text>
               </View>
             </View>
           </Swipeable>
@@ -109,21 +146,32 @@ export default function AddressScreen() {
         keyExtractor={(item) => item.id.toString()} // Use unique id for keyExtractor
       />
 
-      <Button
-        color="red"
-        size="large"
-        title="Add Address"
-        onClick={toggleModalVisibility}
-      />
+      <View style={{ zIndex: 1, position: "absolute", bottom: 5,right:25 }}>
+        <Button
+          color="red"
+          size="large"
+          title="Add Address"
+          onClick={toggleModalVisibility}
+        />
+      </View>
       <Formaddress
         open={isModalVisible}
         setOpen={toggleModalVisibility}
         refetch={refetch}
       />
+       <ShowDialog
+  open={dialogOpen}
+  setOpen={setDialogOpen}
+  onConfirm={() => handleDeleteAddress}
+  onCancel={handleCancel}
+  title="Delete Confirmation"
+  description="Are you sure you want to delete this address?"
+  trigger={undefined}
+/>
     </View>
   );
-}
-
+};
+export default AddressScreen;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -140,8 +188,11 @@ const styles = StyleSheet.create({
     elevation: 1,
   },
   addressDetails: {
-    marginLeft: 8,
-    flex: 1,
+    width: 200,
+    fontSize: 15,
+    fontWeight: "400",
+    opacity: 0.5,
+    left: 12,
   },
   deleteButton: {
     top: "5%",

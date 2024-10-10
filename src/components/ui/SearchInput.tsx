@@ -1,32 +1,39 @@
-// src/components/SearchInput.tsx
+
 import React, { useState } from "react";
-import { View, TouchableOpacity, TextInput, StyleSheet, Text } from "react-native";
-import Icon from 'react-native-vector-icons/FontAwesome'; // تأكد من استيراد الأيقونة
+import { View, TouchableOpacity, TextInput, StyleSheet } from "react-native";
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 interface SearchInputProps {
-    onSearch: (text: string) => void; 
+    onSearch: (text: string) => void;   
+    onClick?: () => void;                
+    color?: string;                      
+    backgroundColor?: string;           
 }
 
-const SearchInput: React.FC<SearchInputProps> = ({ onSearch }) => {
-    const [text, setText] = useState<string>(''); 
+const SearchInput: React.FC<SearchInputProps> = ({
+    onSearch,
+    onClick,
+    color = '#333',                      
+    backgroundColor = 'white'          
+}) => {
+    const [text, setText] = useState<string>('');
 
     const handleChangeText = (inputText: string) => {
-        setText(inputText); 
-        onSearch(inputText); 
+        setText(inputText);
+        onSearch(inputText);
     };
 
     return (
-        <View style={styles.container}>
-            <TouchableOpacity>
-                <Icon name="search" size={20} color="#333" style={styles.icon} />
-            </TouchableOpacity>
+        <TouchableOpacity style={[styles.container, { backgroundColor }]} onPress={onClick}>
+            <Icon name="search" size={20} color={color} style={styles.icon} />
             <TextInput
-                style={styles.input}
-                placeholder="Search"
-                value={text} 
-                onChangeText={handleChangeText} 
+                style={[styles.input, { color }]}
+                placeholder="Search.."
+                placeholderTextColor="#999" 
+                value={text}
+                onChangeText={handleChangeText}
             />
-        </View>
+        </TouchableOpacity>
     );
 };
 
@@ -34,24 +41,22 @@ const styles = StyleSheet.create({
     container: {
         flexDirection: 'row',
         alignItems: 'center',
-        width: '100%',
-        height: 64, 
-        paddingHorizontal: 16, 
-        backgroundColor: '#E0E0E0', 
-        borderRadius: 70, 
-        marginTop: 10, 
+        width: '85%',
+        height: 64,
+        paddingHorizontal: 16,
+        borderRadius: 70,
+        marginTop: 10,
         marginBottom: 10,
     },
     input: {
         flex: 1,
-        fontSize: 16, 
-        color: '#333', 
-        marginTop: 2, 
+        fontSize: 16,
+        marginTop: 2,
         margin: 10,
         marginBottom: 5,
     },
     icon: {
-        marginRight: 10, // لضبط المسافة بين الأيقونة وحقل الإدخال
+        marginRight: 10,
     },
 });
 

@@ -1,41 +1,44 @@
 import React, { useState } from 'react';
-import { View, Text, FlatList, StyleSheet, ActivityIndicator, Button } from 'react-native';
+import { View, Text, StyleSheet, ScrollView } from 'react-native';
 import { useGetProductsByCategoryId } from "../../queries/products/getProductsByCategoryId";
- import SearchInput from '../ui/SearchInput';
+import SearchInput from '../ui/SearchInput';
 import { useTabContext } from '../layout/TabContext';
 import ProductSearch from './ProductSearch';
 import Buttonout from '../ui/Buttonout';
 import Homes from './home';
 import CardWrapper from '../ui/card/CardWrapper';
+
 const BurgerList = () => {
-  const { selectedTab } = useTabContext();
+  const { selectedTab,  selectedCategoryName } = useTabContext();
   const { data: productsByCategory, isLoading: isLoadingProducts } = useGetProductsByCategoryId(selectedTab || 0);
   const [s, setS] = useState(false);
-  const [g,setG] = useState(false)
+  const [g, setG] = useState(false);
 
   if (s) {
     return <ProductSearch />;
   }
-  if(g){
-    return <Homes />
+  if (g) {
+    return <Homes />;
   }
+
   const handleButtonPress = () => {
-  setG(!g)
+    setG(!g);
   };
 
   return (
     <View style={styles.container}>
+     
       <View style={styles.searchContainer}>
-      <Buttonout
-      onPress={handleButtonPress}
-      />
-        <SearchInput onSearch={function (text: string): void {
-          setS(!s);
-        }} />
-       
+        <Buttonout onPress={handleButtonPress} />
+        <SearchInput 
+          onSearch={(text) => {}} 
+          onClick={() => setS(!s)} 
+          color="#000" 
+          backgroundColor="#F5F5F8" 
+        />
       </View>
-      
-      <View style={styles.content}>
+      <Text style={styles.t}>Our {selectedCategoryName}s</Text>
+      <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={styles.content}>
         {selectedTab !== null && productsByCategory && productsByCategory.length > 0 ? (
           productsByCategory.map(product => (
             <CardWrapper
@@ -51,7 +54,7 @@ const BurgerList = () => {
         ) : (
           <Text style={styles.contentText}>No products found for this category.</Text>
         )}
-      </View>
+      </ScrollView>
     </View>
   );
 };
@@ -59,21 +62,26 @@ const BurgerList = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 16,
+    backgroundColor: '#F5F5F8',
   },
   searchContainer: {
     flexDirection: 'row', 
     alignItems: 'center',
-    marginBottom: 16,
-    backgroundColor: '#E0E0E0',  
+    marginBottom: 10,
+    backgroundColor: '#F5F5F8',  
   },
   content: {
-    height: '85%',
-    width: '100%',
+    padding: 10,
+    flexDirection: 'row', 
   },
   contentText: {
     fontSize: 24,
+    textAlign: 'center',
   },
+  t:{
+    textAlign: 'center',
+    fontSize: 30,
+  }
 });
 
 export default BurgerList;

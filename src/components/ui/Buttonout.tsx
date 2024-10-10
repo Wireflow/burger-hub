@@ -21,13 +21,11 @@ const Buttonout: React.FC<ButtonoutProps> = ({ onPress }) => {
 const styles = StyleSheet.create({
   container: {
     borderRadius: 5,
-    backgroundColor: 'white', 
-    width: 50,
-     // زيادة العرض ليكون أكثر وضوحًا
+     width: 50,
+      // زيادة العرض ليكون أكثر وضوحًا
   },
   button: {
-    backgroundColor: '#E0E0E0',
-    padding: 10, // إضافة padding ليكون الزر أكبر
+     padding: 10, // إضافة padding ليكون الزر أكبر
   },
   buttonText: {
     color: 'black',

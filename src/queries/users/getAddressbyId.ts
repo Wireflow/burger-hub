@@ -1,7 +1,6 @@
 import { supabase } from "@/src/services/supabase/client";
 import { Row } from "@/src/services/supabase/table.types";
-import { address } from "@/src/types/schema/address";
-import { useQuery } from "@tanstack/react-query";
+ import { useQuery } from "@tanstack/react-query";
 export type addressWithAdress = Row<"Addresses"> 
 
 export const useGetAddressbyId = (id: number) => {
