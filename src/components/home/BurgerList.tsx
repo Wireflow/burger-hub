@@ -5,7 +5,7 @@ import SearchInput from '../ui/SearchInput';
 import { useTabContext } from '../layout/TabContext';
 import ProductSearch from './ProductSearch';
 import Buttonout from '../ui/Buttonout';
-import Homes from './home';
+import Homes from './Home';
 import CardWrapper from '../ui/card/CardWrapper';
 
 const BurgerList = () => {

@@ -3,7 +3,7 @@ import { View, ScrollView, Text, StyleSheet, ActivityIndicator } from 'react-nat
 import SearchInput from '../ui/SearchInput';
 import { useSearchProducts, Product } from '../../queries/products/getbySearch';
 import Buttonout from '../ui/Buttonout';
-import Homes from './home';
+import Homes from './Home';
 import CardWrapper from '../ui/card/CardWrapper';
 import NotFound from '../notFound/NotFound';
 

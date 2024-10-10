@@ -5,9 +5,9 @@ import {
 } from "@react-navigation/bottom-tabs";
 import { CustomTabBar } from "./CustomTab";
  import FavoriteScreen from "../(drawer)/FavoriteScreen";
-import Homes from "@/src/components/home/home";
+import Homes from "@/src/components/home/Home";
 import Profile from "@/src/components/profile/Profile";
-import OderHistory from "../(drawer)/orderhistory";
+import OderHistory from "../(drawer)/Order History";
  
 
 const Tab = createBottomTabNavigator();
