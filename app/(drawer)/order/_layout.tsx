@@ -7,46 +7,49 @@ import { HeaderBackButton } from "@react-navigation/elements";
 const _layout = () => {
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
-      <Stack >
+      <Stack screenOptions={{headerShown:false}} >
         <Stack.Screen name="cart"         options={{
           headerStyle: { backgroundColor: '#F6F6F9' },
           headerTitleAlign:'center',
         
-          headerTitle: () => (
-            <View style={styles.headerTitleContainer}>
-              <Text style={styles.headerTitle}>Cart</Text>
-            </View>
+          headerLeft: () => (
+            <HeaderBackButton label="Cancel" onPress={() => router.back()} />
           ),
+          title: "Cart",
+          headerShown:true
+
         }}/>
         <Stack.Screen name="checkOut"         options={{
           headerStyle: { backgroundColor: '#F6F6F9' },
           headerTitleAlign:'center',
         
-          headerTitle: () => (
-            <View style={styles.headerTitleContainer}>
-              <Text style={styles.headerTitle}>Checkout</Text>
-            </View>
+          headerLeft: () => (
+            <HeaderBackButton label="Cancel" onPress={() => router.back()} />
           ),
+          title: "Checkout",
+          headerShown:true
         }}/>
         <Stack.Screen name="orderConfirmation"         options={{
           headerStyle: { backgroundColor: '#F6F6F9' },
           headerTitleAlign:'center',
-        
-          headerTitle: () => (
-            <View style={styles.headerTitleContainer}>
-              <Text style={styles.headerTitle}>Order  Confirmation</Text>
-            </View>
+          title:'Order Confirmation',
+          headerShown:true,
+          headerLeft: () => (
+            <></>
           ),
+
+          
         }}/>
         <Stack.Screen name="payment"         options={{
           headerStyle: { backgroundColor: '#F6F6F9' },
           headerTitleAlign:'center',
-        
-          headerTitle: () => (
-            <View style={styles.headerTitleContainer}>
-              <Text style={styles.headerTitle}>Checkout</Text>
-            </View>
+          title:'Checkout',
+          headerLeft: () => (
+            <HeaderBackButton label="Cancel" onPress={() => router.back()} />
           ),
+          headerShown:true
+
+          
         }}/>
 
 

@@ -12,7 +12,7 @@ import { useSessionStore } from "@/src/store/useSessionStore";
 import { Swipeable } from "react-native-gesture-handler";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import NoAddress from "../../address/NoAddress";
- import Button from "../../ui/Button";
+import Button from "../../ui/Button";
 import Buttonout from "../../ui/Buttonout";
 import { router } from "expo-router";
 import Header from "./Header";
@@ -22,13 +22,10 @@ import { useCartStore } from "@/src/store/cart/cartStore";
 
 
 export default function AddressScreen() {
-  const [isModalVisible, setModalVisible] = useState(false);
-  const { session,setSession } = useSessionStore();
+   const { session } = useSessionStore();
   const { cart ,setAddressId } = useCartStore(state => state);
 
-  const toggleModalVisibility = () => {
-    setModalVisible(!isModalVisible);
-  };
+ 
    const userId = session?.id;
   const {
     data: address,

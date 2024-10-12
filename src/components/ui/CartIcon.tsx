@@ -7,11 +7,11 @@ type prop ={
 
 const CartIcon = ({itemCount} :prop) => {
       return (
-        <TouchableOpacity style={styles.containeer} onPress={()=>router.navigate('/order/cart')}>
+        <TouchableOpacity style={styles.containeer} onPress={()=>router.navigate('/(drawer)/order/cart')}>
           
           <Icon name="shopping-cart" size={24} color="black" />
           {itemCount > 0 && (
-            <View style={styles.badge}>
+            <View style={styles.badge} >
               <Text style={styles.badgeText}>{itemCount}</Text>
             </View>
           )}
@@ -20,19 +20,7 @@ const CartIcon = ({itemCount} :prop) => {
       );
   };
 const styles = StyleSheet.create({
-    container: {
-      flexDirection: 'row',
-      justifyContent: 'space-between',
-      alignItems: 'center',
-      marginBottom: 15,
-      marginLeft: 25,
-      height:120,
-      position:'relative',
-      width:150,
-      backgroundColor: 'red',
-    
 
-    },
     titleText: {
       fontSize: 30,
       color: 'black',
@@ -40,11 +28,13 @@ const styles = StyleSheet.create({
       position: 'absolute',
       marginRight: 20, 
       right:20,
-      top:20
+      top:20,
+       width:40,
+       zIndex:999
      },
     badge: {
       position: 'absolute',
-      right: -10,
+      right: 3,
       top: -5,
       backgroundColor: '#AF042C',
       borderRadius: 10,

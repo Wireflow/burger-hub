@@ -1,19 +1,18 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { ActivityIndicator } from 'react-native-paper';
 import ImageProduct from './ImageProduct';
-import Title from '../../ui/Title'; // Title is imported but not used
-import Description from '../../ui/Description'; // Description is imported but not used
-import Price from '../../ui/Price'; // Price is imported but not used
 import Presentation from './Presentation';
-import Button from '../../ui/Button'; // Button is imported but not used
 import Buttons from './Buttons';
-import { router, Stack, useLocalSearchParams } from 'expo-router';
+import { useLocalSearchParams } from 'expo-router';
 import { useGetModifiersWithProduct } from '@/src/queries/products/getModifiersWithProduct';
-import { HeaderBackButton } from "@react-navigation/elements";
-import AddProductFavorite from "@/src/components/product/details/AddProductFavorite";
+import {Dimensions} from 'react-native';
+  const windowWidth = Dimensions.get('window').width;
+const windowHeight = Dimensions.get('window').height;
 
 export const ProductDetailsScreen = () => {
+
+console.log("im height and width in cart ",windowWidth,windowHeight)
   const { id } = useLocalSearchParams();
   const numericId = Array.isArray(id) ? Number(id[0]) : Number(id);
 
@@ -41,7 +40,7 @@ export const ProductDetailsScreen = () => {
     <View style={styles.container}>
       {
       data &&
-      (  <View style={{ alignItems: 'center',width:'95%',marginHorizontal:'auto' }}>
+      (  <View style={{ alignItems: 'center',width:'95%',marginHorizontal:'auto',backgroundColor:'#FFFFFF',height:'48%' }}>
 
         
         <ImageProduct imageBase={data?.product.imageUrl || ''} />
@@ -61,13 +60,13 @@ export const ProductDetailsScreen = () => {
 
 const styles = StyleSheet.create({
   container: {
-    height: '100%',
-    width: '100%',
+    height:windowWidth  +(windowHeight*0.5),
+    width: windowWidth,
     backgroundColor: '#FFFFFF',
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'space-around',
-    paddingTop:40
+    paddingTop:windowHeight*0.02
     
   },
   horizontal: {

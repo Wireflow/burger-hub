@@ -1,12 +1,14 @@
 import { useCartStore } from '@/src/store/cart/cartStore';
+import { Option } from '@/src/types/product/Customize';
 import { Product } from '@/src/types/product/Product';
 import React from 'react';
 import { StyleSheet, Text, View, Image } from 'react-native';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
 const ListItems = () => {
     const { cart } = useCartStore(state => state);
     const products: Product[] = cart.products;
-  return (
+   return (
     
     <View style={styles.container}>
       <Text style={styles.title}>Items</Text>
@@ -19,7 +21,23 @@ const ListItems = () => {
             <Text style={styles.quantity}>{item.quantity}x</Text>
             <Text style={styles.name}>{item.name}</Text>
             </View>
-            <Text style={styles.price}>{item.price}</Text>
+            {
+              item.options && item.options.map((optis)=>(
+                <TouchableOpacity> 
+                 <Text key={optis.modifireId} style={styles.optis}>{optis?.modifierName}</Text>
+                  {
+                    optis.modifireOptions && optis.modifireOptions.map((option)=>(
+                      <TouchableOpacity key={option.modifierOptionId} style={styles.desc2} >
+                      <Text style={{color:'#AF042C'}} >${option.modifierOptionPrice || 0}</Text>
+                       <Text>{option.modifierOptionName}</Text>
+                     </TouchableOpacity>
+                    ))
+                  }
+                </TouchableOpacity>
+
+              ))
+            }
+            <Text style={styles.price}>$ {item.price}</Text>
           </View>
         </View>
       ))}
@@ -73,6 +91,16 @@ const styles = StyleSheet.create({
     flexDirection:'row',
     justifyContent:'space-between',
     width:150
+  },optis:{
+    fontSize: 18,
+    color: 'black',
+    marginTop: 4,
+  },desc2:{
+    display:'flex',
+    flexDirection:'row',
+    justifyContent:'space-between',
+    width:80,
+    left:10
   }
 });
 

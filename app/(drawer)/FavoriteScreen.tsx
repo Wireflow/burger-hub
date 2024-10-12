@@ -4,8 +4,9 @@ import React from 'react'
 import NotFound from '@/src/components/notFound/NotFound';
 import { useGetFavoriteProductsByUserId } from '@/src/queries/products/getFavorite';
 import { useSessionStore } from '@/src/store/useSessionStore';
+import { router } from 'expo-router';
 const FavoriteScreen = () => {
-  const {  session,setSession } = useSessionStore();
+  const {  session } = useSessionStore();
 
   const { data: favoriteProducts, isLoading, error } = useGetFavoriteProductsByUserId(session?.id || ' ');
 
@@ -17,7 +18,7 @@ const FavoriteScreen = () => {
     return <Text>Error: {error.message}</Text>;
   }
     const handlePress =() =>{
-      console.log('ok')
+      router.replace('/(drawer)/main')
     }
   return (
     <View style={styles.content}>

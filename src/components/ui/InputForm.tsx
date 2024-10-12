@@ -29,8 +29,7 @@ function FormInput<T extends FieldValues>({
           onChangeText={onChange}
           placeholder={placeholder}
           error={error?.message}
-          secureTextEntry
-        />
+          />
       )}
     />
   );

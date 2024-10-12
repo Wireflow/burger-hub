@@ -26,24 +26,25 @@ const OrderDialog = ({ visible, onClose }: Props) => {
             <View style={styles.modalBackground}>
                 <View style={styles.dialog}>
                     <Text style={styles.title}>Select order type</Text>
-                    <View style={styles.radioGroup}>
+                    <TouchableOpacity style={styles.radioGroup}                             onPress={() => setSelectedValue(OrderType.Delivery)}
+ >
+                        
                         <RadioButton
                             value="Delivery"
                             status={selectedValue === 'Delivery' ? 'checked' : 'unchecked'}
                             color='black'
-                            onPress={() => setSelectedValue(OrderType.Delivery)}
-                        />
+                         />
                         <Text style={styles.radioLabel}>Delivery</Text>
-                    </View>
-                    <View style={styles.radioGroup}>
+                    </TouchableOpacity>
+                    <TouchableOpacity style={styles.radioGroup}                             onPress={() => setSelectedValue(OrderType.Pickup)}
+                    >
                         <RadioButton
                             value="Pick up"
                             status={selectedValue === 'Pick up' ? 'checked' : 'unchecked'}
-                            onPress={() => setSelectedValue(OrderType.Pickup)}
                             color='black'
                         />
                         <Text style={styles.radioLabel}>Pickup</Text>
-                    </View>
+                    </TouchableOpacity>
                     <TouchableOpacity style={styles.proceedButton} onPress={onClose}>
                        <Button title='Proceed' color='red' size='medium' onClick={()=>{changeOrderType(selectedValue);
                         onClose();

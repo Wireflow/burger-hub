@@ -12,8 +12,9 @@ import { TextInput } from 'react-native-paper';
     onBlur?:
       | ((e: NativeSyntheticEvent<TextInputFocusEventData>) => void)
       | undefined;
+      secureTextEntry:boolean;
   }
-const InputUi = ({label,description,placeholder,error,onBlur,value,onChangeText}:InputProps) => {
+const InputUi = ({secureTextEntry = false,label,description,placeholder,error,onBlur,value,onChangeText}:InputProps) => {
     const [userError, setUserError] = useState(false);
     return (
       <View style={{height:60}} >
@@ -25,6 +26,7 @@ const InputUi = ({label,description,placeholder,error,onBlur,value,onChangeText}
     placeholder={placeholder}
     onBlur={onBlur}
     onChangeText={onChangeText}
+    secureTextEntry={secureTextEntry}
     
   />
     {error && <Text style={{textAlign:'right', right:50,color:'red',top:35}}> { error}</Text>}

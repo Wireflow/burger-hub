@@ -186,16 +186,29 @@ export type CartState = {
     },
     totalPrice: () => {
         const { cart } = get();
-        const totalAmount= cart.products.reduce((total, product) => {
+        const totalAmount = cart.products.reduce((total, product) => {
             const productPrice = product.price || 0; // Ensure price is defined
             const productQuantity = product.quantity || 1; // Default to 1 if quantity is undefined
-            return total + productPrice * productQuantity;
+    
+             const modifierOptionsTotal = (product.options || []).reduce((sum, option) => {
+                const optionTotal = (option.modifireOptions || []).reduce((optionSum, modifier) => {
+                    const modifierOptionPrice = modifier.modifierOptionPrice || 0;  
+                    return optionSum + modifierOptionPrice; // Sum the prices of each modifier option
+                }, 0);
+                return optionTotal ; // Add the option total to the overall sum
+            }, 0);
+    
+            // Calculate total for this product including modifier options
+            const productTotal = (productPrice + modifierOptionsTotal) * productQuantity;
+    
+            return total + productTotal; // Add the product total to the overall total
         }, 0);
+    
+        // Update the cart with the new total amount
         set({ cart: { ...cart, totalAmount } });
         get().getTotalProducts();
-
+    
         return totalAmount;
-
     },
     setAddressId: (idNumber: number) => {
         const { cart } = get();

@@ -1,39 +1,36 @@
-import { z } from 'zod';
+import { nullable, z } from 'zod';
 
-// Define the ModifierOption schema
-export const ModifierOptionSchema = z.object({
-    modifierOptionId: z.number(),
+ export const ModifierOptionSchema = z.object({
     modifierOptionName: z.string(),
-    modifierOptionPrice: z.number(),
+
+    modifierOptionId: z.number().nullable(),
+    modifierOptionPrice: z.number().nullable(),
 });
 
-// Define the Option schema
-export const OptionSchema = z.object({
-    modifireId: z.number(),
+ export const OptionSchema = z.object({
     modifierName: z.string(),
-    modifireOptions: z.array(ModifierOptionSchema).optional(),
+
+    modifireId: z.number(),
+    modifireOptions: z.array(ModifierOptionSchema).nullable().optional(),
 });
 
-// Define the Product schema
-export const ProductSchema = z.object({
+ export const ProductSchema = z.object({
     id: z.number(),
-    imageUrl: z.string().nullable().optional(),  // Allows null
+    imageUrl: z.string().nullable().optional(),  
     name: z.string(),
     price: z.number(),
     quantity: z.number(),
-    options: z.array(OptionSchema).optional(),
+    options: z.array(OptionSchema).nullable(),
 });
-// Define the enum to match your PostgreSQL enum type
-export enum OrderType {
+ export enum OrderType {
     Delivery = 'Delivery',
     Pickup = 'Pick up',
   }
 
-// Define the CartType schema
-export const OrderSchema = z.object({
+ export const OrderSchema = z.object({
     products: z.array(ProductSchema),
     orderType: z.enum([OrderType.Delivery, OrderType.Pickup]).optional(),
-    paymentId: z.number(),
+    paymentId: z.number().optional(),
     addressId: z.number().nullable(),
     totalAmount:z.number().optional(),
     totalQuantity:z.number().optional()

@@ -19,7 +19,7 @@ const NotFound: React.FC<NotFoundProps> = ({ icon, message1,message2, buttonTitl
       <Text style={styles.message1}>{message1}</Text>
       <Text style={styles.message2}>{message2}</Text>
       <View style={styles.b}>
-      {buttonTitle && onButtonPress && (
+      {buttonTitle  && (
         <Button title={buttonTitle} size='large' color='red' onClick={onButtonPress} />
       )}
       </View>

@@ -33,7 +33,7 @@ const AddressScreen = () => {
     data: address,
     error,
     isLoading,
-    refetch,
+    refetch,isFetched,isFetchedAfterMount,isFetching
   } = useGetAddressByUserId(userId as string);
   const [addresses, setAddresses] = useState(address || []);
   const [dialogOpen, setDialogOpen] = useState(false);
@@ -44,14 +44,18 @@ const AddressScreen = () => {
     if (address) {
       setAddresses(address);
     }
-  }, [address]);
+   }, [address]);
 
 
    
 
   const handleDeleteAddress = (id: number) => {
+   
+
     addressDelete(id, userId as string)
       .then(() => {
+        refetch();
+
         showToast("delete address successfully", { type: "success" });
         setDialogOpen(false)
       })
@@ -86,7 +90,7 @@ const AddressScreen = () => {
   const onSwipeableWillClose = () => {
     setActiveSwipeable(null);
   };
-  if (isLoading) {
+  if (isFetching) {
     return (
       <ActivityIndicator
       size={"large"}
@@ -98,7 +102,7 @@ const AddressScreen = () => {
   }
 
  
-  if (!address || address.length == 0) {
+  if (!address ) {
     return (
       <Text style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
         no addresses
@@ -143,10 +147,12 @@ const AddressScreen = () => {
             </View>
           </Swipeable>
         )}
-        keyExtractor={(item) => item.id.toString()} // Use unique id for keyExtractor
+        keyExtractor={(item) => item.id.toString()}  
       />
 
-      <View style={{ zIndex: 1, position: "absolute", bottom: 5,right:25 }}>
+      <View style={{ zIndex: 1, position: "absolute", bottom: 25
+        ,width:'100%',
+         }}>
         <Button
           color="red"
           size="large"

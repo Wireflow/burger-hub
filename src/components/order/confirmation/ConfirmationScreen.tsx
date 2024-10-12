@@ -14,13 +14,12 @@ import ConnectedCardAddress from '../checkout/ConnectedCardAddress';
 
 const ConfirmationScreen = () => {
   const [load,setLoad]=useState(false)
-  const {  session,setSession } = useSessionStore();
+  const {  session } = useSessionStore();
    const showToast = useCustomToast();
   const { cart,removeCart } = useCartStore(state => state);
   const addressId =cart.addressId;
   const orderType = cart.orderType;
   const ComplateOrder = async()=>{
-  console.log("im in order configration",cart)
   
   if(session){
     setLoad(true)

@@ -18,7 +18,7 @@ import { LogInType } from "@/src/types/LogInType";
 import { useSessionStore } from "@/src/store/useSessionStore";
 import { getUserById } from "@/src/queries/users/getUserById";
 import { LogInSchema } from "@/src/types/validations/LogInSchema";
-import { router } from "expo-router";
+import { router } from "expo-router"; // Import router
 import { useCustomToast } from "@/src/hooks/useCustomToast";
 
 const LogIn = () => {
@@ -34,7 +34,7 @@ const LogIn = () => {
     },
   });
 
-  const onSubmit = async (data: LogInType) => {
+  const onSubmitLogin = async (data: LogInType) => {
     try {
       if (!data.email || !data.password) {
         return setError("root", { message: "Check your login information." });
@@ -49,18 +49,17 @@ const LogIn = () => {
           phone: dataUser.phone,
           email: dataUser.email,
           id: dataUser.id,
-         });
+        });
         showToast("Login successfully!", { type: "success" });
-        router.navigate("/(drawer)/main");
-      }else{
-        showToast("there is no account with this email!", { type: "warningC" });
-
+         router.navigate("/(drawer)/main");
+      } else {
+        showToast("There is no account with this email!", { type: "warningC" });
       }
 
       console.log("User logged in:", userId);
     } catch (error) {
       console.error("Log In error:", error);
-      showToast("there is no account with this email!.", { type: "warning" });
+      showToast("There is no account with this email!", { type: "warning" });
       setError("root", { message: "An error occurred during login." });
     } finally {
       setLoader(false);
@@ -77,11 +76,10 @@ const LogIn = () => {
           contentContainerStyle={styles.scrollContent}
           keyboardShouldPersistTaps="handled"
         >
-         
-           <View style={styles.inputContainer}>
-            <FormInput control={control} name="email" label="Email" />
+          <View style={styles.inputContainer}>
+            <FormInput control={control} name="email" label="Email" secureTextEntry={false} />
             <FormInput control={control} name="password" label="Password" secureTextEntry />
-           </View>
+          </View>
         </ScrollView>
         <View style={styles.forgotPasswordContainer}>
           <Text style={styles.forgotPasswordText}>Forget Password?</Text>
@@ -91,7 +89,7 @@ const LogIn = () => {
             title="Log In"
             size="large"
             color="red"
-            onClick={handleSubmit(onSubmit)}
+            onClick={handleSubmit(onSubmitLogin)}
           />
         </View>
       </KeyboardAvoidingView>
@@ -112,23 +110,22 @@ const styles = StyleSheet.create({
   },
   scrollContent: {
     flexGrow: 1,
-    alignItems: 'center', // Center align inputs
+    alignItems: 'center',
   },
   inputContainer: {
     width: "80%",
-    
   },
   forgotPasswordContainer: {
     height: 20,
     width: "40%",
-    alignSelf: 'center', // Center the text
+    alignSelf: 'center',
     marginTop: 20,
   },
   forgotPasswordText: {
     fontSize: 16,
     fontWeight: "bold",
     color: "#AF042C",
-    textAlign: 'center', // Center text
+    textAlign: 'center',
   },
   buttonContainer: {
     height: 50,
@@ -140,8 +137,8 @@ const styles = StyleSheet.create({
     position: 'absolute',
     top: '50%',
     left: '50%',
-    marginLeft: -50, // Center horizontally
-    marginTop: -50,  // Center vertically
+    marginLeft: -50,
+    marginTop: -50,
     height: 100,
     width: 100,
     backgroundColor: '#AF042C',

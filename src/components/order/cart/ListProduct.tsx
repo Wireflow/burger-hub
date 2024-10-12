@@ -60,7 +60,7 @@ const styles = StyleSheet.create({
         height: 60,
         width: '100%',
         marginBottom: 20,
-    },
+     },
 });
 
 export default ListProduct;

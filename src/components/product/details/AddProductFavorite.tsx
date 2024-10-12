@@ -27,17 +27,7 @@ function AddProductFavorite() {
             console.error("Error adding to favorites:", error);
         }
     };
-
-    const newFavorite = () => {
-        Alert.alert(
-            'Confirmation',
-            'Do you want to add this to your favorites?',
-            [
-                { text: 'Cancel', onPress: () => console.log('Cancel Pressed') },
-                { text: 'OK', onPress: insertToFavorite }, 
-            ],
-        );
-    };
+ 
 
     const deleteToFavorite = async () => {
         try {
@@ -51,16 +41,7 @@ function AddProductFavorite() {
         }
     };
 
-    const deleteFavorite = () => {
-        Alert.alert(
-            'Confirmation',
-            'Do you want to delete this from your favorites?',
-            [
-                { text: 'Cancel', onPress: () => console.log('Cancel Pressed') },
-                { text: 'OK', onPress: deleteToFavorite },  
-            ],
-        );
-    };
+ 
 
     useEffect(() => {
         refetch();
@@ -72,9 +53,9 @@ function AddProductFavorite() {
 
             {   isFetchedAfterMount && (
                 favorite?.length === 0 ? (
-                    <EvilIcons name="heart" size={40} color="black" onPress={newFavorite} />
+                    <EvilIcons name="heart" size={40} color="black" onPress={insertToFavorite} />
                 ) : (
-                    <AntDesign name="heart" size={30} onPress={deleteFavorite} color="#AF042C" />
+                    <AntDesign name="heart" size={30} onPress={deleteToFavorite} color="#AF042C" />
                 )
             )}
             

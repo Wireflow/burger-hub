@@ -54,6 +54,9 @@ function FormAddress({ setOpen, open, refetch }: Props) {
     mutationKey: ["new-address"],
     mutationFn:(data: any) => createAddress(data, userId as string),
     onSuccess: () => {
+     
+       
+      setOpen(!open);
       ToastAndroid.show("Successfully added address", ToastAndroid.LONG);
     },
   });
@@ -67,7 +70,9 @@ function FormAddress({ setOpen, open, refetch }: Props) {
   };
 
   const onSubmit = (data:typeof Addressdata) => {
+ 
     mutation.mutate(data);
+ 
   };
 
   return (

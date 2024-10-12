@@ -7,6 +7,7 @@ const _layout = () => {
     <Stack>
         <Stack.Screen name='main' options={{headerShown:false}} />
         <Stack.Screen name='product' options={{headerShown:false}} />
+        <Stack.Screen name='Order History' options={{headerShown:false}} />
         <Stack.Screen name='order' options={{headerShown:false}} />
 
     </Stack>

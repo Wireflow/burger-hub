@@ -44,5 +44,5 @@ const Buttons = ({data}:props) => {
 }
 export default Buttons
 const styles = StyleSheet.create({
-     scop:{height:50,top:-20,marginTop:20}
+     scop:{height:50,marginTop:20}
 })

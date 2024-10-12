@@ -10,7 +10,7 @@ type props ={
 }
 const Presentation = ({title,price,description}:props) => {
   return (
- <View style={{height:180,width:"70%",display:'flex',justifyContent:'space-around',alignItems:'center',position:'relative',top:-40}}>
+ <View style={{height:'50%',width:"70%",display:'flex',justifyContent:'space-around',alignItems:'center',position:'relative',top:-70}}>
       <Title name={title} />
     <Description description={description}/>
     <Price price={price}/>
