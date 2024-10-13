@@ -1,5 +1,6 @@
 import { Option } from "@/src/types/product/Customize";
 import { Product } from "@/src/types/product/Product";
+import { products } from "@/src/types/schema/product";
 import { StateCreator } from "zustand";
 export enum OrderType {
     Delivery = 'Delivery',
@@ -31,6 +32,7 @@ export type CartState = {
     setAddressId: (IdAddress: number) =>void;
     setPaymentId:(IdPayment: number) =>void;
     setNote:(productId:number , note:string) =>void;
+    getNote:(productId:number)=>string | null;
 
 };export const createCartSlice: StateCreator<CartState> = (set, get) => ({
     cart: {
@@ -234,5 +236,9 @@ export type CartState = {
         }, [] as Product[]);
 
         set({ cart: { ...cart, products: updatedProducts } });
-     }
+     },getNote: (productId: number) => {
+        const { cart } = get();
+        const product = cart.products.find(p => p.id === productId);
+        return product ? product.note : null; 
+    }
 });

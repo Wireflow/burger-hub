@@ -4,6 +4,7 @@ import { Product } from '@/src/types/product/Product';
 import React from 'react';
 import { StyleSheet, Text, View, Image } from 'react-native';
 import { TouchableOpacity } from 'react-native-gesture-handler';
+import ModelSetNote from './ModelSetNote';
 
 const ListItems = () => {
     const { cart } = useCartStore(state => state);
@@ -15,12 +16,14 @@ const ListItems = () => {
 
       {products && products.map((item) => (
         <View key={item.id} style={styles.card}>
+          
           <Image source={require('@/assets/images/Mask Group.png')} style={styles.image} />
           <View style={styles.details}>
             <View style={styles.desc}>
             <Text style={styles.quantity}>{item.quantity}x</Text>
             <Text style={styles.name}>{item.name}</Text>
             </View>
+            
             {
               item.options && item.options.map((optis)=>(
                 <TouchableOpacity> 
@@ -39,8 +42,10 @@ const ListItems = () => {
             }
             <Text style={styles.price}>$ {item.price}</Text>
           </View>
+         <ModelSetNote productId={item.id}/>
         </View>
       ))}
+
     </View>
   );
 };
@@ -101,7 +106,7 @@ const styles = StyleSheet.create({
     justifyContent:'space-between',
     width:80,
     left:10
-  }
+  },
 });
 
 export default ListItems;

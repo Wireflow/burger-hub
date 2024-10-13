@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { StyleSheet, View } from 'react-native';
- import CardItems from './ListItems';
+ import ListItems from './ListItems';
  import { useCartStore } from '@/src/store/cart/cartStore';
 import ConnectedPickUp from '../checkout/ConnectedPickUp';
 import Proceed from '@/hooks/Proceed';
@@ -14,6 +14,7 @@ import ConnectedCardAddress from '../checkout/ConnectedCardAddress';
 
 const ConfirmationScreen = () => {
   const [load,setLoad]=useState(false)
+
   const {  session } = useSessionStore();
    const showToast = useCustomToast();
   const { cart,removeCart } = useCartStore(state => state);
@@ -49,7 +50,7 @@ const ConfirmationScreen = () => {
   return (
     <View style={styles.container}>
         
-        <CardItems/>
+        <ListItems/>
      
         {orderType == 'Delivery'? (
           <ConnectedCardAddress addressId={addressId || 0} /> 
