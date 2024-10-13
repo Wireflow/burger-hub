@@ -18,7 +18,7 @@ import Header from "../ui/Header";
 import { SafeAreaView } from "react-native";
 import { formatAddress } from "@/src/util/addressFormat";
 import ShowDialog from "../ui/showDialog";
- 
+
 const AddressChangeScreen = () => {
   const [dialogOpen, setDialogOpen] = useState(false);
   const handleCancel = () => {

@@ -20,6 +20,7 @@ import { nullable, z } from 'zod';
     name: z.string(),
     price: z.number(),
     quantity: z.number(),
+    note:z.string().nullable().optional(),
     options: z.array(OptionSchema).nullable(),
 });
  export enum OrderType {

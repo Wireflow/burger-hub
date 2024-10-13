@@ -30,6 +30,8 @@ export type CartState = {
     totalPrice: () => number;
     setAddressId: (IdAddress: number) =>void;
     setPaymentId:(IdPayment: number) =>void;
+    setNote:(productId:number , note:string) =>void;
+
 };export const createCartSlice: StateCreator<CartState> = (set, get) => ({
     cart: {
         products: [],
@@ -220,5 +222,17 @@ export type CartState = {
     setPaymentId: (IdPayment: number) => {
         const { cart } = get();
         set({ cart: { ...cart, paymentId: IdPayment } });
-    },
+    },setNote: (productId:number,note:string)=>{
+        const { cart } = get();
+        const updatedProducts = cart.products.reduce((acc, p) => {
+            if (p.id === productId) {
+                     acc.push({ ...p, note: note });
+            } else {
+                acc.push(p);
+            }
+            return acc;
+        }, [] as Product[]);
+
+        set({ cart: { ...cart, products: updatedProducts } });
+     }
 });

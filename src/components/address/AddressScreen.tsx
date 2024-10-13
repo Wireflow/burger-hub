@@ -17,8 +17,8 @@ import Formaddress from "./Formaddress";
 import { addressDelete } from "@/src/mutations/user/addressDelete";
 import { formatAddress } from "@/src/util/addressFormat";
 import Header from "../ui/Header";
- import { useCustomToast } from "@/src/hooks/useCustomToast";
 import ShowDialog from "../ui/showDialog";
+import { useCustomToast } from "@/src/hooks/useCustomToast";
 
 const AddressScreen = () => {
   const [isModalVisible, setModalVisible] = useState(false);
@@ -33,7 +33,7 @@ const AddressScreen = () => {
     data: address,
     error,
     isLoading,
-    refetch,isFetched,isFetchedAfterMount,isFetching
+    refetch,
   } = useGetAddressByUserId(userId as string);
   const [addresses, setAddresses] = useState(address || []);
   const [dialogOpen, setDialogOpen] = useState(false);
@@ -44,18 +44,18 @@ const AddressScreen = () => {
     if (address) {
       setAddresses(address);
     }
-   }, [address]);
+  }, [address]);
 
-
-   
+  if (!address || address.length == 0)
+    return (
+      <Text style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+        no addresses
+      </Text>
+    );
 
   const handleDeleteAddress = (id: number) => {
-   
-
     addressDelete(id, userId as string)
       .then(() => {
-        refetch();
-
         showToast("delete address successfully", { type: "success" });
         setDialogOpen(false)
       })
@@ -75,7 +75,6 @@ const AddressScreen = () => {
     
       }}
     >
-
       <MaterialCommunityIcons name="delete" size={24} color="white" />
     </TouchableOpacity>
   );
@@ -90,11 +89,11 @@ const AddressScreen = () => {
   const onSwipeableWillClose = () => {
     setActiveSwipeable(null);
   };
-  if (isFetching) {
+  if (isLoading) {
     return (
       <ActivityIndicator
       size={"large"}
-        color={"#AF042C"}
+        color={"blue"}
         style={{ flex: 1, justifyContent: "center", alignItems: "center" }}
       >
       </ActivityIndicator>
@@ -102,7 +101,7 @@ const AddressScreen = () => {
   }
 
  
-  if (!address ) {
+  if (!address || address.length == 0) {
     return (
       <Text style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
         no addresses
@@ -147,12 +146,10 @@ const AddressScreen = () => {
             </View>
           </Swipeable>
         )}
-        keyExtractor={(item) => item.id.toString()}  
+        keyExtractor={(item) => item.id.toString()} // Use unique id for keyExtractor
       />
 
-      <View style={{ zIndex: 1, position: "absolute", bottom: 25
-        ,width:'100%',
-         }}>
+      <View style={{ zIndex: 1, position: "absolute", bottom: 5,right:25 }}>
         <Button
           color="red"
           size="large"
