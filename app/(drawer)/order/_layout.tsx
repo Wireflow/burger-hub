@@ -49,10 +49,20 @@ const _layout = () => {
           ),
           headerShown:true
 
-          
+ 
         }}/>
 
+  <Stack.Screen name="PaymentUser"         options={{
+          headerStyle: { backgroundColor: '#F6F6F9' },
+          headerTitleAlign:'center',
+          title:'Checkout',
+          headerLeft: () => (
+            <HeaderBackButton label="Cancel" onPress={() => router.back()} />
+          ),
+          headerShown:true
 
+ 
+        }}/>
 
       </Stack>
     </GestureHandlerRootView>

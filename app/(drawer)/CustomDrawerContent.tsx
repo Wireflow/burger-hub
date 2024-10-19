@@ -70,6 +70,17 @@ const CustomDrawerContent: React.FC<{ navigation: any }> = ({ navigation }) => {
         </TouchableOpacity>
         <TouchableOpacity
           style={styles.menuItem}
+          onPress={() => navigation.navigate("PaymentUser")}
+        >
+          <Image
+            source={require("@/assets/icons/ic_outline-local-offer.png")}
+            style={styles.Icon}
+          />
+
+          <Text style={styles.menuText}>Paymentsuser</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={styles.menuItem}
           onPress={() => navigation.navigate("favorites")}
         >
           <Image

@@ -20,7 +20,9 @@ const Homes: React.FC = () => {
   const { selectedTab, selectedCategoryName } = useTabContext();
 
   if (x) {
-    return <BurgerList />;
+     return <BurgerList />;
+
+   
   }
   
   if (s) {
@@ -71,7 +73,7 @@ const styles = StyleSheet.create({
     position: 'relative'
   },
   titleText: {
-    fontSize: 30,
+    fontSize: 40,
     color: 'black',
   },
 });
