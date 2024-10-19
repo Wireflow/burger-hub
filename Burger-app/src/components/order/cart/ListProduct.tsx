@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { Text, View, StyleSheet, SafeAreaView, ScrollView } from 'react-native';
 import { SwipeListView } from 'react-native-swipe-list-view';
-import CardProduct from './CardProduct'; // Ensure this path is correct
-import ItemsHidden from './ItemsHidden'; // Ensure this path is correct
+import CardProduct from './CardProduct'; 
+import ItemsHidden from './ItemsHidden'; 
 import { useCartStore } from '@/src/store/cart/cartStore';
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import Header from './Header';

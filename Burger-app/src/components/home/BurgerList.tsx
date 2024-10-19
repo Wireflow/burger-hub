@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, ScrollView } from 'react-native';
+import { View, Text, StyleSheet, ScrollView, SafeAreaView } from 'react-native';
 import { useGetProductsByCategoryId } from "../../queries/products/getProductsByCategoryId";
 import SearchInput from '../ui/SearchInput';
 import { useTabContext } from '../layout/TabContext';
@@ -7,6 +7,7 @@ import ProductSearch from './ProductSearch';
 import Buttonout from '../ui/Buttonout';
 import Homes from './home';
 import CardWrapper from '../ui/card/CardWrapper';
+import Header from '../ui/Header';
 
 const BurgerList = () => {
   const { selectedTab,  selectedCategoryName } = useTabContext();
@@ -26,36 +27,38 @@ const BurgerList = () => {
   };
 
   return (
-    <View style={styles.container}>
-     
-      <View style={styles.searchContainer}>
-        <Buttonout onPress={handleButtonPress} />
-        <SearchInput 
-          onSearch={(text) => {}} 
-          onClick={() => setS(!s)} 
-          color="#000" 
-          backgroundColor="white" 
-        />
-      </View>
-      <Text style={styles.t}>Our {selectedCategoryName}s</Text>
-      <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={styles.content}>
-        {selectedTab !== null && productsByCategory && productsByCategory.length > 0 ? (
-          productsByCategory.map(product => (
-            <CardWrapper
-              key={product.id}
-              imageSource={{ uri: product.imageUrl || 'http://example.com/default-image.jpg' }}
-              title={product.name || "Product Name"}
-              price={`$${product.price?.toFixed(2)}`}
-              height={190}
-              width={160}
-              id={product?.id}
-            />
-          ))
-        ) : (
-          <Text style={styles.contentText}>No products found for this category.</Text>
-        )}
-      </ScrollView>
-    </View>
+    <SafeAreaView>
+      <View style={styles.container}>
+
+     <View style={styles.searchContainer}>
+       <Buttonout onPress={handleButtonPress} />
+       <SearchInput 
+         onSearch={(text) => {}} 
+         onClick={() => setS(!s)} 
+         color="#000" 
+         backgroundColor="white" 
+       />
+     </View>
+     <Text style={styles.t}>Our {selectedCategoryName}s</Text>
+     <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={styles.content}>
+       {selectedTab !== null && productsByCategory && productsByCategory.length > 0 ? (
+         productsByCategory.map(product => (
+           <CardWrapper
+             key={product.id}
+             imageSource={{ uri: product.imageUrl || 'http://example.com/default-image.jpg' }}
+             title={product.name || "Product Name"}
+             price={`$${product.price?.toFixed(2)}`}
+             height={190}
+             width={160}
+             id={product?.id}
+           />
+         ))
+       ) : (
+         <Text style={styles.contentText}>No products found for this category.</Text>
+       )}
+     </ScrollView>
+   </View>
+    </SafeAreaView>
   );
 };
 

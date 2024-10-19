@@ -1,6 +1,5 @@
 import { supabase } from "@/src/services/supabase/client";
 import { Row } from "@/src/services/supabase/table.types";
-import { address } from "@/src/types/schema/address";
 import { useQuery } from "@tanstack/react-query";
 export type addressWithAdress = Row<"Addresses"> 
 
@@ -14,7 +13,6 @@ export const useGetAddressbyId = (id: number) => {
 };
 
  export const getAddressById = async (id: number) => {
-    if(id == 0){return;}
     try {
         const { data: address, error } = await supabase
             .from("Addresses")
@@ -22,7 +20,9 @@ export const useGetAddressbyId = (id: number) => {
             .eq("id", id)
             .single();
         
-        if (error) throw new Error("Error fetching addresses: " + error.message);
+        if (error)      
+               console.error(error);
+
         
         return address ;  
     } catch (error) {

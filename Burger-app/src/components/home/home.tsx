@@ -10,6 +10,7 @@ import { useTabContext } from '../layout/TabContext';
 import SearchInput from '../ui/SearchInput'; 
 import CartIcon from '../ui/CartIcon';
 import { useCartStore } from '@/src/store/cart/cartStore';
+import Header from '../ui/Header';
 
 const Homes: React.FC = () => {
   const { getTotalProducts } = useCartStore(state => state);

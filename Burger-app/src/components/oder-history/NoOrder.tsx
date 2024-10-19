@@ -19,7 +19,7 @@ const NoOrder = () => {
           <Text style={{ fontSize: 28, fontWeight: "600", width: 190 }}>
             No orders yet
           </Text>
-          <Text>Hit the red button to add begin ordering</Text>
+          <Text style={{width:200,textAlign:"center"}}>Hit the red button to add begin ordering</Text>
         </View>
       );
 }

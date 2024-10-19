@@ -34,7 +34,7 @@ export const CustomTabBar: React.FC<BottomTabBarProps> = ({
             {options.tabBarIcon &&
               options.tabBarIcon({
                 focused: isFocused,
-                color: isFocused ? "#e91e63" : "#222",
+                color: isFocused ? "#AF042C" : "#ADADAF",
                 size: 25,
               })}
           </TouchableOpacity>
@@ -53,5 +53,6 @@ const styles = StyleSheet.create({
   tabButton: {
     alignItems: "center",
     marginHorizontal: 20,
+    color:"#ADADAF",
   },
 });

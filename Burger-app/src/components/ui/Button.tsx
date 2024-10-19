@@ -35,12 +35,12 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
     },
     text: {
-        fontSize: 18,
+        fontSize: 16,
         fontWeight: 'bold',
 
     },
     small: {
-        width: 130,
+        width: 100,
         height:40
 
     },

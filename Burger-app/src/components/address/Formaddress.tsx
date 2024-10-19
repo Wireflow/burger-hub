@@ -55,6 +55,7 @@ function FormAddress({ setOpen, open, refetch }: Props) {
     mutationFn:(data: any) => createAddress(data, userId as string),
     onSuccess: () => {
       ToastAndroid.show("Successfully added address", ToastAndroid.LONG);
+      refetch()
     },
   });
 
@@ -175,7 +176,7 @@ const styles = StyleSheet.create({
     width: "100%",
     height: 60,
     alignItems: "center",
-    justifyContent: "space-around",
+    justifyContent: "space-between",
     paddingRight: 7,
     marginTop: 5,
    

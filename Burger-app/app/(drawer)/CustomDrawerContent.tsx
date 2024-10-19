@@ -32,10 +32,20 @@ const CustomDrawerContent: React.FC<{ navigation: any }> = ({ navigation }) => {
             />
           </View>
 
-          <TouchableOpacity onPress={() => navigation.navigate("home")}>
+          <TouchableOpacity onPress={() => navigation.closeDrawer()}>
             <Text style={styles.backButton}>Back</Text>
           </TouchableOpacity>
         </View>
+        <TouchableOpacity
+          style={styles.menuItem}
+          onPress={() => navigation.navigate("home")}
+        >
+          <Image
+            source={require("@/assets/icons/home1.png")}
+            style={styles.Icon}
+          />
+          <Text style={styles.menuText}>home</Text>
+        </TouchableOpacity>
         <TouchableOpacity
           style={styles.menuItem}
           onPress={() => navigation.navigate("Profile")}
@@ -156,7 +166,7 @@ const styles = StyleSheet.create({
   signOutButton: {
     marginTop: "auto",
     padding: 15,
-    top: 250,
+    top: 150,
   },
   signOutText: {
     color: "#FFFFFF",

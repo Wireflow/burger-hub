@@ -8,20 +8,18 @@ import { router, Stack } from "expo-router";
 
 const index = () => {
   return (
-  <>
-    <Stack.Screen
+    <>
+      <Stack.Screen
         options={{
-          headerStyle:{ backgroundColor:'#F6F6F9'},
-          headerLeft: () => (
-            <HeaderBackButton onPress={() => router.back()} />
-          ),
+          headerStyle: { backgroundColor: "#F6F6F9" },
+          headerLeft: () => <HeaderBackButton onPress={() => router.back()} />,
           title: "Address changing",
-          headerShown:true
+          headerShown: true,
         }}
       />
-       <AddressChangeScreen />
-  </>
- );
+      <AddressChangeScreen />
+    </>
+  );
 };
 
 export default index;

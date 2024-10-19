@@ -1,54 +1,106 @@
-import React from 'react';
-import { View, Text, TouchableOpacity, StyleSheet,Image } from 'react-native';
-import { useNavigation } from '@react-navigation/native';
-import { string } from 'zod';
-interface Prop{
-    title:string
-}
-const Header = ({ title }:Prop) => {
-  const navigation = useNavigation();
+import React, { createContext, useContext } from "react";
+import {
+  StyleProp,
+  StyleSheet,
+  View,
+  ViewStyle,
+  StatusBar,
+  Text,
+  TouchableOpacity,
+} from "react-native";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
+import { Entypo } from "@expo/vector-icons";
+import { Col, Grid } from "react-native-easy-grid";
+import { useNavigation } from "@react-navigation/native";
 
-  const handleBackPress = () => {
+type HeaderProps = {
+  style?: StyleProp<ViewStyle>;
+  title?: string;
+  backgroundColorCode:string
+};
+
+const headerHeight = 130;
+
+type HeaderContextType = {
+  goBack: () => void;
+};
+
+const HeaderContext = createContext<HeaderContextType | null>(null);
+
+function useHeader() {
+  const context = useContext(HeaderContext);
+  if (!context) {
+    throw new Error("Header must be used within a HeaderProvider");
+  }
+  return context;
+}
+
+function Header({ style, title,backgroundColorCode }: HeaderProps) {
+  const navigation = useNavigation();
+  const insets = useSafeAreaInsets();
+
+  const goBack = () => {
     navigation.goBack();
   };
 
+  const contextValue: HeaderContextType = {
+    goBack,
+  };
+
   return (
-    <View style={styles.container}>
-      <TouchableOpacity  onPress={handleBackPress} style={styles.backButton} >
-       <Image source={require("@/assets/icons/back-left.png")} />
+    <HeaderContext.Provider value={contextValue}>
+      <View
+        style={[
+          style,
+          {
+            paddingTop: insets.top,
+            height: headerHeight,
+            backgroundColor:backgroundColorCode
+            
+          },
+        ]}
+      >
+        <Grid style={styles.container}>
+          <Header.BackButton />
+
+          {title && <Text style={[styles.title]}>{title}</Text>}
+        </Grid>
+      </View>
+    </HeaderContext.Provider>
+  );
+}
+
+Header.BackButton = function HeaderBackButton() {
+  const { goBack } = useHeader();
+
+  return (
+    <Col size={0.2}>
+      <TouchableOpacity onPress={goBack} style={styles.button}>
+        <Entypo name="chevron-thin-left" size={23} color="black" />
       </TouchableOpacity>
-      <Text style={styles.title}>{title}</Text>
-    </View>
+    </Col>
   );
 };
 
+export default Header;
+
 const styles = StyleSheet.create({
   container: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    paddingVertical: 15,
-    backgroundColor: '#f8f8f8',
-    borderBottomWidth: 1,
-    borderBottomColor: '#ddd',
-    marginBottom:5
-  },
-  backButton: {
-    marginRight: 50,
-    alignItems:"center",
-    display:"flex"
+    paddingHorizontal: 16,
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between", // Space between title and buttons
   
   },
-  backButtonText: {
-   fontWeight:"200",
-    fontSize: 40,
-
-
-  },
   title: {
-    fontSize: 18,
-    fontWeight: 'bold',
-    alignItems:"center"
+    fontSize: 20,
+    fontWeight: "bold",
+    color: "black",
+    flex: 1, // Allow title to take up available space
+    textAlign: "center", // Center the title
+    right:20
+  },
+  button: {
+    borderRadius: 150,
   },
 });
-
-export default Header;

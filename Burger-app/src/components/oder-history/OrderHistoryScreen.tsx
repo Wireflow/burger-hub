@@ -7,6 +7,7 @@ import Card from "../ui/card/Card";
 import { formatAddress } from "@/src/util/addressFormat";
 import { formatDate, formatDateTime } from "@/src/util/DateFormat";
 import { OrderWithAddress } from "@/src/queries/order/useGetAllOrders";
+import Header from "../ui/Header";
 export default function OrderHistoryScreen() {
   const { session } = useSessionStore();
   const userId = session?.id;
@@ -34,9 +35,11 @@ export default function OrderHistoryScreen() {
 
   return (
     <ScrollView>
+
       {orders.map((order) => (
         <Card key={order.id} height={147} width={321}>
           <View style={styles.container}>
+       
             <View style={{ left: 40 }}>
               <Text style={styles.orderText}>
                 $ {order.totalAmount ?? "Not found: totalAmount"}
@@ -47,7 +50,7 @@ export default function OrderHistoryScreen() {
             </View>
             {order.Addresses && (
               <View>
-                {order.order_type == "delivery" && (
+                {order.order_type == "Delivery" && (
                   <View style={styles.orderDetails}>
                     <Text style={styles.orderText}>
                       {" "}

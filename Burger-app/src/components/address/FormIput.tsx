@@ -14,9 +14,9 @@ type Props = {
   control: any;
   name: string;
   placeholder: string;
-  description?: string; // Optional description prop
-  secureTextEntry?: boolean; // Optional for password inputs
-  onFocus?: () => void; // Optional onFocus handler
+  description?: string; 
+  secureTextEntry?: boolean; 
+  onFocus?: () => void;
   onBlur?:
   | ((e: NativeSyntheticEvent<TextInputFocusEventData>) => void)
   | undefined;

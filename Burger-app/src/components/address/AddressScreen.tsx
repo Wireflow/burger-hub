@@ -3,26 +3,22 @@ import {
   StyleSheet,
   Text,
   View,
-  FlatList,
-  TouchableOpacity,
-  Alert,
   ActivityIndicator,
 } from "react-native";
 import { useGetAddressByUserId } from "@/src/queries/users/useGetAddressbyUserId";
 import { useSessionStore } from "@/src/store/useSessionStore";
-import { Swipeable } from "react-native-gesture-handler";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import Button from "../ui/Button";
 import Formaddress from "./Formaddress";
 import { addressDelete } from "@/src/mutations/user/addressDelete";
 import { formatAddress } from "@/src/util/addressFormat";
-import Header from "../ui/Header";
 import ShowDialog from "../ui/showDialog";
 import { useCustomToast } from "@/src/hooks/useCustomToast";
+import { SwipeListView } from "react-native-swipe-list-view";
+import Header from "../ui/Header";
 
 const AddressScreen = () => {
   const [isModalVisible, setModalVisible] = useState(false);
-  const [activeSwipeable, setActiveSwipeable] = useState<number | null>(null);
   const showToast = useCustomToast();
   const toggleModalVisibility = () => {
     setModalVisible(!isModalVisible);
@@ -31,125 +27,91 @@ const AddressScreen = () => {
   const userId = session?.id;
   const {
     data: address,
-    error,
     isLoading,
     refetch,
   } = useGetAddressByUserId(userId as string);
   const [addresses, setAddresses] = useState(address || []);
   const [dialogOpen, setDialogOpen] = useState(false);
-  const handleCancel = () => {
-    setDialogOpen(false);
-  };
+  const [Id, setId] = useState<number | null>(null);
+
   useEffect(() => {
     if (address) {
       setAddresses(address);
     }
   }, [address]);
 
-  if (!address || address.length == 0)
-    return (
-      <Text style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-        no addresses
-      </Text>
-    );
-
-  const handleDeleteAddress = (id: number) => {
-    addressDelete(id, userId as string)
-      .then(() => {
-        showToast("delete address successfully", { type: "success" });
-        setDialogOpen(false)
-      })
-      .catch(() => {
-        showToast("faild to delete address", { type: "error" });
-      });
-    
-  };
-
-
-  const renderRightActions = (id: number) => (
-    <TouchableOpacity
-      style={styles.deleteButton}
-      onPress={() => {
-        handleDeleteAddress(id);
-        setDialogOpen(true);
-    
-      }}
-    >
-      <MaterialCommunityIcons name="delete" size={24} color="white" />
-    </TouchableOpacity>
-  );
-
-  const onSwipeableWillOpen = (index: number) => {
-    if (activeSwipeable !== null && activeSwipeable !== index) {
-      setActiveSwipeable(null);
+  const handleDeleteAddress = () => {
+    if (Id !== null) {
+      addressDelete(Id, userId as string)
+        .then(() => {
+          showToast("Address deleted successfully", { type: "success" });
+          setDialogOpen(false);
+          refetch();
+        })
+        .catch(() => {
+          showToast("Failed to delete address", { type: "danger" });
+        });
     }
-    setActiveSwipeable(index);
   };
 
-  const onSwipeableWillClose = () => {
-    setActiveSwipeable(null);
-  };
   if (isLoading) {
     return (
       <ActivityIndicator
-      size={"large"}
-        color={"blue"}
+        size="large"
+        color="blue"
         style={{ flex: 1, justifyContent: "center", alignItems: "center" }}
-      >
-      </ActivityIndicator>
+      />
     );
   }
 
- 
-  if (!address || address.length == 0) {
+  if (!addresses.length) {
     return (
-      <Text style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-        no addresses
-      </Text>
+      <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+        <Text>No addresses available</Text>
+      </View>
     );
   }
+
+  const renderHiddenItem = (data:any) => (
+    <View style={styles.deleteButton}>
+      <MaterialCommunityIcons 
+        name="delete" 
+        size={24} 
+        color="white" 
+        onPress={() => {
+          setId(data.item.id);
+          setDialogOpen(true);
+        }} 
+      />
+    </View>
+  );
+
   return (
     <View style={styles.container}>
-      <FlatList
+     
+      <SwipeListView
         data={addresses}
-        renderItem={({ item, index }) => (
-          <Swipeable
-            onSwipeableWillOpen={() => onSwipeableWillOpen(index)}
-            onSwipeableWillClose={onSwipeableWillClose}
-            renderRightActions={() =>
-              renderRightActions(item.id)
-              
-              } 
-            overshootRight={true}
-            enabled={activeSwipeable === null || activeSwipeable === index} // Enable swipe only if no other swipeable is open
-          >
-            <View style={styles.addressItem}>
-              <View
-                style={{
-                  width: 56,
-                  height: 56,
-                  top: 2,
-                  borderRadius: 12,
-                  backgroundColor: "#FFE3E3",
-                }}
-              >
-                <MaterialCommunityIcons
-                  name="map-marker"
-                  size={30}
-                  color="#DF2C2C"
-                  style={{ width: 37, height: 37, top: 12, left: 10 }}
-                />
-              </View>
-              <View style={styles.addressDetails}>
-                <Text>{formatAddress({ ...item })}</Text>
-              </View>
+        renderItem={({ item }) => (
+          <View style={styles.addressItem}>
+            <View style={styles.markerContainer}>
+              <MaterialCommunityIcons
+                name="map-marker"
+                size={30}
+                color="#DF2C2C"
+                style={styles.markerIcon}
+              />
             </View>
-          </Swipeable>
+            <View style={styles.addressDetails}>
+              <Text>{formatAddress({ ...item })}</Text>
+            </View>
+          </View>
         )}
-        keyExtractor={(item) => item.id.toString()} // Use unique id for keyExtractor
+        renderHiddenItem={renderHiddenItem}
+        rightOpenValue={-70} // Width of the delete button
+        keyExtractor={(item) => item.id.toString()}
       />
 
-      <View style={{ zIndex: 1, position: "absolute", bottom: 5,right:25 }}>
+      <View style={styles.addButtonContainer}>
         <Button
           color="red"
           size="large"
@@ -162,24 +124,24 @@ const AddressScreen = () => {
         setOpen={toggleModalVisibility}
         refetch={refetch}
       />
-       <ShowDialog
-  open={dialogOpen}
-  setOpen={setDialogOpen}
-  onConfirm={() => handleDeleteAddress}
-  onCancel={handleCancel}
-  title="Delete Confirmation"
-  description="Are you sure you want to delete this address?"
-  trigger={undefined}
-/>
+      <ShowDialog
+        open={dialogOpen}
+        setOpen={setDialogOpen}
+        onConfirm={handleDeleteAddress}
+        onCancel={() => setDialogOpen(false)}
+        title="Delete Confirmation"
+        description="Are you sure you want to delete this address?" trigger={undefined}      />
     </View>
   );
 };
+
 export default AddressScreen;
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 16,
-    borderRadius: 20,
+    backgroundColor:"#f4f6f7"
   },
   addressItem: {
     flexDirection: "row",
@@ -190,6 +152,18 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     elevation: 1,
   },
+  markerContainer: {
+    width: 56,
+    height: 56,
+    borderRadius: 12,
+    backgroundColor: "#FFE3E3",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  markerIcon: {
+    width: 30,
+    height: 30,
+  },
   addressDetails: {
     width: 200,
     fontSize: 15,
@@ -198,12 +172,20 @@ const styles = StyleSheet.create({
     left: 12,
   },
   deleteButton: {
-    top: "5%",
     backgroundColor: "#DF2C2C",
     justifyContent: "center",
     alignItems: "center",
-    width: 40,
-    height: "40%",
-    borderRadius: 100,
+    width: 50,
+    height: "50%",
+    borderRadius: 50,
+    position: "absolute",
+    right: 0,
+    top:15
+  },
+  addButtonContainer: {
+    position: "absolute",
+    bottom: 5,
+    right: 25,
+    zIndex: 1,
   },
 });

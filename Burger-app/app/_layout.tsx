@@ -32,7 +32,7 @@ export default function RootLayout() {
   );
 }
 function RootLayoutMain() {
-  redirectAuth();
+  // redirectAuth();
   return (
     <Stack>
       <Stack.Screen name="auth" options={{ headerShown: false }} />
@@ -40,6 +40,7 @@ function RootLayoutMain() {
 
 
         <Stack.Screen name="address" options={{ headerShown: false, }}/>
+        <Stack.Screen name="ProfileScreen" options={{ headerShown: false, }}/>
         <Stack.Screen name="orderhistory" options={{ headerShown: false, }}/>
  
          <Stack.Screen name="(drawer)" options={{ headerShown: false, }} />

@@ -19,7 +19,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 40,
-    backgroundColor: '#f9f9f9',
+    backgroundColor: 'white',
     
   },
   title: {

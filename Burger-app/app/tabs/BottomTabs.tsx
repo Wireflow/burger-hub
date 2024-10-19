@@ -1,66 +1,93 @@
 import React from "react";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
-import {
-  createBottomTabNavigator,
-} from "@react-navigation/bottom-tabs";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { CustomTabBar } from "./CustomTab";
-import HomeScreen from "../home/HomeScreen";
-import ProfileScreen from "../(drawer)/ProfileScreen";
-import PaymentScreen from "../(drawer)/Payment";
-import OrderScreen from "../(drawer)/OrderScreen";
-import OderHistory from "../(drawer)/orderhistory/OderHistory";
 import FavoriteScreen from "../(drawer)/FavoriteScreen";
 import Homes from "@/src/components/home/home";
- 
+import Profile from "@/src/components/profile/Profile";
+import OrderHistoryScreen from "@/src/components/oder-history/OrderHistoryScreen";
+import { View, StyleSheet } from "react-native";
+import Favorites from "@/src/components/Favorite/Favorite";
 
 const Tab = createBottomTabNavigator();
-
 export const MyBottomTabs: React.FC = () => {
   return (
-    <Tab.Navigator
-      initialRouteName="home"
-      tabBar={(props) => <CustomTabBar {...props} />}
-    >
-      <Tab.Screen
-        name="home"
-        component={Homes}
-        options={{
-          headerShown: false,
-          tabBarIcon: ({ color, size }) => (
-            <MaterialCommunityIcons name="home" color={color} size={size} />
-          ),
-        }}
-      />
-      <Tab.Screen
-        name="favorite"
-        component={FavoriteScreen}
-        options={{
-          headerShown: false,
-          tabBarIcon: ({ color, size }) => (
-            <MaterialCommunityIcons name="heart" color={color} size={size} />
-          ),
-        }}
-      />
-      <Tab.Screen
-        name="Profile"
-        component={ProfileScreen}
-        options={{
-          headerShown: false,
-          tabBarIcon: ({ color, size }) => (
-            <MaterialCommunityIcons name="account" color={color} size={size} />
-          ),
-        }}
-      />
-      <Tab.Screen
-        name="order"
-        component={OderHistory}
-        options={{
-          headerShown: false,
-          tabBarIcon: ({ color, size }) => (
-            <MaterialCommunityIcons name="history" color={color} size={size} />
-          ),
-        }}
-      />
-    </Tab.Navigator>
+    <View style={styles.container}>
+      <Tab.Navigator
+        initialRouteName="home"
+        tabBar={(props) => <CustomTabBar {...props} />}
+      >
+        <Tab.Screen
+          name="home"
+          component={Homes}
+          options={{
+            tabBarIcon: ({ color, size }) => (
+              <MaterialCommunityIcons name="home" color={color} size={size} />
+            ),
+          }}
+        />
+        <Tab.Screen
+          name="favorite"
+          component={Favorites}
+          options={{
+            tabBarIcon: ({ color, size }) => (
+              <MaterialCommunityIcons
+                name="heart-outline"
+                color={color}
+                size={size}
+              />
+            ),
+            title: "Favorites",
+            headerTitleStyle: styles.headerStyle,
+          }}
+        />
+        <Tab.Screen
+          name="profile"
+          component={Profile}
+          options={{
+            tabBarIcon: ({ color, size }) => (
+              <MaterialCommunityIcons
+                name="account-outline"
+                color={color}
+                size={size}
+              />
+            ),
+            title: "Profile",
+            headerTitleStyle: styles.headerStyle,
+          }}
+        />
+        <Tab.Screen
+          name="order history"
+          component={OrderHistoryScreen}
+          options={{
+            tabBarIcon: ({ color, size }) => (
+              <MaterialCommunityIcons
+                name="history"
+                color={color}
+                size={size}
+              />
+            ),
+            title: "Order History",
+            headerTitleStyle: styles.headerStyle,
+          }}
+        />
+      </Tab.Navigator>
+    </View>
   );
 };
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    marginBottom: 5,
+  },
+  headerStyle: {
+    width: 200,
+    height: 45,
+    top: 5,
+    left: 10,
+    fontSize: 30,
+    fontWeight: "400",
+    lineHeight: 44,
+  },
+});

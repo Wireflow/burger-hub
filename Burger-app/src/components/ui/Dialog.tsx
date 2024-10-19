@@ -99,7 +99,7 @@ const DialogTrigger: React.FC<ViewProps> = ({ children, ...props }) => {
   const { open, setOpen } = useDialog();
 
   const handlePress = () => {
-    setOpen(!open); // Toggle the open state
+    setOpen(!open); 
   };
 
   const childrenWithProps = React.Children.map(children, (child) => {
