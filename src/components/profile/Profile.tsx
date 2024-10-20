@@ -1,52 +1,29 @@
 import { useGetUpdatedAddresses } from "@/src/queries/users/getChangedAddress";
 import { useSessionStore } from "@/src/store/useSessionStore";
 import { formatAddress } from "@/src/util/addressFormat";
-<<<<<<< HEAD:Burger-app/src/components/profile/Profile.tsx
 import { router, useFocusEffect } from "expo-router";
-=======
-import { router, useNavigation } from "expo-router";
->>>>>>> bb7ac8131e927eb0a19d35508835ee6b8d36e4e6:src/components/profile/Profile.tsx
 import React, { useEffect, useState } from "react";
-import {
-  View,
-  Text,
-  StyleSheet,
-  Image,
-  TouchableOpacity,
-  FlatList,
-} from "react-native";
-<<<<<<< HEAD:Burger-app/src/components/profile/Profile.tsx
+import { View, Text, StyleSheet, Image, TouchableOpacity } from "react-native";
 import { formatPhoneNumber } from "@/src/util/formatPhoneNumber";
-import { useAddressStore } from "@/src/store/address/useaddressStore";
-import { useIsFocused } from "@react-navigation/native";
-import Button from "../ui/Button";
 import AddressChangeScreen from "../address/ChangeAddressScreen";
+import { Entypo } from "@expo/vector-icons";
+import FormAddress from "../address/Formaddress";
 const Profile = () => {
   const [isModalVisible, setModalVisible] = useState(false);
   const toggleModalVisibility = () => {
     setModalVisible(!isModalVisible);
   };
+  const [isModalVisibleaddress, setModalVisibleaddress]= useState(false);
+  const toggleModalVisibilityAddress = () => {
+    setModalVisibleaddress(!isModalVisible);
+  };
   // const addressStored=useAddressStore.getState().addresses
   const { data: addresses, refetch } = useGetUpdatedAddresses();
-
-=======
-  import {
-  addresses,
-  addresses as AddressType,
-} from "@/src/types/schema/address";
-import { useAddressStore } from "@/src/store/address/useaddressStore";
-import { formatPhoneNumber } from "@/src/util/formatPhoneNumber";
-
-const Profile: React.FC = () => {
-   const storedAddresses = useAddressStore((state) => state.addresses);
-  const [list, setList] = useState<addresses[]>([]);
-
-  const { refetch } = useGetUpdatedAddresses();
-  refetch();
-  useEffect(() => {
-    setList(storedAddresses || []);
-  }, [storedAddresses]);
->>>>>>> bb7ac8131e927eb0a19d35508835ee6b8d36e4e6:src/components/profile/Profile.tsx
+  useFocusEffect(
+    React.useCallback(() => {
+      refetch();
+    }, [refetch])
+  );
   const { session } = useSessionStore();
 
   return (
@@ -76,53 +53,70 @@ const Profile: React.FC = () => {
               <Text style={[styles.profileValue, { opacity: 0.5 }]}>
                 {formatPhoneNumber(session?.phone)}
               </Text>
-              {addresses?.map((address) => (
-                <View key={address.id}>
-                  <Text style={styles.addressText}>
-                    {formatAddress({ ...address })}
-                  </Text>
+              {addresses?.length ? (
+                addresses?.map((address) => (
+                  <View key={address.id}>
+                    <Text style={styles.addressText}>
+                      {formatAddress({ ...address })}
+                    </Text>
+                  </View>
+                ))
+              ) : (
+                <View  style={{display:"flex",flexDirection:"row",gap:8}}>
+                     <Text>don't have address </Text>
+                  <TouchableOpacity 
+                    onPress={() => toggleModalVisibilityAddress()}
+                   
+                  >
+                 
+                    <Text style={{width:50,textDecorationLine:"underline",color:"#AF042C"}}>add  </Text>
+                  </TouchableOpacity>
                 </View>
-              ))}
+              )}
             </View>
           </View>
         </View>
       </View>
       <View style={styles.buttonsContainer}>
-<<<<<<< HEAD:Burger-app/src/components/profile/Profile.tsx
         <TouchableOpacity
           style={styles.sectionContainer}
-          onPress={() => router.navigate("/(drawer)/orderhistory/OderHistory")}
+          onPress={() => router.navigate("/(drawer)/Order History")}
         >
-=======
-        <TouchableOpacity style={styles.sectionContainer}             onPress={() => router.push("/(drawer)/Order History")}
- >
->>>>>>> bb7ac8131e927eb0a19d35508835ee6b8d36e4e6:src/components/profile/Profile.tsx
           <Text style={styles.sectionTitle}>Orders</Text>
-          <Text style={styles.sectionArrow}>{">"}</Text>
+          <Text style={styles.sectionArrow}>
+            {" "}
+            <Entypo name="chevron-right" size={24} color="black" />
+          </Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.sectionContainer}>
-          <Text style={styles.sectionTitle}>Payment Methods</Text>
-          <Text style={styles.sectionArrow}>{">"}</Text>
-        </TouchableOpacity>
-<<<<<<< HEAD:Burger-app/src/components/profile/Profile.tsx
         <TouchableOpacity
           style={styles.sectionContainer}
-          onPress={() => router.navigate("/FavoriteScreen")}
+          onPress={() => router.navigate("/(drawer)/order/payment")}
+        >
+          <Text style={styles.sectionTitle}>Payment Methods</Text>
+          <Text style={styles.sectionArrow}>
+            {" "}
+            <Entypo name="chevron-right" size={24} color="black" />
+          </Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={styles.sectionContainer}
+          onPress={() => router.navigate("/Favorite")}
         >
           <Text style={styles.sectionTitle}>Favorites</Text>
-=======
-        <TouchableOpacity style={styles.sectionContainer}>
-          <Text style={styles.sectionTitle}            onPress={() => router.push("/(drawer)/FavoriteScreen")}
- >Favorites</Text>
->>>>>>> bb7ac8131e927eb0a19d35508835ee6b8d36e4e6:src/components/profile/Profile.tsx
-          <Text style={styles.sectionArrow}>{">"}</Text>
+          <Text style={styles.sectionArrow}>
+            {" "}
+            <Entypo name="chevron-right" size={24} color="black" />
+          </Text>
         </TouchableOpacity>
         <TouchableOpacity
-          onPress={() => router.push("/(drawer)/address")}
+          onPress={() => router.push("/Addresses")}
           style={styles.sectionContainer}
         >
           <Text style={styles.sectionTitle}>Addresses</Text>
-          <Text style={styles.sectionArrow}>{">"}</Text>
+          <Text style={styles.sectionArrow}>
+            {" "}
+            <Entypo name="chevron-right" size={24} color="black" />
+          </Text>
         </TouchableOpacity>
       </View>
       {
@@ -132,6 +126,11 @@ const Profile: React.FC = () => {
           refetch={refetch}
         />
       }
+      <FormAddress
+        open={isModalVisibleaddress}
+        setOpen={setModalVisibleaddress}
+        refetch={refetch}
+      />
     </View>
   );
 };
@@ -150,13 +149,14 @@ const styles = StyleSheet.create({
   profileContainer: {
     flexDirection: "row",
     backgroundColor: "white",
-    width: "96%",
-    height: 150,
+    width: "90%",
+    height: 170,
     padding: 5,
     gap: 5,
     borderRadius: 20,
     marginTop: 5,
-    elevation:3
+    elevation: 3,
+    left: 15,
   },
   profileImage: {
     width: 100,
@@ -176,6 +176,7 @@ const styles = StyleSheet.create({
     color: "#AF042C",
   },
   profileValue: {
+    width: 180,
     fontSize: 14,
   },
   infoContainer: {
@@ -205,7 +206,7 @@ const styles = StyleSheet.create({
     height: 50,
     paddingHorizontal: 20,
     borderRadius: 20,
-    elevation:3
+    elevation: 3,
   },
   sectionTitle: {
     fontSize: 16,
@@ -215,8 +216,3 @@ const styles = StyleSheet.create({
     fontSize: 23,
   },
 });
-<<<<<<< HEAD:Burger-app/src/components/profile/Profile.tsx
-=======
-
-export default Profile;
->>>>>>> bb7ac8131e927eb0a19d35508835ee6b8d36e4e6:src/components/profile/Profile.tsx

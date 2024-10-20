@@ -12,7 +12,6 @@ import { useSessionStore } from "@/src/store/useSessionStore";
 SplashScreen.preventAutoHideAsync();
 
 export default function RootLayout() {
-
   const colorScheme = useColorScheme();
   const [loaded] = useFonts({
     SpaceMono: require("../assets/fonts/SpaceMono-Regular.ttf"),
@@ -34,28 +33,13 @@ export default function RootLayout() {
   );
 }
 function RootLayoutMain() {
-<<<<<<< HEAD:Burger-app/app/_layout.tsx
-=======
-
->>>>>>> bb7ac8131e927eb0a19d35508835ee6b8d36e4e6:app/_layout.tsx
-  // redirectAuth();
+  redirectAuth();
   return (
     <Stack>
       <Stack.Screen name="auth" options={{ headerShown: false }} />
-<<<<<<< HEAD:Burger-app/app/_layout.tsx
-      <Stack.Screen name="main" options={{ headerShown: false }} />
-
-
-        <Stack.Screen name="address" options={{ headerShown: false, }}/>
-        <Stack.Screen name="ProfileScreen" options={{ headerShown: false, }}/>
-        <Stack.Screen name="orderhistory" options={{ headerShown: false, }}/>
-=======
->>>>>>> bb7ac8131e927eb0a19d35508835ee6b8d36e4e6:app/_layout.tsx
- 
-
-   
-         <Stack.Screen name="(drawer)" options={{ headerShown: false, }} />
-      </Stack>
-
+      <Stack.Screen name="Favorite" options={{ headerShown: false }} />
+      <Stack.Screen name="Addresses" options={{ headerShown: false }} />
+      <Stack.Screen name="(drawer)" options={{ headerShown: false }} />
+    </Stack>
   );
 }

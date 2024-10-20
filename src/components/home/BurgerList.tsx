@@ -19,7 +19,7 @@ const BurgerList = () => {
     return <ProductSearch />;
   }
   if (g) {
-    return <Homes />;
+    return <Homes  />;
   }
 
   const handleButtonPress = () => {
@@ -27,40 +27,6 @@ const BurgerList = () => {
   };
 
   return (
-<<<<<<< HEAD:Burger-app/src/components/home/BurgerList.tsx
-    <SafeAreaView>
-      <View style={styles.container}>
-
-     <View style={styles.searchContainer}>
-       <Buttonout onPress={handleButtonPress} />
-       <SearchInput 
-         onSearch={(text) => {}} 
-         onClick={() => setS(!s)} 
-         color="#000" 
-         backgroundColor="white" 
-       />
-     </View>
-     <Text style={styles.t}>Our {selectedCategoryName}s</Text>
-     <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={styles.content}>
-       {selectedTab !== null && productsByCategory && productsByCategory.length > 0 ? (
-         productsByCategory.map(product => (
-           <CardWrapper
-             key={product.id}
-             imageSource={{ uri: product.imageUrl || 'http://example.com/default-image.jpg' }}
-             title={product.name || "Product Name"}
-             price={`$${product.price?.toFixed(2)}`}
-             height={190}
-             width={160}
-             id={product?.id}
-           />
-         ))
-       ) : (
-         <Text style={styles.contentText}>No products found for this category.</Text>
-       )}
-     </ScrollView>
-   </View>
-    </SafeAreaView>
-=======
     <View style={styles.container}>
      
       <View style={styles.searchContainer}>
@@ -91,7 +57,6 @@ const BurgerList = () => {
         )}
       </ScrollView>
     </View>
->>>>>>> bb7ac8131e927eb0a19d35508835ee6b8d36e4e6:src/components/home/BurgerList.tsx
   );
 };
 

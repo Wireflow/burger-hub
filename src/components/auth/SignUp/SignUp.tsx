@@ -1,5 +1,11 @@
 import React from "react";
-import { SafeAreaView, ScrollView, StyleSheet, View } from "react-native";
+import {
+  Dimensions,
+  SafeAreaView,
+  ScrollView,
+  StyleSheet,
+  View,
+} from "react-native";
 import FormInput from "@/src/components/ui/InputForm";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -10,10 +16,11 @@ import Button from "../../ui/Button";
 import { UserSchema } from "@/src/types/validations/user";
 import { useCustomToast } from "@/src/hooks/useCustomToast";
 import { router } from "expo-router"; // Import router
+const { width } = Dimensions.get("window");
 
 const SignUp = () => {
   const showToast = useCustomToast();
-  const {  session,setSession } = useSessionStore();
+  const { session, setSession } = useSessionStore();
 
   const { control, handleSubmit, setError } = useForm<SignUpType>({
     resolver: zodResolver(UserSchema),
@@ -26,13 +33,12 @@ const SignUp = () => {
   });
 
   const onSubmit = async (data: SignUpType) => {
- 
     try {
       if (!data.email || !data.password) {
         return setError("root", { message: "Check your sign-up information." });
       }
       const dataUser = await SignUpQuery(data);
-      
+
       if (dataUser) {
         console.log("User signed up:", dataUser);
         setSession({
@@ -41,32 +47,50 @@ const SignUp = () => {
           email: dataUser[0]?.email,
           id: dataUser[0]?.id,
         });
-         router.navigate("/(drawer)/main");
-         showToast("User registered successfully!", { type: "success" });
-         console.log(" im session with sign up in success ",session)
-
+        router.navigate("/(drawer)/main");
+        showToast("User registered successfully!", { type: "success" });
+        console.log(" im session with sign up in success ", session);
       } else {
         showToast(" User already registered !", { type: "danger" });
 
-         console.log("User signed up undefined:", dataUser);
+        console.log("User signed up undefined:", dataUser);
       }
-      console.log(" im session with sign up ",session)
-
+      console.log(" im session with sign up ", session);
     } catch (error) {
       console.error("Sign up error:", error);
       setError("root", { message: "An error occurred during sign up." });
     }
-    console.log(" im session with sign up ",session)
+    console.log(" im session with sign up ", session);
   };
 
   return (
     <SafeAreaView style={styles.container}>
       <ScrollView contentContainerStyle={styles.scrollContent}>
         <View style={styles.inputContainer}>
-          <FormInput control={control} name="name" label="Name" secureTextEntry={false}/>
-          <FormInput control={control} name="phone" label="Phone" secureTextEntry={false}/>
-          <FormInput control={control} name="email" label="Email" secureTextEntry={false} />
-          <FormInput control={control} name="password" label="Password" secureTextEntry/>
+          <FormInput
+            control={control}
+            name="name"
+            label="Name"
+            secureTextEntry={false}
+          />
+          <FormInput
+            control={control}
+            name="phone"
+            label="Phone"
+            secureTextEntry={false}
+          />
+          <FormInput
+            control={control}
+            name="email"
+            label="Email"
+            secureTextEntry={false}
+          />
+          <FormInput
+            control={control}
+            name="password"
+            label="Password"
+            secureTextEntry
+          />
         </View>
       </ScrollView>
       <View style={styles.buttonContainer}>
@@ -89,16 +113,17 @@ const styles = StyleSheet.create({
   },
   scrollContent: {
     flexGrow: 1,
+    alignItems: "center",
   },
   inputContainer: {
-    width: "80%",
-    height: 350,
-    margin: "auto",
+    width: width * 0.8,
+    right: 25,
+    top:20
   },
   buttonContainer: {
     height: 50,
-    width: "80%",
     top: 30,
-    margin: "auto",
+    flex: 1,
+    right: 25,
   },
 });

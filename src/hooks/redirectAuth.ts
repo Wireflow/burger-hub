@@ -11,23 +11,23 @@ export const redirectAuth = () => {
     const { data: authListener } = supabase.auth.onAuthStateChange(
       (event, session) => {
         const userSession: UserSession = {
-          name: session?.user.user_metadata.name,
-          email: session?.user.user_metadata.email,
-          phone: session?.user.user_metadata.phone,
+          name: session?.user.user_metadata?.name,
+          email: session?.user.user_metadata?.email,
+          phone: session?.user.user_metadata?.phone,
           id: session?.user.id || "",
         };
-
+        console.log(session?.user.user_metadata);
         if (event === "INITIAL_SESSION") {
           setSession(userSession);
-          router.replace("/auth");
+          router.replace("/(drawer)/main");
         } 
-        else if (event === "SIGNED_IN") {
-            router.replace("/(drawer)/main")
+        else if(event === "SIGNED_IN"){
+          router.replace("/(drawer)/main");
         }
-         else if (event === "SIGNED_OUT") {
+        else if (event === "SIGNED_OUT") {
           router.replace("/auth");
           setSession(null);
-         }
+        }
       }
     );
 

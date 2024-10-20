@@ -10,12 +10,15 @@ import React from "react";
 import NotFound from "@/src/components/notFound/NotFound";
 import CardWrapper from "../ui/card/CardWrapper";
 import { useGetFavoriteProductsByUserId } from "@/src/queries/products/getFavorite";
+import { useSessionStore } from "@/src/store/useSessionStore";
 const Favorites = () => {
+  const { session } = useSessionStore();
+  const id = session?.id;
   const {
     data: favoriteProducts,
     isLoading,
     error,
-  } = useGetFavoriteProductsByUserId();
+  } = useGetFavoriteProductsByUserId(id as string);
 
   if (isLoading) {
     return <ActivityIndicator size="large" color="red" />;
@@ -78,11 +81,4 @@ const styles = StyleSheet.create({
     marginTop: 20,
     fontSize: 18,
   },
-<<<<<<< HEAD:Burger-app/src/components/Favorite/Favorite.tsx
 });
-=======
-  t:{
-    fontSize:40
-  }
-});
->>>>>>> bb7ac8131e927eb0a19d35508835ee6b8d36e4e6:src/components/Favorite/Favorite.tsx

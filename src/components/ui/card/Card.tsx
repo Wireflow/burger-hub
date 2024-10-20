@@ -15,20 +15,15 @@ export default Card;
 
 const styles = StyleSheet.create({
   card: {
-<<<<<<< HEAD:Burger-app/src/components/ui/card/Card.tsx
-    backgroundColor: "#f9f9f9",
-=======
     backgroundColor: "white",
->>>>>>> bb7ac8131e927eb0a19d35508835ee6b8d36e4e6:src/components/ui/card/Card.tsx
 
     padding: 16,
-
     borderRadius: 20,
     shadowColor: "#000",
     shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.8,
     shadowRadius: 2,
-    elevation: 1,
+    elevation: 3,
 
     margin: 15,
   },

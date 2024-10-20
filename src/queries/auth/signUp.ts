@@ -4,9 +4,13 @@ import { Database } from "@/src/services/supabase/database.type";
 
 export default async function SignUpQuery(dataFromUser: SignUpType) {
   try {
-    const { data:dataFromSignUp, error } = await supabase.auth.signUp({
+    const { data: dataFromSignUp, error } = await supabase.auth.signUp({
       email: dataFromUser.email,
       password: dataFromUser.password,
+      options:{data:{
+        name:dataFromUser.name,
+        phone:dataFromUser.phone,
+      }}
     });
 
     console.log("Sign-up data:", dataFromSignUp);
@@ -22,15 +26,16 @@ export default async function SignUpQuery(dataFromUser: SignUpType) {
       throw new Error("User data is missing after sign-up.");
     }
 
-     
     const userData: Database["public"]["Tables"]["User"]["Insert"] = {
       id: userId || "",
       email: dataFromSignUp.user?.email || "",
-      name: dataFromUser.name,
-      phone: dataFromUser.phone,
+      name: dataFromUser.name || "Name not available", // Ensure value exists
+      phone: dataFromUser.phone || "Phone not available", // Ensure value exists
     };
 
-    const {data, error: dbError } = await supabase.from("User").insert(userData).select();
+    console.log("User data to insert:", userData); // Log data before insertion
+
+    const { data, error: dbError } = await supabase.from("User").insert(userData).select();
     console.log("Database insert data:", data);
 
     if (dbError) {
@@ -38,15 +43,12 @@ export default async function SignUpQuery(dataFromUser: SignUpType) {
       throw new Error("Something went wrong while inserting user data.");
     }
     
-
     return data;   
   } catch (error) {
     if (error instanceof Error) {
-      console.log("An unexpected error occurred:", error);
-
-  
+      console.log("An unexpected error occurred:", error.message); // Log only the message
     } else {
-      // console.error("An unexpected error occurred:", error);
+      console.log("An unexpected error occurred:", error);
     }
   }
 }

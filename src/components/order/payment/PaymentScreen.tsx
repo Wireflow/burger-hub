@@ -19,13 +19,8 @@ export default PaymentScreen;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-<<<<<<< HEAD:Burger-app/src/components/order/payment/PaymentScreen.tsx
-    padding: 40,
-    backgroundColor: 'white',
-=======
     padding: '8%',
     backgroundColor: '#f9f9f9',
->>>>>>> bb7ac8131e927eb0a19d35508835ee6b8d36e4e6:src/components/order/payment/PaymentScreen.tsx
     
   },
   title: {

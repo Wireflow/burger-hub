@@ -7,6 +7,7 @@ import {
   KeyboardAvoidingView,
   Platform,
   ActivityIndicator,
+  Dimensions,
 } from "react-native";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -20,6 +21,8 @@ import { getUserById } from "@/src/queries/users/getUserById";
 import { LogInSchema } from "@/src/types/validations/LogInSchema";
 import { router } from "expo-router"; // Import router
 import { useCustomToast } from "@/src/hooks/useCustomToast";
+
+const { width } = Dimensions.get("window");
 
 const LogIn = () => {
   const { setSession } = useSessionStore();
@@ -51,7 +54,7 @@ const LogIn = () => {
           id: dataUser.id,
         });
         showToast("Login successfully!", { type: "success" });
-         router.navigate("/(drawer)/main");
+        router.navigate("/(drawer)/main");
       } else {
         showToast("There is no account with this email!", { type: "warningC" });
       }
@@ -76,18 +79,20 @@ const LogIn = () => {
           contentContainerStyle={styles.scrollContent}
           keyboardShouldPersistTaps="handled"
         >
-<<<<<<< HEAD:Burger-app/src/components/auth/LogIn/LogIn.tsx
-         
-           <View style={styles.inputContainer}>
-            <FormInput control={control} name="email" label="Email" />
-            <FormInput control={control} name="password" label="Password" secureTextEntry />
-           </View>
-=======
           <View style={styles.inputContainer}>
-            <FormInput control={control} name="email" label="Email" secureTextEntry={false} />
-            <FormInput control={control} name="password" label="Password" secureTextEntry />
+            <FormInput
+              control={control}
+              name="email"
+              label="Email"
+              secureTextEntry={false}
+            />
+            <FormInput
+              control={control}
+              name="password"
+              label="Password"
+              secureTextEntry
+            />
           </View>
->>>>>>> bb7ac8131e927eb0a19d35508835ee6b8d36e4e6:src/components/auth/LogIn/LogIn.tsx
         </ScrollView>
         <View style={styles.forgotPasswordContainer}>
           <Text style={styles.forgotPasswordText}>Forget Password?</Text>
@@ -118,41 +123,42 @@ const styles = StyleSheet.create({
   },
   scrollContent: {
     flexGrow: 1,
-    alignItems: 'center',
+    alignItems: "center",
   },
   inputContainer: {
-    width: "80%",
+    width: width * 0.8,
+    right: 25,
   },
   forgotPasswordContainer: {
     height: 20,
     width: "40%",
-    alignSelf: 'center',
+    alignSelf: "center",
     marginTop: 20,
   },
   forgotPasswordText: {
     fontSize: 16,
     fontWeight: "bold",
     color: "#AF042C",
-    textAlign: 'center',
+    textAlign: "center",
   },
   buttonContainer: {
     height: 50,
-    width: "80%",
-    margin: 'auto',
-    marginTop: 20,
+    top: 30,
+    flex: 1,
+    right: 25,
   },
   loaderContainer: {
-    position: 'absolute',
-    top: '50%',
-    left: '50%',
+    position: "absolute",
+    top: "50%",
+    left: "50%",
     marginLeft: -50,
     marginTop: -50,
     height: 100,
     width: 100,
-    backgroundColor: '#AF042C',
+    backgroundColor: "#AF042C",
     opacity: 0.4,
     borderRadius: 15,
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignItems: "center",
+    justifyContent: "center",
   },
 });

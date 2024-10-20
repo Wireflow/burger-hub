@@ -1,23 +1,23 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { create } from "zustand";
 import { persist, PersistStorage } from "zustand/middleware";
+import { StateSlice } from "../types/state"; // Adjust the import as needed
 
- export type UserSession = {
-  name: string | "";
-  phone: string |"";
-  email: string | "";
-  id: string |" ";
-  
+export type UserSession = {
+  name: string;
+  phone: string;
+  email: string;
+  id: string;
 };
 
- type SessionState = {
+type SessionState = {
   session: UserSession | null;
   setSession: (session: UserSession | null) => void;
 };
 
- const createSessionSlice = (set: (partial: Partial<SessionState>) => void) => ({
+const createSessionSlice: StateSlice<SessionState> = (set, get, store) => ({
   session: null,
-  setSession: (session: UserSession | null) => set({ session }),
+  setSession: (session) => set({ session }),
 });
 
 const customStorage: PersistStorage<SessionState> = {
@@ -33,16 +33,18 @@ const customStorage: PersistStorage<SessionState> = {
   },
 };
 
- export const useSessionStore = create<SessionState>()(
+export const useSessionStore = create<SessionState>()(
   persist(
-    (set) => createSessionSlice(set),
+    (set, get, store) => ({
+      ...createSessionSlice(set, get, store), // Pass all three parameters
+    }),
     {
-      name: "session-storage", 
+      name: "session-storage", // unique name for the persisted state
       storage: customStorage, 
     }
   )
 );
 
- export const getSession = () => {
+export const getSession = () => {
   return useSessionStore.getState().session;
 };

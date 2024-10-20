@@ -2,25 +2,16 @@ import React from "react";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { CustomTabBar } from "./CustomTab";
-<<<<<<< HEAD:Burger-app/app/tabs/BottomTabs.tsx
-import FavoriteScreen from "../(drawer)/FavoriteScreen";
-import Homes from "@/src/components/home/home";
+import FavoriteScreen from "../Favorite";
 import Profile from "@/src/components/profile/Profile";
 import OrderHistoryScreen from "@/src/components/oder-history/OrderHistoryScreen";
 import { View, StyleSheet } from "react-native";
 import Favorites from "@/src/components/Favorite/Favorite";
-=======
- import FavoriteScreen from "../(drawer)/FavoriteScreen";
 import Homes from "@/src/components/home/Home";
-import Profile from "@/src/components/profile/Profile";
-import OderHistory from "../(drawer)/Order History";
- 
->>>>>>> bb7ac8131e927eb0a19d35508835ee6b8d36e4e6:app/tabs/BottomTabs.tsx
 
 const Tab = createBottomTabNavigator();
 export const MyBottomTabs: React.FC = () => {
   return (
-<<<<<<< HEAD:Burger-app/app/tabs/BottomTabs.tsx
     <View style={styles.container}>
       <Tab.Navigator
         initialRouteName="home"
@@ -100,52 +91,3 @@ const styles = StyleSheet.create({
     lineHeight: 44,
   },
 });
-=======
-    <Tab.Navigator
-      initialRouteName="home"
-      tabBar={(props) => <CustomTabBar {...props} />}
-    >
-      <Tab.Screen
-        name="home"
-        component={Homes}
-        options={{
-          headerShown: false,
-          tabBarIcon: ({ color, size }) => (
-            <MaterialCommunityIcons name="home" color={color} size={size} />
-          ),
-        }}
-      />
-      <Tab.Screen
-        name="favorite"
-        component={FavoriteScreen}
-        options={{
-          headerShown: false,
-          tabBarIcon: ({ color, size }) => (
-            <MaterialCommunityIcons name="heart" color={color} size={size} />
-          ),
-        }}
-      />
-      <Tab.Screen
-        name="Profile"
-        component={Profile}
-        options={{
-          headerShown: false,
-          tabBarIcon: ({ color, size }) => (
-            <MaterialCommunityIcons name="account" color={color} size={size} />
-          ),
-        }}
-      />
-      <Tab.Screen
-        name="order"
-        component={OderHistory}
-        options={{
-          headerShown: false,
-          tabBarIcon: ({ color, size }) => (
-            <MaterialCommunityIcons name="history" color={color} size={size} />
-          ),
-        }}
-      />
-    </Tab.Navigator>
-  );
-};
->>>>>>> bb7ac8131e927eb0a19d35508835ee6b8d36e4e6:app/tabs/BottomTabs.tsx

@@ -7,7 +7,7 @@ import { useQuery } from "@tanstack/react-query";
 export type OrderWithAddress = Row<"Orders"> & {
   Addresses: Row<"Addresses">
   User:Row<"User">;
-  products: Row<"Order_Items">[];
+  Products: Row<"Order_Items">[];
 };
 export const useGetAllOrders = (id: string) => {
   return useQuery({
@@ -34,9 +34,6 @@ const GetAllOrders = async (userId: string): Promise<OrderWithAddress[]> => {
       console.error("Error in fetching orders:", error);
       return [];
     }
-
-    console.log("Fetched orders:", orders);
-
     return orders as unknown as OrderWithAddress[];
   } catch (error: any) {
     console.error("Error in fetching orders:", error);
