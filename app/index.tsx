@@ -5,8 +5,9 @@ const index = () => {
   const {  session,setSession } = useSessionStore();
   // setSession(null);
 console.log("im session in index",session)
-  if(!session) { return <Redirect href={"/auth"} />}else{
-    return< Redirect href={"/(drawer)/main"} />
+  if(!session) { return <Redirect href={"/(drawer)/main"} />}
+  else{
+    return< Redirect href={"/auth"} />
   }
   return< Redirect href={"/(drawer)/main"} />
 

@@ -5,9 +5,9 @@ import SearchInput from '../ui/SearchInput';
 import { useTabContext } from '../layout/TabContext';
 import ProductSearch from './ProductSearch';
 import Buttonout from '../ui/Buttonout';
-import Homes from './Home';
 import CardWrapper from '../ui/card/CardWrapper';
 import Header from '../ui/Header';
+import Homes from './Home';
 
 const BurgerList = () => {
   const { selectedTab,  selectedCategoryName } = useTabContext();
@@ -19,7 +19,7 @@ const BurgerList = () => {
     return <ProductSearch />;
   }
   if (g) {
-    return <Homes  />;
+    return <Homes />;
   }
 
   const handleButtonPress = () => {

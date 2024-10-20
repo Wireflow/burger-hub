@@ -69,8 +69,8 @@ const Tabs = () => {
                   imageSource={{ uri: product.imageUrl || 'http://example.com/default-image.jpg' }}
                   title={product.name || "Product Name"}
                   price={`$${product.price?.toFixed(2)}`}
-                  height={200}
-                  width={190}
+                  height={210}
+                  width={200}
                   id={product?.id}
                 />
               ))}
@@ -106,6 +106,7 @@ const styles = StyleSheet.create({
   },
   tabText: {
     fontSize: 18,
+    marginTop:30
   },
   underline: {
     marginTop: 10,
