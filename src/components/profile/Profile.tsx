@@ -90,7 +90,7 @@ const Profile = () => {
         </TouchableOpacity>
         <TouchableOpacity
           style={styles.sectionContainer}
-          onPress={() => router.navigate("/(drawer)/order/payment")}
+          onPress={() => router.navigate("/(drawer)/order/PaymentUser")}
         >
           <Text style={styles.sectionTitle}>Payment Methods</Text>
           <Text style={styles.sectionArrow}>

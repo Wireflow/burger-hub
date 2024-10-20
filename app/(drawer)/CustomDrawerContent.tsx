@@ -1,7 +1,7 @@
- import SignOutUser from "@/src/components/auth/LogOut";
+import SignOutUser from "@/src/components/auth/LogOut";
 import Button from "@/src/components/ui/Button";
 import ShowDialog from "@/src/components/ui/showDialog";
- import { router } from "expo-router";
+import { router } from "expo-router";
 import React, { useState } from "react";
 import {
   View,
@@ -78,17 +78,7 @@ const CustomDrawerContent: React.FC<{ navigation: any }> = ({ navigation }) => {
 
           <Text style={styles.menuText}>Payments</Text>
         </TouchableOpacity>
-        <TouchableOpacity
-          style={styles.menuItem}
-          onPress={() => navigation.navigate("PaymentUser")}
-        >
-          <Image
-            source={require("@/assets/icons/ic_outline-local-offer.png")}
-            style={styles.Icon}
-          />
 
-          <Text style={styles.menuText}>Paymentsuser</Text>
-        </TouchableOpacity>
         <TouchableOpacity
           style={styles.menuItem}
           onPress={() => navigation.navigate("favorites")}
