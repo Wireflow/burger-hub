@@ -52,6 +52,7 @@ export default function AddressScreen() {
     
      <Header/>
       {!address && <NoAddress/> }
+  
       <FlatList
         data={addresses}
         renderItem={({ item, index }) => (
@@ -71,8 +72,8 @@ export default function AddressScreen() {
          )}
         keyExtractor={(item, index) => index.toString()}
       />
-      <TouchableOpacity>
-        <Button title="New Address" size="large" color="white" onClick={()=>router.navigate('/(drawer)/address')}/>
+      <TouchableOpacity style={{marginBottom:20}}>
+        <Button title="New Address" size="large" color="white" onClick={()=>router.navigate('/Addresses')}/>
       </TouchableOpacity>
 
      </View>
@@ -82,8 +83,8 @@ export default function AddressScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 16,
     borderRadius: 20,
+    paddingHorizontal:20
   },
   title: {
     fontSize: 18,

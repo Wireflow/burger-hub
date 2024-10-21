@@ -1,7 +1,7 @@
 import React from "react";
 
-import UserPaymentScreen from '@/src/components/order/payment/add/userPaymentScreen'
-import Header from "@/src/components/ui/Header";
+ import Header from "@/src/components/ui/Header";
+import UserPaymentScreen from "@/src/components/paymentMethod/userPaymentScreen";
 const PaymentUser = () => {
   return (
     <>

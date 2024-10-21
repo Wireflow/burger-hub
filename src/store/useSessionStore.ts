@@ -7,7 +7,7 @@ export type UserSession = {
   name: string;
   phone: string;
   email: string;
-  id: string;
+  id: string ;
 };
 
 type SessionState = {

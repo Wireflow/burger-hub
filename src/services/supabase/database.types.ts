@@ -92,7 +92,7 @@ export type Database = {
             foreignKeyName: "Categories_restaurant_id_fkey"
             columns: ["restaurant_id"]
             isOneToOne: false
-            referencedRelation: "restaurant"
+            referencedRelation: "Restaurant"
             referencedColumns: ["id"]
           },
         ]
@@ -133,7 +133,7 @@ export type Database = {
           },
         ]
       }
-      modifier: {
+      Modifier: {
         Row: {
           created_at: string
           deletedAt: string | null
@@ -171,7 +171,7 @@ export type Database = {
           },
         ]
       }
-      modifier_option: {
+      Modifier_Option: {
         Row: {
           created_at: string
           deletedAt: string | null
@@ -207,12 +207,12 @@ export type Database = {
             foreignKeyName: "option_modifier_modifier_id_fkey"
             columns: ["modifier_id"]
             isOneToOne: false
-            referencedRelation: "modifier"
+            referencedRelation: "Modifier"
             referencedColumns: ["id"]
           },
         ]
       }
-      order_item_option_modifier: {
+      Order_Item_Option_Modifier: {
         Row: {
           created_at: string
           id: number
@@ -245,7 +245,7 @@ export type Database = {
             foreignKeyName: "order_item_option_modifier_modifier_id_fkey"
             columns: ["modifier_id"]
             isOneToOne: false
-            referencedRelation: "modifier"
+            referencedRelation: "Modifier"
             referencedColumns: ["id"]
           },
           {
@@ -259,7 +259,7 @@ export type Database = {
             foreignKeyName: "order_item_option_option_modifier_id_fkey"
             columns: ["option_modifier_id"]
             isOneToOne: false
-            referencedRelation: "modifier_option"
+            referencedRelation: "Modifier_Option"
             referencedColumns: ["id"]
           },
           {
@@ -396,7 +396,7 @@ export type Database = {
             foreignKeyName: "Orders_restaurant_id_fkey"
             columns: ["restaurant_id"]
             isOneToOne: false
-            referencedRelation: "restaurant"
+            referencedRelation: "Restaurant"
             referencedColumns: ["id"]
           },
           {
@@ -412,42 +412,89 @@ export type Database = {
         Row: {
           card_cvc: number | null
           card_number: string | null
-          cardt_type: string | null
           created_at: string
           deletedAt: string | null
           expire_date: string | null
           id: number
           is_deleted: boolean | null
+          method_type: Database["public"]["Enums"]["payment_method"] | null
           updatedAt: string | null
           user_id: string
         }
         Insert: {
           card_cvc?: number | null
           card_number?: string | null
-          cardt_type?: string | null
           created_at?: string
           deletedAt?: string | null
           expire_date?: string | null
           id?: number
           is_deleted?: boolean | null
+          method_type?: Database["public"]["Enums"]["payment_method"] | null
           updatedAt?: string | null
           user_id: string
         }
         Update: {
           card_cvc?: number | null
           card_number?: string | null
-          cardt_type?: string | null
           created_at?: string
           deletedAt?: string | null
           expire_date?: string | null
           id?: number
           is_deleted?: boolean | null
+          method_type?: Database["public"]["Enums"]["payment_method"] | null
           updatedAt?: string | null
           user_id?: string
         }
         Relationships: [
           {
             foreignKeyName: "Payment_Method_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "User"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      Payment_Methodpaypal: {
+        Row: {
+          account_name: string | null
+          created_at: string
+          deletedAt: string | null
+          email: string | null
+          id: number
+          is_deleted: boolean | null
+          method_type: string | null
+          phone_number: string | null
+          updatedAt: string | null
+          user_id: string | null
+        }
+        Insert: {
+          account_name?: string | null
+          created_at?: string
+          deletedAt?: string | null
+          email?: string | null
+          id?: number
+          is_deleted?: boolean | null
+          method_type?: string | null
+          phone_number?: string | null
+          updatedAt?: string | null
+          user_id?: string | null
+        }
+        Update: {
+          account_name?: string | null
+          created_at?: string
+          deletedAt?: string | null
+          email?: string | null
+          id?: number
+          is_deleted?: boolean | null
+          method_type?: string | null
+          phone_number?: string | null
+          updatedAt?: string | null
+          user_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "Payment_Methodpaypal_user_id_fkey"
             columns: ["user_id"]
             isOneToOne: false
             referencedRelation: "User"
@@ -507,12 +554,12 @@ export type Database = {
             foreignKeyName: "Products_restaurant_Id_fkey"
             columns: ["restaurant_Id"]
             isOneToOne: false
-            referencedRelation: "restaurant"
+            referencedRelation: "Restaurant"
             referencedColumns: ["id"]
           },
         ]
       }
-      restaurant: {
+      Restaurant: {
         Row: {
           address: string | null
           created_at: string | null
@@ -583,30 +630,12 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
-      create_order:
-        | {
-            Args: {
-              order_data: Json
-              products: Json
-              userid: string
-            }
-            Returns: string[]
-          }
-        | {
-            Args: {
-              userid: string
-              order_data: Json
-            }
-            Returns: number[]
-          }
-      create_order_with_products: {
+      ordernn_5o: {
         Args: {
+          userid: string
           order_data: Json
-          products: Json
         }
-        Returns: {
-          order_id: string
-        }[]
+        Returns: number
       }
     }
     Enums: {
@@ -618,6 +647,7 @@ export type Database = {
         | "received"
         | "reject"
       ordertype: "Delivery" | "Pick up"
+      payment_method: "Visa" | "Super Visa"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -705,4 +735,19 @@ export type Enums<
   ? Database[PublicEnumNameOrOptions["schema"]]["Enums"][EnumName]
   : PublicEnumNameOrOptions extends keyof PublicSchema["Enums"]
     ? PublicSchema["Enums"][PublicEnumNameOrOptions]
+    : never
+
+export type CompositeTypes<
+  PublicCompositeTypeNameOrOptions extends
+    | keyof PublicSchema["CompositeTypes"]
+    | { schema: keyof Database },
+  CompositeTypeName extends PublicCompositeTypeNameOrOptions extends {
+    schema: keyof Database
+  }
+    ? keyof Database[PublicCompositeTypeNameOrOptions["schema"]]["CompositeTypes"]
+    : never = never,
+> = PublicCompositeTypeNameOrOptions extends { schema: keyof Database }
+  ? Database[PublicCompositeTypeNameOrOptions["schema"]]["CompositeTypes"][CompositeTypeName]
+  : PublicCompositeTypeNameOrOptions extends keyof PublicSchema["CompositeTypes"]
+    ? PublicSchema["CompositeTypes"][PublicCompositeTypeNameOrOptions]
     : never

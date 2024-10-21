@@ -2,6 +2,9 @@ import React from 'react';
 import { Image, Text, TouchableOpacity, View, StyleSheet } from 'react-native';
 import AntDesign from '@expo/vector-icons/AntDesign';
 import { useCartStore } from '@/src/store/cart/cartStore';
+import { Dimensions } from 'react-native';
+const windowWidth = Dimensions.get('window').width;
+const windowHeight = Dimensions.get('window').height;
 
 type Product = {
     name: string;
@@ -49,7 +52,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'space-between',
         marginBottom: 15,
-         width:' 95%',
+         width:windowWidth*0.9,
         marginHorizontal: 'auto',
      },
     image: {
@@ -66,7 +69,8 @@ const styles = StyleSheet.create({
         width:150,
         position:'relative',
         left:"-25%",
-        top:-1}
+        top:-1,
+     }
      ,
     name: {
         fontWeight: 'bold',

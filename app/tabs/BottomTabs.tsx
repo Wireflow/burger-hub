@@ -5,27 +5,41 @@ import { CustomTabBar } from "./CustomTab";
 import FavoriteScreen from "../Favorite";
 import Profile from "@/src/components/profile/Profile";
 import OrderHistoryScreen from "@/src/components/oder-history/OrderHistoryScreen";
-import { View, StyleSheet } from "react-native";
+import { View, StyleSheet, TouchableOpacity } from "react-native";
 import Favorites from "@/src/components/Favorite/Favorite";
 import Homes from "@/src/components/home/Home";
+import CartIcon from "@/src/components/ui/CartIcon";
+import { useCartStore } from "@/src/store/cart/cartStore";
+import BarUi from "@/src/components/ui/BarUi";
+import { Text } from "react-native-paper";
+import BarUI from "@/src/components/ui/BarUi";
 
 const Tab = createBottomTabNavigator();
 export const MyBottomTabs: React.FC = () => {
+  const { cart } = useCartStore(state => state);
+
   return (
     <View style={styles.container}>
       <Tab.Navigator
         initialRouteName="home"
         tabBar={(props) => <CustomTabBar {...props} />}
       >
-        <Tab.Screen
-          name="home"
-          component={Homes}
-          options={{
-            tabBarIcon: ({ color, size }) => (
-              <MaterialCommunityIcons name="home" color={color} size={size} />
-            ),
-          }}
-        />
+          <Tab.Screen
+        name=" "
+        component={Homes}
+        options={({ navigation }) => ({
+          tabBarIcon: ({ color, size }) => (
+            <MaterialCommunityIcons name="home" color={color} size={size} />
+          ),
+          headerShown: true,
+          headerLeft: () => (
+     <BarUI onClick={() => navigation.toggleDrawer()}/>
+          ),
+          headerRight:()=> <CartIcon/>,
+          headerLeftStyle:{marginLeft:25}  ,
+          headerStyle:{backgroundColor:'#F2F2F2',paddingLeft:20}         
+        })}
+      />
         <Tab.Screen
           name="favorite"
           component={Favorites}

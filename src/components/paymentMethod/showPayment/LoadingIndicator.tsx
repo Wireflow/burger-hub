@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, ActivityIndicator } from 'react-native';
-import { LoadingIndicatorProps } from '../../../../../types/types';
+import { LoadingIndicatorProps } from '../../../types/types';
 
 const LoadingIndicator: React.FC<LoadingIndicatorProps> = ({ color = 'red' }) => {
     return (

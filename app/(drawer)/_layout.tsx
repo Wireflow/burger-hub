@@ -9,8 +9,9 @@ const _layout = () => {
         <Stack.Screen name='product' options={{headerShown:false}} />
         <Stack.Screen name='Order History' options={{headerShown:false}} />
         <Stack.Screen name='order' options={{headerShown:false}} />
-        <Stack.Screen name='Payments' options={{headerShown:false}} />
+        <Stack.Screen name='payments' options={{headerShown:false}} />
 
+ 
     </Stack>
   )
 }

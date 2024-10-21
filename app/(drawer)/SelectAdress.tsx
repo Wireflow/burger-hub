@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { StyleSheet, Text, View } from "react-native";
  import {  Stack } from "expo-router";
 import AddressScreen from "@/src/components/order/Addresses/AddressScreen";
+import Header from "@/src/components/ui/Header";
 
 const SelectAdress = () => {
  
@@ -9,16 +10,10 @@ const SelectAdress = () => {
     <>
       <Stack.Screen
         options={{
-          headerStyle: { backgroundColor: 'white' },
-          headerTitleAlign:'center',
-     
-          headerTitle: () => (
-            <View style={styles.headerTitleContainer}>
-              <Text style={styles.headerTitle}>Select Address</Text>
-            </View>
-          ),
+    headerShown:false
         }}
       />
+      <Header title='Select Address' backgroundColorCode='#F2F2F2'/>
       <AddressScreen />
     </>
   );

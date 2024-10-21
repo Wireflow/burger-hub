@@ -1,71 +1,63 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { StyleSheet, Text, View, TouchableOpacity, Image, Dimensions } from "react-native";
-import PaymentMethod from "./PaymentMethod";
-import Proceed from "@/hooks/Proceed";
+ import Proceed from "@/hooks/Proceed";
 import { router } from "expo-router";
+import ListPaymentMethod from "./ListPaymentMethod";
+import { useSessionStore } from "@/src/store/useSessionStore";
+import { useCartStore } from "@/src/store/cart/cartStore";
+import { useGetAllPaymentUser } from "@/src/queries/payment/getAllPaymentUser";
+import { PaymentType } from "@/src/store/cart/cartSlice";
+import { ActivityIndicator } from "react-native-paper";
 const { width } = Dimensions.get("window");
 
 const PaymentScreen = () => {
+
+  const { session } = useSessionStore();
+  const { cart ,setPayment } = useCartStore(state => state);
+
+ 
+   const userId = session?.id;
+  const {
+    data: payments,
+    error,
+    refetch,
+    isLoading,
+    isFetched
+  } = useGetAllPaymentUser(userId as string);
+
+  // const [paymentsMethod, setPaymentsMethod] = React.useState(payments || {});
+
+  
+
+ 
+   const setCurrentPayment = (id: number , paymentType : PaymentType.PayPal | PaymentType.SuperVisa | PaymentType.Visa) => {
+     setPayment(id,paymentType);
+  };
   return (
     <View style={styles.container}>
-      <PaymentMethod />
-      <Proceed
-        title="Proceed to payment"
-        method={() => router.navigate("/(drawer)/order/orderConfirmation")}
-      />
- 
-    </View>
+    {isLoading && <ActivityIndicator size="large" color="#AF042C" />}
+
+    {
+    isFetched && (
+    payments ? (
+      <ListPaymentMethod dataPayments={payments} />
+    ) : (
+      <Text>No payment methods available.</Text>
+    ))}
+
+    <Proceed
+      title="Proceed to payment"
+      method={() => router.navigate("/(drawer)/order/orderConfirmation")}
+    />
+  </View>
   );
 };
 export default PaymentScreen;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: "8%",
-    backgroundColor: "#f9f9f9",
-
+     padding:'8%',
+  
   },
-  title: {
-    fontSize: 33,
-    marginBottom: "5%",
-    fontWeight: "bold",
-  },
-  card: {
-    padding: 16,
-    borderRadius: 10,
-    backgroundColor: "white",
-    marginBottom: 10,
-    elevation: 2,
-    borderWidth: 1,
-    borderColor: "#ddd",
-    display: "flex",
-    flexDirection: "row",
-    alignItems: "center",
-  },
-  selectedCard: {
-    borderColor: "#000",
-    backgroundColor: "#3C2F2F",
-  },
-  brand: {
-    fontSize: 18,
-    fontWeight: "600",
-  },
-  type: {
-    fontSize: 14,
-    color: "#666",
-  },
-  lastFour: {
-    fontSize: 16,
-    fontWeight: "bold",
-    marginTop: 4,
-  },
-  radioButton: {
-    position: "absolute",
-    right: 10,
-    top: 30,
-    width: 20,
-    height: 20,
-    borderRadius: 10,
-    backgroundColor: "#FFFFFF",
-  },
+ 
 });

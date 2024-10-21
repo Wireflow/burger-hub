@@ -8,8 +8,7 @@ const NoAddress = () => {
             flex: 1,
             justifyContent: "center",
             alignItems: "center",
-            backgroundColor: "white",
-            gap: 5,
+             gap: 5,
           }}
         >
           <Image
@@ -19,8 +18,7 @@ const NoAddress = () => {
           <Text style={{ fontSize: 28, fontWeight: "600", width: 190 }}>
             No orders yet
           </Text>
-          <Text>Hit the red button to add begin ordering</Text>
-        </View>
+         </View>
       );
 }
 

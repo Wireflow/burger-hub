@@ -1,5 +1,5 @@
 import React from "react";
-import { View, TouchableOpacity, StyleSheet } from "react-native";
+import { View, TouchableOpacity, StyleSheet, Text } from "react-native";
 import { BottomTabBarProps } from "@react-navigation/bottom-tabs";
 
 export const CustomTabBar: React.FC<BottomTabBarProps> = ({
@@ -36,8 +36,8 @@ export const CustomTabBar: React.FC<BottomTabBarProps> = ({
                 focused: isFocused,
                 color: isFocused ? "#AF042C" : "#ADADAF",
                 size: 25,
-              })}
-          </TouchableOpacity>
+              })} 
+           </TouchableOpacity>
         );
       })}
     </View>

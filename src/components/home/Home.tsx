@@ -11,6 +11,10 @@ import SearchInput from '../ui/SearchInput';
 import CartIcon from '../ui/CartIcon';
 import { useCartStore } from '@/src/store/cart/cartStore';
 import Header from '../ui/Header';
+import { TouchableOpacity } from 'react-native';
+import BarUi from '../ui/BarUi';
+import BarUI from '../ui/BarUi';
+ import CustomDrawerContent from '@/app/(drawer)/CustomDrawerContent';
 
 const Homes: React.FC = () => {
   const { cart } = useCartStore(state => state);
@@ -33,7 +37,10 @@ const Homes: React.FC = () => {
   return (
     <>
       <View style={styles.container}>
-        <CartIcon itemCount={cart?.totalQuantity} />
+
+         {/* <HeaderHome/> */}
+         <TouchableOpacity>
+
         <View style={{ width: '90%' }}>
           <Text style={styles.titleText}>Delicious</Text>
           <Text style={styles.titleText}>burgers for you</Text>
@@ -46,6 +53,8 @@ const Homes: React.FC = () => {
                 backgroundColor="#E0E0E0" 
             />
         </View>
+        </TouchableOpacity>
+
       </View>
       <Tabs />
       <View style={{ marginBottom: 90 }}>
@@ -65,18 +74,29 @@ const Homes: React.FC = () => {
 
 const styles = StyleSheet.create({
   container: {
-    flexDirection: 'row',
+    flexDirection: 'column',
     justifyContent: 'space-between',
     alignItems: 'flex-start',
     marginBottom: 15,
     marginLeft: 25,
     height: 120,
-    position: 'relative'
+    position: 'relative',
+    width:'100%'
   },
   titleText: {
     fontSize: 40,
     color: 'black',
-  },
+  },header:{
+     height:"30%",
+    width:"80%",
+    marginTop:20,
+    marginBottom:20,
+    display:'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    backgroundColor:'black'
+
+  }
 });
 
 export default Homes;

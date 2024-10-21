@@ -1,3 +1,4 @@
+import { PaymentType } from '@/src/store/cart/cartSlice';
 import { nullable, z } from 'zod';
 
  export const ModifierOptionSchema = z.object({
@@ -34,7 +35,10 @@ import { nullable, z } from 'zod';
     paymentId: z.number().optional(),
     addressId: z.number().nullable(),
     totalAmount:z.number().optional(),
-    totalQuantity:z.number().optional()
+    totalQuantity:z.number().optional(),
+    paymentType: z.enum([PaymentType.PayPal,PaymentType.SuperVisa,PaymentType.Visa]).optional(),
+
 });
+  
 
 export type OrderSchemaType = z.infer<typeof OrderSchema>;

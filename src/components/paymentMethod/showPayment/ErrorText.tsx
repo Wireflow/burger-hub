@@ -1,6 +1,6 @@
 import React from 'react';
 import { Text } from 'react-native';
-import { ErrorTextProps } from '../../../../../types/types';
+import { ErrorTextProps } from '../../../types/types';
 
 const ErrorText: React.FC<ErrorTextProps> = ({ message }) => {
     return (

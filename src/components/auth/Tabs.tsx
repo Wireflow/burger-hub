@@ -57,7 +57,7 @@ const Tabs = () => {
             alignItems: "center",
             width:'40%',
             top:'-15%',
-        },
+         },
         tabText: {
             fontSize: 22,
             color: "#00000",
@@ -72,8 +72,8 @@ const Tabs = () => {
         },
         content: {
             height:'85%',
-            width:414,
-             top:'-15%',
+            width:'100%',
+             top:'-12%',
             
         },
         contentText: {

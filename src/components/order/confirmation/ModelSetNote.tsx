@@ -23,17 +23,16 @@ const ModelSetNote = ({ productId }: Props) => {
     const { control, handleSubmit, reset } = useForm({
         resolver: zodResolver(NoteSchema),
         values:{
-            note:'dsd'
+            note:''
         }
         
     });
 
-    // useEffect(() => {
-    //     if (dialogVisible) {
-    //         const existingNote = getNote(productId) || ''; // Fetch the existing note
-    //         reset({ note: existingNote }); // Reset form with the existing note
-    //     }
-    // }, [dialogVisible, productId, getNote, reset]);
+    useEffect(() => {
+        if (dialogVisible) {
+            const existingNote = getNote(productId) || '';
+            reset({ note: existingNote }); }
+    }, [dialogVisible, productId, getNote, reset]);
 
     const onSubmit = (data: NoteType) => {
         setNote(productId, data.note);
@@ -100,7 +99,8 @@ const styles = StyleSheet.create({
         color: '#AF042C',
         textDecorationLine: 'underline',
         fontSize: 16,
-    },
+        marginTop:25
+     },
 });
 
 export default ModelSetNote;

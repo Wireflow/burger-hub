@@ -1,18 +1,17 @@
 import { useSessionStore } from '@/src/store/useSessionStore'
 import { router } from 'expo-router'
 import React from 'react'
-import { StyleSheet } from 'react-native'
+import { Dimensions, StyleSheet } from 'react-native'
 import { TouchableOpacity } from 'react-native'
 import { Text, View } from 'react-native'
-type Props ={
-    name:string;
-    phon:string;
-}
-const ContentDetails = ({name,phon}:Props) => {
+const windowWidth = Dimensions.get('window').width;
+const windowHeight = Dimensions.get('window').height;
+
+const ContentDetails = () => {
     const {  session } = useSessionStore();
-    // if (!session){
-    //     router.navigate('/auth')
-    // }
+    if (!session){
+        router.navigate('/auth')
+    }
   return (
 <View style={styles.contactDetails}>
                 <Text style={styles.label}>Contact details</Text>
@@ -35,30 +34,30 @@ const styles = StyleSheet.create({
   
     contactDetails: {
         marginBottom: 20,
-         height:'25%',
+         height:windowHeight*0.25,
         alignItems:'center',
-        justifyContent:'space-between'
-    },
+        justifyContent:'space-between',
+     },
     label: {
         fontSize: 16,
         fontWeight: '600',
-        marginBottom: 8,
+        marginBottom: 5,
         width:"100%"
     },
     input: {
-        height: 65,
+        height: windowHeight*0.09,
         backgroundColor:'#fff',
         width:'100%',
-        paddingTop:10,
-        paddingLeft:25,
-        borderRadius:20
+         paddingLeft:25,
+        borderRadius:15,
+        paddingTop:5
     },     
     ContentTitle:{
       color:'#000000',
       opacity:0.7
     },ContentDescription:{
       color:'#000000',
-      fontSize:18,
+      fontSize:17,
       fontWeight:'600'
 
     }

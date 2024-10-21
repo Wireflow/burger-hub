@@ -52,8 +52,7 @@ const ListItems = () => {
 
 const styles = StyleSheet.create({
   container: {
-     backgroundColor: '#F5F5F8',
-    height:'auto'
+     height:'auto'
     
   },
   title: {

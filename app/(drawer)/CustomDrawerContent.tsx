@@ -12,7 +12,7 @@ import {
   SafeAreaView,
 } from "react-native";
 
-const CustomDrawerContent: React.FC<{ navigation: any }> = ({ navigation }) => {
+const CustomDrawerContent: React.FC<{ navigation?: any }> = ({ navigation }) => {
   const [dialogOpen, setDialogOpen] = useState(false);
   const handleCancel = () => {
     setDialogOpen(false);
@@ -69,7 +69,7 @@ const CustomDrawerContent: React.FC<{ navigation: any }> = ({ navigation }) => {
         </TouchableOpacity>
         <TouchableOpacity
           style={styles.menuItem}
-          onPress={() => navigation.navigate("payments")}
+          onPress={() => router.navigate("/(drawer)/payments")}
         >
           <Image
             source={require("@/assets/icons/ic_outline-local-offer.png")}

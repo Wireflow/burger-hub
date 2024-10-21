@@ -120,6 +120,7 @@ export default LogIn;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+ 
   },
   scrollContent: {
     flexGrow: 1,
@@ -131,15 +132,15 @@ const styles = StyleSheet.create({
   },
   forgotPasswordContainer: {
     height: 20,
-    width: "40%",
-    alignSelf: "center",
+    width: "50%",
+    alignSelf: 'center',
     marginTop: 20,
-  },
+   },
   forgotPasswordText: {
     fontSize: 16,
     fontWeight: "bold",
     color: "#AF042C",
-    textAlign: "center",
+    textAlign: "left",
   },
   buttonContainer: {
     height: 50,
