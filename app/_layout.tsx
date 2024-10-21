@@ -39,7 +39,8 @@ function RootLayoutMain() {
       <Stack.Screen name="auth" options={{ headerShown: false }} />
       <Stack.Screen name="Favorite" options={{ headerShown: false }} />
       <Stack.Screen name="Addresses" options={{ headerShown: false }} />
-       <Stack.Screen name="(drawer)" options={{ headerShown: false }} />
+      <Stack.Screen name="payments" options={{ headerShown: false }} />
+      <Stack.Screen name="(drawer)" options={{ headerShown: false }} />
     </Stack>
   );
 }

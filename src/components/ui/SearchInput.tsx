@@ -1,39 +1,42 @@
-
 import React, { useState } from "react";
-import { View, TouchableOpacity, TextInput, StyleSheet } from "react-native";
+import { View, TouchableOpacity, TextInput, StyleSheet, Alert } from "react-native";
 import Icon from 'react-native-vector-icons/FontAwesome';
+import { usePathname, router } from "expo-router";
 
-interface SearchInputProps {
-    onSearch: (text: string) => void;   
-    onClick?: () => void;                
-    color?: string;                      
-    backgroundColor?: string;           
-}
+const SearchInput: React.FC<{ color?: string, backgroundColor?: string }> = ({ color = '#333', backgroundColor = 'white' }) => {
+    const [query, setQuery] = useState<string>('');
+    const pathname = usePathname();
 
-const SearchInput: React.FC<SearchInputProps> = ({
-    onSearch,
-    onClick,
-    color = '#333',                      
-    backgroundColor = 'white'          
-}) => {
-    const [text, setText] = useState<string>('');
+    const handleSearchPress = () => {
+        if (query === "") {
+            return Alert.alert(
+                "Missing Query",
+                "Please input something to search results across database"
+            );
+        }
 
-    const handleChangeText = (inputText: string) => {
-        setText(inputText);
-        onSearch(inputText);
+        if (pathname.startsWith("/search")) {
+            router.setParams({ query });
+        } else {
+            router.push(`/search/${query}`);
+        }
+        
+        setQuery(''); 
     };
 
     return (
-        <TouchableOpacity style={[styles.container, { backgroundColor }]} onPress={onClick}>
-            <Icon name="search" size={20} color={color} style={styles.icon} />
+        <View style={[styles.container, { backgroundColor }]}>
+            <TouchableOpacity onPress={handleSearchPress}>
+                <Icon name="search" size={20} color={color} />
+            </TouchableOpacity>
             <TextInput
                 style={[styles.input, { color }]}
                 placeholder="Search.."
-                placeholderTextColor="#999" 
-                value={text}
-                onChangeText={handleChangeText}
+                placeholderTextColor="#999"
+                value={query}
+                onChangeText={setQuery}
             />
-        </TouchableOpacity>
+        </View>
     );
 };
 
@@ -52,7 +55,7 @@ const styles = StyleSheet.create({
         flex: 1,
         fontSize: 16,
         marginTop: 2,
-        margin: 10,
+        margin: 15,
         marginBottom: 5,
     },
     icon: {
