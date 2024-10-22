@@ -4,21 +4,38 @@ import { PanGestureHandler, State } from 'react-native-gesture-handler';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import styles from '../../../../ui/styles';
 import { PaymentCardProps } from '../../../../../types/types';
+import { any } from 'zod';
 
 const PaymentCard: React.FC<PaymentCardProps> = ({ method, translateX, isSwiped, handleSwipe, handleDelete }) => {
+    const translateValue = translateX[method.id] || new Animated.Value(0);
+
+    const onGestureEvent = Animated.event(
+        [{ nativeEvent: { translationX: translateValue } }],
+        { useNativeDriver: true }
+    );
+
+    const onHandlerStateChange = (event:any) => {
+        if (event.nativeEvent.state === State.END) {
+            handleSwipe(method.id, event.nativeEvent.translationX);
+        }
+    };
+
+    const handleTouchStart = () => {
+        for (const key in translateX) {
+           //@ts-ignore
+            if (key !== method.id) {
+                translateX[key].setValue(0); 
+            }
+        }
+    };
+
     return (
         <PanGestureHandler
-            onGestureEvent={Animated.event(
-                [{ nativeEvent: { translationX: translateX[method.id] || new Animated.Value(0) } }],
-                { useNativeDriver: true }
-            )}
-            onHandlerStateChange={(event) => {
-                if (event.nativeEvent.state === State.END) {
-                    handleSwipe(method.id, event.nativeEvent.translationX);
-                }
-            }}
+            onGestureEvent={onGestureEvent}
+            onHandlerStateChange={onHandlerStateChange}
+            onBegan={handleTouchStart} 
         >
-            <Animated.View style={[styles.card, { transform: [{ translateX: translateX[method.id] || new Animated.Value(0) }] }]}>
+            <Animated.View style={[styles.card, { transform: [{ translateX: translateValue }] }]} key={method.id} >
                 <TouchableOpacity style={styles.cardContent}>
                     {method.method_type === 'Visa' ? (
                         <Image source={require('@/assets/icons/visa.png')} style={styles.icon} />

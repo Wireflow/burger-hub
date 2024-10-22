@@ -43,7 +43,8 @@ const Tabs = () => {
   return (
     <View style={styles.container}>
       <View style={styles.tabContainer}>
-        {isLoading && <ActivityIndicator size="large" color="red" style={{ alignItems: 'center', justifyContent: 'center' }} />}
+      <ScrollView horizontal>
+      {isLoading && <ActivityIndicator size="large" color="red" style={{ alignItems: 'center', justifyContent: 'center' }} />}
         {categories && categories.map((categoryItem: category) => (
           <TouchableOpacity
             key={categoryItem.id}
@@ -56,6 +57,7 @@ const Tabs = () => {
             {selectedTab === categoryItem.id && <View style={styles.underline} />}
           </TouchableOpacity>
         ))}
+      </ScrollView>
       </View>
       <View style={styles.content}>
         {isLoadingProducts ? (
@@ -88,21 +90,20 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: 'baseline',
-    width: "90%",
-    marginTop: 30,
+    width: "100%",
     margin: 12,
     height: 300,
+    top:80
   },
   tabContainer: {
     flexDirection: "row",
     justifyContent: 'space-around',
     marginBottom: 0,
-    width: '70%',
+
   },
   tab: {
     padding: 5,
     alignItems: "center",
-    width: '35%',
   },
   tabText: {
     fontSize: 18,
@@ -111,7 +112,7 @@ const styles = StyleSheet.create({
   underline: {
     marginTop: 10,
     height: 3,
-    width: 134,
+    width: "100%",
     backgroundColor: "#AF042C",
     borderRadius: 40,
   },

@@ -78,7 +78,6 @@ const PaymentMethodsScreen: React.FC = () => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>paymentMethods</Text>
 
       {paymentMethods?.map((method) => (
         <PaymentCard
@@ -89,7 +88,7 @@ const PaymentMethodsScreen: React.FC = () => {
               handleSwipe={handleSwipe}
               handleDelete={handleDelete}
               //@ts-ignore
-               method={method.method_name}        />
+               method={method}        />
       ))}
 
       {paypalPaymentMethods?.map((method) => (

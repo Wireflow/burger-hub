@@ -3,17 +3,25 @@ import { useSessionStore } from "@/src/store/useSessionStore";
 import { formatAddress } from "@/src/util/addressFormat";
 import { router, useFocusEffect } from "expo-router";
 import React, { useEffect, useState } from "react";
-import { View, Text, StyleSheet, Image, TouchableOpacity } from "react-native";
+import {
+  View,
+  Text,
+  StyleSheet,
+  Image,
+  TouchableOpacity,
+  Dimensions,
+} from "react-native";
 import { formatPhoneNumber } from "@/src/util/formatPhoneNumber";
 import AddressChangeScreen from "../address/ChangeAddressScreen";
 import { Entypo } from "@expo/vector-icons";
 import FormAddress from "../address/Formaddress";
+const { width } = Dimensions.get("window");
 const Profile = () => {
   const [isModalVisible, setModalVisible] = useState(false);
   const toggleModalVisibility = () => {
     setModalVisible(!isModalVisible);
   };
-  const [isModalVisibleaddress, setModalVisibleaddress]= useState(false);
+  const [isModalVisibleaddress, setModalVisibleaddress] = useState(false);
   const toggleModalVisibilityAddress = () => {
     setModalVisibleaddress(!isModalVisible);
   };
@@ -62,14 +70,20 @@ const Profile = () => {
                   </View>
                 ))
               ) : (
-                <View  style={{display:"flex",flexDirection:"row",gap:8}}>
-                     <Text>don't have address </Text>
-                  <TouchableOpacity 
+                <View style={{ display: "flex", flexDirection: "row", gap: 8 }}>
+                  <Text>don't have address </Text>
+                  <TouchableOpacity
                     onPress={() => toggleModalVisibilityAddress()}
-                   
                   >
-                 
-                    <Text style={{width:50,textDecorationLine:"underline",color:"#AF042C"}}>add  </Text>
+                    <Text
+                      style={{
+                        width: 50,
+                        textDecorationLine: "underline",
+                        color: "#AF042C",
+                      }}
+                    >
+                      add{" "}
+                    </Text>
                   </TouchableOpacity>
                 </View>
               )}
@@ -149,7 +163,7 @@ const styles = StyleSheet.create({
   profileContainer: {
     flexDirection: "row",
     backgroundColor: "white",
-    width: "90%",
+    width: width * 0.8,
     height: 170,
     padding: 5,
     gap: 5,
@@ -202,7 +216,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     marginTop: 20,
     backgroundColor: "white",
-    width: "90%",
+    width: width * 0.8,
     height: 50,
     paddingHorizontal: 20,
     borderRadius: 20,

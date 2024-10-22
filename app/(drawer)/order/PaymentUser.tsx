@@ -1,11 +1,10 @@
 import React from "react";
 
 import UserPaymentScreen from '@/src/components/order/payment/add/userPaymentScreen'
-import Header from "@/src/components/ui/Header";
+import Header from "@/src/hooks/Header";
 const PaymentUser = () => {
   return (
     <>
-     <Header title="Payments Methods" backgroundColorCode="#FFFFFF" />
       <UserPaymentScreen />
     </>
   );

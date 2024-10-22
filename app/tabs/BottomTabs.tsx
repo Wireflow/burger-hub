@@ -21,6 +21,7 @@ export const MyBottomTabs: React.FC = () => {
           name="home"
           component={Homes}
           options={{
+            headerShown:false,
             tabBarIcon: ({ color, size }) => (
               <MaterialCommunityIcons name="home" color={color} size={size} />
             ),

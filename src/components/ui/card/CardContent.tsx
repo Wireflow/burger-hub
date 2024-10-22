@@ -10,18 +10,14 @@ import { router } from 'expo-router';
 };
 
 const CardContent = ({id, imageSource, title, price }: CardContentProps) => {
-  const [currentImage, setCurrentImage] = useState(imageSource);
 
-  // const handleImageError = () => {
-  //   console.log('Error loading image');
-  //   setCurrentImage(defaultImage); // تغيير الصورة إلى الافتراضية عند حدوث خطأ
-  // };
 
   return (
     <View>
       <View style={styles.imageWrapper}>
         <Image 
-          source={require('@/assets/images/Mask Group.png')}  
+
+          source={imageSource || require('@/assets/images/Mask Group.png')}  
           style={styles.image}
           // onError={handleImageError} // التعامل مع الخطأ هنا
         />

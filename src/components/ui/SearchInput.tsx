@@ -47,6 +47,7 @@ const styles = StyleSheet.create({
         borderRadius: 70,
         marginTop: 10,
         marginBottom: 10,
+        top:15
     },
     input: {
         flex: 1,

@@ -6,7 +6,7 @@ import { useTabContext } from '../layout/TabContext';
 import ProductSearch from './ProductSearch';
 import Buttonout from '../ui/Buttonout';
 import CardWrapper from '../ui/card/CardWrapper';
-import Header from '../ui/Header';
+import Header from '../../hooks/Header';
 import Homes from './Home';
 
 const BurgerList = () => {
@@ -64,6 +64,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#F5F5F8',
+   
   },
   searchContainer: {
     flexDirection: 'row', 

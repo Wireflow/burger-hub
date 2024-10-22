@@ -16,7 +16,7 @@ export const redirectAuth = () => {
           phone: session?.user.user_metadata?.phone,
           id: session?.user.id || "",
         };
-        console.log(session?.user.user_metadata);
+     
         if (event === "INITIAL_SESSION") {
           setSession(userSession);
           router.replace("/(drawer)/main");
