@@ -93,7 +93,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: 'baseline',
-    width: "100%",
     margin: 12,
     height: 300,
     top:80
@@ -102,12 +101,10 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: 'space-around',
     marginBottom: 0,
-    width: '70%',
   },
   tab: {
     padding: 5,
     alignItems: "center",
-    width: '35%',
   },
   tabText: {
     fontSize: 18,
@@ -116,7 +113,7 @@ const styles = StyleSheet.create({
   underline: {
     marginTop: 10,
     height: 3,
-    width: 134,
+    width: "100%",
     backgroundColor: "#AF042C",
     borderRadius: 40,
   },

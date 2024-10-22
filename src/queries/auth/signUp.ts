@@ -1,6 +1,6 @@
 import { SignUpType } from "@/src/types/SignUpType";
 import { supabase } from "../../services/supabase/client";
-import { Database } from "@/src/services/supabase/database.type";
+import { Database } from "@/src/services/supabase/database.types";
 
 export default async function SignUpQuery(dataFromUser: SignUpType) {
   try {

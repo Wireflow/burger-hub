@@ -8,11 +8,8 @@ import { MyBottomTabs } from '../tabs/BottomTabs';
 import ProfileScreen from './ProfileScreen';
 
 import FavoriteScreen from '../Favorite';
-import PaymentScreen from '@/src/components/order/payment/PaymentScreen';
 import OderHistory from './Order History';
-import Payments from './payments/Payments';
-import PaymentUser from './order/PaymentUser';
- 
+import Payments from '../payments/Index';
 
 const Drawer = createDrawerNavigator();
 
@@ -26,7 +23,7 @@ const Main = () => {
       >
         <Drawer.Screen name="home" component={MyBottomTabs} options={{headerShown:false}}/>
         <Drawer.Screen name="Profile" component={ProfileScreen} options={{headerShown:false}}/>
-        <Drawer.Screen name="payments" component={PaymentUser} options={{headerShown:false}}/>
+        <Drawer.Screen name="payments" component={Payments} options={{headerShown:false}}/>
         <Drawer.Screen name="orders" component={OderHistory} options={{headerShown:false}}/>
         <Drawer.Screen name="favorites" component={FavoriteScreen} options={{headerShown:false}}/>
       </Drawer.Navigator>

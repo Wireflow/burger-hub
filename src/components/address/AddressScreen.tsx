@@ -15,7 +15,7 @@ import { formatAddress } from "@/src/util/addressFormat";
 import ShowDialog from "../ui/showDialog";
 import { useCustomToast } from "@/src/hooks/useCustomToast";
 import { SwipeListView } from "react-native-swipe-list-view";
-import Header from "../../hooks/Header";
+import Header from "../ui/Header";
 
 const AddressScreen = () => {
   const [isModalVisible, setModalVisible] = useState(false);

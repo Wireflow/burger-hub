@@ -11,7 +11,7 @@ import CartIcon from '../ui/CartIcon';
 import { useCartStore } from '@/src/store/cart/cartStore';
 import { MaterialCommunityIcons, MaterialIcons } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
-import useToggleDrawer from '../ui/toggleDrwaer';
+import useToggleDrawer from '../../hooks/toggleDrwaer';
 
 const Homes: React.FC = () => {
   const { cart } = useCartStore(state => state);
@@ -36,13 +36,17 @@ const Homes: React.FC = () => {
           <TouchableOpacity onPress={() => toggleDrawer()}>
             <Image source={require("@/assets/icons/menu.png")}/>
           </TouchableOpacity>
-          <CartIcon itemCount={cart?.totalQuantity} />
+          
+          <CartIcon
+          //@ts-ignore
+          itemCount={cart?.totalQuantity} />
         </View>
         <View style={{ width: '90%' }}>
           <Text style={styles.titleText}>Delicious</Text>
           <Text style={styles.titleText}>burgers for you</Text>
           <SearchInput
-            onSearch={(text) => {}}
+          //@ts-ignore
+            onSearch={(text: any) => {}}
             onClick={() => setS(!s)}
             color="#000"
             backgroundColor="#E0E0E0"

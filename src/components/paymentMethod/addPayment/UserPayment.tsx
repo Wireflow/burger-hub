@@ -41,7 +41,7 @@ const UserPayment: React.FC = () => {
 
     try {
       await paymentAction(paymentData);
-      router.replace("/(drawer)/payments");
+      router.replace("/payments");
     } catch (error) {
       console.error( error);
     }

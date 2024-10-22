@@ -1,7 +1,7 @@
 import { StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 import OrderHistoryScreen from '@/src/components/oder-history/OrderHistoryScreen'
-import Header from '@/src/hooks/Header'
+import Header from '@/src/components/ui/Header'
 
 const OderHistory = () => {
   return (

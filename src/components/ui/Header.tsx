@@ -12,7 +12,6 @@ import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { Entypo } from "@expo/vector-icons";
 import { Col, Grid } from "react-native-easy-grid";
 import { useNavigation } from "@react-navigation/native";
-import AddProductFavorite from "../product/details/AddProductFavorite";
 
 type HeaderProps = {
   style?: StyleProp<ViewStyle>;

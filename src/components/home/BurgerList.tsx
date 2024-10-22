@@ -6,7 +6,7 @@ import { useTabContext } from '../layout/TabContext';
 import { Redirect } from "expo-router";
 import Buttonout from '../ui/Buttonout';
 import CardWrapper from '../ui/card/CardWrapper';
-import Header from '../../hooks/Header';
+import Header from '../ui/Header';
 import Homes from './Home';
 import { router } from 'expo-router';
 

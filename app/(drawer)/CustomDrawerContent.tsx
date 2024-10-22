@@ -69,7 +69,7 @@ const CustomDrawerContent: React.FC<{ navigation?: any }> = ({ navigation }) => 
         </TouchableOpacity>
         <TouchableOpacity
           style={styles.menuItem}
-          onPress={() => router.navigate("/(drawer)/payments")}
+          onPress={() => router.navigate("/payments/Index")}
         >
           <Image
             source={require("@/assets/icons/ic_outline-local-offer.png")}
