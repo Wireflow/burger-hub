@@ -34,8 +34,8 @@ const styles = StyleSheet.create({
        flexDirection:'row',
        justifyContent:'space-around',
        margin:'auto',
-       marginVertical:20
-      }
+       marginVertical:20,
+       }
 });
 
 export default Header

@@ -1,12 +1,12 @@
 // UserPayment.tsx
 import React, { useState } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
-import { useSessionStore } from '../../../../../store/useSessionStore';
-import { useRouter } from 'expo-router';
-import { useAddPaymentMethod } from '../../../../../queries/products/useAddPaymentMethod';
-import { useAddPayPalPaymentMethod } from '../../../../../queries/products/useAddPaymentMethodpa';
-import PaymentMethodSelector from './PaymentMethodSelector';
+ import { useRouter } from 'expo-router';
+  import PaymentMethodSelector from './PaymentMethodSelector';
 import PaymentForm from './PaymentForm';
+import { useAddPayPalPaymentMethod } from '@/src/queries/payment/useAddPaymentMethodpa';
+import { useAddPaymentMethod } from '@/src/queries/payment/useAddPaymentMethod';
+import { useSessionStore } from '@/src/store/useSessionStore';
 
 const UserPayment: React.FC = () => {
   const { session } = useSessionStore();
@@ -41,7 +41,7 @@ const UserPayment: React.FC = () => {
 
     try {
       await paymentAction(paymentData);
-      router.replace("/(drawer)/order/PaymentUser");
+      router.replace("/(drawer)/payments");
     } catch (error) {
       console.error( error);
     }
@@ -69,9 +69,9 @@ export default UserPayment;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
+    justifyContent: 'flex-start',
     padding: 16,
-    backgroundColor: '#f0f0f0',
+    backgroundColor: '#F2F2F2',
   },
   subtitle: {
     fontSize: 20,

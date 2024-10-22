@@ -42,6 +42,7 @@ const PresentationCustomize = ({ handlePress, isPressed, data }: PresentationCus
       price: data.product.price,
       quantity: 0,
       options,
+      note:null
     });
     
     handlePress();

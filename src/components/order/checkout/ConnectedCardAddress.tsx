@@ -1,6 +1,6 @@
 import { useSessionStore } from '@/src/store/useSessionStore';
 import React, { useEffect, useState } from 'react';
-import { ActivityIndicator, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { ActivityIndicator, Dimensions, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import { useGetAddressbyId } from '@/src/queries/users/getAddressbyId';
 import { Row } from '@/src/services/supabase/table.types';
 import CardAddress from './CardAddress';
@@ -9,9 +9,10 @@ import { router } from 'expo-router';
 export type addressRow = Row<"Addresses">;
 type Prop = {
     addressId?: number;
+    change?:boolean
 };
 
-const ConnectedCardAddress = ({ addressId=0 }: Prop) => {
+const ConnectedCardAddress = ({ addressId=0 ,change=false}: Prop) => {
     const [address, setAddress] = useState<addressRow | null>(null);
     const { session } = useSessionStore();
     const { data, error, isLoading } = useGetAddressbyId(addressId);
@@ -24,9 +25,10 @@ const ConnectedCardAddress = ({ addressId=0 }: Prop) => {
         <View>
             <View style={styles.deliveryAddress}>
                 <Text style={styles.label}>Delivery address</Text>
-                <TouchableOpacity onPress={()=> router.navigate('/SelectAdress')}>
+                {change && ( <TouchableOpacity onPress={()=> router.navigate('/SelectAdress')}>
                     <Text style={styles.changeLink}>change</Text>
-                </TouchableOpacity>
+                </TouchableOpacity> )}
+               
             </View>
 
             {isLoading ? (
@@ -48,10 +50,10 @@ const styles = StyleSheet.create({
         alignItems: "center",
         marginBottom: 16,
         padding: 16,
-        backgroundColor: "white",
+        backgroundColor: "red",
         borderRadius: 20,
         elevation: 1,
-    },
+     },
     deliveryAddress: {
         marginBottom: 20,
         justifyContent: 'space-between',

@@ -6,6 +6,11 @@ export enum OrderType {
     Delivery = 'Delivery',
     Pickup = 'Pick up',
   }
+  export enum PaymentType {
+    Visa = 'Visa',
+    SuperVisa = 'Super Visa',
+    PayPal ='PayPal'
+  }
 export type CartType = {
     products: Product[];
     orderType: OrderType.Delivery | OrderType.Pickup;
@@ -13,6 +18,7 @@ export type CartType = {
     addressId: number |null;
     totalQuantity:number;
     totalAmount:number
+    paymentType:PaymentType.PayPal | PaymentType.SuperVisa | PaymentType.Visa 
 
 }; 
 
@@ -30,7 +36,7 @@ export type CartState = {
     changeOrderType: (orderType: OrderType.Delivery | OrderType.Pickup) => void; // New method
     totalPrice: () => number;
     setAddressId: (IdAddress: number) =>void;
-    setPaymentId:(IdPayment: number) =>void;
+    setPayment:(IdPayment: number , paymentType:PaymentType.PayPal | PaymentType.SuperVisa | PaymentType.Visa) =>void;
     setNote:(productId:number , note:string) =>void;
     getNote:(productId:number)=>string | null;
 
@@ -41,7 +47,8 @@ export type CartState = {
         paymentId: 0,
         addressId: null,
         totalAmount:0,
-        totalQuantity:0
+        totalQuantity:0,
+        paymentType : PaymentType.PayPal,
 
     },
     
@@ -94,7 +101,7 @@ export type CartState = {
 
     },
     
-    removeCart: () => set({ cart: { products: [], orderType: OrderType.Delivery, paymentId: 0, addressId: null ,totalAmount:0,totalQuantity:0} }),
+    removeCart: () => set({ cart: { products: [], orderType: OrderType.Delivery, paymentId: 0, addressId: null ,totalAmount:0,totalQuantity:0,paymentType:PaymentType.PayPal} }),
 
     addOption: (product: Product) => {
         const { cart } = get();
@@ -221,9 +228,9 @@ export type CartState = {
 
     },
 
-    setPaymentId: (IdPayment: number) => {
+    setPayment: (IdPayment: number ,paymentType : PaymentType.PayPal | PaymentType.SuperVisa | PaymentType.Visa) => {
         const { cart } = get();
-        set({ cart: { ...cart, paymentId: IdPayment } });
+        set({ cart: { ...cart, paymentId: IdPayment , paymentType:paymentType } });
     },setNote: (productId:number,note:string)=>{
         const { cart } = get();
         const updatedProducts = cart.products.reduce((acc, p) => {

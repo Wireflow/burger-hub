@@ -12,7 +12,7 @@ console.log(" in create order",parsedData,id)
     console.log(" in create products order",dataA,id)
 
     const { data: order, error } = await supabase.rpc(
-      'ordernn_5o',
+      'create_order',
       {  order_data: dataA,
          userid:id
       }

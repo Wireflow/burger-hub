@@ -1,4 +1,4 @@
-import React, { createContext, useContext } from "react";
+import React, { Component, createContext, useContext } from "react";
 import {
   StyleProp,
   StyleSheet,
@@ -12,11 +12,13 @@ import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { Entypo } from "@expo/vector-icons";
 import { Col, Grid } from "react-native-easy-grid";
 import { useNavigation } from "@react-navigation/native";
+import AddProductFavorite from "../product/details/AddProductFavorite";
 
 type HeaderProps = {
   style?: StyleProp<ViewStyle>;
   title?: string;
-  backgroundColorCode:string
+  backgroundColorCode:string;
+  headerRight?: React.ReactElement;
 };
 
 const headerHeight = 130;
@@ -35,7 +37,7 @@ function useHeader() {
   return context;
 }
 
-function Header({ style, title,backgroundColorCode }: HeaderProps) {
+function Header({ style, title,backgroundColorCode,headerRight }: HeaderProps) {
   const navigation = useNavigation();
   const insets = useSafeAreaInsets();
 
@@ -64,7 +66,8 @@ function Header({ style, title,backgroundColorCode }: HeaderProps) {
           <Header.BackButton />
 
           {title && <Text style={[styles.title]}>{title}</Text>}
-        </Grid>
+ {headerRight}
+         </Grid>
       </View>
     </HeaderContext.Provider>
   );

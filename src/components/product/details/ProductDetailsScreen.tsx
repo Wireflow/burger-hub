@@ -40,7 +40,7 @@ console.log("im height and width in cart ",windowWidth,windowHeight)
     <View style={styles.container}>
       {
       data &&
-      (  <View style={{ alignItems: 'center',width:'95%',marginHorizontal:'auto',backgroundColor:'#FFFFFF',height:'48%' }}>
+      (  <View style={{ alignItems: 'center',width:'95%',marginHorizontal:'auto',height:windowHeight*0.6,justifyContent:'space-between',position:'relative' }}>
 
         
         <ImageProduct imageBase={data?.product.imageUrl || ''} />
@@ -60,14 +60,12 @@ console.log("im height and width in cart ",windowWidth,windowHeight)
 
 const styles = StyleSheet.create({
   container: {
-    height:windowWidth  +(windowHeight*0.5),
+    height:windowWidth  +(windowHeight*0.4),
     width: windowWidth,
-    backgroundColor: '#FFFFFF',
-    display: 'flex',
+     display: 'flex',
     alignItems: 'center',
-    justifyContent: 'space-around',
-    paddingTop:windowHeight*0.02
-    
+    justifyContent: 'space-between',
+      
   },
   horizontal: {
     flexDirection: 'row',

@@ -12,23 +12,29 @@ export interface Product {
     restaurant_Id: number | null;
     updatedAt: string | null;
 }
-
-// استعلام البحث
 import { supabase } from "@/src/services/supabase/client";
 import { useQuery } from "@tanstack/react-query";
 
-export const useSearchProducts = (searchTerm: string) => {
+export const useSearchProducts = (query: string) => {
     return useQuery<Product[]>({
-        queryKey: ['searchProducts', searchTerm],
-        queryFn: async () => {
-            const { data, error } = await supabase
-                .from("Products")
-                .select("*")
-                .ilike('name', `%${searchTerm}%`); 
-
-            if (error) throw new Error(error.message);
-            return data;
-        },
-        enabled: !!searchTerm, 
+      queryKey: ['searchProducts', query], 
+      queryFn: async () => {
+        console.log('Executing search with query:', query);  
+  
+        const { data, error } = await supabase
+          .from("Products")
+          .select("*")
+          .ilike('name', `%${query}%`);  
+  
+        if (error) {
+          console.error('Search Error:', error.message);
+          throw new Error(error.message);
+        }
+  
+        console.log('Search Results:', data);  
+        return data;
+      },
+      enabled: !!query,  
     });
-};
+  };
+  

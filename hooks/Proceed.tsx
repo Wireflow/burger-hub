@@ -1,8 +1,11 @@
 import React from 'react'
-import { StyleSheet, Text, View } from 'react-native'
+import { Dimensions, StyleSheet, Text, View } from 'react-native'
  import { useCartStore } from '@/src/store/cart/cartStore';
 import { router } from 'expo-router';
 import Button from '@/src/components/ui/Button';
+const windowWidth = Dimensions.get('window').width;
+const windowHeight = Dimensions.get('window').height;
+
  type Props ={
     title:string;
      method:()=>void;
@@ -21,7 +24,7 @@ const Proceed = ({title,method}:Props) => {
 </View>  )
 }
 const styles = StyleSheet.create({
-    container:{height:130,
+    container:{height:windowHeight*0.19,
          width:'100%',
           position:'absolute',
          bottom:20,

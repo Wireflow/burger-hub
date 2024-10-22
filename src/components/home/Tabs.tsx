@@ -34,7 +34,7 @@ const Tabs = () => {
         setSelectedCategoryName(selectedCategory.name); 
       }
     }
-  });
+  }, [selectedTab, categories, setSelectedCategoryName]);
 
   if (error) {
     return <Text>Error fetching categories: {error.message}</Text>;
@@ -63,20 +63,23 @@ const Tabs = () => {
         {isLoadingProducts ? (
           <ActivityIndicator size="large" color="red" />
         ) : productsByCategory && productsByCategory.length > 0 ? (
-          <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-            <View style={styles.cardContainer}>
-              {productsByCategory.map(product => (
-                <CardWrapper
-                  key={product.id}
-                  imageSource={{ uri: product.imageUrl || 'http://example.com/default-image.jpg' }}
-                  title={product.name || "Product Name"}
-                  price={`$${product.price?.toFixed(2)}`}
-                  height={210}
-                  width={200}
-                  id={product?.id}
-                />
-              ))}
-            </View>
+          <ScrollView
+            horizontal
+            showsHorizontalScrollIndicator={false}
+            contentContainerStyle={styles.cardContainer}
+          >
+            {productsByCategory.map(product => (
+              <CardWrapper
+                key={product.id}
+                imageSource={{ uri: product.imageUrl || 'http://example.com/default-image.jpg' }}
+                title={product.name || "Product Name"}
+                price={`$${product.price?.toFixed(2)}`}
+                height={210}
+                width={200}
+                id={product.id}
+               
+              />
+            ))}
           </ScrollView>
         ) : (
           <Text style={styles.noProductsText}>No Product found</Text>
@@ -99,20 +102,21 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: 'space-around',
     marginBottom: 0,
-
+    width: '70%',
   },
   tab: {
     padding: 5,
     alignItems: "center",
+    width: '35%',
   },
   tabText: {
     fontSize: 18,
-    marginTop:30
+    marginTop: 30,
   },
   underline: {
     marginTop: 10,
     height: 3,
-    width: "100%",
+    width: 134,
     backgroundColor: "#AF042C",
     borderRadius: 40,
   },
@@ -122,6 +126,8 @@ const styles = StyleSheet.create({
   },
   cardContainer: {
     flexDirection: 'row',
+    justifyContent: 'flex-start',
+    alignItems: 'center',
   },
   noProductsText: {
     fontSize: 18,

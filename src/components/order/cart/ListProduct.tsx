@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Text, View, StyleSheet, SafeAreaView } from 'react-native';
+import { Text, View, StyleSheet, SafeAreaView, Dimensions } from 'react-native';
 import { SwipeListView } from 'react-native-swipe-list-view';
 import CardProduct from './CardProduct'; 
 import ItemsHidden from './ItemsHidden'; 
@@ -47,14 +47,13 @@ const ListProduct: React.FC = () => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#F6F6F9',
-        paddingTop: 30,
-    },
+        backgroundColor: '#F2F2F2',
+     },
     safeArea: {
         flex: 1,
         alignItems: "flex-start",
         justifyContent: "center",
-        marginLeft: 30,
+        marginHorizontal: 15,
     },
     buttonContainer: {
         height: 60,

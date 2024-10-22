@@ -1,10 +1,13 @@
 import React, {  useState } from 'react'
-import {  StyleSheet,View } from 'react-native'
+import {  Dimensions, StyleSheet,View } from 'react-native'
 import Button from '../../ui/Button'
 import { useCartStore } from '@/src/store/cart/cartStore'
 import PresentationCustomize from './Customize/PresentationOptions'
 import { router } from 'expo-router'
 import { useCustomToast } from '@/src/hooks/useCustomToast'
+const windowWidth = Dimensions.get('window').width;
+const windowHeight = Dimensions.get('window').height;
+
   type props ={
   data?:any
 }
@@ -25,14 +28,15 @@ const Buttons = ({data}:props) => {
       name: data?.product?.name,
       price: data?.product?.price,
       quantity: 1,
-      options: []
+      options: [],
+      note:null
     });
    await getTotalProducts();
     showToast("Product has been added successfully!", { type: "success" });
     router.back();
   };
    return (
-    <View style={{height:100,width:350,margin:'auto'}}>
+    <View style={{height:windowHeight*0.2,width:350,marginHorizontal:'auto'}}>
     <View style={styles.scop}>
     <Button size='large' color='white' title='Costomize' onClick={handlePress}/>
   </View>

@@ -1,19 +1,19 @@
-import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { useCartStore } from "@/src/store/cart/cartStore";
 import { router } from "expo-router";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import Icon from 'react-native-vector-icons/FontAwesome'; // You can choose any icon set
-type prop ={
-  itemCount:number
-}
 
-const CartIcon = ({itemCount} :prop) => {
+
+const CartIcon = () => {
+  const { cart } = useCartStore(state => state);
+
       return (
         <TouchableOpacity style={styles.containeer} onPress={()=>router.navigate('/(drawer)/order/cart')}>
           
-          <MaterialCommunityIcons name="cart-outline" size={24} color="black" style={{opacity:0.5}}/>
-          {itemCount > 0 && (
+          <Icon name="shopping-cart" size={24} color="black" />
+          {cart.totalQuantity > 0 && (
             <View style={styles.badge} >
-              <Text style={styles.badgeText}>{itemCount}</Text>
+              <Text style={styles.badgeText}>{cart?.totalQuantity}</Text>
             </View>
           )}
       
@@ -26,9 +26,9 @@ const styles = StyleSheet.create({
       fontSize: 30,
       color: 'black',
     },  containeer: {
-  right:15
-     
-    
+        width:40,
+       zIndex:999,
+       marginRight:20
      },
     badge: {
       position: 'absolute',

@@ -3,40 +3,27 @@ import { View, Text, StyleSheet, ScrollView, SafeAreaView } from 'react-native';
 import { useGetProductsByCategoryId } from "../../queries/products/getProductsByCategoryId";
 import SearchInput from '../ui/SearchInput';
 import { useTabContext } from '../layout/TabContext';
-import ProductSearch from './ProductSearch';
+import { Redirect } from "expo-router";
 import Buttonout from '../ui/Buttonout';
 import CardWrapper from '../ui/card/CardWrapper';
 import Header from '../../hooks/Header';
 import Homes from './Home';
+import { router } from 'expo-router';
 
 const BurgerList = () => {
   const { selectedTab,  selectedCategoryName } = useTabContext();
   const { data: productsByCategory, isLoading: isLoadingProducts } = useGetProductsByCategoryId(selectedTab || 0);
-  const [s, setS] = useState(false);
-  const [g, setG] = useState(false);
-
-  if (s) {
-    return <ProductSearch />;
-  }
-  if (g) {
-    return <Homes />;
-  }
-
-  const handleButtonPress = () => {
-    setG(!g);
-  };
-
   return (
     <View style={styles.container}>
      
       <View style={styles.searchContainer}>
-        <Buttonout onPress={handleButtonPress} />
-        <SearchInput 
-          onSearch={(text) => {}} 
-          onClick={() => setS(!s)} 
-          color="#000" 
-          backgroundColor="#F5F5F8" 
-        />
+        <Buttonout onPress={()=>{
+          router.push("/(drawer)/main"); 
+        }} />
+        <SearchInput
+         color="#000" 
+         backgroundColor="#F5F5F8" 
+         />
       </View>
       <Text style={styles.t}>Our {selectedCategoryName}s</Text>
       <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={styles.content}>

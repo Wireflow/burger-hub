@@ -33,7 +33,7 @@ export default function RootLayout() {
   );
 }
 function RootLayoutMain() {
-  redirectAuth();
+  // redirectAuth();
   return (
     <Stack>
       <Stack.Screen name="auth" options={{ headerShown: false }} />

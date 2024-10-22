@@ -2,9 +2,8 @@ import React from 'react';
 import { TouchableOpacity, Text, Animated, View, Image } from 'react-native';
 import { PanGestureHandler, State } from 'react-native-gesture-handler';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import styles from '../../../../ui/styles';
-import { PaymentCardProps } from '../../../../../types/types';
-import { any } from 'zod';
+import styles from '../../ui/styles';
+import { PaymentCardProps } from '../../../types/types';
 
 const PaymentCard: React.FC<PaymentCardProps> = ({ method, translateX, isSwiped, handleSwipe, handleDelete }) => {
     const translateValue = translateX[method.id] || new Animated.Value(0);

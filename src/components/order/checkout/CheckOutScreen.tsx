@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View,Text,StyleSheet } from 'react-native';
+import { View,Text,StyleSheet, Dimensions } from 'react-native';
 import ContentDetails from './ContentDetails';
   import ConnectedCardAddress from './ConnectedCardAddress';
 import { useSessionStore } from '@/src/store/useSessionStore';
@@ -9,6 +9,8 @@ import ConnectedPickUp from './ConnectedPickUp';
 import Proceed from '@/hooks/Proceed';
 import { router } from 'expo-router';
 import ConfirmAddress from './ConfirmAddress';
+const windowWidth = Dimensions.get('window').width;
+const windowHeight = Dimensions.get('window').height;
 
 const CheckOutScreen = () => {
   const [dialogVisible, setDialogVisible] = useState(false);
@@ -30,11 +32,11 @@ const CheckOutScreen = () => {
         <View style={styles.container}>
             <Text style={styles.header}>Delivery</Text>
 
-<ContentDetails name='mohammed alkhax' phon=' 7160526755'/>
+<ContentDetails />
 {orderType == 'Delivery'? (<>{
   !addressId  && <ConnectedNotFoundAddressId/>
 }
-           {addressId && <ConnectedCardAddress addressId={addressId} /> }
+           {addressId && <ConnectedCardAddress addressId={addressId} change /> }
 </>):<ConnectedPickUp/>}
 
 <Proceed title='Proceed to payment' method={confirm}/>
@@ -45,11 +47,11 @@ const CheckOutScreen = () => {
 
 const styles = StyleSheet.create({
     container: {
-         padding: 30,
-        backgroundColor: '#F5F5F8',
-        height:'100%',
-        width:'100%',
-        position:'relative'
+         backgroundColor: '#F2F2F2',
+        height:windowHeight*0.9,
+        width:windowWidth,
+        position:'relative',
+        paddingHorizontal:25
 
     },
     header: {

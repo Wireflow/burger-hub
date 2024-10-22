@@ -12,7 +12,7 @@ const ImageProduct = ({imageBase}:props) => {
  <View>
     <Image 
  source={require('@/assets/images/Mask Group.png')} 
-                     style={{height:windowHeight*0.4,width:windowWidth*0.6,zIndex:999}}
+                     style={{height:windowHeight*0.35,width:windowWidth*0.6,zIndex:999}}
     />
  </View>  )
 }
