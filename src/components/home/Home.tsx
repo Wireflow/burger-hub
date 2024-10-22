@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { StyleSheet, Text, TouchableOpacity, View,Image } from 'react-native';
+import { StyleSheet, Text, TouchableOpacity, View,Image, KeyboardAvoidingView, ScrollView, Platform } from 'react-native';
 import Tabs from './Tabs';
 import Button from '../ui/Button';
 import { useRouter } from 'expo-router';
@@ -9,9 +9,7 @@ import { useTabContext } from '../layout/TabContext';
 import SearchInput from '../ui/SearchInput'; 
 import CartIcon from '../ui/CartIcon';
 import { useCartStore } from '@/src/store/cart/cartStore';
-import { MaterialCommunityIcons, MaterialIcons } from '@expo/vector-icons';
-import { useNavigation } from '@react-navigation/native';
-import useToggleDrawer from '../../hooks/toggleDrwaer';
+import useToggleDrawer from '@/src/hooks/toggleDrwaer';
 
 const Homes: React.FC = () => {
   const { cart } = useCartStore(state => state);
@@ -30,58 +28,57 @@ const Homes: React.FC = () => {
   }
 
   return (
-    <>
-      <View style={styles.container}>
+    <KeyboardAvoidingView style={styles.container} behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
+      <ScrollView contentContainerStyle={styles.scrollContainer}>
         <View style={styles.header}>
-          <TouchableOpacity onPress={() => toggleDrawer()}>
-            <Image source={require("@/assets/icons/menu.png")}/>
-          </TouchableOpacity>
-          
-          <CartIcon
-          //@ts-ignore
-          itemCount={cart?.totalQuantity} />
+          <CartIcon  />
+          <View style={styles.titleContainer}>
+            <Text style={styles.titleText}>Delicious</Text>
+            <Text style={styles.titleText}>burgers for you</Text>
+            <SearchInput
+              color="#000" 
+              backgroundColor="#E0E0E0" 
+            />
+          </View>
         </View>
-        <View style={{ width: '90%' }}>
-          <Text style={styles.titleText}>Delicious</Text>
-          <Text style={styles.titleText}>burgers for you</Text>
-          <SearchInput
-          //@ts-ignore
-            onSearch={(text: any) => {}}
-            onClick={() => setS(!s)}
-            color="#000"
-            backgroundColor="#E0E0E0"
+        <Tabs />
+        <View style={styles.buttonContainer}>
+          <Button
+            size='large'
+            color='red'
+            title={` View All ${selectedCategoryName} `} 
+            onClick={() => {
+              setRedirectToBurgerList(!redirectToBurgerList);
+            }}
           />
         </View>
-      </View>
-      <Tabs />
-      <View style={{ marginBottom: 40 }}>
-        <Button
-          size='large'
-          color='red'
-          title={` View All ${selectedCategoryName} `}
-          onClick={() => {
-            setX(!x);
-            console.log(x);
-          }}
-        />
-      </View>
-    </>
+      </ScrollView>
+    </KeyboardAvoidingView>
   );
 };
 const styles = StyleSheet.create({
   container: {
-    display:"flex",
-    flexDirection: 'column',
+    flex: 1,
+  },
+  scrollContainer: {
+    flexGrow: 1, 
+    justifyContent: 'space-between', 
+  },
+  header: {
+    flexDirection: 'row',
     justifyContent: 'space-between',
     marginBottom: 15,
     marginLeft: 25,
     height: 120,
-    position: 'relative',
-    gap:20
+    paddingHorizontal: 10,
+  },
+  titleContainer: {
+    width: '90%',
   },
   titleText: {
     fontSize: 34,
     color: 'black',
+    marginBottom: 5,
   },
   header: {
     top:30,
