@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="NONE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="fdb80171-0a7d-4907-845e-de330efe0cae" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.expo/settings.json" beforeDir="false" afterPath="$PROJECT_DIR$/.expo/settings.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app.json" beforeDir="false" afterPath="$PROJECT_DIR$/app.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/(drawer)/_layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/(drawer)/_layout.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/(drawer)/main.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/(drawer)/main.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/(drawer)/order/PaymentUser.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/(drawer)/order/PaymentUser.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/(drawer)/payments/Payments.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/(drawer)/payments/Payments.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/_layout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/_layout.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/tabs/BottomTabs.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/app/tabs/BottomTabs.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database.types.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/.package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@types/axios/README.md" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@types/axios/index.d.ts" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@types/axios/package.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/node_modules/@types/axios/types-metadata.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/address/AddressScreen.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/address/AddressScreen.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/home/BurgerList.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/home/BurgerList.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/home/Home.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/home/Home.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/home/ProductSearch.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/home/ProductSearch.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/home/Tabs.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/home/Tabs.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/order/payment/add/showPayment/PaymentCard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/order/payment/add/showPayment/PaymentCard.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/order/payment/add/showPayment/PaymentMethodsScreen.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/order/payment/add/showPayment/PaymentMethodsScreen.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/profile/Profile.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/profile/Profile.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/ui/CartIcon.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ui/CartIcon.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/ui/SearchInput.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ui/SearchInput.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/ui/styles.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ui/styles.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/hooks/redirectAuth.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/hooks/redirectAuth.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/queries/auth/login.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/queries/auth/login.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/queries/auth/signUp.ts" beforeDir="false" afterPath="$PROJECT_DIR$/src/queries/auth/signUp.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProjectId" id="2nkbtSW0ZjHK9QIUv68wsBVQGl4" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "AnalyzeApkAction.lastApkPath": "D:/MY WORK/burger-hub",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.cidr.known.project.marker": "true",
+    "cidr.known.project.marker": "true",
+    "dart.analysis.tool.window.visible": "false",
+    "last_opened_file_path": "D:/MY WORK/burger-hub",
+    "settings.editor.selected.configurable": "AndroidSdkUpdater",
+    "show.migrate.to.gradle.popup": "false"
+  }
+}]]></component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="fdb80171-0a7d-4907-845e-de330efe0cae" name="Changes" comment="" />
+      <created>1729520236100</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1729520236100</updated>
+    </task>
+    <servers />
+  </component>
+</project>
