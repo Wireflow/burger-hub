@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { StyleSheet, Text, View, KeyboardAvoidingView, Platform, ScrollView } from 'react-native';
+import { StyleSheet, Text, TouchableOpacity, View,Image } from 'react-native';
 import Tabs from './Tabs';
 import Button from '../ui/Button';
 import { router } from 'expo-router';
@@ -15,8 +15,8 @@ const Homes: React.FC = () => {
  
 
   return (
-    <KeyboardAvoidingView style={styles.container} behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
-      <ScrollView contentContainerStyle={styles.scrollContainer}>
+    <>
+      <View style={styles.container}>
         <View style={styles.header}>
            <View style={styles.titleContainer}>
             <Text style={styles.titleText}>Delicious</Text>
@@ -44,39 +44,49 @@ const Homes: React.FC = () => {
              }}
           />
         </View>
-      </ScrollView>
-    </KeyboardAvoidingView>
+      </View>
+      <Tabs />
+      <View style={{ marginBottom: 40 }}>
+        <Button
+          size='large'
+          color='red'
+          title={` View All ${selectedCategoryName} `}
+          onClick={() => {
+            setX(!x);
+            console.log(x);
+          }}
+        />
+      </View>
+    </>
   );
 };
-
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-  },
-  scrollContainer: {
-    flexGrow: 1, 
-    justifyContent: 'space-between', 
-  },
-  header: {
-    flexDirection: 'row',
+    display:"flex",
+    flexDirection: 'column',
     justifyContent: 'space-between',
-    alignItems: 'flex-start',
-    marginBottom: 20,
+    marginBottom: 15,
     marginLeft: 25,
     height: 120,
-    paddingHorizontal: 10,
-  },
-  titleContainer: {
-    width: '90%',
+    position: 'relative',
+    gap:20
   },
   titleText: {
-    fontSize: 40,
+    fontSize: 34,
     color: 'black',
-    marginBottom: 5,
   },
-  buttonContainer: {
-    marginBottom: 20,
-    paddingHorizontal: 25, 
+  header: {
+    top:30,
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent:"space-between",
+    paddingBottom: 16,
+    
+    
+  },
+  headerTitle: {
+    fontSize: 24,
+    fontWeight: "bold",
   },
 });
 

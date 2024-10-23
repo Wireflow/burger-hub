@@ -8,10 +8,11 @@ const Payments = () => {
     <>
       <Header title="Payments Methods" backgroundColorCode="#F2F2F2" />
        <UserPaymentScreen />
+
      </>
   );
 };
 
 export default Payments;
 
- 
+const styles = StyleSheet.create({});

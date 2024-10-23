@@ -23,12 +23,6 @@ export default async function LogInQuery(dataFromUser: LogInType) {
       throw new Error("User ID is missing after sign-in");
     }
 
-    // const userTable = await getOrderById(userId);
-
-     
-
-  
-    // console.log("User data:", userTable);
     return userId
   } catch (error) {
     console.error("Error in LogInQuery:", error);

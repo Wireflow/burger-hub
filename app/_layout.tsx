@@ -33,14 +33,21 @@ export default function RootLayout() {
   );
 }
 function RootLayoutMain() {
-  // redirectAuth();
+  redirectAuth();
   return (
     <Stack>
       <Stack.Screen name="auth" options={{ headerShown: false }} />
       <Stack.Screen name="Favorite" options={{ headerShown: false }} />
+<<<<<<< HEAD
       <Stack.Screen name="Addresses" options={{ headerShown: false }} />
        <Stack.Screen name="(drawer)" options={{ headerShown: false }} />
  
+=======
+      <Stack.Screen name="payments" options={{ headerShown: false }} />
+
+      <Stack.Screen name="Addresses" options={{ headerShown: false }} />
+      <Stack.Screen name="(drawer)" options={{ headerShown: false }} />
+>>>>>>> 9a2bce4538b18a5748a0a8a7f1d0555cc0e8d4e1
     </Stack>
   );
 }

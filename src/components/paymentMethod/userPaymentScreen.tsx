@@ -45,7 +45,7 @@ const UserPaymentScreen = () => {
         color='red'
         title='Add payment'
         onClick={() => { 
-        router.navigate('/payments/NewPaymentMethod')
+        router.push('/payments/NewPaymentMethod')
          }}
       />
     </View>

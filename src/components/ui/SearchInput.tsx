@@ -53,11 +53,6 @@ const styles = StyleSheet.create({
         borderRadius: 70,
         marginTop: 10,
         marginBottom: 10,
-        backgroundColor:'red',
-        position:'relative',
-        justifyContent:'flex-end',
-        borderWidth:0
-
     },
     input: {
          fontSize: 16,
