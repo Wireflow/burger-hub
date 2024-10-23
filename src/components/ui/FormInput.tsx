@@ -2,6 +2,7 @@ import React from "react";
 import { Controller, Control, FieldValues, Path } from "react-hook-form";
 import { StyleSheet } from "react-native";
 import Input, { InputProps } from "./input";
+import { ViewStyle } from "react-native";
 
 type FormInputProps<T extends FieldValues> = Omit<
   InputProps,
@@ -10,6 +11,8 @@ type FormInputProps<T extends FieldValues> = Omit<
   control?: Control<T>;
   name: Path<T>;
   placeholder?: string;
+  style?: ViewStyle;
+
 };
 
 function FormInput<T extends FieldValues>({

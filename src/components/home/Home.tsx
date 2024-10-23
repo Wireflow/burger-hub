@@ -2,32 +2,27 @@ import React, { useState } from 'react';
 import { StyleSheet, Text, View, KeyboardAvoidingView, Platform, ScrollView } from 'react-native';
 import Tabs from './Tabs';
 import Button from '../ui/Button';
-import { useRouter } from 'expo-router';
-import BurgerList from './BurgerList';
+import { router } from 'expo-router';
 import { useTabContext } from '../layout/TabContext';
 import SearchInput from '../ui/SearchInput';
-import CartIcon from '../ui/CartIcon';
-import { useCartStore } from '@/src/store/cart/cartStore';
+import { usesearchStore } from '@/src/store/search/searchStore';
+import { removeTeailingS } from '@/hooks/removeTeailingS';
 
 const Homes: React.FC = () => {
-  const { cart } = useCartStore(state => state);
-  const router = useRouter();
-  const [redirectToBurgerList, setRedirectToBurgerList] = useState(false);
   const { selectedCategoryName } = useTabContext();
-
-  if (redirectToBurgerList) {
-     return <BurgerList />;
-  }
+  const {  setSearchTerm, clearSearchTerm } = usesearchStore();
+  
+ 
 
   return (
     <KeyboardAvoidingView style={styles.container} behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
       <ScrollView contentContainerStyle={styles.scrollContainer}>
         <View style={styles.header}>
-          <CartIcon  />
-          <View style={styles.titleContainer}>
+           <View style={styles.titleContainer}>
             <Text style={styles.titleText}>Delicious</Text>
             <Text style={styles.titleText}>burgers for you</Text>
             <SearchInput
+            
               color="#000" 
               backgroundColor="#E0E0E0" 
             />
@@ -39,9 +34,14 @@ const Homes: React.FC = () => {
             size='large'
             color='red'
             title={` View All ${selectedCategoryName} `} 
-            onClick={() => {
-              setRedirectToBurgerList(!redirectToBurgerList);
-            }}
+            onClick={ async() => {
+              clearSearchTerm()
+              let title = await removeTeailingS(selectedCategoryName)
+              console.log(title,"im title after slice")
+              setSearchTerm(title);
+              router.push(`/product/search`);
+
+             }}
           />
         </View>
       </ScrollView>

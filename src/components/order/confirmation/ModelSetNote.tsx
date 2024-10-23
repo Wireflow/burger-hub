@@ -5,7 +5,7 @@ import { z } from 'zod';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { NoteType } from '@/src/types/validations/NoteType';
-import FormInput from '../../ui/InputForm';
+import FormInput from '../../ui/FormInput';
 import { useCartStore } from '@/src/store/cart/cartStore';
 
 type Props = {

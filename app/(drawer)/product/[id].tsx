@@ -9,13 +9,7 @@ import Header from "@/src/components/ui/Header";
 const ProductDetails = () => {
   return (
     <>
-      <Stack.Screen
-        options={{
-   
-            headerShown: false,
  
-        }}
-      />
         <Header title='' backgroundColorCode='#F2F2F2' headerRight={<AddProductFavorite/>}/>
 
       <ProductDetailsScreen />

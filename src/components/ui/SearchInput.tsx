@@ -1,41 +1,45 @@
-import React, { useState } from "react";
-import { View, TouchableOpacity, TextInput, StyleSheet, Alert } from "react-native";
-import Icon from 'react-native-vector-icons/FontAwesome';
+import React, { useRef } from "react";
+import { View, StyleSheet } from "react-native";
 import { usePathname, router } from "expo-router";
-
+import { useCustomToast } from "@/src/hooks/useCustomToast";
+import { usesearchStore } from "@/src/store/search/searchStore";
+import Input from "./input";
+import SearchProductScreen from "../home/search/SearchProductScreen";
+ 
 const SearchInput: React.FC<{ color?: string, backgroundColor?: string }> = ({ color = '#333', backgroundColor = 'white' }) => {
-    const [query, setQuery] = useState<string>('');
-    const pathname = usePathname();
+     const pathname = usePathname();
+    const { searchTerm, setSearchTerm, clearSearchTerm } = usesearchStore();
+ 
 
+    console.log("im her in search",pathname.startsWith("/product/search"))
+
+ 
+   
     const handleSearchPress = () => {
-        if (query === "") {
-            return Alert.alert(
-                "Missing Query",
-                "Please input something to search results across database"
-            );
-        }
-
-        if (pathname.startsWith("/search")) {
-            router.setParams({ query });
-        } else {
-            router.push(`/search/${query}`);
-        }
+    
+            if (pathname.startsWith("/product/search")) {
+                console.log("im her in search",pathname.startsWith("/(drawer)/product/search"))
+            } else {
+              router.push(`/product/search`);
+          }
         
-        setQuery(''); 
-    };
+     };
 
     return (
         <View style={[styles.container, { backgroundColor }]}>
-            <TouchableOpacity onPress={handleSearchPress}>
-                <Icon name="search" size={20} color={color} />
-            </TouchableOpacity>
-            <TextInput
-                style={[styles.input, { color }]}
-                placeholder="Search.."
-                placeholderTextColor="#999"
-                value={query}
-                onChangeText={setQuery}
-            />
+              <Input
+                label=""
+              secureTextEntry={false}
+              style={styles.input}
+              placeholder={'Search...'}
+              placeholderTextColor={"black"} 
+              searchBox={searchTerm && pathname.startsWith("/product/search")  ? false :true}
+              onChangeText={setSearchTerm}
+              value={searchTerm}
+               border
+              onPress={handleSearchPress}
+              autoFocus={pathname.startsWith("/product/search")}
+             />
         </View>
     );
 };
@@ -44,23 +48,26 @@ const styles = StyleSheet.create({
     container: {
         flexDirection: 'row',
         alignItems: 'center',
-        width: '85%',
+        width: '90%',
         height: 64,
-        paddingHorizontal: 16,
         borderRadius: 70,
         marginTop: 10,
         marginBottom: 10,
+        backgroundColor:'red',
+        position:'relative',
+        justifyContent:'flex-end',
+        borderWidth:0
+
     },
     input: {
-        flex: 1,
-        fontSize: 16,
+         fontSize: 16,
         marginTop: 2,
         margin: 15,
         marginBottom: 5,
-    },
-    icon: {
-        marginRight: 10,
-    },
+        width:'80%',
+        borderWidth:0
+     },
+  
 });
 
 export default SearchInput;

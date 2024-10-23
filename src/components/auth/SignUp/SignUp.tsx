@@ -6,7 +6,7 @@ import {
   StyleSheet,
   View,
 } from "react-native";
-import FormInput from "@/src/components/ui/InputForm";
+import FormInput from "@/src/components/ui/FormInput";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { SignUpType } from "@/src/types/SignUpType";

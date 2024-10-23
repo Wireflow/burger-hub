@@ -3,6 +3,7 @@ import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import Button from '../ui/Button'; 
+import { Ionicons } from '@expo/vector-icons';
 
 interface NotFoundProps {
   icon: string; 
@@ -15,8 +16,8 @@ interface NotFoundProps {
 const NotFound: React.FC<NotFoundProps> = ({ icon, message1,message2, buttonTitle, onButtonPress }) => {
   return (
     <View style={styles.container}>
-      <Icon name={icon} size={50} color="#333" style={styles.icon} />
-      <Text style={styles.message1}>{message1}</Text>
+        <Ionicons name="search-outline" size={120} color={"#C7C7C7"} />
+        <Text style={styles.message1}>{message1}</Text>
       <Text style={styles.message2}>{message2}</Text>
       <View style={styles.b}>
       {buttonTitle  && (
@@ -41,10 +42,11 @@ marginTop:60
   message1: {
     fontSize: 22,
     textAlign: 'center',
-    marginBottom: 20,
+    marginVertical:20
   },
   message2: {
     fontSize: 15,
+    color:'#BABABA'
   
   },
   b:{

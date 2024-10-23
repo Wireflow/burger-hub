@@ -1,8 +1,6 @@
 import { z } from "zod";
 
-// Define your phone number regex pattern
-const phoneNumberRegex = /^[0-9]{10}$/; // Adjust this regex according to your requirements
-
+ const phoneNumberRegex = /^[0-9]{10}$/;  
 export const UserSchema = z.object({
     name: z.string()
         .min(1, "Name is required")

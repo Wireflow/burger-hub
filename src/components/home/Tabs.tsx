@@ -72,7 +72,7 @@ const Tabs = () => {
                 imageSource={{ uri: product.imageUrl || 'http://example.com/default-image.jpg' }}
                 title={product.name || "Product Name"}
                 price={`$${product.price?.toFixed(2)}`}
-                height={210}
+                height={220}
                 width={200}
                 id={product.id}
                
@@ -92,7 +92,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'baseline',
     width: "90%",
-    marginTop: 30,
+    marginTop: 40,
     margin: 12,
     height: 300,
   },
@@ -120,7 +120,7 @@ const styles = StyleSheet.create({
     borderRadius: 40,
   },
   content: {
-    height: '75%',
+    height: '50%',
     width: '100%',
   },
   cardContainer: {

@@ -33,7 +33,7 @@ const Favorites = () => {
   return (
     <View style={styles.content}>
       {favoriteProducts && favoriteProducts.length > 0 ? (
-        <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+        <ScrollView horizontal  showsHorizontalScrollIndicator={false}>
           <View style={styles.cardContainer}>
             {favoriteProducts.map((product) => (
               <CardWrapper
@@ -71,8 +71,7 @@ export default Favorites;
 const styles = StyleSheet.create({
   content: {
     padding: 16,
-    backgroundColor: "white",
-  },
+   },
   cardContainer: {
     flexDirection: "row",
   },

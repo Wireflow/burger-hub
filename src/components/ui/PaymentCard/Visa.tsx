@@ -30,11 +30,13 @@ function Visa({ paymentMethode, onClick, selectedPaymentID=0, selectedPaymentTyp
           selectedPaymentID === paymentMethode.id && selectedPaymentType === paymentMethode.method_type ? styles.selectedCard : {},
         ]}
         onPress={onClick}  
-      >
-        <Image
+      > 
+    
+      <Image
           source={require("@/assets/icons/visa.png")}
           style={{ height: 40, width: 70 }}
         />
+        
         <View style={{ width: "70%", marginLeft: 15 }}>
           <Text style={styles.type}>{paymentMethode.method_type}</Text>
           <Text style={styles.lastFour}>

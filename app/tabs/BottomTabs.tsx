@@ -37,7 +37,7 @@ export const MyBottomTabs: React.FC = () => {
           ),
           headerRight:()=> <CartIcon/>,
           headerLeftStyle:{marginLeft:25}  ,
-          headerStyle:{backgroundColor:'#F2F2F2',paddingLeft:20}         
+          headerStyle:{backgroundColor:'#F2F2F2'}         
         })}
       />
         <Tab.Screen
@@ -94,14 +94,16 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     marginBottom: 5,
+    
+    
   },
   headerStyle: {
     width: 200,
     height: 45,
     top: 5,
-    left: 10,
+    left: 50,
     fontSize: 30,
     fontWeight: "400",
     lineHeight: 44,
-  },
+   },
 });
