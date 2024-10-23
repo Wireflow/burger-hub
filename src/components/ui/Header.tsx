@@ -22,8 +22,9 @@ import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { Entypo } from "@expo/vector-icons";
 import { Col, Grid } from "react-native-easy-grid";
 import { useNavigation } from "@react-navigation/native";
-import AddProductFavorite from "../product/details/AddProductFavorite";
-
+ import { Text } from "react-native-paper";
+import SearchInput from "./SearchInput";
+ 
 type HeaderProps = {
   style?: StyleProp<ViewStyle>;
   backgroundColorCode:string;
@@ -131,8 +132,8 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: "bold",
     color: "black",
-    flex: 1, // Allow title to take up available space
-    textAlign: "center", // Center the title
+    flex: 1,  
+    textAlign: "center",  
     right:20
     
   },

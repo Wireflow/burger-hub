@@ -21,9 +21,9 @@ const styles = StyleSheet.create({
     alignItems: 'flex-start',
     justifyContent: 'space-between',
     width: 28,
-    height: 15,
-    marginLeft:25
-   },
+    height: 18,
+    marginLeft:25,
+    },
   bar: {
     backgroundColor: '#000000',
     width: 22,

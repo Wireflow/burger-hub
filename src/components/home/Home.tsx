@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { StyleSheet, Text, TouchableOpacity, View,Image } from 'react-native';
+import { StyleSheet, Text, View, KeyboardAvoidingView, Platform, ScrollView } from 'react-native';
 import Tabs from './Tabs';
 import Button from '../ui/Button';
 import { router } from 'expo-router';
@@ -15,8 +15,8 @@ const Homes: React.FC = () => {
  
 
   return (
-    <>
-      <View style={styles.container}>
+    <KeyboardAvoidingView style={styles.container} behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
+      <ScrollView contentContainerStyle={styles.scrollContainer}>
         <View style={styles.header}>
            <View style={styles.titleContainer}>
             <Text style={styles.titleText}>Delicious</Text>
@@ -44,49 +44,39 @@ const Homes: React.FC = () => {
              }}
           />
         </View>
-      </View>
-      <Tabs />
-      <View style={{ marginBottom: 40 }}>
-        <Button
-          size='large'
-          color='red'
-          title={` View All ${selectedCategoryName} `}
-          onClick={() => {
-            setX(!x);
-            console.log(x);
-          }}
-        />
-      </View>
-    </>
+      </ScrollView>
+    </KeyboardAvoidingView>
   );
 };
+
 const styles = StyleSheet.create({
   container: {
-    display:"flex",
-    flexDirection: 'column',
-    justifyContent: 'space-between',
-    marginBottom: 15,
-    marginLeft: 25,
-    height: 120,
-    position: 'relative',
-    gap:20
+    flex: 1,
   },
-  titleText: {
-    fontSize: 34,
-    color: 'black',
+  scrollContainer: {
+    flexGrow: 1, 
+    justifyContent: 'space-between', 
   },
   header: {
-    top:30,
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent:"space-between",
-    paddingBottom: 16,
-    
-    
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'flex-start',
+    marginBottom: 20,
+    marginLeft: 25,
+    height: 120,
+    paddingHorizontal: 10,
   },
-  headerTitle: {
-    fontSize: 24,
-    fontWeight: "bold",
+  titleContainer: {
+    width: '90%',
+  },
+  titleText: {
+    fontSize: 40,
+    color: 'black',
+    marginBottom: 5,
+  },
+  buttonContainer: {
+    marginBottom: 20,
+    paddingHorizontal: 25, 
   },
 });
 

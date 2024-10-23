@@ -43,8 +43,8 @@ const Tabs = () => {
   return (
     <View style={styles.container}>
       <View style={styles.tabContainer}>
-      <ScrollView horizontal>
-      {isLoading && <ActivityIndicator size="large" color="red" style={{ alignItems: 'center', justifyContent: 'center' }} />}
+      <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+      {isLoading && <ActivityIndicator size="large" color="#AF042C" style={{ alignItems: 'center', justifyContent: 'center' ,margin:50}} />}
         {categories && categories.map((categoryItem: category) => (
           <TouchableOpacity
             key={categoryItem.id}
@@ -61,7 +61,7 @@ const Tabs = () => {
       </View>
       <View style={styles.content}>
         {isLoadingProducts ? (
-          <ActivityIndicator size="large" color="red" />
+          <ActivityIndicator size="large" color="#AF042C" />
         ) : productsByCategory && productsByCategory.length > 0 ? (
           <ScrollView
             horizontal
@@ -97,16 +97,17 @@ const styles = StyleSheet.create({
     marginTop: 30,
     margin: 12,
     height: 300,
-    top:80
+    top:8
   },
   tabContainer: {
     flexDirection: "row",
     justifyContent: 'space-around',
-    marginBottom: 0,
+    marginBottom: 20,
   },
   tab: {
     padding: 5,
     alignItems: "center",
+     width:'25%'
   },
   tabText: {
     fontSize: 18,
