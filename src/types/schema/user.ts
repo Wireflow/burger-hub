@@ -1,3 +1,4 @@
-import { Row } from "@/src/service/subabase/table.types";
+import { Row } from "@/src/services/supabase/table.types";
 
+ 
 export type Users=Row<"User">

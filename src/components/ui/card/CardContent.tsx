@@ -45,17 +45,17 @@ const styles = StyleSheet.create({
     
   },
   image: {
-    width: 110,
-    height: 100,
+    width: 170,
+    height: 155,
     borderRadius: 15,
     borderTopLeftRadius:30,
     borderTopRightRadius:30
   },
   textContainer: {
-    marginTop: 58,
+    marginTop: 95,
     alignItems: 'center',
     marginBottom: 10,
-  },
+   },
   text: {
     color: 'black',
     fontSize: 15,

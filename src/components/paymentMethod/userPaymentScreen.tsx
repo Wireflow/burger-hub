@@ -1,13 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { StyleSheet, View } from 'react-native';
 import Button from '../ui/Button';
-import UserPayment from './addPayment/UserPayment';
 import { useGetAllPaymentUser } from '@/src/queries/payment/getAllPaymentUser';
 import { useSessionStore } from '@/src/store/useSessionStore';
 import LoadingIndicator from './showPayment/LoadingIndicator';
 import ErrorText from './showPayment/ErrorText';
 import ConnectedCardWithSwipe from './showPayment/ConnectedCardWithSwipe';
-import { router, useNavigation } from 'expo-router';
+import { router, useFocusEffect, useNavigation } from 'expo-router';
 
 const UserPaymentScreen = () => {
   const { session } = useSessionStore();
@@ -21,7 +20,11 @@ const UserPaymentScreen = () => {
     isFetched
   } = useGetAllPaymentUser(userId as string);
 
- 
+  useFocusEffect(
+    React.useCallback(() => {
+      refetch();
+    }, [refetch])
+  );
   if (paymentLoading) {
     return <LoadingIndicator />;
   }
@@ -29,9 +32,7 @@ const UserPaymentScreen = () => {
   if (paymentError) {
     return <ErrorText message={paymentError.message} />;
   }
-useEffect(()=>{
-  refetch()
-})
+ 
 
   return (
     <View style={styles.container}>

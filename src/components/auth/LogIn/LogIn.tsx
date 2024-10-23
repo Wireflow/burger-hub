@@ -11,7 +11,7 @@ import {
 } from "react-native";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import FormInput from "@/src/components/ui/InputForm";
+import FormInput from "@/src/components/ui/FormInput";
 import { SafeAreaView } from "react-native-safe-area-context";
 import Button from "../../ui/Button";
 import LogInQuery from "@/src/queries/auth/login";
@@ -28,7 +28,7 @@ const LogIn = () => {
   const { setSession } = useSessionStore();
   const [loader, setLoader] = useState(false);
   const showToast = useCustomToast();
-
+ 
   const { control, handleSubmit, setError } = useForm<LogInType>({
     resolver: zodResolver(LogInSchema),
     defaultValues: {
@@ -54,9 +54,10 @@ const LogIn = () => {
           id: dataUser.id,
         });
         showToast("Login successfully!", { type: "success" });
+ 
         router.navigate("/(drawer)/main");
       } else {
-        showToast("There is no account with this email!", { type: "warningC" });
+        showToast("There is no account with this email!", { type: "warning" });
       }
 
       console.log("User logged in:", userId);

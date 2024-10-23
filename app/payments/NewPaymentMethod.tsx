@@ -1,15 +1,14 @@
 import { StyleSheet, Text, View } from "react-native";
 import React from "react";
 import Header from "@/src/components/ui/Header";
- import UserPayment from "@/src/components/paymentMethod/addPayment/UserPayment";
-import { Stack } from "expo-router";
+ import { Stack } from "expo-router";
+import NewPaymentScreen from "@/src/components/paymentMethod/newPayment/NewPaymentScreen";
  
 const NewPaymentMethod = () => {
   return (
     <>
-    <Stack screenOptions={{headerShown:false}}/>
-      <Header title="New Payment   " backgroundColorCode="#F2F2F2" />
-       <UserPayment />
+       <Header title="New Payment   " backgroundColorCode="#F2F2F2" />
+       <NewPaymentScreen />
 
      </>
   );

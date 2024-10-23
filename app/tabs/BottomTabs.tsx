@@ -24,16 +24,22 @@ export const MyBottomTabs: React.FC = () => {
         initialRouteName="home"
         tabBar={(props) => <CustomTabBar {...props} />}
       >
-        <Tab.Screen
-          name="home"
-          component={Homes}
-          options={{
-            headerShown:false,
-            tabBarIcon: ({ color, size }) => (
-              <MaterialCommunityIcons name="home" color={color} size={size} />
-            ),
-          }}
-        />
+          <Tab.Screen
+        name=" "
+        component={Homes}
+        options={({ navigation }) => ({
+          tabBarIcon: ({ color, size }) => (
+            <MaterialCommunityIcons name="home" color={color} size={size} />
+          ),
+          headerShown: true,
+          headerLeft: () => (
+     <BarUI onClick={() => navigation.toggleDrawer()}/>
+          ),
+          headerRight:()=> <CartIcon/>,
+          headerLeftStyle:{marginLeft:25}  ,
+          headerStyle:{backgroundColor:'#F2F2F2'}         
+        })}
+      />
         <Tab.Screen
           name="favorite"
           component={Favorites}
@@ -88,14 +94,16 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     marginBottom: 5,
+    
+    
   },
   headerStyle: {
     width: 200,
     height: 45,
     top: 5,
-    left: 10,
+    left: 50,
     fontSize: 30,
     fontWeight: "400",
     lineHeight: 44,
-  },
+   },
 });

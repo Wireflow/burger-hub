@@ -14,7 +14,6 @@ type Prop = {
     paymentMethods: PaymentMethodVisa[] | null;
     onClick:(id: number, methodType:PaymentType )=>void
 }
-
 const ConnectedCardWithSwipeVisa = ({ paymentMethods,onClick }: Prop) => {
     console.log("im connect this datapayment",paymentMethods)
  
@@ -25,9 +24,12 @@ const ConnectedCardWithSwipeVisa = ({ paymentMethods,onClick }: Prop) => {
         <View>
         <SwipeListView
             data={paymentMethods} 
-            renderItem={({ item }) => (
+            renderItem={({ item }) => 
+                (
+                
                 <Visa
                     onClick={() => {}}
+
                     paymentMethode={item}
                 />
             )}

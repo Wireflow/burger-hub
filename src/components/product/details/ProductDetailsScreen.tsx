@@ -60,7 +60,7 @@ console.log("im height and width in cart ",windowWidth,windowHeight)
 
 const styles = StyleSheet.create({
   container: {
-    height:windowWidth  +(windowHeight*0.4),
+    height:windowWidth  ,
     width: windowWidth,
      display: 'flex',
     alignItems: 'center',

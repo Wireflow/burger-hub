@@ -8,6 +8,8 @@ const _layout = () => {
     <GestureHandlerRootView style={{ flex: 1 }}>
       <Stack >
         <Stack.Screen name="Index" options={{ headerShown: false }} />
+        <Stack.Screen name="NewPaymentMethod" options={{ headerShown: false }} />
+
       </Stack>
     </GestureHandlerRootView>
   );
@@ -15,4 +17,4 @@ const _layout = () => {
 
 export default _layout;
 
-const styles = StyleSheet.create({});
+ 

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import {
   NativeSyntheticEvent,
   StyleSheet,
@@ -9,25 +9,29 @@ import {
   View,
   ViewStyle,
 } from "react-native";
- import { Ionicons } from "@expo/vector-icons";
- import { textStyles } from "../themed";
+import { Ionicons } from "@expo/vector-icons";
+import { textStyles } from "../themed";
+import { TouchableOpacity } from "react-native-gesture-handler";
 
 export interface InputProps extends TextInputProps {
   label?: string;
   description?: string;
   placeholder?: string;
-  value?: string | any;
+  value?: string;
   onChangeText?: (text: string) => void;
   secureTextEntry?: boolean;
   error?: string;
   errorStyle?: object;
-  searchBox?: React.ReactNode;
+  searchBox?: boolean;
   style?: ViewStyle;
   icon?: (focused: boolean) => React.ReactNode;
   inputStyle?: ViewStyle;
   onBlur?:
     | ((e: NativeSyntheticEvent<TextInputFocusEventData>) => void)
     | undefined;
+  onClickIcon?: () => void;
+  border?: boolean;
+
 }
 
 const Input: React.FC<InputProps> = ({
@@ -45,45 +49,36 @@ const Input: React.FC<InputProps> = ({
   multiline,
   searchBox,
   icon,
+  onClickIcon,
+  border,
   ...props
 }) => {
-  const [isFocused, setIsFocused] = useState(false);
- 
-
-  const handleFocus = () => setIsFocused(true);
-  const handleBlur = () => setIsFocused(false);
-
   return (
     <View style={[styles.container, style]}>
       {label && <Text style={[textStyles.small, styles.label]}>{label}</Text>}
-      <View style={[styles.inputContainer, isFocused && styles.focusedInput]}>
-        {icon ? (
-          <View style={styles.iconContainer}>{icon(isFocused)}</View>
-        ) : searchBox ? (
+      <View style={[styles.inputContainer, { borderWidth: border ? 0 :1 }]}>
+        {searchBox && (
           <View style={styles.searchIconContainer}>
-            <Ionicons
-              name="search-outline"
-              size={24}
-              color={isFocused ? "white": "black"}
-            />
+            <TouchableOpacity onPress={onClickIcon}>
+              <Ionicons name="search-outline" size={24} color={"black"} />
+            </TouchableOpacity>
           </View>
-        ) : null}
+        )}
         <TextInput
           style={[
             styles.input,
             multiline && styles.multilineInput,
-            icon || searchBox ? styles.inputWithIcon : null,
             inputStyle,
           ]}
           placeholder={placeholder}
-          placeholderTextColor={'#fff'}
+          placeholderTextColor={'#00000080'}
           value={value}
           onChangeText={onChangeText}
           secureTextEntry={secureTextEntry}
-          onFocus={handleFocus}
           multiline={multiline}
-          onBlur={onBlur ? onBlur : handleBlur}
-          {...props}
+          onBlur={(onBlur)}
+          
+           {...props}
         />
       </View>
       {description && <Text style={styles.description}>{description}</Text>}
@@ -100,14 +95,10 @@ const styles = StyleSheet.create({
     marginBottom: 8,
   },
   inputContainer: {
-    borderWidth: 1,
-    borderColor:'black',
+    borderColor: 'black',
     borderRadius: 8,
     flexDirection: "row",
     alignItems: "center",
-  },
-  focusedInput: {
-    borderColor: 'black',
   },
   input: {
     flex: 1,
@@ -117,24 +108,16 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
     minHeight: 48,
   },
-  inputWithIcon: {
-    paddingLeft: 48,
-  },
   multilineInput: {
     minHeight: 100,
     textAlignVertical: "top",
   },
-  iconContainer: {
+  searchIconContainer: {
     position: "absolute",
-    left: 12,
+    left: -20,
     top: 12,
     justifyContent: "center",
     alignItems: "center",
-  },
-  searchIconContainer: {
-    position: "absolute",
-    left: 12,
-    top: 12,
   },
   description: {
     ...textStyles.xsmall,

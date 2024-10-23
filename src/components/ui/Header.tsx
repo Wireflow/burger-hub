@@ -1,24 +1,43 @@
+//  import React from 'react'
+ 
+//  const HeaderSearchInpu = () => {
+//    return (
+//      <>
+//      </>
+//    )
+//  }
+ 
+//  export default HeaderSearchInpu
+
 import React, { Component, createContext, useContext } from "react";
 import {
   StyleProp,
   StyleSheet,
   View,
   ViewStyle,
-  StatusBar,
-  Text,
+ 
   TouchableOpacity,
 } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { Entypo } from "@expo/vector-icons";
 import { Col, Grid } from "react-native-easy-grid";
 import { useNavigation } from "@react-navigation/native";
-
+ import { Text } from "react-native-paper";
+import SearchInput from "./SearchInput";
+ 
 type HeaderProps = {
   style?: StyleProp<ViewStyle>;
-  title?: string;
   backgroundColorCode:string;
   headerRight?: React.ReactElement;
+  left?:number;
+  title?:string;
+  headerSearch?:boolean;
+  onBack?:()=>void;
 };
+type onBackProp ={
+  onBack?:()=>void;
+
+}
 
 const headerHeight = 130;
 
@@ -36,7 +55,7 @@ function useHeader() {
   return context;
 }
 
-function Header({ style, title,backgroundColorCode,headerRight }: HeaderProps) {
+function Header({ style,backgroundColorCode,headerRight,onBack ,left,title,headerSearch}: HeaderProps) {
   const navigation = useNavigation();
   const insets = useSafeAreaInsets();
 
@@ -56,33 +75,48 @@ function Header({ style, title,backgroundColorCode,headerRight }: HeaderProps) {
           {
             paddingTop: insets.top,
             height: headerHeight,
-            backgroundColor:backgroundColorCode
+            backgroundColor:backgroundColorCode,
+            left:left
             
           },
         ]}
       >
         <Grid style={styles.container}>
-          <Header.BackButton />
-
+          <Header.BackButton onBack={onBack} />
+          {
+headerSearch && <Header.SearchInputHeader backgroundColorCode={backgroundColorCode}/>
+          }
           {title && <Text style={[styles.title]}>{title}</Text>}
- {headerRight}
-         </Grid>
+          {headerRight}
+          </Grid>
       </View>
     </HeaderContext.Provider>
   );
 }
 
-Header.BackButton = function HeaderBackButton() {
+Header.BackButton = function HeaderBackButton({onBack}:onBackProp) {
   const { goBack } = useHeader();
 
   return (
     <Col size={0.2}>
-      <TouchableOpacity onPress={goBack} style={styles.button}>
+      <TouchableOpacity onPress={onBack ? onBack :goBack} style={styles.button}>
         <Entypo name="chevron-thin-left" size={23} color="black" />
       </TouchableOpacity>
     </Col>
   );
 };
+
+Header.SearchInputHeader = function SearchInputHeader({backgroundColorCode}:HeaderProps){
+  return (
+<>
+<View style={styles.search}>
+         <SearchInput
+          backgroundColor={backgroundColorCode}
+         />
+        </View>
+</>
+  )
+}
 
 export default Header;
 
@@ -91,18 +125,34 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
     flexDirection: "row",
     alignItems: "center",
-    justifyContent: "space-between", // Space between title and buttons
+    justifyContent: "space-between",  
   
   },
   title: {
     fontSize: 20,
     fontWeight: "bold",
     color: "black",
-    flex: 1, // Allow title to take up available space
-    textAlign: "center", // Center the title
+    flex: 1,  
+    textAlign: "center",  
     right:20
+    
   },
   button: {
     borderRadius: 150,
+    left:20
   },
+  search :{
+    flex: 1,  
+    right:20,
+    top:5
+  }
 });
+
+
+
+
+
+
+
+
+

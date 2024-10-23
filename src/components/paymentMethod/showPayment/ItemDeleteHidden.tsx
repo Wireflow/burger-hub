@@ -1,32 +1,19 @@
-import { useCartStore } from '@/src/store/cart/cartStore';
-import { PaymentMethodPayPal } from '@/src/types/validations/Payments';
-import AntDesign from '@expo/vector-icons/AntDesign';
 import MaterialIcons from '@expo/vector-icons/MaterialIcons';
 import React from 'react'
 import { StyleSheet, TouchableOpacity, View } from 'react-native';
 import {Dimensions} from 'react-native';
-  const windowWidth = Dimensions.get('window').width;
-const windowHeight = Dimensions.get('window').height;
-
-type Product = {
-    name: string;
-    price: number;
-    quantity: number;
-    id:number
-};
+const windowWidth = Dimensions.get('window').width;
+ 
 type Props = {
      
     onClick:()=> void
 };
 const ItemsHidden = ({onClick}:Props) => {
-    const { removeProduct } = useCartStore(state => state);
-
+ 
   return (
     <View style={styles.hiddenContainer}>
- 
     <TouchableOpacity style={styles.hiddenText} onPress={onClick}>
       <MaterialIcons name="delete-outline" size={20} color="#f0f0f0" />
-
     </TouchableOpacity>
   </View>  )
 }
