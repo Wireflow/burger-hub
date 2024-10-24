@@ -32,30 +32,25 @@ export const ProductDetailsScreen = () => {
     );
   }
   return (
-    <>
-      <View style={styles.container}>
-        {data && (
-          <View
-            style={{
-              alignItems: "center",
-              width: "95%",
-              marginHorizontal: "auto",
-              height: windowHeight * 0.6,
-              justifyContent: "space-between",
-              position: "relative",
-            }}
-          >
-            <ImageProduct imageBase={data?.product.imageUrl} />
-            <Presentation
-              title={data?.product.name || ""}
-              description={data?.product.description || ""}
-              price={data?.product.price || undefined}
-            />
-          </View>
-        )}
+    <>  
+       
+    <View style={styles.container}>
+      {
+      data &&
+      (  <View style={{ alignItems: 'center',width:'95%',marginHorizontal:'auto',height:windowHeight*0.6,justifyContent:'space-between',position:'relative' }}>
 
-        <Buttons data={data} />
-      </View>
+        
+        <ImageProduct imageBase={data?.product.imageUrl || ''} />
+        <Presentation
+          title={data?.product.name || ''}
+          description={data?.product.description || ''}
+          price={data?.product.price || undefined}
+        />
+      </View>)
+      }
+    
+      <Buttons data={data} />
+    </View>
     </>
   );
 };
@@ -64,9 +59,10 @@ const styles = StyleSheet.create({
   container: {
     height: windowWidth,
     width: windowWidth,
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "space-between",
+     display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+      
   },
   horizontal: {
     flexDirection: "row",

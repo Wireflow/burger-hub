@@ -139,7 +139,7 @@ const styles = StyleSheet.create({
   },
   tabText: {
     fontSize: 18,
-    marginTop: 30,
+    marginTop: height*0.03,
   },
   underline: {
     marginTop: 10,

@@ -1,19 +1,12 @@
-import React, { useState } from "react";
-import {
-  StyleSheet,
-  Text,
-  View,
-  KeyboardAvoidingView,
-  Platform,
-  ScrollView,
-} from "react-native";
-import Tabs from "./Tabs";
-import Button from "../ui/Button";
-import { router } from "expo-router";
-import { useTabContext } from "../layout/TabContext";
-import SearchInput from "../ui/SearchInput";
-import { usesearchStore } from "@/src/store/search/searchStore";
-import { removeTeailingS } from "@/hooks/removeTeailingS";
+import React, { useState } from 'react';
+import { StyleSheet, Text, View, KeyboardAvoidingView, Platform, ScrollView } from 'react-native';
+import Tabs from './Tabs';
+import Button from '../ui/Button';
+import { router } from 'expo-router';
+import { useTabContext } from '../layout/TabContext';
+import SearchInput from '../ui/SearchInput';
+import { usesearchStore } from '@/src/store/search/searchStore';
+import { removeTeailingS } from '@/hooks/removeTeailingS';
 
 const Homes: React.FC = () => {
   const { selectedCategoryName } = useTabContext();
@@ -67,22 +60,20 @@ const styles = StyleSheet.create({
     alignItems: "flex-start",
     marginBottom: 20,
     marginLeft: 25,
-    height: 120,
+    height: windowHeight*0.2,
     paddingHorizontal: 10,
-  },
+   },
   titleContainer: {
     width: "90%",
   },
   titleText: {
     fontSize: 40,
-    color: "black",
+    color: 'black',
     marginBottom: 5,
   },
   buttonContainer: {
-    position: "absolute",
-    paddingHorizontal: 25,
-    bottom: 40,
-    left: 10,
+    marginBottom: 20,
+    paddingHorizontal: 25, 
   },
 });
 

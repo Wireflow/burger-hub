@@ -9,6 +9,9 @@ type CardContentProps = {
   price: string;  
   id: number;
 };
+import { Dimensions } from 'react-native';
+const windowWidth = Dimensions.get('window').width;
+const windowHeight = Dimensions.get('window').height;
 
 const CardContent = ({ id, imageSource, title, price }: CardContentProps) => {
   return (
@@ -53,7 +56,7 @@ const CardContent = ({ id, imageSource, title, price }: CardContentProps) => {
     },
   
   textContainer: {
-    marginTop: 95,
+    marginTop: windowHeight*0.06,
     alignItems: 'center',
     marginBottom: 10,
   },
