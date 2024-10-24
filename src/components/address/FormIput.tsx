@@ -6,6 +6,7 @@ import {
   StyleSheet,
   NativeSyntheticEvent,
   TextInputFocusEventData,
+  KeyboardAvoidingView,
 } from 'react-native';
 import { Controller } from 'react-hook-form';
 
@@ -38,7 +39,8 @@ const FormInput: React.FC<Props> = ({
   const handleOnFocus = () => setIsFocused(true);
   const handleOnBlur = () => setIsFocused(false);
   return (
-    <View style={styles.container}>
+  <KeyboardAvoidingView>
+      <View style={styles.container}>
       <Text style={styles.label}>{text}</Text>
       <Controller
         control={control}
@@ -63,19 +65,20 @@ const FormInput: React.FC<Props> = ({
       />
       {description && <Text style={styles.description}>{description}</Text>}
     </View>
+  </KeyboardAvoidingView>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
     width: '95%',
-    marginBottom: 15, // Spacing between inputs
+    marginBottom: 15,
   },
   label: {
     fontSize: 14,
     fontWeight: '700',
     color: '#091e3a',
-    marginBottom: 5, // Spacing below the label
+    marginBottom: 5,
   },
   input: {
     borderRadius: 10,
@@ -97,7 +100,7 @@ const styles = StyleSheet.create({
   },
   description: {
     fontSize: 12,
-    color: '#6c757d', // Gray color for description
+    color: '#6c757d',
     marginTop: 3,
   },
 });

@@ -49,7 +49,7 @@ const styles = StyleSheet.create({
   deliveryAddress: {
     marginBottom: 20,
     justifyContent: "space-between",
-    flexDirection: "row",
+    flexDirection: "column",
     width: "97%",
   },
   label: {

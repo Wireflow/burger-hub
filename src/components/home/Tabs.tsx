@@ -13,7 +13,7 @@ import { category } from "../../types/schema/category";
 import { useGetProductsByCategoryId } from "../../queries/products/getProductsByCategoryId";
 import { useTabContext } from "../layout/TabContext";
 import CardWrapper from "../ui/card/CardWrapper";
-const { width,height } = Dimensions.get("window");
+const { width, height } = Dimensions.get("window");
 
 const Tabs = () => {
   const { data: categories, error, isLoading } = useGetAllCategories();
@@ -104,8 +104,6 @@ const Tabs = () => {
                 }}
                 title={product.name || "Product Name"}
                 price={`$${product.price?.toFixed(2)}`}
-             
-              
                 id={product.id}
               />
             ))}
@@ -122,9 +120,9 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: "baseline",
-    marginTop: 20,
+    marginTop: 30,
     margin: 12,
-    height:height*0.5,
+    height: height * 0.5,
     top: 8,
   },
   tabContainer: {
@@ -139,7 +137,7 @@ const styles = StyleSheet.create({
   },
   tabText: {
     fontSize: 18,
-    marginTop: height*0.03,
+    marginTop: height * 0.03,
   },
   underline: {
     marginTop: 10,

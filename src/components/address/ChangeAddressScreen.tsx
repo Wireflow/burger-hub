@@ -9,6 +9,7 @@ import {
   ActivityIndicator,
   Modal,
   Dimensions,
+  ScrollView,
 } from "react-native";
 import { useGetAddressByUserId } from "@/src/queries/users/useGetAddressbyUserId";
 import { useSessionStore } from "@/src/store/useSessionStore";
@@ -32,7 +33,7 @@ type Props = {
     options?: RefetchOptions & RefetchQueryFilters
   ) => Promise<QueryObserverResult<any, any>>;
 };
-const { width } = Dimensions.get("window");
+const { width,height } = Dimensions.get("window");
 
 const AddressChangeScreen = ({ setOpen, open, refetch }: Props) => {
   const [dialogOpen, setDialogOpen] = useState(false);
@@ -58,7 +59,7 @@ const AddressChangeScreen = ({ setOpen, open, refetch }: Props) => {
   };
 
   return (
-    <SafeAreaView style={styles.container}>
+    <ScrollView   style={styles.container}>
       <Modal
         onDismiss={setOpen}
         presentationStyle="overFullScreen"
@@ -127,7 +128,7 @@ const AddressChangeScreen = ({ setOpen, open, refetch }: Props) => {
           trigger={undefined}
         />
       </Modal>
-    </SafeAreaView>
+    </ScrollView>
   );
 };
 export default AddressChangeScreen;
@@ -143,7 +144,7 @@ const styles = StyleSheet.create({
     display: "flex",
     top: "25%",
     left: "50%",
-    height: "auto",
+    height: height*0.5,
     width: width * 0.8,
     flex: 1,
     alignItems: "center",

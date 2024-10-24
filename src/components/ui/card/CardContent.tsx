@@ -22,6 +22,7 @@ const CardContent = ({ id, imageSource, title, price }: CardContentProps) => {
           style={styles.image}
           resizeMode="cover" 
         />
+         
       </View>
       <View style={styles.textContainer}>
         <Text style={styles.text}>{title}</Text>  
@@ -39,24 +40,24 @@ const CardContent = ({ id, imageSource, title, price }: CardContentProps) => {
 };
 
 
-  const styles = StyleSheet.create({
-    imageWrapper: {
-      position: 'absolute',
-      top: -45,
-      alignSelf: 'center',
-      width: '100%', // تأكد من أن العرض هنا محدد
-      height: 150,
-      backgroundColor:""
-      
-    },
-    image: {
-      width: '100%',
-      height: '100%', // استخدام 100% لجعل الصورة تتناسب مع الكارد
-
-    },
   
+const styles = StyleSheet.create({
+  imageWrapper: {
+    position: 'absolute',
+    top: -45,
+    alignSelf: 'center',
+    width: '100%', // تأكد من أن العرض هنا محدد
+    height: 150,
+    
+  },
+  image: {
+    width: '100%',
+    height: '100%', // استخدام 100% لجعل الصورة تتناسب مع الكارد
+
+  },
+
   textContainer: {
-    marginTop: windowHeight*0.06,
+    marginTop: 100,
     alignItems: 'center',
     marginBottom: 10,
   },
