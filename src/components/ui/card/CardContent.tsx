@@ -22,8 +22,7 @@ const CardContent = ({id, imageSource, title, price }: CardContentProps) => {
 
           source={imageSource || require('@/assets/images/Mask Group.png')}  
           style={styles.image}
-          // onError={handleImageError} // التعامل مع الخطأ هنا
-        />
+         />
       </View>
       <View style={styles.textContainer}>
         <Text style={styles.text}>{title}</Text>  
@@ -55,7 +54,7 @@ const styles = StyleSheet.create({
     borderTopRightRadius:30
   },
   textContainer: {
-    marginTop: 95,
+    marginTop: windowHeight*0.06,
     alignItems: 'center',
     marginBottom: 10,
    },

@@ -98,15 +98,14 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'baseline',
     width: "90%",
-    marginTop: 30,
+    marginTop: windowHeight*0.02,
     margin: 12,
-    height: 300,
-    top:8
-  },
+    height: windowHeight*0.35,
+   },
   tabContainer: {
     flexDirection: "row",
     justifyContent: 'space-around',
-    marginBottom: 20,
+    marginBottom: 10,
   },
   tab: {
     padding: 5,
@@ -115,7 +114,7 @@ const styles = StyleSheet.create({
   },
   tabText: {
     fontSize: 18,
-    marginTop: 30,
+    marginTop: windowHeight*0.03,
   },
   underline: {
     marginTop: 10,
@@ -125,13 +124,14 @@ const styles = StyleSheet.create({
     borderRadius: 40,
   },
   content: {
-    height: '50%',
+    height: windowHeight*0.3,
     width: '100%',
-  },
+   },
   cardContainer: {
     flexDirection: 'row',
     justifyContent: 'flex-start',
     alignItems: 'center',
+    
   },
   noProductsText: {
     fontSize: 18,

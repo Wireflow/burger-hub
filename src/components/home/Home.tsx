@@ -7,6 +7,9 @@ import { useTabContext } from '../layout/TabContext';
 import SearchInput from '../ui/SearchInput';
 import { usesearchStore } from '@/src/store/search/searchStore';
 import { removeTeailingS } from '@/hooks/removeTeailingS';
+import { Dimensions } from 'react-native';
+const windowWidth = Dimensions.get('window').width;
+const windowHeight = Dimensions.get('window').height;
 
 const Homes: React.FC = () => {
   const { selectedCategoryName } = useTabContext();
@@ -63,21 +66,21 @@ const styles = StyleSheet.create({
     alignItems: 'flex-start',
     marginBottom: 20,
     marginLeft: 25,
-    height: 120,
+    height: windowHeight*0.2,
     paddingHorizontal: 10,
-  },
+   },
   titleContainer: {
     width: '90%',
   },
   titleText: {
-    fontSize: 40,
+    fontSize: windowHeight*0.05,
     color: 'black',
     marginBottom: 5,
   },
   buttonContainer: {
-    marginBottom: 20,
-    paddingHorizontal: 25, 
-  },
+    marginBottom: windowHeight*0.03,
+     backgroundColor:'red',
+   },
 });
 
 export default Homes;
