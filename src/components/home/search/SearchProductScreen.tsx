@@ -50,6 +50,8 @@ const SearchProductScreen = () => {
             height={220}
             width={160}
             id={item.id}
+
+             
           />
         )}
     

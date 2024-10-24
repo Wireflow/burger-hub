@@ -8,6 +8,9 @@ import { router } from 'expo-router';
   price: string;  
   id:number
 };
+import { Dimensions } from 'react-native';
+const windowWidth = Dimensions.get('window').width;
+const windowHeight = Dimensions.get('window').height;
 
 const CardContent = ({id, imageSource, title, price }: CardContentProps) => {
 
@@ -45,8 +48,8 @@ const styles = StyleSheet.create({
     
   },
   image: {
-    width: 170,
-    height: 155,
+    width: windowHeight*0.167,
+    height: windowHeight*0.14,
     borderRadius: 15,
     borderTopLeftRadius:30,
     borderTopRightRadius:30

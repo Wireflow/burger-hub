@@ -43,7 +43,10 @@ console.log("im height and width in cart ",windowWidth,windowHeight)
       (  <View style={{ alignItems: 'center',width:'95%',marginHorizontal:'auto',height:windowHeight*0.6,justifyContent:'space-between',position:'relative' }}>
 
         
-        <ImageProduct imageBase={data?.product.imageUrl || ''} />
+
+        
+<ImageProduct                 imageBase={{ uri: data.product.imageUrl || 'http://example.com/default-image.jpg' }}
+ />
         <Presentation
           title={data?.product.name || ''}
           description={data?.product.description || ''}

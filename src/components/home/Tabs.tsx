@@ -12,6 +12,10 @@ import { category } from "../../types/schema/category";
 import { useGetProductsByCategoryId } from "../../queries/products/getProductsByCategoryId";
 import { useTabContext } from '../layout/TabContext';
 import CardWrapper from "../ui/card/CardWrapper";
+import { Dimensions } from 'react-native';
+const windowWidth = Dimensions.get('window').width;
+const windowHeight = Dimensions.get('window').height;
+
 
 const Tabs = () => {
   const { data: categories, error, isLoading } = useGetAllCategories();
@@ -74,8 +78,8 @@ const Tabs = () => {
                 imageSource={{ uri: product.imageUrl || 'http://example.com/default-image.jpg' }}
                 title={product.name || "Product Name"}
                 price={`$${product.price?.toFixed(2)}`}
-                height={220}
-                width={200}
+                height={windowHeight*0.25}
+                width={windowHeight*0.22}
                 id={product.id}
                
               />
