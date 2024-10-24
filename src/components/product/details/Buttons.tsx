@@ -22,7 +22,7 @@ const Buttons = ({data}:props) => {
   };
   const handleAddProduct =async () => {
     console.log("im button and cart store before",cart)
-    const x =await addProduct({
+    const x = addProduct({
       id: data?.product?.id,
       imageUrl: data?.product?.imageUrl,
       name: data?.product?.name,

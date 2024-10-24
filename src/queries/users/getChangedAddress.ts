@@ -4,11 +4,10 @@ import { useAddressStore } from "@/src/store/address/useaddressStore";
 import { addresses } from "@/src/types/schema/address";
 import { useQuery } from "@tanstack/react-query";
 
-// Custom hook to get updated addresses
 export const useGetUpdatedAddresses = () => {
     const setAddress = useAddressStore((state) => state.setAddress); 
 
-    return useQuery<addresses[], Error>({
+    return useQuery({
         queryKey: ['addressUpdated'],
         queryFn: async () => {
             const addresses = await getUpdatedAddresses();
@@ -18,7 +17,7 @@ export const useGetUpdatedAddresses = () => {
     });
 };
 
-// Function to fetch updated addresses from Supabase
+
 const getUpdatedAddresses = async () => {
     try {
         const { session } = useSessionStore.getState(); 

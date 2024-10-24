@@ -10,13 +10,11 @@ import Favorites from "@/src/components/Favorite/Favorite";
 import Homes from "@/src/components/home/Home";
 import CartIcon from "@/src/components/ui/CartIcon";
 import { useCartStore } from "@/src/store/cart/cartStore";
-import BarUi from "@/src/components/ui/BarUi";
-import { Text } from "react-native-paper";
 import BarUI from "@/src/components/ui/BarUi";
 
 const Tab = createBottomTabNavigator();
 export const MyBottomTabs: React.FC = () => {
-  const { cart } = useCartStore(state => state);
+  const { cart } = useCartStore((state) => state);
 
   return (
     <View style={styles.container}>
@@ -24,22 +22,23 @@ export const MyBottomTabs: React.FC = () => {
         initialRouteName="home"
         tabBar={(props) => <CustomTabBar {...props} />}
       >
-          <Tab.Screen
-        name=" "
-        component={Homes}
-        options={({ navigation }) => ({
-          tabBarIcon: ({ color, size }) => (
-            <MaterialCommunityIcons name="home" color={color} size={size} />
-          ),
-          headerShown: true,
-          headerLeft: () => (
-     <BarUI onClick={() => navigation.toggleDrawer()}/>
-          ),
-          headerRight:()=> <CartIcon/>,
-          headerLeftStyle:{marginLeft:25}  ,
-          headerStyle:{backgroundColor:'#F2F2F2'}         
-        })}
-      />
+        <Tab.Screen
+          name="home"
+          component={Homes}
+          options={({ navigation }) => ({
+            title:"",
+            tabBarIcon: ({ color, size }) => (
+              <MaterialCommunityIcons name="home" color={color} size={size} />
+            ),
+            headerShown: true,
+
+            headerLeft: () => (
+              <BarUI onClick={() => navigation.toggleDrawer()} />
+            ),
+            headerRight: () => <CartIcon />,
+            headerStyle: { backgroundColor: "#F2F2F2" },
+          })}
+        />
         <Tab.Screen
           name="favorite"
           component={Favorites}
@@ -93,9 +92,7 @@ export const MyBottomTabs: React.FC = () => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    marginBottom: 5,
-    
-    
+    bottom: 20,
   },
   headerStyle: {
     width: 200,
@@ -105,5 +102,5 @@ const styles = StyleSheet.create({
     fontSize: 30,
     fontWeight: "400",
     lineHeight: 44,
-   },
+  },
 });

@@ -6,7 +6,6 @@ import Header from '@/src/components/ui/Header'
 const ProfileScreen = () => {
   return (
     <>
-        <Header title='profile'   backgroundColorCode='#f4f6f7'/> 
      <Profile/>
     </>
   )

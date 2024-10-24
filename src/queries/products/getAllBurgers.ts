@@ -3,42 +3,38 @@ import { useQuery } from "@tanstack/react-query";
 
 export const getAllCategories = async () => {
   const { data: categories, error } = await supabase
-    .from("Categories") 
+    .from("Categories")
     .select("*");
 
   if (error) throw new Error("Failed to fetch categories.");
   return categories;
 };
 export const getProductsForFirstCategory = async () => {
-    try {
-      
-      const categories = await getAllCategories();
-      
-      if (!categories || categories.length === 0) {
-        throw new Error("No categories found.");
-      }
-  
-    
-      const firstCategoryId = categories[0].id;
-  
-     
-      const { data: products, error } = await supabase
-        .from("Products")
-        .select("*")
-        .eq("categoriy_id", firstCategoryId); 
-  
-      if (error) throw new Error("Failed to get products.");
-  
-      return products;
-    } catch (error: any) {
-      console.error("Error getting products:", error);
-      throw error;
+  try {
+    const categories = await getAllCategories();
+
+    if (!categories || categories.length === 0) {
+      throw new Error("No categories found.");
     }
-  };
-  export const useGetProductsForFirstCategory = () => {
-    return useQuery({
-      queryKey: ["productsForFirstCategory"],
-      queryFn: getProductsForFirstCategory,
-    });
-  };
-    
+
+    const firstCategoryId = categories[0].id;
+
+    const { data: products, error } = await supabase
+      .from("Products")
+      .select("*")
+      .eq("categoriy_id", firstCategoryId);
+
+    if (error) throw new Error("Failed to get products.");
+
+    return products;
+  } catch (error: any) {
+    console.error("Error getting products:", error);
+    throw error;
+  }
+};
+export const useGetProductsForFirstCategory = () => {
+  return useQuery({
+    queryKey: ["productsForFirstCategory"],
+    queryFn: getProductsForFirstCategory,
+  });
+};

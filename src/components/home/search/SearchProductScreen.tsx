@@ -47,9 +47,9 @@ const SearchProductScreen = () => {
             imageSource={{ uri: item.imageUrl || 'http://example.com/default-image.jpg' }}
             title={item.name || "Product Name"}
             price={`$${item.price?.toFixed(2)}`}
-            height={220}
-            width={160}
             id={item.id}
+
+             
           />
         )}
     

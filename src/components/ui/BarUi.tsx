@@ -21,17 +21,18 @@ const styles = StyleSheet.create({
     alignItems: 'flex-start',
     justifyContent: 'space-between',
     width: 28,
-    height: 18,
+    height: 15,
     marginLeft:25,
+    
     },
   bar: {
-    backgroundColor: '#000000',
+    backgroundColor: 'darkcyan',
     width: 22,
     height: 2,
     borderRadius: 1,
   },
   barMedium: {
-    backgroundColor: '#000000',
+    backgroundColor: 'darkcyan',
     width: 14,
     height: 2,
     borderRadius: 1,

@@ -4,8 +4,9 @@ import {
   View,
   ActivityIndicator,
   ScrollView,
+  RefreshControl,
 } from "react-native";
-import React from "react";
+import React, { useState } from "react";
 import NoOrder from "./NoOrder";
 import { useGetAllOrders } from "@/src/queries/order/useGetAllOrders";
 import { useSessionStore } from "@/src/store/useSessionStore";
@@ -16,6 +17,7 @@ import { OrderWithAddress } from "@/src/queries/order/useGetAllOrders";
 import Header from "../ui/Header";
 import { useFocusEffect } from "expo-router";
 export default function OrderHistoryScreen() {
+  const [refreshing, setRefreshing] = useState(false);
   const { session } = useSessionStore();
   const userId = session?.id;
   const {
@@ -47,9 +49,19 @@ export default function OrderHistoryScreen() {
   if (!orders || orders.length === 0) {
     return <NoOrder />;
   }
+  const OnRefreshing=()=>{
+    setRefreshing(true);
+    setTimeout(()=>{
+      refetch();
+    },3000);
+    setRefreshing(false)
+  }
 
   return (
-    <ScrollView>
+    <ScrollView refreshControl={
+      <RefreshControl refreshing={refreshing} onRefresh={OnRefreshing}/>
+    }>
+      
       {orders.map((order) => (
         <Card key={order.id} height={147} width={331}>
           <View style={styles.container}>

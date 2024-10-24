@@ -16,7 +16,6 @@ export default Card;
 const styles = StyleSheet.create({
   card: {
     backgroundColor: "white",
-
     padding: 16,
     borderRadius: 20,
     shadowColor: "#000",

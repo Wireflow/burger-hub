@@ -36,7 +36,9 @@ const ProductSearch: React.FC = () => {
     <View style={styles.container}>
       <View style={styles.searchContainer}>
         <Buttonout onPress={handleButtonPress} />
-        <SearchInput onSearch={handleSearch} />
+        <SearchInput
+        //@ts-ignore
+        onSearch={handleSearch} />
       </View>
 
       {isLoading && (
@@ -65,8 +67,7 @@ const ProductSearch: React.FC = () => {
                 }}
                 title={item.name || "Product Name"}
                 price={`$${item.price?.toFixed(2)}`}
-                height={190}
-                width={160}
+
                 id={item?.id}
               />
             ))}

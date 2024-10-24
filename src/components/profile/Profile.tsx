@@ -15,7 +15,8 @@ import { formatPhoneNumber } from "@/src/util/formatPhoneNumber";
 import AddressChangeScreen from "../address/ChangeAddressScreen";
 import { Entypo } from "@expo/vector-icons";
 import FormAddress from "../address/Formaddress";
-const { width } = Dimensions.get("window");
+import { useAddressStore } from "@/src/store/address/useaddressStore";
+const { width,height } = Dimensions.get("window");
 const Profile = () => {
   const [isModalVisible, setModalVisible] = useState(false);
   const toggleModalVisibility = () => {
@@ -164,7 +165,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     backgroundColor: "white",
     width: width * 0.8,
-    height: 170,
+    height: height*0.24,
     padding: 5,
     gap: 5,
     borderRadius: 20,

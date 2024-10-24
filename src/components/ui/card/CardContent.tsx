@@ -1,25 +1,23 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { View, Text, Image, StyleSheet, ImageSourcePropType } from 'react-native';
 import Button from '../Button';
 import { router } from 'expo-router';
- type CardContentProps = {
+
+type CardContentProps = {
   imageSource: ImageSourcePropType;  
   title: string; 
   price: string;  
-  id:number
+  id: number;
 };
 
-const CardContent = ({id, imageSource, title, price }: CardContentProps) => {
-
-
+const CardContent = ({ id, imageSource, title, price }: CardContentProps) => {
   return (
     <View>
       <View style={styles.imageWrapper}>
         <Image 
-
-          source={imageSource || require('@/assets/images/Mask Group.png')}  
+          source={imageSource}  
           style={styles.image}
-          // onError={handleImageError} // التعامل مع الخطأ هنا
+          resizeMode="cover" 
         />
       </View>
       <View style={styles.textContainer}>
@@ -31,31 +29,34 @@ const CardContent = ({id, imageSource, title, price }: CardContentProps) => {
         title="Customize" 
         size="small" 
         color="white" 
-        onClick={() =>router.navigate(`/(drawer)/product/${id}`)} 
+        onClick={() => router.navigate(`/(drawer)/product/${id}`)} 
       /> 
     </View>
   );
 };
 
-const styles = StyleSheet.create({
-  imageWrapper: {
-    position: 'absolute',
-    top: -30,
-    alignSelf: 'center',
-    
-  },
-  image: {
-    width: 170,
-    height: 155,
-    borderRadius: 15,
-    borderTopLeftRadius:30,
-    borderTopRightRadius:30
-  },
+
+  const styles = StyleSheet.create({
+    imageWrapper: {
+      position: 'absolute',
+      top: -45,
+      alignSelf: 'center',
+      width: '100%', // تأكد من أن العرض هنا محدد
+      height: 150,
+      backgroundColor:""
+      
+    },
+    image: {
+      width: '100%',
+      height: '100%', // استخدام 100% لجعل الصورة تتناسب مع الكارد
+
+    },
+  
   textContainer: {
     marginTop: 95,
     alignItems: 'center',
     marginBottom: 10,
-   },
+  },
   text: {
     color: 'black',
     fontSize: 15,

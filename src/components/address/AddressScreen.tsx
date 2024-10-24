@@ -1,10 +1,5 @@
 import React, { useState, useEffect } from "react";
-import {
-  StyleSheet,
-  Text,
-  View,
-  ActivityIndicator,
-} from "react-native";
+import { StyleSheet, Text, View, ActivityIndicator } from "react-native";
 import { useGetAddressByUserId } from "@/src/queries/users/useGetAddressbyUserId";
 import { useSessionStore } from "@/src/store/useSessionStore";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
@@ -57,11 +52,10 @@ const AddressScreen = () => {
   if (isLoading) {
     return (
       <ActivityIndicator
-      size={"large"}
+        size={"large"}
         color={"blue"}
         style={{ flex: 1, justifyContent: "center", alignItems: "center" }}
-      >
-      </ActivityIndicator>
+      ></ActivityIndicator>
     );
   }
 
@@ -73,23 +67,22 @@ const AddressScreen = () => {
     );
   }
 
-  const renderHiddenItem = (data:any) => (
+  const renderHiddenItem = (data: any) => (
     <View style={styles.deleteButton}>
-      <MaterialCommunityIcons 
-        name="delete" 
-        size={24} 
-        color="white" 
+      <MaterialCommunityIcons
+        name="delete"
+        size={24}
+        color="white"
         onPress={() => {
           setId(data.item.id);
           setDialogOpen(true);
-        }} 
+        }}
       />
     </View>
   );
 
   return (
     <View style={styles.container}>
-     
       <SwipeListView
         data={addresses}
         renderItem={({ item }) => (
@@ -131,7 +124,9 @@ const AddressScreen = () => {
         onConfirm={handleDeleteAddress}
         onCancel={() => setDialogOpen(false)}
         title="Delete Confirmation"
-        description="Are you sure you want to delete this address?" trigger={undefined}      />
+        description="Are you sure you want to delete this address?"
+        trigger={undefined}
+      />
     </View>
   );
 };
@@ -142,7 +137,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 16,
-    backgroundColor:"#f4f6f7"
+    backgroundColor: "#f4f6f7",
   },
   addressItem: {
     flexDirection: "row",
@@ -181,7 +176,7 @@ const styles = StyleSheet.create({
     borderRadius: 50,
     position: "absolute",
     right: 0,
-    top:15
+    top: 15,
   },
   addButtonContainer: {
     position: "absolute",
