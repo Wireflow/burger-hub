@@ -5,8 +5,6 @@ import {
   View,
   FlatList,
   TouchableOpacity,
-  Alert,
-  ActivityIndicator,
   Modal,
   Dimensions,
   ScrollView,
@@ -17,8 +15,6 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { addressChane } from "@/src/mutations/user/changeAddress";
 import { useCustomToast } from "@/src/hooks/useCustomToast";
 import Button from "../ui/Button";
-import Header from "../ui/Header";
-import { SafeAreaView } from "react-native";
 import { formatAddress } from "@/src/util/addressFormat";
 import ShowDialog from "../ui/showDialog";
 import {

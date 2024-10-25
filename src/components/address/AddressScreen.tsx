@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { StyleSheet, Text, View, ActivityIndicator } from "react-native";
+import { StyleSheet, Text, View, ActivityIndicator, Dimensions } from "react-native";
 import { useGetAddressByUserId } from "@/src/queries/users/useGetAddressbyUserId";
 import { useSessionStore } from "@/src/store/useSessionStore";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
@@ -11,7 +11,7 @@ import ShowDialog from "../ui/showDialog";
 import { useCustomToast } from "@/src/hooks/useCustomToast";
 import { SwipeListView } from "react-native-swipe-list-view";
 import Header from "../ui/Header";
-
+const {height,width}=Dimensions.get("screen")
 const AddressScreen = () => {
   const [isModalVisible, setModalVisible] = useState(false);
   const showToast = useCustomToast();
@@ -181,7 +181,7 @@ const styles = StyleSheet.create({
   addButtonContainer: {
     position: "absolute",
     bottom: 5,
-    right: 25,
+    width:width,
     zIndex: 1,
   },
 });

@@ -8,7 +8,6 @@ type RootParamList = {
   payments: undefined;
   orders: undefined;
   favorites: undefined;
-
 };
 const useToggleDrawer = () => {
   const navigation = useNavigation<DrawerNavigationProp<RootParamList>>();

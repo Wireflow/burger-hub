@@ -9,11 +9,14 @@ export type OrderWithAddress = Row<"Orders"> & {
   User:Row<"User">;
   Products: Row<"Order_Items">[];
 };
+
 export const useGetAllOrders = (id: string) => {
+  const setOrder=useOrderStore().setGlobalOrders
   return useQuery({
     queryKey: ["orders", "address", id],
     queryFn: async () => {
       const order = await GetAllOrders(id);
+      setOrder(order)
       return order;
     },
   });

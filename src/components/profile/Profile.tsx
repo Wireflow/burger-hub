@@ -49,7 +49,8 @@ const Profile = () => {
             source={require("@/assets/icons/person.png")}
             style={styles.profileImage}
           />
-          <View>
+       <View>
+       <View style={{height:"100%",width:"100%"}}>
             <Text
               style={[styles.profileValue, { fontWeight: "600", fontSize: 18 }]}
             >
@@ -90,6 +91,7 @@ const Profile = () => {
               )}
             </View>
           </View>
+       </View>
         </View>
       </View>
       <View style={styles.buttonsContainer}>
@@ -165,7 +167,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     backgroundColor: "white",
     width: width * 0.8,
-    height: height*0.24,
+    height: height*0.22,
     padding: 5,
     gap: 5,
     borderRadius: 20,

@@ -121,15 +121,15 @@ export default LogIn;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
- 
   },
   scrollContent: {
     flexGrow: 1,
+    width:width,
     alignItems: "center",
+    
   },
   inputContainer: {
     width: width * 0.8,
-    right: 25,
   },
   forgotPasswordContainer: {
     height: 20,
@@ -147,7 +147,7 @@ const styles = StyleSheet.create({
     height: 50,
     top: 30,
     flex: 1,
-    right: 25,
+    width:width,
   },
   loaderContainer: {
     position: "absolute",

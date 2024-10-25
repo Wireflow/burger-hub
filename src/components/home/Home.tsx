@@ -6,6 +6,7 @@ import {
   KeyboardAvoidingView,
   Platform,
   ScrollView,
+  Dimensions,
 } from "react-native";
 import Tabs from "./Tabs";
 import Button from "../ui/Button";
@@ -14,7 +15,7 @@ import { useTabContext } from "../layout/TabContext";
 import SearchInput from "../ui/SearchInput";
 import { usesearchStore } from "@/src/store/search/searchStore";
 import { removeTeailingS } from "@/hooks/removeTeailingS";
-
+const {width,height}=Dimensions.get("screen");
 const Homes: React.FC = () => {
   const { selectedCategoryName } = useTabContext();
   const { setSearchTerm, clearSearchTerm } = usesearchStore();
@@ -60,6 +61,7 @@ const styles = StyleSheet.create({
   scrollContainer: {
     flexGrow: 1,
     justifyContent: "space-between",
+    width:width
   },
   header: {
     flexDirection: "row",
@@ -82,7 +84,7 @@ const styles = StyleSheet.create({
     position: "absolute",
     paddingHorizontal: 25,
     bottom: 40,
-    left: 10,
+    width:width
   },
 });
 

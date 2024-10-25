@@ -113,17 +113,17 @@ const styles = StyleSheet.create({
   },
   scrollContent: {
     flexGrow: 1,
+    width:width,
     alignItems: "center",
   },
   inputContainer: {
     width: width * 0.8,
-    right: 25,
     top:20
   },
   buttonContainer: {
+    width:width,
     height: 50,
     top: 30,
     flex: 1,
-    right: 25,
   },
 });

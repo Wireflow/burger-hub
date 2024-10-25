@@ -5,6 +5,7 @@ import {
   ActivityIndicator,
   ScrollView,
   RefreshControl,
+  Dimensions,
 } from "react-native";
 import React, { useState } from "react";
 import NoOrder from "./NoOrder";
@@ -16,22 +17,20 @@ import { formatDate, formatDateTime } from "@/src/util/DateFormat";
 import { OrderWithAddress } from "@/src/queries/order/useGetAllOrders";
 import Header from "../ui/Header";
 import { useFocusEffect } from "expo-router";
+import { useOrderStore } from "@/src/store/oder/useOrderStore";
+const { height, width } = Dimensions.get("screen");
+
 export default function OrderHistoryScreen() {
   const [refreshing, setRefreshing] = useState(false);
   const { session } = useSessionStore();
   const userId = session?.id;
-  const {
-    data: orders,
-    error,
-    isLoading,
-    refetch,
-  } = useGetAllOrders(userId as string);
-  useFocusEffect(
-    React.useCallback(() => {
-      refetch();
-    }, [refetch])
-  );
-
+  const { error, isLoading, refetch } = useGetAllOrders(userId as string);
+  // useFocusEffect(
+  //   React.useCallback(() => {
+  //     refetch();
+  //   }, [refetch])
+  // );
+  const order = useOrderStore().globalOrders;
   if (isLoading) {
     return (
       <ActivityIndicator
@@ -46,78 +45,80 @@ export default function OrderHistoryScreen() {
     return <Text>Error loading orders</Text>;
   }
 
-  if (!orders || orders.length === 0) {
+  if (!order || order.length === 0) {
     return <NoOrder />;
   }
-  const OnRefreshing=()=>{
+  const OnRefreshing = () => {
     setRefreshing(true);
-    setTimeout(()=>{
+    setTimeout(() => {
       refetch();
-    },3000);
-    setRefreshing(false)
-  }
+    }, 3000);
+    setRefreshing(false);
+  };
 
   return (
-    <ScrollView refreshControl={
-      <RefreshControl refreshing={refreshing} onRefresh={OnRefreshing}/>
-    }>
-      
-      {orders.map((order) => (
-        <Card key={order.id} height={147} width={331}>
-          <View style={styles.container}>
-            <View >
-              <Text style={styles.orderText}>
-                $ {order.totalAmount ?? "Not found: totalAmount"}
-              </Text>
-              <Text style={styles.orderText}>
-                {order.totalQuantity ?? "Not found: totalQuantity"} items
-              </Text>
-            </View>
+    <ScrollView
+      refreshControl={
+        <RefreshControl refreshing={refreshing} onRefresh={OnRefreshing} />
+      }
+    >
+      <View style={{ width: width, flex: 1, alignItems: "center" }}>
+        {order.map((order) => (
+          <Card key={order.id} height={147} width={331}>
+            <View style={styles.container}>
+              <View>
+                <Text style={styles.orderText}>
+                  $ {order.totalAmount ?? "Not found: totalAmount"}
+                </Text>
+                <Text style={styles.orderText}>
+                  {order.totalQuantity ?? "Not found: totalQuantity"} items
+                </Text>
+              </View>
 
-            <View>
-              {order.order_type == "Delivery" ? (
-                <View style={styles.orderDetails}>
-                  <Text style={styles.orderText}>
-                    {" "}
-                    {order.deliveryAt
-                      ? formatDate(new Date(order.deliveryAt))
-                      : "Delivery date not available"}{" "}
-                  </Text>
-                  <Text style={styles.orderText}>Delivered to</Text>
-                  <Text style={styles.address}>
-                    {formatAddress({ ...order.Addresses })}
-                  </Text>
-                </View>
-              ) : (
-                <View style={styles.orderDetails}>
-                  <Text style={styles.orderText}>
-                    {" "}
-                    {order.deliveryAt
-                      ? formatDate(new Date(order.created_at))
-                      : "Delivery date not available"}{" "}
-                  </Text>
-                  <Text style={styles.orderText}>Pick up at</Text>
-                  <Text style={styles.address}>
-                    {formatDateTime(new Date(order.created_at))}
-                  </Text>
-                </View>
-              )}
+              <View>
+                {order.order_type == "Delivery" ? (
+                  <View style={styles.orderDetails}>
+                    <Text style={styles.orderText}>
+                      {" "}
+                      {order.deliveryAt
+                        ? formatDate(new Date(order.deliveryAt))
+                        : "Delivery date not available"}{" "}
+                    </Text>
+                    <Text style={styles.orderText}>Delivered to</Text>
+                    <Text style={styles.address}>
+                      {formatAddress({ ...order.Addresses })}
+                    </Text>
+                  </View>
+                ) : (
+                  <View style={styles.orderDetails}>
+                    <Text style={styles.orderText}>
+                      {" "}
+                      {order.deliveryAt
+                        ? formatDate(new Date(order.created_at))
+                        : "Delivery date not available"}{" "}
+                    </Text>
+                    <Text style={styles.orderText}>Pick up at</Text>
+                    <Text style={styles.address}>
+                      {formatDateTime(new Date(order.created_at))}
+                    </Text>
+                  </View>
+                )}
+              </View>
             </View>
-          </View>
-          <View>
-            <Text></Text>
-          </View>
-        </Card>
-      ))}
+            <View>
+              <Text></Text>
+            </View>
+          </Card>
+        ))}
+      </View>
     </ScrollView>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    width: "100%",
     flexDirection: "row-reverse",
-    display:"flex",
+    display: "flex",
     justifyContent: "space-around",
     padding: 10,
   },

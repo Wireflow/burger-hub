@@ -1,6 +1,6 @@
 import React from "react";
-import { View, StyleSheet } from "react-native";
-
+import { View, StyleSheet, Dimensions } from "react-native";
+const {height,width}=Dimensions.get("screen")
 type CardProps = {
   height: number;
   width: number;
