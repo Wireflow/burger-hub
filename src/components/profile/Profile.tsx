@@ -43,7 +43,19 @@ const Profile = () => {
           <TouchableOpacity onPress={() => toggleModalVisibility()}>
             <Text style={styles.profileChange}>change</Text>
           </TouchableOpacity>
+          
         </View>
+        <AddressChangeScreen
+          open={isModalVisible}
+          setOpen={setModalVisible}
+          refetch={refetch}
+        />
+      
+      <FormAddress
+        open={isModalVisibleaddress}
+        setOpen={setModalVisibleaddress}
+        refetch={refetch}
+      />
         <View style={styles.profileContainer}>
           <Image
             source={require("@/assets/icons/person.png")}
@@ -136,18 +148,8 @@ const Profile = () => {
           </Text>
         </TouchableOpacity>
       </View>
-      {
-        <AddressChangeScreen
-          open={isModalVisible}
-          setOpen={setModalVisible}
-          refetch={refetch}
-        />
-      }
-      <FormAddress
-        open={isModalVisibleaddress}
-        setOpen={setModalVisibleaddress}
-        refetch={refetch}
-      />
+      
+     
     </View>
   );
 };

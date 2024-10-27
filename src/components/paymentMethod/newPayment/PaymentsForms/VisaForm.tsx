@@ -41,7 +41,7 @@ const VisaForm: React.FC<VisaFormProps> = ({ onSubmit }) => {
               placeholder='CVC'
               keyboardType='numeric'
              />
-       <Button title='Add New Payment' color='red' size='medium' onClick={handleSubmit(onSubmit)}/>
+       <Button title='Add Payment' color='red' size='medium' onClick={handleSubmit(onSubmit)}/>
     </View>
   );
 };

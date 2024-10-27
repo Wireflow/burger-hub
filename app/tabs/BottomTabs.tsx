@@ -26,14 +26,14 @@ export const MyBottomTabs: React.FC = () => {
           name="home"
           component={Homes}
           options={({ navigation }) => ({
-            title:"",
-            
+            title: "",
+
             tabBarIcon: ({ color, size }) => (
               <MaterialCommunityIcons name="home" color={color} size={size} />
             ),
             headerShown: true,
-            headerRightContainerStyle:{top:10},
-            headerLeftContainerStyle:{top:10},
+            headerRightContainerStyle: { top: 10 },
+            headerLeftContainerStyle: { top: 10 },
             headerLeft: () => (
               <BarUI onClick={() => navigation.toggleDrawer()} />
             ),

@@ -35,9 +35,11 @@ const getUpdatedAddresses = async () => {
             .order("updated_at", { ascending: false })// Sort by last updated date
             .limit(1);
 
-        if (error) throw new Error(`Failed to fetch addresses: ${error.message}`);
+        if (error) {
+            console.log(error.message)
+        }
 
-        return addresses; 
+        return addresses || []; 
     } catch (error: any) {
         console.error("Error fetching addresses:", error);
         throw error; 

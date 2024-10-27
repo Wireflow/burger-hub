@@ -5,35 +5,32 @@ import { UserSession, useSessionStore } from "../store/useSessionStore";
 
 export const redirectAuth = () => {
   const setSession = useSessionStore((state) => state.setSession);
-  const router = useRouter(); 
+  const router = useRouter();
 
   useEffect(() => {
     const { data: authListener } = supabase.auth.onAuthStateChange(
       (event, session) => {
         const userSession: UserSession = {
-          name: session?.user.user_metadata?.name,
-          email: session?.user.user_metadata?.email,
-          phone: session?.user.user_metadata?.phone,
+          name: session?.user.user_metadata.name,
+          email: session?.user.user_metadata.email,
+          phone: session?.user.user_metadata.phone,
           id: session?.user.id || "",
         };
-     
-        if (event === "INITIAL_SESSION") {
+
+        if (session) {
           setSession(userSession);
           router.replace("/(drawer)/main");
-        } 
-        else if(event === "SIGNED_IN"){
+        } else if (event === "SIGNED_IN") {
           router.replace("/(drawer)/main");
-        }
-        else if (event === "SIGNED_OUT") {
+        } else if (!session) {
           router.replace("/auth");
           setSession(null);
         }
       }
     );
 
-  
     return () => {
       authListener.subscription.unsubscribe();
     };
-  }, [router]); 
+  }, [router]);
 };

@@ -44,8 +44,6 @@ const Favorites = () => {
                 }}
                 title={product.name || "Product Name"}
                 price={`$${product.price?.toFixed(2)}`}
-                height={200}
-                width={190}
                 id={product.id}
               />
             ))}

@@ -25,11 +25,11 @@ export default function OrderHistoryScreen() {
   const { session } = useSessionStore();
   const userId = session?.id;
   const { error, isLoading, refetch } = useGetAllOrders(userId as string);
-  // useFocusEffect(
-  //   React.useCallback(() => {
-  //     refetch();
-  //   }, [refetch])
-  // );
+  useFocusEffect(
+    React.useCallback(() => {
+      refetch();
+    }, [refetch])
+  );
   const order = useOrderStore().globalOrders;
   if (isLoading) {
     return (

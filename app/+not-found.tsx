@@ -1,4 +1,5 @@
 import { Link, Stack } from "expo-router";
+import React from "react";
 import { StyleSheet, Text, View } from "react-native";
 export default function NotFoundScreen() {
   return (
@@ -7,7 +8,6 @@ export default function NotFoundScreen() {
       <View style={styles.container}>
         <Text>burger-hub</Text>
         <Text>This screen doesn't exist.</Text>
-        <Link href={"/auth"} style={styles.link}>SignIn</Link>
       </View>
     </>
   );

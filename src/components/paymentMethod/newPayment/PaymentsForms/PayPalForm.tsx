@@ -38,7 +38,7 @@ import { PaypalSchema, PaypalType } from '@/src/types/payment/PayPal';
               placeholder="Email"
              /> 
   
-  <Button title='Add New Payment' color='red' size='medium' onClick={handleSubmit(onSubmit)}/>
+  <Button title='Add Payment' color='red' size='medium' onClick={handleSubmit(onSubmit)}/>
   </View>
   );
 };
