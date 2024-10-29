@@ -28,7 +28,7 @@ const LogIn = () => {
   const { setSession } = useSessionStore();
   const [loader, setLoader] = useState(false);
   const showToast = useCustomToast();
- 
+
   const { control, handleSubmit, setError } = useForm<LogInType>({
     resolver: zodResolver(LogInSchema),
     defaultValues: {
@@ -53,11 +53,6 @@ const LogIn = () => {
           email: dataUser.email,
           id: dataUser.id,
         });
-        showToast("Login successfully!", { type: "success" });
- 
-        router.navigate("/(drawer)/main");
-      } else {
-        showToast("There is no account with this email!", { type: "warning" });
       }
 
       console.log("User logged in:", userId);
@@ -124,9 +119,8 @@ const styles = StyleSheet.create({
   },
   scrollContent: {
     flexGrow: 1,
-    width:width,
+    width: width,
     alignItems: "center",
-    
   },
   inputContainer: {
     width: width * 0.8,
@@ -134,9 +128,9 @@ const styles = StyleSheet.create({
   forgotPasswordContainer: {
     height: 20,
     width: "50%",
-    alignSelf: 'center',
+    alignSelf: "center",
     marginTop: 20,
-   },
+  },
   forgotPasswordText: {
     fontSize: 16,
     fontWeight: "bold",
@@ -147,7 +141,7 @@ const styles = StyleSheet.create({
     height: 50,
     top: 30,
     flex: 1,
-    width:width,
+    width: width,
   },
   loaderContainer: {
     position: "absolute",

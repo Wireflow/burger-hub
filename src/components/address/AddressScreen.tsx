@@ -1,17 +1,23 @@
 import React, { useState, useEffect } from "react";
-import { StyleSheet, Text, View, ActivityIndicator, Dimensions } from "react-native";
+import {
+  StyleSheet,
+  Text,
+  View,
+  ActivityIndicator,
+  Dimensions,
+} from "react-native";
 import { useGetAddressByUserId } from "@/src/queries/users/useGetAddressbyUserId";
 import { useSessionStore } from "@/src/store/useSessionStore";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import Button from "../ui/Button";
-import Formaddress from "./Formaddress";
+import Formaddress from "./FormaAddress";
 import { addressDelete } from "@/src/mutations/user/addressDelete";
 import { formatAddress } from "@/src/util/addressFormat";
 import ShowDialog from "../ui/showDialog";
 import { useCustomToast } from "@/src/hooks/useCustomToast";
 import { SwipeListView } from "react-native-swipe-list-view";
 import Header from "../ui/Header";
-const {height,width}=Dimensions.get("screen")
+const { height, width } = Dimensions.get("screen");
 const AddressScreen = () => {
   const [isModalVisible, setModalVisible] = useState(false);
   const showToast = useCustomToast();
@@ -59,13 +65,11 @@ const AddressScreen = () => {
     );
   }
 
-  if (!addresses.length) {
-    return (
-      <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-        <Text>No addresses available</Text>
-      </View>
-    );
-  }
+  // if (!addresses.length) {
+  //   return (
+
+  //   );
+  // }
 
   const renderHiddenItem = (data: any) => (
     <View style={styles.deleteButton}>
@@ -104,7 +108,17 @@ const AddressScreen = () => {
         rightOpenValue={-70} // Width of the delete button
         keyExtractor={(item) => item.id.toString()}
       />
-
+      {!address?.length && (
+        <View
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <Text>No addresses available</Text>
+        </View>
+      )}
       <View style={styles.addButtonContainer}>
         <Button
           color="red"
@@ -181,7 +195,7 @@ const styles = StyleSheet.create({
   addButtonContainer: {
     position: "absolute",
     bottom: 5,
-    width:width,
+    width: width,
     zIndex: 1,
   },
 });

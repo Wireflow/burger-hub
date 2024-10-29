@@ -14,8 +14,7 @@ import { router } from "expo-router";
 import { useTabContext } from "../layout/TabContext";
 import SearchInput from "../ui/SearchInput";
 import { usesearchStore } from "@/src/store/search/searchStore";
-import { removeTeailingS } from "@/hooks/removeTeailingS";
-const {width,height}=Dimensions.get("screen");
+const { width, height } = Dimensions.get("screen");
 const Homes: React.FC = () => {
   const { selectedCategoryName } = useTabContext();
   const { setSearchTerm, clearSearchTerm } = usesearchStore();
@@ -42,7 +41,7 @@ const Homes: React.FC = () => {
             title={` View All ${selectedCategoryName} `}
             onClick={async () => {
               clearSearchTerm();
-              let title = await removeTeailingS(selectedCategoryName);
+              let title = selectedCategoryName;
               console.log(title, "im title after slice");
               setSearchTerm(title);
               router.push("/product/search");
@@ -61,7 +60,7 @@ const styles = StyleSheet.create({
   scrollContainer: {
     flexGrow: 1,
     justifyContent: "space-between",
-    width:width
+    width: width,
   },
   header: {
     flexDirection: "row",
@@ -83,9 +82,9 @@ const styles = StyleSheet.create({
   buttonContainer: {
     position: "absolute",
     paddingHorizontal: 25,
-    bottom: 40,
-    height:height*0.15,
-    width:width
+    bottom: 0,
+    height: height / 5,
+    width: width,
   },
 });
 

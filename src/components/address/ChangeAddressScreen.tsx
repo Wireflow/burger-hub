@@ -43,10 +43,11 @@ const AddressChangeScreen = ({ setOpen, open, refetch }: Props) => {
 
   const showToast = useCustomToast();
   const handleSelectAddress = () => {
+    console.log(Id)
     addressChane(Id)
       .then(() => {
-        showToast("update address successfully", { type: "success" });
         refetch();
+        showToast("update address successfully", { type: "success" });
         setDialogOpen(false);
       })
       .catch((error) => {

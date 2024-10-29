@@ -15,8 +15,6 @@ import {
 } from "@/src/types/validations/address";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
-  QueriesObserver,
-  QueryObserverBaseResult,
   QueryObserverResult,
   RefetchOptions,
   RefetchQueryFilters,

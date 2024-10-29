@@ -11,6 +11,7 @@ type CardWrapperProps = {
   title: string;
   price: string;
   id: number;
+
 };
 
 const CardWrapper: React.FC<CardWrapperProps> = ({ id, imageSource, title, price }) => {

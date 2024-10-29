@@ -14,9 +14,9 @@ import {
 import { formatPhoneNumber } from "@/src/util/formatPhoneNumber";
 import AddressChangeScreen from "../address/ChangeAddressScreen";
 import { Entypo } from "@expo/vector-icons";
-import FormAddress from "../address/Formaddress";
+import FormAddress from "../address/FormaAddress";
 import { useAddressStore } from "@/src/store/address/useaddressStore";
-const { width,height } = Dimensions.get("window");
+const { width, height } = Dimensions.get("window");
 const Profile = () => {
   const [isModalVisible, setModalVisible] = useState(false);
   const toggleModalVisibility = () => {
@@ -33,6 +33,7 @@ const Profile = () => {
       refetch();
     }, [refetch])
   );
+
   const { session } = useSessionStore();
 
   return (
@@ -43,67 +44,71 @@ const Profile = () => {
           <TouchableOpacity onPress={() => toggleModalVisibility()}>
             <Text style={styles.profileChange}>change</Text>
           </TouchableOpacity>
-          
         </View>
         <AddressChangeScreen
           open={isModalVisible}
           setOpen={setModalVisible}
           refetch={refetch}
         />
-      
-      <FormAddress
-        open={isModalVisibleaddress}
-        setOpen={setModalVisibleaddress}
-        refetch={refetch}
-      />
+
+        <FormAddress
+          open={isModalVisibleaddress}
+          setOpen={setModalVisibleaddress}
+          refetch={refetch}
+        />
         <View style={styles.profileContainer}>
           <Image
             source={require("@/assets/icons/person.png")}
             style={styles.profileImage}
           />
-       <View>
-       <View style={{height:"100%",width:"100%"}}>
-            <Text
-              style={[styles.profileValue, { fontWeight: "600", fontSize: 18 }]}
-            >
-              {session?.name}
-            </Text>
-            <View style={styles.infoContainer}>
-              <Text style={[styles.profileValue, { opacity: 0.5 }]}>
-                {session?.email}
+          <View>
+            <View style={{ height: "100%", width: "100%" }}>
+              <Text
+                style={[
+                  styles.profileValue,
+                  { fontWeight: "600", fontSize: 18 },
+                ]}
+              >
+                {session?.name}
               </Text>
-              <Text style={[styles.profileValue, { opacity: 0.5 }]}>
-                {formatPhoneNumber(session?.phone)}
-              </Text>
-              {addresses?.length ? (
-                addresses?.map((address) => (
-                  <View key={address.id}>
-                    <Text style={styles.addressText}>
-                      {formatAddress({ ...address })}
-                    </Text>
-                  </View>
-                ))
-              ) : (
-                <View style={{ display: "flex", flexDirection: "row", gap: 8 }}>
-                  <Text>don't have address </Text>
-                  <TouchableOpacity
-                    onPress={() => toggleModalVisibilityAddress()}
+              <View style={styles.infoContainer}>
+                <Text style={[styles.profileValue, { opacity: 0.5 }]}>
+                  {session?.email}
+                </Text>
+                <Text style={[styles.profileValue, { opacity: 0.5 }]}>
+                  {formatPhoneNumber(session?.phone)}
+                </Text>
+                {addresses?.length ? (
+                  addresses?.map((address) => (
+                    <View key={address.id}>
+                      <Text style={styles.addressText}>
+                        {formatAddress({ ...address })}
+                      </Text>
+                    </View>
+                  ))
+                ) : (
+                  <View
+                    style={{ display: "flex", flexDirection: "row", gap: 8 }}
                   >
-                    <Text
-                      style={{
-                        width: 50,
-                        textDecorationLine: "underline",
-                        color: "#AF042C",
-                      }}
+                    <Text>don't have address </Text>
+                    <TouchableOpacity
+                      onPress={() => toggleModalVisibilityAddress()}
                     >
-                      add{" "}
-                    </Text>
-                  </TouchableOpacity>
-                </View>
-              )}
+                      <Text
+                        style={{
+                          width: 50,
+                          textDecorationLine: "underline",
+                          color: "#AF042C",
+                        }}
+                      >
+                        add{" "}
+                      </Text>
+                    </TouchableOpacity>
+                  </View>
+                )}
+              </View>
             </View>
           </View>
-       </View>
         </View>
       </View>
       <View style={styles.buttonsContainer}>
@@ -148,8 +153,6 @@ const Profile = () => {
           </Text>
         </TouchableOpacity>
       </View>
-      
-     
     </View>
   );
 };
@@ -169,7 +172,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     backgroundColor: "white",
     width: width * 0.8,
-    height: height*0.22,
+    height: height * 0.22,
     padding: 5,
     gap: 5,
     borderRadius: 20,

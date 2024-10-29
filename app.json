@@ -19,7 +19,8 @@
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.abdullahalsharupi.Burgerapp"
     },
     "web": {
       "bundler": "metro",
@@ -31,8 +32,14 @@
     ],
     "experiments": {
       "typedRoutes": true
+    },
+    "extra": {
+      "router": {
+        "origin": false
+      },
+      "eas": {
+        "projectId": "1f180e62-4221-41e0-a1d7-ccaeb5348d82"
+      }
     }
-  
   }
-  
 }

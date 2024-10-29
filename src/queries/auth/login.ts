@@ -1,8 +1,7 @@
 import { LogInType } from "@/src/types/LogInType";
 import { supabase } from "../../services/supabase/client";
-  
+
 export default async function LogInQuery(dataFromUser: LogInType) {
- 
   try {
     const { email, password } = dataFromUser;
 
@@ -10,7 +9,7 @@ export default async function LogInQuery(dataFromUser: LogInType) {
       email,
       password,
     });
-    console.log(data?.user)
+    console.log(data?.user);
 
     if (error) {
       console.error("Sign-in error:", error);
@@ -23,7 +22,7 @@ export default async function LogInQuery(dataFromUser: LogInType) {
       throw new Error("User ID is missing after sign-in");
     }
 
-    return userId
+    return userId;
   } catch (error) {
     console.error("Error in LogInQuery:", error);
     throw error; // Rethrow the error for further handling

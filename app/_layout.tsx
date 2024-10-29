@@ -7,8 +7,8 @@ import { useColorScheme } from "@/hooks/useColorScheme";
 import Providers from "@/src/components/layout/Providers";
 import { redirectAuth } from "@/src/hooks/redirectAuth";
 import { useSessionStore } from "@/src/store/useSessionStore";
-import NetInfo from "@react-native-community/netinfo";
 import React from "react";
+import Disconnected from "./disconnected";
 
 // Prevent the splash screen from auto-hiding before asset loading is complete.
 SplashScreen.preventAutoHideAsync();
@@ -36,6 +36,7 @@ export default function RootLayout() {
   );
 }
 function RootLayoutMain() {
+  <Disconnected/>
   redirectAuth();
   return (
     <Stack screenOptions={{ headerShown: false }}>
@@ -43,7 +44,7 @@ function RootLayoutMain() {
       <Stack.Screen name="Favorite" options={{ headerShown: false }} />
       <Stack.Screen name="Addresses" options={{ headerShown: false }} />
       <Stack.Screen name="(drawer)" options={{ headerShown: false }} />
-      <Stack.Screen name="payments" options={{
-
+      <Stack.Screen name="payments" options={{ headerShown: false }} />
+    </Stack>
   );
 }

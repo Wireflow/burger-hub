@@ -16,7 +16,7 @@ const NoAddress = () => {
             style={{ width: 107, height: 115 }}
           />
           <Text style={{ fontSize: 28, fontWeight: "600", width: 190 }}>
-            No orders yet
+            No address yet
           </Text>
          </View>
       );

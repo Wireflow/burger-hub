@@ -1,11 +1,16 @@
 import { StyleSheet, Text, View, Image, Dimensions } from "react-native";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Button from "@/src/components/ui/Button";
+import NetInfo from "@react-native-community/netinfo";
+
 const { width, height } = Dimensions.get("screen");
+
 const Disconnected = () => {
+ 
   return (
     <View style={styles.constainer}>
-      <View style={styles.content}>
+ 
+    <View style={styles.content}>
         <Image source={require("@/assets/images/networkX.png")} />
         <Text style={{ fontSize: 24, fontWeight: "600" }}>
           No internet Connection
