@@ -68,8 +68,7 @@ export default Favorites;
 
 const styles = StyleSheet.create({
   content: {
-    padding: 16,
-   },
+margin:16   },
   cardContainer: {
     flexDirection: "row",
   },

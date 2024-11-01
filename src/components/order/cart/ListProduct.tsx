@@ -9,6 +9,8 @@ import { Product } from '@/src/types/product/Product';
 import OrderDialog from './ModelOrderType';
 import Header from './Header';
 import NotFoundproduct from './NotFoundproduct';
+import ProductCardWithOption from '../../ui/order/ProductCardWithOption';
+import IncereaseDecrease from './IncereaseDecrease';
 
 const ListProduct: React.FC = () => {
     const [dialogVisible, setDialogVisible] = useState(false);
@@ -18,7 +20,7 @@ const ListProduct: React.FC = () => {
     console.log("I'm cart ", cart);
 
     return (
-        <View style={styles.container}>
+        <>
             {cart.products.length !== 0 ? (
                 <SafeAreaView style={styles.safeArea}>
                     <Header />
@@ -30,7 +32,7 @@ const ListProduct: React.FC = () => {
                         keyExtractor={item => item.id.toString()}
                         disableRightSwipe
                     />
-                    <OrderDialog visible={dialogVisible} onClose={closeDialog} />
+                     <OrderDialog visible={dialogVisible} onClose={closeDialog} />
                     <View style={styles.buttonContainer}>
                         <Button title='Complete order' size='large' color='red' onClick={closeDialog} />
                     </View>
@@ -40,21 +42,18 @@ const ListProduct: React.FC = () => {
             
             }
          
-        </View>
+        </>
     );
 };
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: '#F2F2F2',
-     },
+ 
     safeArea: {
         flex: 1,
-        alignItems: "flex-start",
+        alignItems: "center",
         justifyContent: "center",
         marginHorizontal: 15,
-    },
+     },
     buttonContainer: {
         height: 60,
         width: '100%',

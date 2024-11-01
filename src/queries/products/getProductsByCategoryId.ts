@@ -1,4 +1,5 @@
 import { supabase } from "@/src/services/supabase/client";
+import { Row } from "@/src/services/supabase/table.types";
 import { useQuery } from "@tanstack/react-query";
 
 
@@ -13,7 +14,7 @@ export const getProductsByCategoryId = async (categoryId: number) => {
 
     if (error) throw new Error("Failed to get products.");
 
-    return products;
+    return products as Row<'Products'>[] || [];
   } catch (error: any) {
     console.error("Error getting products:", error);
     throw error;
@@ -28,7 +29,7 @@ export const useGetProductsByCategoryId = (categoryId: number) => {
       if (!categoryId) return [];
       const products = await getProductsByCategoryId(categoryId);
       console.log(products); 
-      return products;
+      return products as Row<'Products'>[];
     },
   });
 };

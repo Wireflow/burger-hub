@@ -1,14 +1,17 @@
+import { router } from "expo-router";
 import React from "react";
-import { View, StyleSheet, Dimensions } from "react-native";
+import { View, StyleSheet, Dimensions, TouchableOpacity } from "react-native";
 const {height,width}=Dimensions.get("screen")
 type CardProps = {
   height: number;
   width: number;
   children: React.ReactNode;
+  id:number;
 };
 
-const Card = ({ height, width, children }: CardProps) => {
-  return <View style={[styles.card, { height, width }]}>{children}</View>;
+const Card = ({ height, width, children ,id}: CardProps) => {
+  return <TouchableOpacity         onPress={() => router.navigate(`/(drawer)/product/${id}`)} 
+  style={[styles.card, { height, width }]}>{children}</TouchableOpacity>;
 };
 
 export default Card;

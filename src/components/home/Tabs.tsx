@@ -13,14 +13,18 @@ import { category } from "../../types/schema/category";
 import { useGetProductsByCategoryId } from "../../queries/products/getProductsByCategoryId";
 import { useTabContext } from "../layout/TabContext";
 import CardWrapper from "../ui/card/CardWrapper";
+import Button from "../ui/Button";
+import { usesearchStore } from "@/src/store/search/searchStore";
+import { router } from "expo-router";
 const { width, height } = Dimensions.get("window");
 
 const Tabs = () => {
   const { data: categories, error, isLoading } = useGetAllCategories();
-  const { selectedTab, setSelectedTab, setSelectedCategoryName } =
+  const { selectedTab, setSelectedTab, setSelectedCategoryName ,selectedCategoryName} =
     useTabContext();
   const { data: productsByCategory, isLoading: isLoadingProducts } =
     useGetProductsByCategoryId(selectedTab || 0);
+    const { setSearchTerm, clearSearchTerm,setProductsOfSearch } = usesearchStore();
 
   useEffect(() => {
     if (categories && categories.length > 0 && selectedTab === null) {
@@ -47,6 +51,7 @@ const Tabs = () => {
   }
 
   return (
+    <> 
     <View style={styles.container}>
       <View style={[styles.tabContainer]}>
         <ScrollView horizontal showsHorizontalScrollIndicator={false}>
@@ -109,10 +114,25 @@ const Tabs = () => {
             ))}
           </ScrollView>
         ) : (
-          <Text style={styles.noProductsText}>No Product found</Text>
+          <Text style={styles.noProductsText}>We don’t have any {selectedCategoryName} at this moment</Text>
         )}
       </View>
     </View>
+    <View style={styles.buttonContainer}>
+          <Button
+            size="large"
+            color="red"
+            title={` View All ${selectedCategoryName} `}
+            onClick={()=>{
+              console.log("im in view all",productsByCategory )
+              setSearchTerm("ij")
+              setProductsOfSearch(productsByCategory ?? [])
+               router.push('/(drawer)/product/search')
+            }}
+          
+          />
+        </View>
+    </>
   );
 };
 
@@ -160,6 +180,12 @@ const styles = StyleSheet.create({
     textAlign: "center",
     marginTop: 20,
     color: "gray",
+  },  buttonContainer: {
+    position: "absolute",
+    paddingHorizontal: 25,
+    bottom: 0,
+    height: height / 5,
+    width: width,
   },
 });
 

@@ -1,10 +1,9 @@
 import { useCartStore } from "@/src/store/cart/cartStore";
-import { Option } from "@/src/types/product/Customize";
-import { Product } from "@/src/types/product/Product";
+ import { Product } from "@/src/types/product/Product";
 import React from "react";
 import { StyleSheet, Text, View, Image, ScrollView, Dimensions } from "react-native";
-import { TouchableOpacity } from "react-native-gesture-handler";
-import ModelSetNote from "./ModelSetNote";
+ import { SafeAreaView } from "react-native-safe-area-context";
+import CardProduct from "./CardProduct";
 const {width,height}=Dimensions.get("screen");
 const ListItems = () => {
   const { cart } = useCartStore((state) => state);
@@ -12,58 +11,22 @@ const ListItems = () => {
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Items</Text>
+      <SafeAreaView style={{flex:1}}>
 
       <ScrollView>
         {products &&
           products.map((item) => (
-            <View key={item.id} style={styles.card}>
-              <Image
-                src={
-                  item.imageUrl
-                    ? item.imageUrl
-                    : require("@/assets/images/Mask Group.png")
-                }
-                style={styles.image}
-              />
-              <View style={styles.details}>
-                <View style={styles.desc}>
-                  <Text style={styles.quantity}>{item.quantity}x</Text>
-                  <Text style={styles.name}>{item.name}</Text>
-                </View>
-
-                {item.options &&
-                  item.options.map((optis) => (
-                    <TouchableOpacity>
-                      <Text key={optis.modifireId} style={styles.optis}>
-                        {optis?.modifierName}
-                      </Text>
-                      {optis.modifireOptions &&
-                        optis.modifireOptions.map((option) => (
-                          <TouchableOpacity
-                            key={option.modifierOptionId}
-                            style={styles.desc2}
-                          >
-                            <Text style={{ color: "#AF042C" }}>
-                              ${option.modifierOptionPrice || 0}
-                            </Text>
-                            <Text>{option.modifierOptionName}</Text>
-                          </TouchableOpacity>
-                        ))}
-                    </TouchableOpacity>
-                  ))}
-                <Text style={styles.price}>$ {item.price}</Text>
-              </View>
-              <ModelSetNote productId={item.id} />
-            </View>
+          <CardProduct item={item}/>
           ))}
       </ScrollView>
+      </SafeAreaView>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    height:height*0.3
+    height:height*0.3,
   },
   title: {
     fontSize: 24,
@@ -100,13 +63,13 @@ const styles = StyleSheet.create({
   price: {
     fontSize: 16,
     color: "#AF042C",
-    marginTop: 4,
+    marginTop: 2,
   },
   desc: {
     display: "flex",
     flexDirection: "row",
-    justifyContent: "space-between",
-    width: 150,
+    justifyContent: "space-around",
+    width: 170,
   },
   optis: {
     fontSize: 18,

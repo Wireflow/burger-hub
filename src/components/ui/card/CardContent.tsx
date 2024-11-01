@@ -44,7 +44,7 @@ const CardContent = ({ id, imageSource, title, price }: CardContentProps) => {
 const styles = StyleSheet.create({
   imageWrapper: {
     position: 'absolute',
-    top: -45,
+    top: -40,
     alignSelf: 'center',
     width: '100%', // تأكد من أن العرض هنا محدد
     height: 150,

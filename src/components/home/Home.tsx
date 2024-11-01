@@ -9,16 +9,10 @@ import {
   Dimensions,
 } from "react-native";
 import Tabs from "./Tabs";
-import Button from "../ui/Button";
-import { router } from "expo-router";
-import { useTabContext } from "../layout/TabContext";
-import SearchInput from "../ui/SearchInput";
-import { usesearchStore } from "@/src/store/search/searchStore";
-const { width, height } = Dimensions.get("screen");
+  import SearchInput from "../ui/SearchInput";
+ const { width, height } = Dimensions.get("screen");
 const Homes: React.FC = () => {
-  const { selectedCategoryName } = useTabContext();
-  const { setSearchTerm, clearSearchTerm } = usesearchStore();
-
+ 
   return (
     <KeyboardAvoidingView
       style={styles.container}
@@ -34,20 +28,7 @@ const Homes: React.FC = () => {
         </View>
 
         <Tabs />
-        <View style={styles.buttonContainer}>
-          <Button
-            size="large"
-            color="red"
-            title={` View All ${selectedCategoryName} `}
-            onClick={async () => {
-              clearSearchTerm();
-              let title = selectedCategoryName;
-              console.log(title, "im title after slice");
-              setSearchTerm(title);
-              router.push("/product/search");
-            }}
-          />
-        </View>
+
       </ScrollView>
     </KeyboardAvoidingView>
   );
@@ -79,13 +60,7 @@ const styles = StyleSheet.create({
     color: "black",
     marginBottom: 5,
   },
-  buttonContainer: {
-    position: "absolute",
-    paddingHorizontal: 25,
-    bottom: 0,
-    height: height / 5,
-    width: width,
-  },
+
 });
 
 export default Homes;

@@ -11,12 +11,21 @@ import Header from "../../ui/Header";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import { getProductsByCategoryId } from "@/src/queries/products/getProductsByCategoryId";
  
+
+
  
 const SearchProductScreen = () => {
-   const { searchTerm, setSearchTerm, clearSearchTerm } = usesearchStore();
+   const { searchTerm, setSearchTerm, clearSearchTerm ,productsOfSearch,setProductsOfSearch } = usesearchStore();
    const navigation = useNavigation();
-
+ console.log("im productsOfSearch 111 ",productsOfSearch)
    const { data: products, isLoading, error, refetch } = useSearchProducts(searchTerm);
+   useEffect(()=>{
+     if (products) {
+      
+      setProductsOfSearch(products)}
+
+   },[searchTerm])
+
   const goBack =()=>{
     clearSearchTerm();
     navigation.goBack()
@@ -33,11 +42,11 @@ const SearchProductScreen = () => {
         <ActivityIndicator size="large" color="red" />
       ) : ( <> 
         {
-          products && (        <Text style={styles.found}> { products?.length > 0 ? `Found ${products?.length} results `:''}</Text>
+          productsOfSearch && (        <Text style={styles.found}> { productsOfSearch?.length > 0 ? `Found ${productsOfSearch?.length} results `:''}</Text>
           )
         }
                <FlatList
-        data={products}
+        data={productsOfSearch}
         keyExtractor={(item) => item.id.toString()}
         numColumns={2} 
         columnWrapperStyle={styles.row} 

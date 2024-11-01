@@ -16,11 +16,11 @@ type CardWrapperProps = {
 
 const CardWrapper: React.FC<CardWrapperProps> = ({ id, imageSource, title, price }) => {
 
-  const cardWidth = width * 0.5; 
+  const cardWidth = width * 0.49; 
   const cardHeight = cardWidth * 1.2; 
 
   return (
-    <Card height={cardHeight} width={cardWidth}>
+    <Card id={id} height={cardHeight} width={cardWidth}>
       <CardContent 
         imageSource={imageSource}
         title={title}
