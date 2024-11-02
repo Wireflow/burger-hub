@@ -9,8 +9,8 @@ import { Product } from '@/src/types/product/Product';
 import OrderDialog from './ModelOrderType';
 import Header from './Header';
 import NotFoundproduct from './NotFoundproduct';
-import ProductCardWithOption from '../../ui/order/ProductCardWithOption';
-import IncereaseDecrease from './IncereaseDecrease';
+
+const {height}=Dimensions.get("screen");
 
 const ListProduct: React.FC = () => {
     const [dialogVisible, setDialogVisible] = useState(false);
@@ -56,7 +56,7 @@ const styles = StyleSheet.create({
      },
     buttonContainer: {
         height: 60,
-        width: '100%',
+        width: "100%",
         marginBottom: 20,
      },
 });

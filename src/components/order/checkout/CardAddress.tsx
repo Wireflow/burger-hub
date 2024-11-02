@@ -4,17 +4,19 @@ import React from "react";
 import { Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import Button from "../../ui/Button";
 import { Row } from "@/src/services/supabase/table.types";
+import { useGetUpdatedAddresses } from "@/src/queries/users/getChangedAddress";
+import { useAddressStore } from "@/src/store/address/useaddressStore";
 type Props = {
   data: Row<"Addresses">;
 };
 const CardAddress = ({ data }: Props) => {
   return (
     <View style={styles.addressItem}>
+   
       <View style={styles.icon}>
         <Image source={require("@/assets/icons/Location.png")} />
       </View>
       <View style={styles.addressDetails}>
-        <Text>{data.street}</Text>
         <Text>
           {data.street}, {data.city}, {data.state}, {data.zip_code}
         </Text>

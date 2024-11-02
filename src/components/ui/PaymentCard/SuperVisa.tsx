@@ -1,6 +1,6 @@
 import { PaymentType } from "@/src/store/cart/cartSlice";
 import { PaymentMethodVisa } from "@/src/types/validations/Payments";
- import React from "react";
+import React from "react";
 import {
   Dimensions,
   Image,
@@ -16,20 +16,30 @@ type Props = {
   paymentMethode: PaymentMethodVisa;
   onClick: () => void;
   selectedPaymentID?: number;
-  selectedPaymentType?: PaymentType.PayPal | PaymentType.SuperVisa | PaymentType.Visa;
+  selectedPaymentType?:
+    | PaymentType.PayPal
+    | PaymentType.SuperVisa
+    | PaymentType.Visa;
 };
 
-function SuperVisa({ paymentMethode, onClick, selectedPaymentID=0, selectedPaymentType }: Props) {
- 
+function SuperVisa({
+  paymentMethode,
+  onClick,
+  selectedPaymentID = 0,
+  selectedPaymentType,
+}: Props) {
   return (
-    < >
+    <>
       <TouchableOpacity
         key={paymentMethode.id}
         style={[
           styles.card,
-          selectedPaymentID === paymentMethode.id && selectedPaymentType === paymentMethode.method_type ? styles.selectedCard : {},
+          selectedPaymentID === paymentMethode.id &&
+          selectedPaymentType === paymentMethode.method_type
+            ? styles.selectedCard
+            : {},
         ]}
-        onPress={onClick}  
+        onPress={onClick}
       >
         <Image
           source={require("@/assets/icons/visa.png")}
@@ -42,9 +52,12 @@ function SuperVisa({ paymentMethode, onClick, selectedPaymentID=0, selectedPayme
           </Text>
         </View>
 
-        {selectedPaymentID === paymentMethode.id && selectedPaymentType === paymentMethode.method_type && <View style={styles.radioButton} />}
+        {selectedPaymentID === paymentMethode.id &&
+          selectedPaymentType === paymentMethode.method_type && (
+            <View style={styles.radioButton} />
+          )}
       </TouchableOpacity>
-    </ >
+    </>
   );
 }
 
@@ -69,7 +82,7 @@ const styles = StyleSheet.create({
     display: "flex",
     flexDirection: "row",
     alignItems: "center",
-    height:90,
+    height: 90,
     width: width * 0.8,
   },
   selectedCard: {

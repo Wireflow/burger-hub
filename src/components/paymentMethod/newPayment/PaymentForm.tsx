@@ -1,11 +1,8 @@
 import React from "react";
 import { StyleSheet, View } from "react-native";
 import { ActivityIndicator } from "react-native-paper";
-import { PayPalFormValues, PaypalType } from "@/src/types/payment/PayPal";
-import {
-  VisaSuperVisaFormValues,
-  VisaSuperVisaType,
-} from "@/src/types/payment/VisaSuperVisa";
+import { PaypalType } from "@/src/types/payment/PayPal";
+import { payment_MethodType } from "@/src/types/payment/VisaSuperVisa";
 import PayPalForm from "./PaymentsForms/PayPalForm";
 import VisaForm from "./PaymentsForms/VisaForm";
 
@@ -13,7 +10,7 @@ interface PaymentFormProps {
   paymentMethod: string | null;
   loading: boolean;
   handleSubmitPyPal: (data: PaypalType) => void;
-  handleSubmitVisaSuperVisa: (data: VisaSuperVisaType) => void;
+  handleSubmitVisaSuperVisa: (data: payment_MethodType) => void;
 }
 
 const PaymentForm: React.FC<PaymentFormProps> = ({

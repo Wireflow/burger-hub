@@ -7,7 +7,7 @@ import {
   ActivityIndicator,
 } from "react-native";
 import SearchInput from "../ui/SearchInput";
-import { useSearchProducts, Product } from "../../queries/products/getbySearch";
+import { useSearchProducts } from "../../queries/products/getbySearch";
 import Buttonout from "../ui/Buttonout";
 import Homes from "./Home";
 import CardWrapper from "../ui/card/CardWrapper";
@@ -19,7 +19,7 @@ const ProductSearch: React.FC = () => {
   const [g, setG] = useState(false);
 
   const handleSearch = (text: string) => {
-    setSearchTerm(text);
+    setSearchTerm(text.toLowerCase());
   };
 
   if (g) {
@@ -59,7 +59,7 @@ const ProductSearch: React.FC = () => {
             showsHorizontalScrollIndicator={false}
             contentContainerStyle={styles.content}
           >
-            {products.map((item: Product) => (
+            {products.map((item: any) => (
               <CardWrapper
                 key={item.id}
                 imageSource={{

@@ -41,13 +41,12 @@ const SignUp = () => {
 
       if (dataUser) {
         console.log("User signed up:", dataUser);
-        setSession({
-          name: dataUser[0]?.name || "",
-          phone: dataUser[0]?.phone,
-          email: dataUser[0]?.email,
-          id: dataUser[0]?.id,
-        });
-        router.navigate("/(drawer)/main");
+        // setSession({
+        //   name: dataUser[0]?.name || "",
+        //   phone: dataUser[0]?.phone,
+        //   email: dataUser[0]?.email,
+        //   id: dataUser[0]?.id,
+        // });
         showToast("User registered successfully!", { type: "success" });
         console.log(" im session with sign up in success ", session);
       } else {
@@ -113,15 +112,15 @@ const styles = StyleSheet.create({
   },
   scrollContent: {
     flexGrow: 1,
-    width:width,
+    width: width,
     alignItems: "center",
   },
   inputContainer: {
     width: width * 0.8,
-    top:20
+    top: 20,
   },
   buttonContainer: {
-    width:width,
+    width: width,
     height: 50,
     top: 30,
     flex: 1,

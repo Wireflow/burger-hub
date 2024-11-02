@@ -19,11 +19,11 @@ export const MyBottomTabs: React.FC = () => {
   return (
     <View style={styles.container}>
       <Tab.Navigator
-        initialRouteName="home"
+        initialRouteName="main"
         tabBar={(props) => <CustomTabBar {...props} />}
       >
         <Tab.Screen
-          name="home"
+          name="main"
           component={Homes}
           options={({ navigation }) => ({
             title: "",

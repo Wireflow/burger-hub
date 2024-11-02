@@ -18,6 +18,7 @@ import { OrderWithAddress } from "@/src/queries/order/useGetAllOrders";
 import Header from "../ui/Header";
 import { useFocusEffect } from "expo-router";
 import { useOrderStore } from "@/src/store/oder/useOrderStore";
+import OrderCard from "../ui/OrderCard";
 const { height, width } = Dimensions.get("screen");
 
 export default function OrderHistoryScreen() {
@@ -64,7 +65,7 @@ export default function OrderHistoryScreen() {
     >
       <View style={{ width: width, flex: 1, alignItems: "center" }}>
         {order.map((order) => (
-          <Card key={order.id} height={147} width={331}>
+          <OrderCard key={order.id} height={147} width={331} id={order.id}>
             <View style={styles.container}>
               <View>
                 <Text style={styles.orderText}>
@@ -108,7 +109,7 @@ export default function OrderHistoryScreen() {
             <View>
               <Text></Text>
             </View>
-          </Card>
+          </OrderCard>
         ))}
       </View>
     </ScrollView>

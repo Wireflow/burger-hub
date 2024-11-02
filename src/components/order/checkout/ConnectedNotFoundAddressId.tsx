@@ -12,22 +12,23 @@ const ConnectedNotFoundAddressId = () => {
         <Text style={styles.label}>Delivery address</Text>
       </View>
 
-      <View
+     { <View
         style={{
-          justifyContent: "center",
+          display: "flex",
+          flexDirection: "row",
+
+          justifyContent: "space-around",
           alignItems: "center",
-          gap: 10,
-          margin: 20,
         }}
       >
         <Image
           source={require("@/assets/icons/Location.png")}
           style={{ width: 40, height: 35 }}
         />
-        <Text style={{ fontSize: 28, fontWeight: "600", width: 200 }}>
+        <Text style={{ fontSize: 28, fontWeight: "600", width: 200, top: -5 }}>
           No Address yet
         </Text>
-      </View>
+      </View>}
       <Button
         title="Select  Address"
         size="medium"

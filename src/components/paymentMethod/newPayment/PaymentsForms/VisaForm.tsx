@@ -4,9 +4,9 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod'; 
 import FormInput from '@/src/components/ui/FormInput';
 import Button from '@/src/components/ui/Button';
-import { VisaSuperVisaSchema, VisaSuperVisaType } from '@/src/types/payment/VisaSuperVisa';
+import { payment_MethodSchema, payment_MethodType } from '@/src/types/payment/VisaSuperVisa';
 type VisaFormProps = {
-    onSubmit: (data: VisaSuperVisaType) => void; 
+    onSubmit: (data: payment_MethodType) => void; 
   };
   
  
@@ -15,8 +15,8 @@ const VisaForm: React.FC<VisaFormProps> = ({ onSubmit }) => {
     control,
     handleSubmit,
     formState: { errors },
-  } = useForm<VisaSuperVisaType>({
-    resolver: zodResolver(VisaSuperVisaSchema),
+  } = useForm<payment_MethodType>({
+    resolver: zodResolver(payment_MethodSchema),
   });
 
   return (

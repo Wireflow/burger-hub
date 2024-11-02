@@ -1,42 +1,35 @@
 import React, { useEffect, useRef, useState } from "react";
 import { View, StyleSheet } from "react-native";
 import { usePathname, router } from "expo-router";
- import { usesearchStore } from "@/src/store/search/searchStore";
+import { usesearchStore } from "@/src/store/search/searchStore";
 import Input from "./input";
- 
+
 const SearchInput: React.FC<{ color?: string; backgroundColor?: string }> = ({
   color = "#333",
   backgroundColor = "white",
 }) => {
   const pathname = usePathname();
-  const { searchTerm, setSearchTerm, clearSearchTerm,setProductsOfSearch } = usesearchStore();
- const [searchAuto,setSearchAuto] = useState(true)
+  const { searchTerm, setSearchTerm, clearSearchTerm, setProductsOfSearch } =
+    usesearchStore();
+  const [searchAuto, setSearchAuto] = useState(true);
   console.log("im her in search", pathname.startsWith("/product/search"));
 
   const handleSearchPress = () => {
     if (pathname.startsWith("/product/search")) {
-      console.log(
-        "im her in search",
-        pathname.startsWith("/product/search")
-      );
+      console.log("im her in search", pathname.startsWith("/product/search"));
     } else {
-       router.push(`/product/search`);
-       setProductsOfSearch([])
-      
+      router.push(`/product/search`);
+      setProductsOfSearch([]);
     }
- 
-   
-
   };
-useEffect(()=>{
-  if(searchTerm){
-    setSearchAuto(false)
-  }else{
-    console.log("im searchTerm ",searchTerm)
-    setSearchAuto(true) 
-  
-  }
-},[searchTerm])
+  useEffect(() => {
+    if (searchTerm) {
+      setSearchAuto(false);
+    } else {
+      console.log("im searchTerm ", searchTerm);
+      setSearchAuto(true);
+    }
+  }, [searchTerm]);
   return (
     <View style={[styles.container, { backgroundColor }]}>
       <Input
@@ -45,9 +38,9 @@ useEffect(()=>{
         style={styles.input}
         placeholder={"Search..."}
         placeholderTextColor={"black"}
-        searchBox={searchAuto }
+        searchBox={searchAuto}
         onChangeText={setSearchTerm}
-         border
+        border
         onPress={handleSearchPress}
         autoFocus={pathname.startsWith("/product/search")}
       />

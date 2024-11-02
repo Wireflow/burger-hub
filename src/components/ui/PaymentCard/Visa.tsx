@@ -1,6 +1,6 @@
 import { PaymentType } from "@/src/store/cart/cartSlice";
 import { PaymentMethodVisa } from "@/src/types/validations/Payments";
- import React from "react";
+import React from "react";
 import {
   Dimensions,
   Image,
@@ -16,37 +16,57 @@ type Props = {
   paymentMethode: PaymentMethodVisa;
   onClick: () => void;
   selectedPaymentID?: number;
-  selectedPaymentType?: PaymentType.PayPal | PaymentType.SuperVisa | PaymentType.Visa;
+  selectedPaymentType?:
+    | PaymentType.PayPal
+    | PaymentType.SuperVisa
+    | PaymentType.Visa;
 };
 
-function Visa({ paymentMethode, onClick, selectedPaymentID=0, selectedPaymentType }: Props) {
- 
+function Visa({
+  paymentMethode,
+  onClick,
+  selectedPaymentID = 0,
+  selectedPaymentType,
+}: Props) {
   return (
-    < >
+    <>
       <TouchableOpacity
         key={paymentMethode.id}
         style={[
           styles.card,
-          selectedPaymentID === paymentMethode.id && selectedPaymentType === paymentMethode.method_type ? styles.selectedCard : {},
+          selectedPaymentID === paymentMethode.id &&
+          selectedPaymentType === paymentMethode.method_type
+            ? styles.selectedCard
+            : {},
         ]}
-        onPress={onClick}  
-      > 
-    
-      <Image
-          source={require("@/assets/icons/visa.png")}
-          style={{ height: 40, width: 70 }}
+        onPress={onClick}
+      >
+        <Image
+          source={
+            paymentMethode.phone_number
+              ? require("@/assets/icons/Paypal.png")
+              : require("@/assets/icons/visa.png")
+          }
+          style={{ height: paymentMethode.phone_number ? 60 : 40, width: 70 }}
         />
-        
+
         <View style={{ width: "70%", marginLeft: 15 }}>
           <Text style={styles.type}>{paymentMethode.method_type}</Text>
           <Text style={styles.lastFour}>
-            {`**** **** **** ${paymentMethode.card_number.slice(-4)}`}
+            {`**** **** **** ${
+              paymentMethode.card_number
+                ? paymentMethode?.card_number?.slice(-4)
+                : paymentMethode.phone_number.slice(-4)
+            }`}
           </Text>
         </View>
 
-        {selectedPaymentID === paymentMethode.id && selectedPaymentType === paymentMethode.method_type && <View style={styles.radioButton} />}
+        {selectedPaymentID === paymentMethode.id &&
+          selectedPaymentType === paymentMethode.method_type && (
+            <View style={styles.radioButton} />
+          )}
       </TouchableOpacity>
-    </ >
+    </>
   );
 }
 
