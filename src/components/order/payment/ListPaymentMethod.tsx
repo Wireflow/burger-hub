@@ -25,17 +25,6 @@ const ListPaymentMethod = ({ dataPayments }: Prop) => {
     const { id, method_type } = payment;
 
     switch (method_type) {
-     
-      case PaymentType.SuperVisa:
-        return (
-          <SuperVisa
-            key={id}
-            onClick={() => handlePaymentSelect(id, method_type)}
-            selectedPaymentType={cart?.paymentType}
-            paymentMethode={payment}
-            selectedPaymentID={cart?.paymentId}
-          />
-        );
       default:
         return null;
     }

@@ -87,34 +87,39 @@ export default function OrderDetails() {
                 </Badge>
               )}
             </View>
-          <View style={{ display: "flex",flexDirection:"row-reverse",justifyContent:"space-between" }}>
-          <View >
-              <Text style={styles.orderText}>
-                ${order.totalAmount ?? "Not found: totalAmount"}
-              </Text>
-              <Text style={styles.orderText}>
-                {order.deliveryAt
-                  ? formatDate(new Date(order.created_at))
-                  : "Delivery date not available"}
-              </Text>
-            </View>
-          <View>
-          <Text style={styles.orderText}>
-              {order.totalQuantity ?? "Not found: totalQuantity"} items
-            </Text>
-            {order.Products?.length > 0 ? (
-              order.Products.map((product, index) => (
-                <Text key={product.id} style={styles.productText}>
-                  {`${index + 1}.${product.name}`}
+            <View
+              style={{
+                display: "flex",
+                flexDirection: "row-reverse",
+                justifyContent: "space-between",
+              }}
+            >
+              <View>
+                <Text style={styles.orderText}>
+                  ${order.totalAmount ?? "Not found: totalAmount"}
                 </Text>
-              ))
-            ) : (
-              <Text>No products found</Text>
-            )}
+                <Text style={styles.orderText}>
+                  {order.deliveryAt
+                    ? formatDate(new Date(order.created_at))
+                    : "Delivery date not available"}
+                </Text>
+              </View>
+              <View>
+                <Text style={styles.orderText}>
+                  {order.totalQuantity ?? "Not found: totalQuantity"} items
+                </Text>
+                {order.Products?.length > 0 ? (
+                  order.Products.map((product, index) => (
+                    <Text key={product.id} style={styles.productText}>
+                      {`${index + 1}.${product.name} (${product.quantity})`}
+                    </Text>
+                  ))
+                ) : (
+                  <Text>No products found</Text>
+                )}
+              </View>
+            </View>
           </View>
-          </View>
-          </View>
-
           <View style={styles.orderDetails}>
             {order.order_type === "Delivery" ? (
               <>

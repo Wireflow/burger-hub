@@ -43,9 +43,9 @@ function Visa({
       >
         <Image
           source={
-            paymentMethode.phone_number
+            paymentMethode.method_type=="PayPal"
               ? require("@/assets/icons/Paypal.png")
-              : require("@/assets/icons/visa.png")
+              : paymentMethode.method_type=="Visa"?require("@/assets/icons/visa.png"):require("@/assets/icons/mastercard.png")
           }
           style={{ height: paymentMethode.phone_number ? 60 : 40, width: 70 }}
         />

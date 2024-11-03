@@ -30,7 +30,5 @@ export interface PaymentMethodVisa {
 }
 
  export interface PaymentMethodsResponse {
-  
-    payment_method_paypal: PaymentMethodPayPal[] | null; 
     payment_method_visa_super_visa: PaymentMethodVisa[] | null;  
 }
