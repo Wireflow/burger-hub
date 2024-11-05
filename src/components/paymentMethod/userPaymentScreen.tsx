@@ -42,6 +42,7 @@ const UserPaymentScreen = () => {
             paymentMethods={paymentMethods}
           />
         ) : null)}
+      <View style={{position:"absolute", alignSelf:"center",bottom:0}}>
       <Button
         size="large"
         color="red"
@@ -50,6 +51,7 @@ const UserPaymentScreen = () => {
           router.push("/payments/NewPaymentMethod");
         }}
       />
+      </View>
     </View>
   );
 };

@@ -8,6 +8,7 @@ const _layout = () => {
     <GestureHandlerRootView style={{ flex: 1 }}>
       <Stack >
         <Stack.Screen name="index" options={{ headerShown: false }} />
+        <Stack.Screen name="[id]" options={{ headerShown: false }} />
       </Stack>
     </GestureHandlerRootView>
   );

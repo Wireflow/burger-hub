@@ -12,7 +12,8 @@ import { useGetAddressbyId } from "@/src/queries/users/getAddressbyId";
 import { Row } from "@/src/services/supabase/table.types";
 import CardAddress from "./CardAddress";
 import { router } from "expo-router";
-const {height,width}=Dimensions.get("screen");
+import { useAddressStore } from "@/src/store/address/useaddressStore";
+const { height, width } = Dimensions.get("screen");
 export type addressRow = Row<"Addresses">;
 type Prop = {
   addressId?: number;
@@ -23,8 +24,6 @@ const ConnectedCardAddress = ({ addressId = 0, change = false }: Prop) => {
   const [address, setAddress] = useState<addressRow | null>(null);
   const { session } = useSessionStore();
   const { data, error, isLoading } = useGetAddressbyId(addressId);
-
-  useEffect(() => {});
 
   return (
     <View>
@@ -62,7 +61,7 @@ const styles = StyleSheet.create({
     marginBottom: 20,
     justifyContent: "space-between",
     flexDirection: "row",
-    width: width*0.8,
+    width: width * 0.8,
   },
   label: {
     fontSize: 16,

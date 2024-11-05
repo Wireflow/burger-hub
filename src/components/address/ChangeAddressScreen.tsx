@@ -105,6 +105,7 @@ const AddressChangeScreen = ({ setOpen, open, refetch }: Props) => {
               )}
               keyExtractor={(item) => item.id.toString()}
             />
+            
             <View style={{ position: "absolute", bottom: 5 }}>
               <Button
                 color="red"
@@ -113,6 +114,8 @@ const AddressChangeScreen = ({ setOpen, open, refetch }: Props) => {
                 onClick={() => setOpen(false)}
               />
             </View>
+            <View style={{alignItems:"center",justifyContent:"center",position:"absolute"}}>{!address?.length&&<Text>no address available</Text>}</View>
+
           </View>
         </View>
         <ShowDialog

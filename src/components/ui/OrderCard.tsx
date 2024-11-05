@@ -9,10 +9,10 @@ type CardProps = {
   id: number;
 };
 
-const Card = ({ height, width, children, id }: CardProps) => {
+const OrderCard = ({ height, width, children, id }: CardProps) => {
   return (
     <TouchableOpacity
-      onPress={() => router.navigate(`/(drawer)/product/${id}`)}
+      onPress={() => router.navigate(`/(drawer)/Order History/${id}`)}
       style={[styles.card, { height, width }]}
     >
       {children}
@@ -20,7 +20,7 @@ const Card = ({ height, width, children, id }: CardProps) => {
   );
 };
 
-export default Card;
+export default OrderCard;
 
 const styles = StyleSheet.create({
   card: {

@@ -13,7 +13,7 @@ type props ={
 }
 const Presentation = ({title,price,description}:props) => {
   return (
- <View style={{height:windowHeight*0.3,width:"70%",display:'flex',justifyContent:'space-around',alignItems:'center',position:'absolute',bottom:'13%'}}>
+ <View style={{height:windowHeight*0.3,width:"70%",display:'flex',justifyContent:'space-evenly',alignItems:'center',position:'absolute',bottom:0}}>
       <Title name={title} />
     <Description description={description}/>
     <Price price={price}/>

@@ -16,7 +16,7 @@ const ListItems = () => {
       <ScrollView>
         {products &&
           products.map((item) => (
-          <CardProduct item={item}/>
+          <CardProduct item={item} key={item.id}/>
           ))}
       </ScrollView>
       </SafeAreaView>

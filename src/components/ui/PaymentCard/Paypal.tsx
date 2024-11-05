@@ -38,7 +38,7 @@ function Paypal({ paymentMethode, onClick, selectedPaymentID=0, selectedPaymentT
         <View style={{ width: "70%", marginLeft: 15 }}>
           <Text style={styles.type}>PayPal</Text>
           <Text style={styles.lastFour}>
-            {`**** **** **** ${paymentMethode.phone_number.slice(-4)}`}
+            {`**** **** **** ${paymentMethode?.phone_number?.slice(-4)}`}
           </Text>
         </View>
 

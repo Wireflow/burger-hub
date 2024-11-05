@@ -5,11 +5,11 @@ import { useSessionStore } from "@/src/store/useSessionStore";
 import PaymentMethodSelector from "./PaymentMethodSelector";
 import PaymentForm from "./PaymentForm";
 import { PaymentType } from "@/src/store/cart/cartSlice";
-import { PaypalType } from "@/src/types/payment/PayPal";
-import { VisaSuperVisaType } from "@/src/types/payment/VisaSuperVisa";
-import { useAddPaymentMethod } from "@/src/queries/payment/useAddPaymentMethod";
-import { useAddPayPalPaymentMethod } from "@/src/queries/payment/useAddPaymentMethodpa";
+
+import { payment_MethodType } from "@/src/types/payment/VisaSuperVisa";
+import { AddPaymentMethod } from "@/src/mutations/payments/AddPaymentMethod";
 import { useCustomToast } from "@/src/hooks/useCustomToast";
+import { PaypalType } from "@/src/types/payment/PayPal";
 
 const NewPaymentScreen: React.FC = () => {
   const { session } = useSessionStore();
@@ -18,21 +18,22 @@ const NewPaymentScreen: React.FC = () => {
   const [loading, setLoading] = useState(false);
 
   const router = useRouter();
-  const addPaymentMethod = useAddPaymentMethod();
-  const addPayPalPaymentMethod = useAddPayPalPaymentMethod();
+  const addPayPalPaymentMethod = AddPaymentMethod();
+  const addPaymentMethod = AddPaymentMethod();
+
   const showToast = useCustomToast();
-  const handleSubmitPyPal = async (data: PaypalType) => {
+  const handleSubmitPyPal = (data: PaypalType) => {
     setLoading(true);
     const paymentData = {
       user_id: userId || "",
       method_type: paymentMethod,
-      account_name: data.account_name,
+      acount_name: data.account_name,
       phone_number: data.phone_number,
       email: data.email,
     };
 
     try {
-      await addPayPalPaymentMethod.mutateAsync(paymentData);
+       addPayPalPaymentMethod.mutateAsync(paymentData);
       setLoading(false);
       showToast("Payment Has Been Added!", { type: "success" });
 
@@ -44,7 +45,7 @@ const NewPaymentScreen: React.FC = () => {
     }
   };
 
-  const handleSubmitVisaSuperVisa = async (data: VisaSuperVisaType) => {
+  const handleSubmitVisaSuperVisa = async (data: payment_MethodType) => {
     setLoading(true);
     if (
       !paymentMethod ||
@@ -59,8 +60,8 @@ const NewPaymentScreen: React.FC = () => {
       user_id: userId || "",
       method_type: paymentMethod,
       card_number: data.card_number,
-      expire_date: data.expire_date,
-      card_cvc: data.card_cvc,
+      expire_date: data.expire_date ,
+      card_cvc: data.card_cvc ,
     };
 
     try {

@@ -1,9 +1,7 @@
-import React, { useState } from "react";
+import React from "react";
 import { Modal, View, Text, TouchableOpacity, StyleSheet } from "react-native";
-import { RadioButton } from "react-native-paper"; // Import from react-native-paper
 import Button from "../../ui/Button";
-import { useCartStore } from "@/src/store/cart/cartStore";
-import { router } from "expo-router";
+
 
 type Props = {
   visible?: boolean;

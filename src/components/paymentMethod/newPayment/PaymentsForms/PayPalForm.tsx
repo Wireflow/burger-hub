@@ -5,6 +5,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import FormInput from '@/src/components/ui/FormInput';
 import Button from '@/src/components/ui/Button';
 import { PaypalSchema, PaypalType } from '@/src/types/payment/PayPal';
+
  type PayPalFormProps = {
     onSubmit: (data: PaypalType) => void; 
   };

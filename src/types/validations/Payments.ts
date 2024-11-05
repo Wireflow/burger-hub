@@ -16,6 +16,9 @@ export interface PaymentMethodPayPal {
 export interface PaymentMethodVisa {
     card_cvc: number;
     card_number: string;
+    phone_number: string;
+    email: string;
+    account_name: string;
     created_at: string;  
     deletedAt: string | null;
     expire_date: string;  
@@ -27,6 +30,5 @@ export interface PaymentMethodVisa {
 }
 
  export interface PaymentMethodsResponse {
-    payment_method_paypal: PaymentMethodPayPal[] | null; 
     payment_method_visa_super_visa: PaymentMethodVisa[] | null;  
 }

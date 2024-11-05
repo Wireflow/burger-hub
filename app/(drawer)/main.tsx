@@ -11,28 +11,36 @@ import OrderHistoryScreen from "@/src/components/oder-history/OrderHistoryScreen
 import Favorites from "@/src/components/Favorite/Favorite";
 import Disconnected from "../disconnected";
 import NetInfo from "@react-native-community/netinfo";
+import { useSessionStore } from "@/src/store/useSessionStore";
+import { View, Text } from "react-native";
 
 const Drawer = createDrawerNavigator();
 
 const Main = () => {
+  const isSessionExist = useSessionStore().session;
+
   const [isConnected, setIsConnected] = useState<boolean | null>(null);
 
   useEffect(() => {
-    const unsubscribe = NetInfo.addEventListener((state) => {
+    const unSubscribe = NetInfo.addEventListener((state) => {
       setIsConnected(state.isConnected);
     });
-
-    NetInfo.fetch().then(state => {
+    NetInfo.fetch().then((state) => {
       setIsConnected(state.isConnected);
     });
-
-    return unsubscribe;
+    return unSubscribe;
   }, []);
 
   if (isConnected === null) {
-    return null; 
+    return null;
   }
-
+  if (!isSessionExist) {
+    return (
+      <View>
+        <Text>not authorized</Text>
+      </View>
+    );
+  }
   return (
     <NavigationContainer independent={true}>
       {isConnected ? (
