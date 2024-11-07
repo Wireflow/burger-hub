@@ -1,17 +1,17 @@
-import { PaymentType } from "@/src/store/cart/cartSlice";
-import React from "react";
+ import React from "react";
 import {
   View,
-  Text,
-  TouchableOpacity,
+   TouchableOpacity,
   StyleSheet,
   Dimensions,
 } from "react-native";
 import Button from "../../ui/Button";
-const { height, width } = Dimensions.get("screen");
+import { PaymentMethod } from "@/src/types/schema/enums";
+const { width } = Dimensions.get("screen");
 interface PaymentMethodSelectorProps {
-  setPaymentMethod: (method: PaymentType | null) => void;
+  setPaymentMethod: (method: PaymentMethod | null) => void;
 }
+const paymentMethods: PaymentMethod[] = ["Visa", "Super Visa", "PayPal"];
 
 const PaymentMethodSelector: React.FC<PaymentMethodSelectorProps> = ({
   setPaymentMethod,
@@ -27,8 +27,8 @@ const PaymentMethodSelector: React.FC<PaymentMethodSelectorProps> = ({
 
       }}
     >
-      {[PaymentType.Visa, PaymentType.SuperVisa, PaymentType.PayPal].map(
-        (method) => (
+      {paymentMethods.map(
+        (method ) => (
           <TouchableOpacity
             key={method}
             style={styles.button}

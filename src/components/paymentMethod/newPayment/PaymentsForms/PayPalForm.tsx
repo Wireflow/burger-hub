@@ -51,7 +51,9 @@ const styles = StyleSheet.create({
      height:80,
    
   },container:{
-    height:350,   }
+    height:350, 
+  
+  }
  
  
 });

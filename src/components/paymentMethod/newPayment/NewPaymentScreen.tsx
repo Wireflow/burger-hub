@@ -4,17 +4,17 @@ import { useRouter } from "expo-router";
 import { useSessionStore } from "@/src/store/useSessionStore";
 import PaymentMethodSelector from "./PaymentMethodSelector";
 import PaymentForm from "./PaymentForm";
-import { PaymentType } from "@/src/store/cart/cartSlice";
-
+ 
 import { payment_MethodType } from "@/src/types/payment/VisaSuperVisa";
 import { AddPaymentMethod } from "@/src/mutations/payments/AddPaymentMethod";
 import { useCustomToast } from "@/src/hooks/useCustomToast";
 import { PaypalType } from "@/src/types/payment/PayPal";
+import { PaymentMethod } from "@/src/types/schema/enums";
 
 const NewPaymentScreen: React.FC = () => {
   const { session } = useSessionStore();
   const userId = session?.id;
-  const [paymentMethod, setPaymentMethod] = useState<PaymentType | null>(null);
+  const [paymentMethod, setPaymentMethod] = useState<PaymentMethod | null>(null);
   const [loading, setLoading] = useState(false);
 
   const router = useRouter();
@@ -49,8 +49,8 @@ const NewPaymentScreen: React.FC = () => {
     setLoading(true);
     if (
       !paymentMethod ||
-      (paymentMethod !== PaymentType.Visa &&
-        paymentMethod !== PaymentType.SuperVisa)
+      (paymentMethod !== 'Visa' &&
+        paymentMethod !== 'Super Visa')
     ) {
       console.error("Invalid payment method");
       setLoading(false);
@@ -76,10 +76,7 @@ const NewPaymentScreen: React.FC = () => {
       showToast("Sory! some be problem try agine ", { type: "warning" });
     }
   };
-  const [open, setOpen] = useState(false);
-  const toggleModalVisibility = () => {
-    setOpen(!open);
-  };
+ 
   return (
     <View style={styles.container}>
       {!paymentMethod && (

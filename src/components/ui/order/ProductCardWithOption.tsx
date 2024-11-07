@@ -29,7 +29,7 @@ const ProductCardWithOption: React.FC<Props> = ({
       <View style={styles.cardContainer}>
         <View style={styles.textContainer}>
           <Text style={styles.name}>
-            {confirmation && `${item?.quantity}x`} {item.name}
+            {confirmation && `${item?.quantity}x`}{item.name}
           </Text>
           <Text style={styles.price}>${item.price.toFixed(2)}</Text>
 
@@ -60,7 +60,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "space-between",
     marginBottom: 15,
-    width: windowWidth * 0.8,
+    width: windowWidth * 0.9,
   },
   image: {
     width: 70,
@@ -71,7 +71,8 @@ const styles = StyleSheet.create({
   },
   textContainer: {
     top: -1,
-  },
+    width:100,
+   },
   name: {
     fontWeight: "bold",
     fontSize: 15,

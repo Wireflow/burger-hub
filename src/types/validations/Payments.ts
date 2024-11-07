@@ -1,5 +1,6 @@
-import { PaymentType } from "@/src/store/cart/cartSlice";
+import { PaymentMethod } from "../schema/enums";
 
+ 
 export interface PaymentMethodPayPal {
     account_name: string;
     created_at: string;  
@@ -7,7 +8,7 @@ export interface PaymentMethodPayPal {
     email: string;
     id: number;
     is_deleted: boolean | null;
-    method_type: PaymentType;
+    method_type: PaymentMethod;
     phone_number: string;
     updatedAt: string | null;
     user_id: string;
@@ -24,7 +25,7 @@ export interface PaymentMethodVisa {
     expire_date: string;  
     id: number;
     is_deleted: boolean | null;
-    method_type: PaymentType;
+    method_type: PaymentMethod;
     updatedAt: string | null;
     user_id: string;
 }

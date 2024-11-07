@@ -36,6 +36,9 @@ export default function RootLayout() {
   );
 }
 function RootLayoutMain() {
+  const session = useSessionStore((state) => state);
+{console.log("im seassession",session)
+}
   <Disconnected/>
   redirectAuth();
   return (

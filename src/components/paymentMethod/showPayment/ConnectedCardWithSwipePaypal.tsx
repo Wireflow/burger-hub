@@ -5,13 +5,13 @@ import {
   PaymentMethodPayPal,
   PaymentMethodVisa,
 } from "@/src/types/validations/Payments";
-import { PaymentType } from "@/src/store/cart/cartSlice";
-import Paypal from "../../ui/PaymentCard/Paypal";
+ import Paypal from "../../ui/PaymentCard/Paypal";
 import ItemsHidden from "./ItemDeleteHidden";
 import Visa from "../../ui/PaymentCard/Visa";
+import { PaymentMethod } from "@/src/types/schema/enums";
 type Prop = {
   paymentMethods: PaymentMethodVisa[] | null;
-  onClick: (id: number, methodType: PaymentType) => void;
+  onClick: (id: number, methodType: PaymentMethod) => void;
 };
 const ConnectedCardWithSwipePaypal = ({ paymentMethods, onClick }: Prop) => {
   console.log("im connect this datapayment", paymentMethods);

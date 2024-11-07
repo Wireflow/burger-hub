@@ -1,24 +1,21 @@
 import { Option } from "@/src/types/product/Customize";
 import { Product } from "@/src/types/product/Product";
+import { PaymentMethod } from "@/src/types/schema/enums";
 import { products } from "@/src/types/schema/product";
 import { StateCreator } from "zustand";
 export enum OrderType {
     Delivery = 'Delivery',
     Pickup = 'Pick up',
   }
-  export enum PaymentType {
-    Visa = 'Visa',
-    SuperVisa = 'Super Visa',
-    PayPal ='PayPal'
-  }
+ 
 export type CartType = {
     products: Product[];
     orderType: OrderType.Delivery | OrderType.Pickup;
-    paymentId: number;
+    paymentId: number | null;
     addressId: number |null;
     totalQuantity:number;
     totalAmount:number
-    paymentType:PaymentType.PayPal | PaymentType.SuperVisa | PaymentType.Visa 
+    paymentType:PaymentMethod
 
 }; 
 
@@ -36,7 +33,7 @@ export type CartState = {
     changeOrderType: (orderType: OrderType.Delivery | OrderType.Pickup) => void; // New method
     totalPrice: () => number;
     setAddressId: (IdAddress: number) =>void;
-    setPayment:(IdPayment: number , paymentType:PaymentType.PayPal | PaymentType.SuperVisa | PaymentType.Visa) =>void;
+    setPayment:(IdPayment: number , paymentType:PaymentMethod) =>void;
     setNote:(productId:number , note:string) =>void;
     getNote:(productId:number)=>string | null;
 
@@ -48,7 +45,7 @@ export type CartState = {
         addressId: null,
         totalAmount:0,
         totalQuantity:0,
-        paymentType : PaymentType.PayPal,
+        paymentType : 'Cash',
 
     },
     
@@ -101,7 +98,7 @@ export type CartState = {
 
     },
     
-    removeCart: () => set({ cart: { products: [], orderType: OrderType.Delivery, paymentId: 0, addressId: null ,totalAmount:0,totalQuantity:0,paymentType:PaymentType.PayPal} }),
+    removeCart: () => set({ cart: { products: [], orderType: OrderType.Delivery, paymentId: 0, addressId: null ,totalAmount:0,totalQuantity:0,paymentType:'Cash'} }),
 
     addOption: (product: Product) => {
         const { cart } = get();
@@ -228,7 +225,7 @@ export type CartState = {
 
     },
 
-    setPayment: (IdPayment: number ,paymentType : PaymentType.PayPal | PaymentType.SuperVisa | PaymentType.Visa) => {
+    setPayment: (IdPayment: number ,paymentType : PaymentMethod) => {
         const { cart } = get();
         set({ cart: { ...cart, paymentId: IdPayment , paymentType:paymentType } });
     },setNote: (productId:number,note:string)=>{

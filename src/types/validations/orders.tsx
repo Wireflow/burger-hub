@@ -1,6 +1,10 @@
-import { PaymentType } from '@/src/store/cart/cartSlice';
-import { nullable, z } from 'zod';
-
+ import { nullable, z } from 'zod';
+  enum PaymentMethod {
+   Visa = "Visa",
+   SuperVisa = "Super Visa",
+   PayPal = "PayPal",
+   Cash = "Cash",
+}
  export const ModifierOptionSchema = z.object({
     modifierOptionName: z.string(),
 
@@ -32,12 +36,11 @@ import { nullable, z } from 'zod';
  export const OrderSchema = z.object({
     products: z.array(ProductSchema),
     orderType: z.enum([OrderType.Delivery, OrderType.Pickup]).optional(),
-    paymentId: z.number().optional(),
+    paymentId: z.number().nullable(),
     addressId: z.number().nullable(),
     totalAmount:z.number().optional(),
     totalQuantity:z.number().optional(),
-    paymentType: z.enum([PaymentType.PayPal,PaymentType.SuperVisa,PaymentType.Visa]).optional(),
-
+    paymentType: z.enum([PaymentMethod.Visa, PaymentMethod.SuperVisa, PaymentMethod.PayPal, PaymentMethod.Cash]).optional()
 });
   
 

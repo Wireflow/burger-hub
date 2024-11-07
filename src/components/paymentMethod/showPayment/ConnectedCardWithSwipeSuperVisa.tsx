@@ -1,13 +1,13 @@
 import React from "react";
 import { SwipeListView } from "react-native-swipe-list-view";
 import { PaymentMethodVisa } from "@/src/types/validations/Payments";
-import { PaymentType } from "@/src/store/cart/cartSlice";
-import Visa from "../../ui/PaymentCard/Visa";
+ import Visa from "../../ui/PaymentCard/Visa";
 import ItemsHidden from "./ItemDeleteHidden";
+import { PaymentMethod } from "@/src/types/schema/enums";
 
 type Prop = {
   paymentMethods: PaymentMethodVisa[] | null;
-  onClick: (id: number, methodType: PaymentType) => void;
+  onClick: (id: number, methodType: PaymentMethod) => void;
 };
 
 const ConnectedCardWithSwipeSuperVisa = ({ paymentMethods, onClick }: Prop) => {

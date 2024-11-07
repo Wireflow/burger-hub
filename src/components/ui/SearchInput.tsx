@@ -25,6 +25,7 @@ const SearchInput: React.FC<{ color?: string; backgroundColor?: string }> = ({
   useEffect(() => {
     if (searchTerm) {
       setSearchAuto(false);
+      
     } else {
       console.log("im searchTerm ", searchTerm);
       setSearchAuto(true);

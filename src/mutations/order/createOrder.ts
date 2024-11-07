@@ -1,7 +1,7 @@
 import { supabase } from "@/src/services/supabase/client";
 import { OrderSchema, OrderSchemaType } from "@/src/types/validations/orders";
  
-export const createOrder = async (data: OrderSchemaType ,id:string) => {
+export const createOrder = async (data: OrderSchema ,id:string) => {
   console.log(data.products)
   try {
     const parsedData = OrderSchema.safeParse(data);

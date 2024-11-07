@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, SafeAreaView, StyleSheet, Dimensions } from "react-native";
+import { View, SafeAreaView, StyleSheet, Dimensions, ScrollView } from "react-native";
 import {
   PaymentMethodsResponse,
   PaymentMethodVisa,
@@ -11,9 +11,9 @@ import {
   deletePayPalPayment,
   deleteVisaOrSuperVisaPayment,
 } from "@/src/queries/products/deletePayment";
-import { PaymentType } from "@/src/store/cart/cartSlice";
-import { ActivityIndicator } from "react-native-paper";
+ import { ActivityIndicator } from "react-native-paper";
 import ShowDialog from "../../ui/showDialog";
+import { PaymentMethod } from "@/src/types/schema/enums";
 
 const { height, width } = Dimensions.get("screen");
 
@@ -27,7 +27,7 @@ const ConnectedCardWithSwipe = ({ paymentMethods, refetch }: Prop) => {
   const [loading, setLoading] = useState(false);
   const [selectedMethod, setSelectedMethod] = useState<{
     id: number;
-    methodType: PaymentType;
+    methodType: PaymentMethod;
   } | null>(null);
 
   const handleCancel = () => {
@@ -63,9 +63,11 @@ const ConnectedCardWithSwipe = ({ paymentMethods, refetch }: Prop) => {
     <View style={styles.container}>
       {paymentMethods && <Header />}
       <SafeAreaView style={styles.safeArea}>
+      <ScrollView>
+
         {paymentMethods?.payment_method_visa_super_visa && (
           <ConnectedCardWithSwipeVisa
-            onClick={(id: number, methodType: PaymentType) => {
+            onClick={(id: number, methodType: PaymentMethod) => {
               setSelectedMethod({ id, methodType });
               setDialogOpen(true);
             }}
@@ -74,7 +76,7 @@ const ConnectedCardWithSwipe = ({ paymentMethods, refetch }: Prop) => {
         )}
         {paymentMethods?.payment_method_visa_super_visa && (
           <ConnectedCardWithSwipeVisa
-            onClick={(id: number, methodType: PaymentType) => {
+            onClick={(id: number, methodType: PaymentMethod) => {
               setSelectedMethod({ id, methodType });
               setDialogOpen(true);
             }}
@@ -82,6 +84,8 @@ const ConnectedCardWithSwipe = ({ paymentMethods, refetch }: Prop) => {
             paymentMethods={paymentMethods.payment_method_paypal}
           />
         )}
+              </ScrollView>
+
       </SafeAreaView>
       {loading && (
         <View style={styles.loaderContainer}>
@@ -105,10 +109,10 @@ const styles = StyleSheet.create({
   container: {
     width: width * 0.8,
     alignSelf: "center",
+    height:height *0.5
   },
   safeArea: {
-    height: "auto",
-  },
+   },
   loaderContainer: {
     position: "absolute",
     top: "50%",

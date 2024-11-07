@@ -1,4 +1,4 @@
-import { PaymentType } from "@/src/store/cart/cartSlice";
+ import { PaymentMethod } from "@/src/types/schema/enums";
 import { PaymentMethodVisa } from "@/src/types/validations/Payments";
 import React from "react";
 import {
@@ -16,10 +16,7 @@ type Props = {
   paymentMethode: PaymentMethodVisa;
   onClick: () => void;
   selectedPaymentID?: number;
-  selectedPaymentType?:
-    | PaymentType.PayPal
-    | PaymentType.SuperVisa
-    | PaymentType.Visa;
+  selectedPaymentType?:PaymentMethod
 };
 
 function SuperVisa({

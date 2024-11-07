@@ -6,8 +6,8 @@ import ListPaymentMethod from "./ListPaymentMethod";
 import { useSessionStore } from "@/src/store/useSessionStore";
 import { useCartStore } from "@/src/store/cart/cartStore";
 import { useGetAllPaymentUser } from "@/src/queries/payment/getAllPaymentUser";
-import { PaymentType } from "@/src/store/cart/cartSlice";
-import { ActivityIndicator } from "react-native-paper";
+ import { ActivityIndicator } from "react-native-paper";
+import { PaymentMethod } from "@/src/types/schema/enums";
 const { width } = Dimensions.get("window");
 
 const PaymentScreen = () => {
@@ -25,16 +25,16 @@ const PaymentScreen = () => {
     isFetched
   } = useGetAllPaymentUser(userId as string);
 
-  // const [paymentsMethod, setPaymentsMethod] = React.useState(payments || {});
-
+ 
   
 
  
-   const setCurrentPayment = (id: number , paymentType : PaymentType.PayPal | PaymentType.SuperVisa | PaymentType.Visa) => {
+   const setCurrentPayment = (id: number , paymentType :PaymentMethod) => {
      setPayment(id,paymentType);
   };
   return (
     <View style={styles.container}>
+      
     {isLoading && <ActivityIndicator size="large" color="#AF042C" />}
 
     {
@@ -56,7 +56,7 @@ export default PaymentScreen;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-     padding:'8%',
+    padding:'8%',
   
   },
  

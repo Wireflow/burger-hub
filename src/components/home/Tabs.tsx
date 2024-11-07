@@ -125,8 +125,7 @@ const Tabs = () => {
             title={` View All ${selectedCategoryName} `}
             onClick={()=>{
               console.log("im in view all",productsByCategory )
-              setSearchTerm("ij")
-              setProductsOfSearch(productsByCategory ?? [])
+               setProductsOfSearch(productsByCategory ?? [])
                router.push('/(drawer)/product/search')
             }}
           

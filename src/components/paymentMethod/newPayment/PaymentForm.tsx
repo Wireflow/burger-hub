@@ -5,9 +5,10 @@ import { PaypalType } from "@/src/types/payment/PayPal";
 import { payment_MethodType } from "@/src/types/payment/VisaSuperVisa";
 import PayPalForm from "./PaymentsForms/PayPalForm";
 import VisaForm from "./PaymentsForms/VisaForm";
+import { PaymentMethod } from "@/src/types/schema/enums";
 
 interface PaymentFormProps {
-  paymentMethod: string | null;
+  paymentMethod: PaymentMethod;
   loading: boolean;
   handleSubmitPyPal: (data: PaypalType) => void;
   handleSubmitVisaSuperVisa: (data: payment_MethodType) => void;

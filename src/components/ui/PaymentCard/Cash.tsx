@@ -1,4 +1,4 @@
- import { PaymentMethod } from "@/src/types/schema/enums";
+import { PaymentMethod } from "@/src/types/schema/enums";
 import { PaymentMethodPayPal } from "@/src/types/validations/Payments";
 import React from "react";
 import {
@@ -13,51 +13,38 @@ import {
 const { width } = Dimensions.get("window");
 
 type Props = {
-  paymentMethode: PaymentMethodPayPal;
-  onClick: () => void;
-  selectedPaymentID?: number;
-  selectedPaymentType?: PaymentMethod
+   onClick: () => void;
+   selectedPaymentType?: PaymentMethod
 };
 
-function Paypal({ paymentMethode, onClick, selectedPaymentID=0, selectedPaymentType }: Props) {
+function Cash({  onClick,  selectedPaymentType }: Props) {
  
   return (
     < >
       <TouchableOpacity
-        key={paymentMethode.id}
-        style={[
+         style={[
           styles.card,
-          selectedPaymentID === paymentMethode.id && selectedPaymentType === paymentMethode.method_type ? styles.selectedCard : {},
+           selectedPaymentType === 'Cash'? styles.selectedCard : {},
         ]}
         onPress={onClick}  
       >
         <Image
-          source={require("@/assets/icons/Paypal.png")}
+          source={require("@/assets/icons/cash.png")}
           style={{ height: 70, width: 70 }}
         />
         <View style={{ width: "70%", marginLeft: 15 }}>
-          <Text style={styles.type}>PayPal</Text>
-          <Text style={styles.lastFour}>
-            {`**** **** **** ${paymentMethode?.phone_number?.slice(-4)}`}
-          </Text>
+          <Text style={styles.type}>Cash</Text>
+         
         </View>
 
-        {selectedPaymentID === paymentMethode.id && selectedPaymentType === paymentMethode.method_type && <View style={styles.radioButton} />}
+        { selectedPaymentType === 'Cash' && <View style={styles.radioButton} />}
       </TouchableOpacity>
     </ >
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    padding: 0,
-    backgroundColor: "#f9f9f9",
-  },
-  title: {
-    fontSize: 18,
-    marginBottom: 10,
-  },
+ 
   card: {
     padding: 16,
     borderRadius: 15,
@@ -76,12 +63,9 @@ const styles = StyleSheet.create({
     borderColor: "#000",
     backgroundColor: "#3C2F2F",
   },
-  brand: {
-    fontSize: 18,
-    fontWeight: "600",
-  },
+ 
   type: {
-    fontSize: 14,
+    fontSize: 18,
     color: "#666",
   },
   lastFour: {
@@ -100,4 +84,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Paypal;
+export default Cash;

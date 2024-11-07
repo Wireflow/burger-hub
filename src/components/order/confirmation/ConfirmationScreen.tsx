@@ -39,9 +39,21 @@ const ConfirmationScreen = () => {
     }
   };
 
+ 
   return (
     <View style={styles.container}>
+      {
+        load &&    <ActivityIndicator
+        size={"large"}
+        color={"#AF042C"}
+        style={{position:'absolute',left:'50%'}}
+       />
+      }
+     
+
       <ListItems />
+    
+
 
       {orderType == "Delivery" ? (
         <ConnectedCardAddress addressId={addressId || 0} />
@@ -59,7 +71,7 @@ export default ConfirmationScreen;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 40,
+    padding: 20,
     backgroundColor: "#F2F2F2",
   },
   title: {

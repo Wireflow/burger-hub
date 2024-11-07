@@ -1,44 +1,42 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { View, Text, FlatList, ActivityIndicator, Alert, StyleSheet } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { useLocalSearchParams, useNavigation } from "expo-router";  
+import {  useNavigation } from "expo-router";  
 import { useSearchProducts } from "@/src/queries/products/getbySearch";
 import CardWrapper from "../../ui/card/CardWrapper";
-import SearchInput from "../../ui/SearchInput";
 import NotFound from "../../notFound/NotFound";
 import { usesearchStore } from "@/src/store/search/searchStore";
 import Header from "../../ui/Header";
-import { TouchableOpacity } from "react-native-gesture-handler";
-import { getProductsByCategoryId } from "@/src/queries/products/getProductsByCategoryId";
- 
 
-
- 
 const SearchProductScreen = () => {
    const { searchTerm, setSearchTerm, clearSearchTerm ,productsOfSearch,setProductsOfSearch } = usesearchStore();
    const navigation = useNavigation();
- console.log("im productsOfSearch 111 ",productsOfSearch)
-   const { data: products, isLoading, error, refetch } = useSearchProducts(searchTerm);
-   useEffect(()=>{
-     if (products) {
-      
-      setProductsOfSearch(products)}
+   console.log("im productsOfSearch 111 ",productsOfSearch)
+   const { data: products, isLoading, error, refetch ,isFetching} = useSearchProducts(searchTerm);
+   console.log("im in change the search item ",products)
 
-   },[searchTerm])
+  useEffect(()=>{
+    refetch()
 
+     if(searchTerm){
+ 
+       products ? setProductsOfSearch(products):setProductsOfSearch([])
+    }else{
+ 
+      }
+   },[searchTerm,products])
+  
   const goBack =()=>{
     clearSearchTerm();
+    setProductsOfSearch([])
     navigation.goBack()
   }
  
   return (
      <SafeAreaView style={{  flex: 1,backgroundColor:'#EFEEEE' }}>
                 <Header onBack={goBack}  backgroundColorCode="#EFEEEE" headerSearch/>
-
       <View style={{backgroundColor:'#F9F9F9',borderRadius:30,height:'100%',width:'100%'}}> 
-      
-
-        {isLoading ? (
+        {isLoading ||isFetching ? (
         <ActivityIndicator size="large" color="red" />
       ) : ( <> 
         {
@@ -60,8 +58,7 @@ const SearchProductScreen = () => {
 
              
           />
-        )}
-    
+        )}    
         ListEmptyComponent={() => (
           <NotFound
             icon="search"
@@ -71,8 +68,7 @@ const SearchProductScreen = () => {
         )}
       />   
    </>
-      )}
-      
+      )}   
       </View>
     </SafeAreaView>
    );

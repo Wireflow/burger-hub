@@ -117,8 +117,7 @@ const styles = StyleSheet.create({
     color: "#AF042C",
     textDecorationLine: "underline",
     fontSize: 16,
-    marginTop: 25,
-  },
+   },
 });
 
 export default ModelSetNote;
